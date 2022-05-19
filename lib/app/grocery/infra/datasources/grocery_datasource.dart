@@ -1,4 +1,4 @@
-import 'package:market_lists/modules/grocery/domain/entities/grocery.dart';
+import 'package:market_lists/app/grocery/domain/entities/grocery.dart';
 
 abstract class GroceryDatasource {
   Future<Grocery> create(Grocery grocery);
