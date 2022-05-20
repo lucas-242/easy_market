@@ -16,4 +16,6 @@ class GroceryList {
   })  : groceries = groceries ?? [],
         createdAt = createdAt ?? DateTime.now(),
         updatedAt = updatedAt ?? DateTime.now();
+
+  bool get isValidName => name.isNotEmpty;
 }
