@@ -3,33 +3,33 @@ import 'package:market_lists/app/grocery/domain/entities/grocery_list.dart';
 import 'package:market_lists/app/grocery/domain/errors/errors.dart';
 import 'package:market_lists/app/grocery/domain/repositories/grocery_repository.dart';
 
-abstract class CreateGroceryList {
-  Future<Either<Failure, GroceryList>> call(GroceryList groceryList);
+abstract class UpdateGroceryList {
+  Future<Either<Failure, void>> call(GroceryList groceryList);
 }
 
-class CreateGroceryListImpl implements CreateGroceryList {
+class UpdateGroceryListImpl implements UpdateGroceryList {
   final GroceryRepository groceryRepository;
-  CreateGroceryListImpl(this.groceryRepository);
+  UpdateGroceryListImpl(this.groceryRepository);
 
   @override
-  Future<Either<Failure, GroceryList>> call(GroceryList groceryList) async {
+  Future<Either<Failure, void>> call(GroceryList groceryList) async {
     var validateResult = _validateGroceryList(groceryList);
     if (validateResult != null) return validateResult;
-    return await _createGroceryList(groceryList);
+    return _updateGroceryList(groceryList);
   }
 
-  Either<Failure, GroceryList>? _validateGroceryList(GroceryList groceryList) {
-    if (!groceryList.isValidName) {
+  Either<Failure, void>? _validateGroceryList(GroceryList groceryList) {
+    if (!groceryList.isValidName || groceryList.id.isEmpty) {
       return Left(InvalidGroceryList());
     }
     return null;
   }
 
-  Future<Either<Failure, GroceryList>> _createGroceryList(
+  Future<Either<Failure, Unit>> _updateGroceryList(
       GroceryList groceryList) async {
     var option = optionOf(groceryList);
     return option.fold(() => Left(GroceryListFailure()), (groceryList) async {
-      var result = await groceryRepository.createGroceryList(groceryList);
+      var result = groceryRepository.updateGroceryList(groceryList);
       return result;
     });
   }

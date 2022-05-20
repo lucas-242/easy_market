@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:market_lists/app/grocery/domain/errors/errors.dart';
+import 'package:market_lists/app/grocery/domain/usecases/update_grocery_list.dart';
 import 'package:market_lists/app/grocery/grocery.dart';
 import 'package:mockito/mockito.dart';
 
@@ -8,9 +9,10 @@ import '../../mock_groceries_test.mocks.dart';
 
 void main() {
   final repository = MockGroceryRepositoryTest();
-  final usecase = CreateGroceryListImpl(repository);
+  final usecase = UpdateGroceryListImpl(repository);
 
   final groceryListMock = GroceryList(
+    id: '123',
     name: 'Test',
     groceries: const [
       Grocery(name: 'product1', quantity: 5),
@@ -18,17 +20,18 @@ void main() {
     ],
   );
 
-  test('Should return a GroceryList', () async {
-    when(repository.createGroceryList(any))
-        .thenAnswer((_) async => right(groceryListMock));
+  test('Should update groceryList', () async {
+    when(repository.updateGroceryList(any))
+        .thenAnswer((_) async => right(unit));
 
     var result = await usecase(groceryListMock);
-    expect(result, Right(groceryListMock));
+    expect(result, const Right(unit));
   });
 
   test('Should throw InvalidGroceryList if the list is invalid', () async {
-    var groceryList = GroceryList(
-      name: '',
+    final groceryList = GroceryList(
+      id: '',
+      name: 'Test',
       groceries: const [
         Grocery(name: 'product1', quantity: 5),
         Grocery(name: 'product2', quantity: 3),
@@ -41,7 +44,7 @@ void main() {
 
   test('Should throw GroceryListFailure if there are any error to save',
       () async {
-    when(repository.createGroceryList(any))
+    when(repository.updateGroceryList(any))
         .thenAnswer((_) async => left(GroceryListFailure()));
 
     var result = await usecase(groceryListMock);
