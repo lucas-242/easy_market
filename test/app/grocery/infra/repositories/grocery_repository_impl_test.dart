@@ -32,7 +32,7 @@ void main() {
   });
 
   group('Edit GroceryList', () {
-    test('Should return GroceryList', () async {
+    test('Should return  Unit', () async {
       var groceryList = mock.groceryListToUpdate;
       when(datasource.updateGroceryList(any))
           .thenAnswer((_) async => groceryList);
@@ -47,6 +47,26 @@ void main() {
           .thenThrow((_) async => Exception());
 
       var result = await repository.updateGroceryList(mock.groceryListToCreate);
+      expect(result.leftMap((l) => l is GroceryListFailure), const Left(true));
+    });
+  });
+
+  group('Delete GroceryList', () {
+    test('Should return Unit', () async {
+      var groceryList = mock.groceryListToUpdate;
+      when(datasource.deleteGroceryList(any))
+          .thenAnswer((_) async => groceryList);
+
+      var result = await repository.deleteGroceryList(groceryList);
+      expect(result, const Right(unit));
+    });
+
+    test('Should throw GroceryListFailure when there are any errors to save',
+        () async {
+      when(datasource.deleteGroceryList(any))
+          .thenThrow((_) async => Exception());
+
+      var result = await repository.deleteGroceryList(mock.groceryListToCreate);
       expect(result.leftMap((l) => l is GroceryListFailure), const Left(true));
     });
   });

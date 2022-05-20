@@ -21,9 +21,14 @@ class GroceryRepositoryImpl implements GroceryRepository {
   }
 
   @override
-  Future<Either<Failure, Unit>> deleteGroceryList(GroceryList groceryList) {
-    // TODO: implement deleteGroceryList
-    throw UnimplementedError();
+  Future<Either<Failure, Unit>> deleteGroceryList(
+      GroceryList groceryList) async {
+    try {
+      await datasource.deleteGroceryList(groceryList.id);
+      return right(unit);
+    } catch (e) {
+      return left(GroceryListFailure());
+    }
   }
 
   @override
