@@ -4,7 +4,7 @@ import 'package:market_lists/app/grocery/domain/errors/errors.dart';
 import 'package:market_lists/app/grocery/domain/repositories/grocery_repository.dart';
 
 abstract class UpdateGroceryList {
-  Future<Either<Failure, void>> call(GroceryList groceryList);
+  Future<Either<Failure, Unit>> call(GroceryList groceryList);
 }
 
 class UpdateGroceryListImpl implements UpdateGroceryList {
@@ -12,13 +12,13 @@ class UpdateGroceryListImpl implements UpdateGroceryList {
   UpdateGroceryListImpl(this.groceryRepository);
 
   @override
-  Future<Either<Failure, void>> call(GroceryList groceryList) async {
+  Future<Either<Failure, Unit>> call(GroceryList groceryList) async {
     var validateResult = _validateGroceryList(groceryList);
     if (validateResult != null) return validateResult;
     return _updateGroceryList(groceryList);
   }
 
-  Either<Failure, void>? _validateGroceryList(GroceryList groceryList) {
+  Either<Failure, Unit>? _validateGroceryList(GroceryList groceryList) {
     if (!groceryList.isValidName || groceryList.id.isEmpty) {
       return Left(InvalidGroceryList());
     }
