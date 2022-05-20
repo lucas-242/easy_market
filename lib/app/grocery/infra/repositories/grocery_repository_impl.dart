@@ -27,8 +27,13 @@ class GroceryRepositoryImpl implements GroceryRepository {
   }
 
   @override
-  Future<Either<Failure, Unit>> updateGroceryList(GroceryList groceryList) {
-    // TODO: implement updateGroceryList
-    throw UnimplementedError();
+  Future<Either<Failure, Unit>> updateGroceryList(
+      GroceryList groceryList) async {
+    try {
+      await datasource.updateGroceryList(groceryList);
+      return right(unit);
+    } catch (e) {
+      return left(GroceryListFailure());
+    }
   }
 }

@@ -11,20 +11,43 @@ void main() {
   final datasource = MockGroceryDatasourceTest();
   final repository = GroceryRepositoryImpl(datasource);
 
-  test('Should return GroceryList', () async {
-    var groceryList = mock.groceryListToUpdate;
-    when(datasource.createGroceryList(any))
-        .thenAnswer((_) async => groceryList);
+  group('Create GroceryList', () {
+    test('Should return GroceryList', () async {
+      var groceryList = mock.groceryListToUpdate;
+      when(datasource.createGroceryList(any))
+          .thenAnswer((_) async => groceryList);
 
-    var result = await repository.createGroceryList(mock.groceryListToCreate);
-    expect(result, Right(groceryList));
+      var result = await repository.createGroceryList(mock.groceryListToCreate);
+      expect(result, Right(groceryList));
+    });
+
+    test('Should throw GroceryListFailure when there are any errors to save',
+        () async {
+      when(datasource.createGroceryList(any))
+          .thenThrow((_) async => Exception());
+
+      var result = await repository.createGroceryList(mock.groceryListToCreate);
+      expect(result.leftMap((l) => l is GroceryListFailure), const Left(true));
+    });
   });
 
-  test('Should throw GroceryListFailure when there are any errors to save',
-      () async {
-    when(datasource.createGroceryList(any)).thenThrow((_) async => Exception());
+  group('Edit GroceryList', () {
+    test('Should return GroceryList', () async {
+      var groceryList = mock.groceryListToUpdate;
+      when(datasource.updateGroceryList(any))
+          .thenAnswer((_) async => groceryList);
 
-    var result = await repository.createGroceryList(mock.groceryListToCreate);
-    expect(result.leftMap((l) => l is GroceryListFailure), const Left(true));
+      var result = await repository.updateGroceryList(groceryList);
+      expect(result, const Right(unit));
+    });
+
+    test('Should throw GroceryListFailure when there are any errors to save',
+        () async {
+      when(datasource.updateGroceryList(any))
+          .thenThrow((_) async => Exception());
+
+      var result = await repository.updateGroceryList(mock.groceryListToCreate);
+      expect(result.leftMap((l) => l is GroceryListFailure), const Left(true));
+    });
   });
 }
