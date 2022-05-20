@@ -7,6 +7,7 @@ class GroceryRepositoryTest extends Mock implements GroceryRepository {}
 
 class GroceryDatasourceTest extends Mock implements GroceryDatasource {}
 
+/// GroceryList without id
 GroceryList get groceryListToCreate => GroceryList(
       name: 'Test',
       groceries: const [
@@ -15,6 +16,7 @@ GroceryList get groceryListToCreate => GroceryList(
       ],
     );
 
+/// GroceryList with id
 GroceryList get groceryListToUpdate => GroceryList(
       id: '123',
       name: 'Test',

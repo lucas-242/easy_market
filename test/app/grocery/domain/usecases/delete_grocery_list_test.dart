@@ -5,6 +5,7 @@ import 'package:market_lists/app/grocery/domain/errors/errors.dart';
 import 'package:market_lists/app/grocery/domain/usecases/delete_grocery_list.dart';
 import 'package:mockito/mockito.dart';
 
+import '../../mock_groceries_test.dart' as mock;
 import '../../mock_groceries_test.mocks.dart';
 
 void main() {
@@ -22,8 +23,7 @@ void main() {
   });
 
   test('Should throw InvalidGroceryList when the list is invalid', () async {
-    final groceryList = GroceryList(id: '', name: 'name');
-    var result = await usecase(groceryList);
+    var result = await usecase(mock.groceryListToCreate);
     expect(result.leftMap((l) => l is InvalidGroceryList), const Left(true));
   });
 
