@@ -28,7 +28,7 @@ void main() {
     expect(result, const Right(unit));
   });
 
-  test('Should throw InvalidGroceryList if the list is invalid', () async {
+  test('Should throw InvalidGroceryList when the list is invalid', () async {
     final groceryList = GroceryList(
       id: '',
       name: 'Test',
@@ -42,7 +42,7 @@ void main() {
     expect(result.leftMap((l) => l is InvalidGroceryList), const Left(true));
   });
 
-  test('Should throw GroceryListFailure if there are any error to save',
+  test('Should throw GroceryListFailure when there are any errors to save',
       () async {
     when(repository.updateGroceryList(any))
         .thenAnswer((_) async => left(GroceryListFailure()));
