@@ -2,7 +2,6 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:market_lists/app/grocery/domain/entities/grocery_list.dart';
 import 'package:market_lists/app/grocery/domain/errors/errors.dart';
-import 'package:market_lists/app/grocery/domain/repositories/grocery_repository.dart';
 import 'package:market_lists/app/grocery/domain/usecases/delete_grocery_list.dart';
 import 'package:mockito/mockito.dart';
 

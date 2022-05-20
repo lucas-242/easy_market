@@ -1,7 +1,7 @@
-import 'package:market_lists/app/grocery/domain/entities/grocery.dart';
+import 'package:market_lists/app/grocery/domain/entities/grocery_list.dart';
 
 abstract class GroceryDatasource {
-  Future<Grocery> create(Grocery grocery);
-  Future<void> update(Grocery grocery);
-  Future<void> delete(String id);
+  Future<GroceryList> createGroceryList(GroceryList groceryList);
+  Future<void> updateGroceryList(GroceryList groceryList);
+  Future<void> deleteGroceryList(String id);
 }
