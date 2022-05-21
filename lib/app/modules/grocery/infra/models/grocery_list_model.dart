@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:market_lists/app/modules/grocery/domain/entities/grocery.dart';
 import 'package:market_lists/app/modules/grocery/domain/entities/grocery_list.dart';
 import 'package:market_lists/app/modules/grocery/infra/models/grocery_model.dart';
 

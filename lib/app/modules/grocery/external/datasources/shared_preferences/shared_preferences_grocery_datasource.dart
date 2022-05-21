@@ -10,25 +10,20 @@ class SharedPreferencesGroceryDatasource implements GroceryDatasource {
   @override
   Future<GroceryList> createGroceryList(GroceryList groceryList) async {
     try {
-      var storageGroceryLists = await _getGroceryLists();
-      await _saveGroceryLists(storageGroceryLists);
+      var groceryListsToSave =
+          await _mergeGroceryListWithStorageOnes(groceryList);
+      await _saveGroceryLists(groceryListsToSave);
       return groceryList;
     } catch (e) {
       throw GroceryListFailure(message: e.toString());
     }
   }
 
-  Future<List<GroceryListModel>> _getGroceryLists() async {
-    var listsFromStorage = await _getGroceryListsFromStrorage();
-    var result =
-        listsFromStorage.map((e) => GroceryListModel.fromJson(e)).toList();
-    return result;
-  }
-
-  Future<List<String>> _getGroceryListsFromStrorage() async {
-    var preferences = await _getSharePreferencesInstance();
-    var result = preferences.getStringList(groceryListsStorageName) ?? [];
-    return result;
+  Future<List<GroceryListModel>> _mergeGroceryListWithStorageOnes(
+      GroceryList groceryList) async {
+    var storageGroceryLists = await _getGroceryLists();
+    storageGroceryLists.add(GroceryListModel.fromGroceryList(groceryList));
+    return storageGroceryLists;
   }
 
   Future<void> _saveGroceryLists(List<GroceryListModel> groceryLists) async {
@@ -46,19 +41,32 @@ class SharedPreferencesGroceryDatasource implements GroceryDatasource {
   }
 
   @override
-  Future<void> deleteGroceryList(String id) {
-    // TODO: implement deleteGroceryList
+  Future<void> updateGroceryList(GroceryList groceryList) async {
+    // TODO: implement updateGroceryList
     throw UnimplementedError();
   }
 
   @override
-  Future<void> updateGroceryList(GroceryList groceryList) {
-    // TODO: implement updateGroceryList
+  Future<void> deleteGroceryList(String id) {
+    // TODO: implement deleteGroceryList
     throw UnimplementedError();
   }
 
   Future<SharedPreferences> _getSharePreferencesInstance() async {
     var preferences = await SharedPreferences.getInstance();
     return preferences;
+  }
+
+  Future<List<GroceryListModel>> _getGroceryLists() async {
+    var listsFromStorage = await _getGroceryListsFromStrorage();
+    var result =
+        listsFromStorage.map((e) => GroceryListModel.fromJson(e)).toList();
+    return result;
+  }
+
+  Future<List<String>> _getGroceryListsFromStrorage() async {
+    var preferences = await _getSharePreferencesInstance();
+    var result = preferences.getStringList(groceryListsStorageName) ?? [];
+    return result;
   }
 }
