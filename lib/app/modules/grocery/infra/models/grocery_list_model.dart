@@ -34,6 +34,13 @@ class GroceryListModel extends GroceryList {
     };
   }
 
+  Map<String, dynamic> toMapUpdate() {
+    return {
+      'name': name,
+      'updatedAt': updatedAt.millisecondsSinceEpoch,
+    };
+  }
+
   Map<String, dynamic> toMap() {
     return {
       'id': id,

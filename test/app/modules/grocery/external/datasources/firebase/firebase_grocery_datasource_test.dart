@@ -2,6 +2,7 @@ import 'package:fake_cloud_firestore/fake_cloud_firestore.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:market_lists/app/modules/grocery/external/datasources/firebase/firebase_grocery_datasource.dart';
 import 'package:market_lists/app/modules/grocery/grocery.dart';
+import 'package:market_lists/app/modules/grocery/infra/models/grocery_list_model.dart';
 
 import '../../../mock_groceries_test.dart' as mock;
 
@@ -51,6 +52,27 @@ void main() {
       var groceryLists = await datasource.getGroceryLists();
       expect(groceryLists.map((e) => e.id),
           isNot(contains(groceryListToDelete.id)));
+    });
+  });
+
+  group('Update', () {
+    Future<GroceryListModel> _setupUpdateTest() async {
+      var groceryListCreated = await _createMockGroceryList();
+      var newName = 'testing update';
+      var groceryListToUpdate =
+          GroceryListModel.fromGroceryList(groceryListCreated)
+              .copyWith(name: newName);
+      return groceryListToUpdate;
+    }
+
+    test('Should update GroceryList', () async {
+      var groceryListToUpdate = await _setupUpdateTest();
+      await datasource.updateGroceryList(groceryListToUpdate);
+      var groceryLists = await datasource.getGroceryLists();
+      var result = groceryLists
+          .firstWhere((element) => element.id == groceryListToUpdate.id);
+
+      expect(result.name, groceryListToUpdate.name);
     });
   });
 }
