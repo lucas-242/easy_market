@@ -8,12 +8,12 @@ class SharedPreferencesGroceryDatasource implements GroceryDatasource {
   static String groceryListsStorageName = 'groceryLists';
 
   @override
-  Future<GroceryList> createGroceryList(GroceryList groceryList) async {
+  Future<GroceryListModel> createGroceryList(GroceryList groceryList) async {
     try {
       var groceryListsToSave =
           await _mergeGroceryListWithStorageOnes(groceryList);
       await _saveGroceryLists(groceryListsToSave);
-      return groceryList;
+      return GroceryListModel.fromGroceryList(groceryList);
     } catch (e) {
       throw GroceryListFailure(message: e.toString());
     }

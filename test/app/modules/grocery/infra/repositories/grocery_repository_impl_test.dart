@@ -13,7 +13,7 @@ void main() {
 
   group('Create GroceryList', () {
     test('Should return GroceryList', () async {
-      var groceryList = mock.groceryListToUpdate;
+      var groceryList = mock.groceryListModelToUpdate;
       when(datasource.createGroceryList(any))
           .thenAnswer((_) async => groceryList);
 

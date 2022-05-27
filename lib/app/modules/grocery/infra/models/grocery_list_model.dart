@@ -26,6 +26,10 @@ class GroceryListModel extends GroceryList {
     );
   }
 
+  Map<String, dynamic> toMapCreateOrUpdate() {
+    return {'name': name};
+  }
+
   Map<String, dynamic> toMap() {
     return {
       'id': id,
