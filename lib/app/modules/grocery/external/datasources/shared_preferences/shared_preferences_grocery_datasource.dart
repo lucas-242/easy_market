@@ -69,4 +69,16 @@ class SharedPreferencesGroceryDatasource implements GroceryDatasource {
     var result = preferences.getStringList(groceryListsStorageName) ?? [];
     return result;
   }
+
+  @override
+  Future<List<GroceryListModel>> getGroceryLists() {
+    // TODO: implement getGroceryLists
+    throw UnimplementedError();
+  }
+
+  @override
+  Stream<List<GroceryListModel>> listenGroceryLists() {
+    // TODO: implement listenGroceryLists
+    throw UnimplementedError();
+  }
 }

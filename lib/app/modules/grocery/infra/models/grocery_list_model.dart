@@ -26,8 +26,12 @@ class GroceryListModel extends GroceryList {
     );
   }
 
-  Map<String, dynamic> toMapCreateOrUpdate() {
-    return {'name': name};
+  Map<String, dynamic> toMapCreate() {
+    return {
+      'name': name,
+      'createdAt': createdAt.millisecondsSinceEpoch,
+      'updatedAt': updatedAt.millisecondsSinceEpoch,
+    };
   }
 
   Map<String, dynamic> toMap() {
@@ -44,8 +48,10 @@ class GroceryListModel extends GroceryList {
     return GroceryListModel(
       id: map['id'] ?? '',
       name: map['name'] ?? '',
-      groceries: List<GroceryModel>.from(
-          map['groceries']?.map((x) => GroceryModel.fromMap(x))),
+      groceries: map['groceries'] != null
+          ? List<GroceryModel>.from(
+              map['groceries']?.map((x) => GroceryModel.fromMap(x)))
+          : [],
       createdAt: DateTime.fromMillisecondsSinceEpoch(map['createdAt']),
       updatedAt: DateTime.fromMillisecondsSinceEpoch(map['updatedAt']),
     );
@@ -55,4 +61,20 @@ class GroceryListModel extends GroceryList {
 
   factory GroceryListModel.fromJson(String source) =>
       GroceryListModel.fromMap(json.decode(source));
+
+  GroceryListModel copyWith({
+    String? id,
+    String? name,
+    List<GroceryModel>? groceries,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+  }) {
+    return GroceryListModel(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      groceries: groceries ?? this.groceries,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
+    );
+  }
 }
