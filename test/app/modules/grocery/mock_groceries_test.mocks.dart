@@ -2,7 +2,7 @@
 // in market_lists/test/app/modules/grocery/mock_groceries_test.dart.
 // Do not manually edit this file.
 
-import 'dart:async' as _i5;
+import 'dart:async' as _i4;
 
 import 'package:dartz/dartz.dart' as _i2;
 import 'package:market_lists/app/modules/grocery/domain/errors/errors.dart'
@@ -12,7 +12,7 @@ import 'package:market_lists/app/modules/grocery/infra/models/grocery_list_model
     as _i3;
 import 'package:mockito/mockito.dart' as _i1;
 
-import 'mock_groceries_test.dart' as _i4;
+import 'mock_groceries_test.dart' as _i5;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -29,62 +29,324 @@ class _FakeEither_0<L, R> extends _i1.Fake implements _i2.Either<L, R> {}
 class _FakeGroceryListModel_1 extends _i1.Fake implements _i3.GroceryListModel {
 }
 
+class _FakeStreamSubscription_2<T> extends _i1.Fake
+    implements _i4.StreamSubscription<T> {}
+
 /// A class which mocks [GroceryRepositoryTest].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockGroceryRepositoryTest extends _i1.Mock
-    implements _i4.GroceryRepositoryTest {
+    implements _i5.GroceryRepositoryTest {
   MockGroceryRepositoryTest() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i5.Future<_i2.Either<_i6.Failure, _i7.GroceryList>> createGroceryList(
+  _i4.Future<_i2.Either<_i6.Failure, List<_i7.GroceryList>>>
+      getGroceryLists() => (super.noSuchMethod(
+              Invocation.method(#getGroceryLists, []),
+              returnValue:
+                  Future<_i2.Either<_i6.Failure, List<_i7.GroceryList>>>.value(
+                      _FakeEither_0<_i6.Failure, List<_i7.GroceryList>>()))
+          as _i4.Future<_i2.Either<_i6.Failure, List<_i7.GroceryList>>>);
+  @override
+  _i2.Either<_i6.Failure, _i4.Stream<List<_i7.GroceryList>>>
+      listenGroceryLists() =>
+          (super.noSuchMethod(Invocation.method(#listenGroceryLists, []),
+                  returnValue: _FakeEither_0<_i6.Failure,
+                      _i4.Stream<List<_i7.GroceryList>>>())
+              as _i2.Either<_i6.Failure, _i4.Stream<List<_i7.GroceryList>>>);
+  @override
+  _i4.Future<_i2.Either<_i6.Failure, _i7.GroceryList>> createGroceryList(
           _i7.GroceryList? groceryList) =>
       (super.noSuchMethod(Invocation.method(#createGroceryList, [groceryList]),
           returnValue: Future<_i2.Either<_i6.Failure, _i7.GroceryList>>.value(
-              _FakeEither_0<_i6.Failure, _i7.GroceryList>())) as _i5
+              _FakeEither_0<_i6.Failure, _i7.GroceryList>())) as _i4
           .Future<_i2.Either<_i6.Failure, _i7.GroceryList>>);
   @override
-  _i5.Future<_i2.Either<_i6.Failure, _i2.Unit>> updateGroceryList(
+  _i4.Future<_i2.Either<_i6.Failure, _i2.Unit>> updateGroceryList(
           _i7.GroceryList? groceryList) =>
       (super.noSuchMethod(Invocation.method(#updateGroceryList, [groceryList]),
               returnValue: Future<_i2.Either<_i6.Failure, _i2.Unit>>.value(
                   _FakeEither_0<_i6.Failure, _i2.Unit>()))
-          as _i5.Future<_i2.Either<_i6.Failure, _i2.Unit>>);
+          as _i4.Future<_i2.Either<_i6.Failure, _i2.Unit>>);
   @override
-  _i5.Future<_i2.Either<_i6.Failure, _i2.Unit>> deleteGroceryList(
+  _i4.Future<_i2.Either<_i6.Failure, _i2.Unit>> deleteGroceryList(
           _i7.GroceryList? groceryList) =>
       (super.noSuchMethod(Invocation.method(#deleteGroceryList, [groceryList]),
               returnValue: Future<_i2.Either<_i6.Failure, _i2.Unit>>.value(
                   _FakeEither_0<_i6.Failure, _i2.Unit>()))
-          as _i5.Future<_i2.Either<_i6.Failure, _i2.Unit>>);
+          as _i4.Future<_i2.Either<_i6.Failure, _i2.Unit>>);
 }
 
 /// A class which mocks [GroceryDatasourceTest].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockGroceryDatasourceTest extends _i1.Mock
-    implements _i4.GroceryDatasourceTest {
+    implements _i5.GroceryDatasourceTest {
   MockGroceryDatasourceTest() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i5.Future<_i3.GroceryListModel> createGroceryList(
+  _i4.Future<List<_i3.GroceryListModel>> getGroceryLists() =>
+      (super.noSuchMethod(Invocation.method(#getGroceryLists, []),
+              returnValue: Future<List<_i3.GroceryListModel>>.value(
+                  <_i3.GroceryListModel>[]))
+          as _i4.Future<List<_i3.GroceryListModel>>);
+  @override
+  _i4.Stream<List<_i3.GroceryListModel>> listenGroceryLists() =>
+      (super.noSuchMethod(Invocation.method(#listenGroceryLists, []),
+              returnValue: Stream<List<_i3.GroceryListModel>>.empty())
+          as _i4.Stream<List<_i3.GroceryListModel>>);
+  @override
+  _i4.Future<_i3.GroceryListModel> createGroceryList(
           _i3.GroceryListModel? groceryList) =>
       (super.noSuchMethod(Invocation.method(#createGroceryList, [groceryList]),
               returnValue:
                   Future<_i3.GroceryListModel>.value(_FakeGroceryListModel_1()))
-          as _i5.Future<_i3.GroceryListModel>);
+          as _i4.Future<_i3.GroceryListModel>);
   @override
-  _i5.Future<void> updateGroceryList(_i3.GroceryListModel? groceryList) =>
+  _i4.Future<void> updateGroceryList(_i3.GroceryListModel? groceryList) =>
       (super.noSuchMethod(Invocation.method(#updateGroceryList, [groceryList]),
           returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i5.Future<void>);
+          returnValueForMissingStub: Future<void>.value()) as _i4.Future<void>);
   @override
-  _i5.Future<void> deleteGroceryList(String? id) =>
+  _i4.Future<void> deleteGroceryList(String? id) =>
       (super.noSuchMethod(Invocation.method(#deleteGroceryList, [id]),
           returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i5.Future<void>);
+          returnValueForMissingStub: Future<void>.value()) as _i4.Future<void>);
+}
+
+/// A class which mocks [StreamGroceryListsTest].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockStreamGroceryListsTest extends _i1.Mock
+    implements _i5.StreamGroceryListsTest {
+  MockStreamGroceryListsTest() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  bool get isBroadcast =>
+      (super.noSuchMethod(Invocation.getter(#isBroadcast), returnValue: false)
+          as bool);
+  @override
+  _i4.Future<int> get length => (super.noSuchMethod(Invocation.getter(#length),
+      returnValue: Future<int>.value(0)) as _i4.Future<int>);
+  @override
+  _i4.Future<bool> get isEmpty =>
+      (super.noSuchMethod(Invocation.getter(#isEmpty),
+          returnValue: Future<bool>.value(false)) as _i4.Future<bool>);
+  @override
+  _i4.Future<List<_i3.GroceryListModel>> get first => (super.noSuchMethod(
+      Invocation.getter(#first),
+      returnValue: Future<List<_i3.GroceryListModel>>.value(
+          <_i3.GroceryListModel>[])) as _i4.Future<List<_i3.GroceryListModel>>);
+  @override
+  _i4.Future<List<_i3.GroceryListModel>> get last => (super.noSuchMethod(
+      Invocation.getter(#last),
+      returnValue: Future<List<_i3.GroceryListModel>>.value(
+          <_i3.GroceryListModel>[])) as _i4.Future<List<_i3.GroceryListModel>>);
+  @override
+  _i4.Future<List<_i3.GroceryListModel>> get single => (super.noSuchMethod(
+      Invocation.getter(#single),
+      returnValue: Future<List<_i3.GroceryListModel>>.value(
+          <_i3.GroceryListModel>[])) as _i4.Future<List<_i3.GroceryListModel>>);
+  @override
+  _i4.Stream<List<_i3.GroceryListModel>> asBroadcastStream(
+          {void Function(_i4.StreamSubscription<List<_i3.GroceryListModel>>)?
+              onListen,
+          void Function(_i4.StreamSubscription<List<_i3.GroceryListModel>>)?
+              onCancel}) =>
+      (super.noSuchMethod(
+              Invocation.method(#asBroadcastStream, [],
+                  {#onListen: onListen, #onCancel: onCancel}),
+              returnValue: Stream<List<_i3.GroceryListModel>>.empty())
+          as _i4.Stream<List<_i3.GroceryListModel>>);
+  @override
+  _i4.StreamSubscription<List<_i3.GroceryListModel>> listen(
+          void Function(List<_i3.GroceryListModel>)? onData,
+          {Function? onError,
+          void Function()? onDone,
+          bool? cancelOnError}) =>
+      (super.noSuchMethod(
+              Invocation.method(#listen, [
+                onData
+              ], {
+                #onError: onError,
+                #onDone: onDone,
+                #cancelOnError: cancelOnError
+              }),
+              returnValue:
+                  _FakeStreamSubscription_2<List<_i3.GroceryListModel>>())
+          as _i4.StreamSubscription<List<_i3.GroceryListModel>>);
+  @override
+  _i4.Stream<List<_i3.GroceryListModel>> where(
+          bool Function(List<_i3.GroceryListModel>)? test) =>
+      (super.noSuchMethod(Invocation.method(#where, [test]),
+              returnValue: Stream<List<_i3.GroceryListModel>>.empty())
+          as _i4.Stream<List<_i3.GroceryListModel>>);
+  @override
+  _i4.Stream<S> map<S>(S Function(List<_i3.GroceryListModel>)? convert) =>
+      (super.noSuchMethod(Invocation.method(#map, [convert]),
+          returnValue: Stream<S>.empty()) as _i4.Stream<S>);
+  @override
+  _i4.Stream<E> asyncMap<E>(
+          _i4.FutureOr<E>? Function(List<_i3.GroceryListModel>)? convert) =>
+      (super.noSuchMethod(Invocation.method(#asyncMap, [convert]),
+          returnValue: Stream<E>.empty()) as _i4.Stream<E>);
+  @override
+  _i4.Stream<E> asyncExpand<E>(
+          _i4.Stream<E>? Function(List<_i3.GroceryListModel>)? convert) =>
+      (super.noSuchMethod(Invocation.method(#asyncExpand, [convert]),
+          returnValue: Stream<E>.empty()) as _i4.Stream<E>);
+  @override
+  _i4.Stream<List<_i3.GroceryListModel>> handleError(Function? onError,
+          {bool Function(dynamic)? test}) =>
+      (super.noSuchMethod(
+              Invocation.method(#handleError, [onError], {#test: test}),
+              returnValue: Stream<List<_i3.GroceryListModel>>.empty())
+          as _i4.Stream<List<_i3.GroceryListModel>>);
+  @override
+  _i4.Stream<S> expand<S>(
+          Iterable<S> Function(List<_i3.GroceryListModel>)? convert) =>
+      (super.noSuchMethod(Invocation.method(#expand, [convert]),
+          returnValue: Stream<S>.empty()) as _i4.Stream<S>);
+  @override
+  _i4.Future<dynamic> pipe(
+          _i4.StreamConsumer<List<_i3.GroceryListModel>>? streamConsumer) =>
+      (super.noSuchMethod(Invocation.method(#pipe, [streamConsumer]),
+          returnValue: Future<dynamic>.value()) as _i4.Future<dynamic>);
+  @override
+  _i4.Stream<S> transform<S>(
+          _i4.StreamTransformer<List<_i3.GroceryListModel>, S>?
+              streamTransformer) =>
+      (super.noSuchMethod(Invocation.method(#transform, [streamTransformer]),
+          returnValue: Stream<S>.empty()) as _i4.Stream<S>);
+  @override
+  _i4.Future<List<_i3.GroceryListModel>> reduce(
+          List<_i3.GroceryListModel> Function(
+                  List<_i3.GroceryListModel>, List<_i3.GroceryListModel>)?
+              combine) =>
+      (super.noSuchMethod(Invocation.method(#reduce, [combine]),
+              returnValue: Future<List<_i3.GroceryListModel>>.value(
+                  <_i3.GroceryListModel>[]))
+          as _i4.Future<List<_i3.GroceryListModel>>);
+  @override
+  _i4.Future<S> fold<S>(S? initialValue,
+          S Function(S, List<_i3.GroceryListModel>)? combine) =>
+      (super.noSuchMethod(Invocation.method(#fold, [initialValue, combine]),
+          returnValue: Future<S>.value(null)) as _i4.Future<S>);
+  @override
+  _i4.Future<String> join([String? separator = r'']) =>
+      (super.noSuchMethod(Invocation.method(#join, [separator]),
+          returnValue: Future<String>.value('')) as _i4.Future<String>);
+  @override
+  _i4.Future<bool> contains(Object? needle) =>
+      (super.noSuchMethod(Invocation.method(#contains, [needle]),
+          returnValue: Future<bool>.value(false)) as _i4.Future<bool>);
+  @override
+  _i4.Future<dynamic> forEach(
+          void Function(List<_i3.GroceryListModel>)? action) =>
+      (super.noSuchMethod(Invocation.method(#forEach, [action]),
+          returnValue: Future<dynamic>.value()) as _i4.Future<dynamic>);
+  @override
+  _i4.Future<bool> every(bool Function(List<_i3.GroceryListModel>)? test) =>
+      (super.noSuchMethod(Invocation.method(#every, [test]),
+          returnValue: Future<bool>.value(false)) as _i4.Future<bool>);
+  @override
+  _i4.Future<bool> any(bool Function(List<_i3.GroceryListModel>)? test) =>
+      (super.noSuchMethod(Invocation.method(#any, [test]),
+          returnValue: Future<bool>.value(false)) as _i4.Future<bool>);
+  @override
+  _i4.Stream<R> cast<R>() => (super.noSuchMethod(Invocation.method(#cast, []),
+      returnValue: Stream<R>.empty()) as _i4.Stream<R>);
+  @override
+  _i4.Future<List<List<_i3.GroceryListModel>>> toList() =>
+      (super.noSuchMethod(Invocation.method(#toList, []),
+              returnValue: Future<List<List<_i3.GroceryListModel>>>.value(
+                  <List<_i3.GroceryListModel>>[]))
+          as _i4.Future<List<List<_i3.GroceryListModel>>>);
+  @override
+  _i4.Future<Set<List<_i3.GroceryListModel>>> toSet() =>
+      (super.noSuchMethod(Invocation.method(#toSet, []),
+              returnValue: Future<Set<List<_i3.GroceryListModel>>>.value(
+                  <List<_i3.GroceryListModel>>{}))
+          as _i4.Future<Set<List<_i3.GroceryListModel>>>);
+  @override
+  _i4.Future<E> drain<E>([E? futureValue]) =>
+      (super.noSuchMethod(Invocation.method(#drain, [futureValue]),
+          returnValue: Future<E>.value(null)) as _i4.Future<E>);
+  @override
+  _i4.Stream<List<_i3.GroceryListModel>> take(int? count) =>
+      (super.noSuchMethod(Invocation.method(#take, [count]),
+              returnValue: Stream<List<_i3.GroceryListModel>>.empty())
+          as _i4.Stream<List<_i3.GroceryListModel>>);
+  @override
+  _i4.Stream<List<_i3.GroceryListModel>> takeWhile(
+          bool Function(List<_i3.GroceryListModel>)? test) =>
+      (super.noSuchMethod(Invocation.method(#takeWhile, [test]),
+              returnValue: Stream<List<_i3.GroceryListModel>>.empty())
+          as _i4.Stream<List<_i3.GroceryListModel>>);
+  @override
+  _i4.Stream<List<_i3.GroceryListModel>> skip(int? count) =>
+      (super.noSuchMethod(Invocation.method(#skip, [count]),
+              returnValue: Stream<List<_i3.GroceryListModel>>.empty())
+          as _i4.Stream<List<_i3.GroceryListModel>>);
+  @override
+  _i4.Stream<List<_i3.GroceryListModel>> skipWhile(
+          bool Function(List<_i3.GroceryListModel>)? test) =>
+      (super.noSuchMethod(Invocation.method(#skipWhile, [test]),
+              returnValue: Stream<List<_i3.GroceryListModel>>.empty())
+          as _i4.Stream<List<_i3.GroceryListModel>>);
+  @override
+  _i4.Stream<List<_i3.GroceryListModel>> distinct(
+          [bool Function(
+                  List<_i3.GroceryListModel>, List<_i3.GroceryListModel>)?
+              equals]) =>
+      (super.noSuchMethod(Invocation.method(#distinct, [equals]),
+              returnValue: Stream<List<_i3.GroceryListModel>>.empty())
+          as _i4.Stream<List<_i3.GroceryListModel>>);
+  @override
+  _i4.Future<List<_i3.GroceryListModel>> firstWhere(
+          bool Function(List<_i3.GroceryListModel>)? test,
+          {List<_i3.GroceryListModel> Function()? orElse}) =>
+      (super.noSuchMethod(
+              Invocation.method(#firstWhere, [test], {#orElse: orElse}),
+              returnValue: Future<List<_i3.GroceryListModel>>.value(
+                  <_i3.GroceryListModel>[]))
+          as _i4.Future<List<_i3.GroceryListModel>>);
+  @override
+  _i4.Future<List<_i3.GroceryListModel>> lastWhere(
+          bool Function(List<_i3.GroceryListModel>)? test,
+          {List<_i3.GroceryListModel> Function()? orElse}) =>
+      (super.noSuchMethod(
+              Invocation.method(#lastWhere, [test], {#orElse: orElse}),
+              returnValue: Future<List<_i3.GroceryListModel>>.value(
+                  <_i3.GroceryListModel>[]))
+          as _i4.Future<List<_i3.GroceryListModel>>);
+  @override
+  _i4.Future<List<_i3.GroceryListModel>> singleWhere(
+          bool Function(List<_i3.GroceryListModel>)? test,
+          {List<_i3.GroceryListModel> Function()? orElse}) =>
+      (super.noSuchMethod(
+              Invocation.method(#singleWhere, [test], {#orElse: orElse}),
+              returnValue: Future<List<_i3.GroceryListModel>>.value(
+                  <_i3.GroceryListModel>[]))
+          as _i4.Future<List<_i3.GroceryListModel>>);
+  @override
+  _i4.Future<List<_i3.GroceryListModel>> elementAt(int? index) =>
+      (super.noSuchMethod(Invocation.method(#elementAt, [index]),
+              returnValue: Future<List<_i3.GroceryListModel>>.value(
+                  <_i3.GroceryListModel>[]))
+          as _i4.Future<List<_i3.GroceryListModel>>);
+  @override
+  _i4.Stream<List<_i3.GroceryListModel>> timeout(Duration? timeLimit,
+          {void Function(_i4.EventSink<List<_i3.GroceryListModel>>)?
+              onTimeout}) =>
+      (super.noSuchMethod(
+              Invocation.method(#timeout, [timeLimit], {#onTimeout: onTimeout}),
+              returnValue: Stream<List<_i3.GroceryListModel>>.empty())
+          as _i4.Stream<List<_i3.GroceryListModel>>);
 }

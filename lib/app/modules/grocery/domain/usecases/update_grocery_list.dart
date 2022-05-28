@@ -27,10 +27,7 @@ class UpdateGroceryListImpl implements UpdateGroceryList {
 
   Future<Either<Failure, Unit>> _updateGroceryList(
       GroceryList groceryList) async {
-    var option = optionOf(groceryList);
-    return option.fold(() => Left(GroceryListFailure()), (groceryList) async {
-      var result = groceryRepository.updateGroceryList(groceryList);
-      return result;
-    });
+    var result = groceryRepository.updateGroceryList(groceryList);
+    return result;
   }
 }

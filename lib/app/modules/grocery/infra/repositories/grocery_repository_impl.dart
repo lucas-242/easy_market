@@ -11,6 +11,26 @@ class GroceryRepositoryImpl implements GroceryRepository {
   GroceryRepositoryImpl(this.datasource);
 
   @override
+  Future<Either<Failure, List<GroceryList>>> getGroceryLists() async {
+    try {
+      var result = await datasource.getGroceryLists();
+      return right(result);
+    } catch (e) {
+      return left(GroceryListFailure());
+    }
+  }
+
+  @override
+  Either<Failure, Stream<List<GroceryList>>> listenGroceryLists() {
+    try {
+      var result = datasource.listenGroceryLists();
+      return right(result);
+    } catch (e) {
+      return left(GroceryListFailure());
+    }
+  }
+
+  @override
   Future<Either<Failure, GroceryList>> createGroceryList(
       GroceryList groceryList) async {
     try {

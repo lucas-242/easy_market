@@ -27,10 +27,7 @@ class DeleteGroceryListImpl implements DeleteGroceryList {
 
   Future<Either<Failure, Unit>> _deleteGroceryList(
       GroceryList groceryList) async {
-    var option = optionOf(groceryList);
-    return option.fold(() => Left(GroceryListFailure()), (groceryList) {
-      var result = groceryRepository.deleteGroceryList(groceryList);
-      return result;
-    });
+    var result = groceryRepository.deleteGroceryList(groceryList);
+    return result;
   }
 }

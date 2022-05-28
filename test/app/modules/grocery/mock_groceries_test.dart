@@ -9,6 +9,9 @@ class GroceryRepositoryTest extends Mock implements GroceryRepository {}
 
 class GroceryDatasourceTest extends Mock implements GroceryDatasource {}
 
+class StreamGroceryListsTest extends Mock
+    implements Stream<List<GroceryListModel>> {}
+
 /// GroceryList without id
 GroceryList get groceryListToCreate => GroceryList(
       name: 'Test',
@@ -47,5 +50,62 @@ GroceryListModel get groceryListModelToUpdate => GroceryListModel(
       ],
     );
 
-@GenerateMocks([GroceryRepositoryTest, GroceryDatasourceTest])
+///List of GroceryList
+List<GroceryList> get groceryLists => [
+      GroceryList(
+        id: '123',
+        name: 'Test1',
+        groceries: [
+          const Grocery(name: 'product1', quantity: 5),
+          const Grocery(name: 'product2', quantity: 3),
+        ],
+      ),
+      GroceryList(
+        id: '1234',
+        name: 'Test2',
+        groceries: [
+          const Grocery(name: 'product1', quantity: 5),
+          const Grocery(name: 'product2', quantity: 3),
+        ],
+      ),
+      GroceryList(
+        id: '12345',
+        name: 'Test3',
+        groceries: [
+          const Grocery(name: 'product1', quantity: 5),
+          const Grocery(name: 'product2', quantity: 3),
+        ],
+      ),
+    ];
+
+///List of GroceryListModel
+List<GroceryListModel> get groceryListModelList => [
+      GroceryListModel(
+        id: '123',
+        name: 'Test1',
+        groceries: [
+          GroceryModel(name: 'product1', quantity: 5),
+          GroceryModel(name: 'product2', quantity: 3),
+        ],
+      ),
+      GroceryListModel(
+        id: '1234',
+        name: 'Test2',
+        groceries: [
+          GroceryModel(name: 'product1', quantity: 5),
+          GroceryModel(name: 'product2', quantity: 3),
+        ],
+      ),
+      GroceryListModel(
+        id: '12345',
+        name: 'Test3',
+        groceries: [
+          GroceryModel(name: 'product1', quantity: 5),
+          GroceryModel(name: 'product2', quantity: 3),
+        ],
+      ),
+    ];
+
+@GenerateMocks(
+    [GroceryRepositoryTest, GroceryDatasourceTest, StreamGroceryListsTest])
 void main() {}

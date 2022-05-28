@@ -27,10 +27,7 @@ class CreateGroceryListImpl implements CreateGroceryList {
 
   Future<Either<Failure, GroceryList>> _createGroceryList(
       GroceryList groceryList) async {
-    var option = optionOf(groceryList);
-    return option.fold(() => Left(GroceryListFailure()), (groceryList) async {
-      var result = await groceryRepository.createGroceryList(groceryList);
-      return result;
-    });
+    var result = await groceryRepository.createGroceryList(groceryList);
+    return result;
   }
 }

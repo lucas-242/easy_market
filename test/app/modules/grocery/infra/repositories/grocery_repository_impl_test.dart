@@ -11,6 +11,28 @@ void main() {
   final datasource = MockGroceryDatasourceTest();
   final repository = GroceryRepositoryImpl(datasource);
 
+  group('Get GroceryList', () {
+    test('Should return list of GroceryList', () async {
+      var groceryLists = mock.groceryListModelList;
+      when(datasource.getGroceryLists()).thenAnswer((_) async => groceryLists);
+
+      var result = await repository.getGroceryLists();
+      expect(result, Right(groceryLists));
+    });
+
+    test('Should listen to the GroceryList stream', () async {
+      var mockStream = MockStreamGroceryListsTest();
+      when(datasource.listenGroceryLists()).thenAnswer((_) => mockStream);
+      when(mockStream.first)
+          .thenAnswer((_) => Future.value(mock.groceryListModelList));
+
+      var result =
+          (repository.listenGroceryLists()).fold((l) => null, (r) => r);
+      expect(result, isNotNull);
+      expect(await result!.first, isNotEmpty);
+    });
+  });
+
   group('Create GroceryList', () {
     test('Should return GroceryList', () async {
       var groceryList = mock.groceryListModelToUpdate;
