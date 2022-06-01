@@ -113,6 +113,13 @@ Grocery get groceryToAdd => const Grocery(
       groceryListId: '123',
     );
 
+/// GroceryModel without id
+GroceryModel get groceryModelToAdd => GroceryModel(
+      name: 'product1',
+      quantity: 5,
+      groceryListId: '123',
+    );
+
 @GenerateMocks(
     [GroceryRepositoryTest, GroceryDatasourceTest, StreamGroceryListsTest])
 void main() {}

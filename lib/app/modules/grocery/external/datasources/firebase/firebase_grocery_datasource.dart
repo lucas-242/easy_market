@@ -3,6 +3,7 @@ import 'package:market_lists/app/modules/grocery/domain/errors/errors.dart';
 
 import 'package:market_lists/app/modules/grocery/infra/datasources/grocery_datasource.dart';
 import 'package:market_lists/app/modules/grocery/infra/models/grocery_list_model.dart';
+import 'package:market_lists/app/modules/grocery/infra/models/grocery_model.dart';
 
 class FirebaseGroceryDatasource implements GroceryDatasource {
   final String groceryListsTable = 'groceryLists';
@@ -94,5 +95,11 @@ class FirebaseGroceryDatasource implements GroceryDatasource {
     } catch (e) {
       throw GroceryListFailure(message: 'Erro to save data on firebase');
     }
+  }
+
+  @override
+  Future<GroceryModel> addGroceryToList(GroceryModel grocery) {
+    // TODO: implement addGroceryToList
+    throw UnimplementedError();
   }
 }

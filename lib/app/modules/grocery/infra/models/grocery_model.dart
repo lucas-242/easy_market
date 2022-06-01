@@ -10,6 +10,7 @@ class GroceryModel extends Grocery {
     required super.quantity,
     super.price,
     super.type,
+    super.groceryListId,
   });
 
   factory GroceryModel.fromGrocery(Grocery grocery) {
@@ -19,6 +20,7 @@ class GroceryModel extends Grocery {
       quantity: grocery.quantity,
       type: grocery.type,
       price: grocery.price,
+      groceryListId: grocery.groceryListId,
     );
   }
 
@@ -29,16 +31,18 @@ class GroceryModel extends Grocery {
       'quantity': quantity,
       'type': type != null ? GroceryTypeUtil.toText(type!) : null,
       'price': price,
+      'groceryListId': groceryListId,
     };
   }
 
   factory GroceryModel.fromMap(Map<String, dynamic> map) {
     return GroceryModel(
-      id: map['id'] ?? '',
-      name: map['name'] ?? '',
+      id: map['id'],
+      name: map['name'],
       quantity: map['quantity']?.toInt() ?? 0,
       type: map['type'] != null ? GroceryTypeUtil.fromText(map['type']) : null,
       price: map['price']?.toDouble(),
+      groceryListId: map['groceryListId'],
     );
   }
 

@@ -5,6 +5,7 @@ import 'package:dartz/dartz.dart';
 import 'package:market_lists/app/modules/grocery/domain/repositories/grocery_repository.dart';
 import 'package:market_lists/app/modules/grocery/infra/datasources/grocery_datasource.dart';
 import 'package:market_lists/app/modules/grocery/infra/models/grocery_list_model.dart';
+import 'package:market_lists/app/modules/grocery/infra/models/grocery_model.dart';
 
 class GroceryRepositoryImpl implements GroceryRepository {
   final GroceryDatasource datasource;
@@ -67,8 +68,13 @@ class GroceryRepositoryImpl implements GroceryRepository {
   }
 
   @override
-  Future<Either<Failure, Grocery>> addGroceryToList(Grocery grocery) {
-    // TODO: implement addGroceryToList
-    throw UnimplementedError();
+  Future<Either<Failure, Grocery>> addGroceryToList(Grocery grocery) async {
+    try {
+      var groceryToAdd = GroceryModel.fromGrocery(grocery);
+      var result = await datasource.addGroceryToList(groceryToAdd);
+      return right(result);
+    } catch (e) {
+      return left(GroceryListFailure());
+    }
   }
 }
