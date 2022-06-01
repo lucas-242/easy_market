@@ -106,6 +106,13 @@ List<GroceryListModel> get groceryListModelList => [
       ),
     ];
 
+/// Grocery without id
+Grocery get groceryToAdd => const Grocery(
+      name: 'product1',
+      quantity: 5,
+      groceryListId: '123',
+    );
+
 @GenerateMocks(
     [GroceryRepositoryTest, GroceryDatasourceTest, StreamGroceryListsTest])
 void main() {}

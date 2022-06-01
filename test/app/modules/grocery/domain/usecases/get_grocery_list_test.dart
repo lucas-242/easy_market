@@ -21,8 +21,7 @@ void main() {
     expect(result, isNotEmpty);
   });
 
-  test('Should throw GroceryListFailure when there are any errors to save',
-      () async {
+  test('Should throw GroceryListFailure', () async {
     when(repository.getGroceryLists())
         .thenAnswer((_) async => left(GroceryListFailure()));
 

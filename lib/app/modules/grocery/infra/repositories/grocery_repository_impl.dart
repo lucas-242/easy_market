@@ -1,3 +1,4 @@
+import 'package:market_lists/app/modules/grocery/domain/entities/grocery.dart';
 import 'package:market_lists/app/modules/grocery/domain/errors/errors.dart';
 import 'package:market_lists/app/modules/grocery/domain/entities/grocery_list.dart';
 import 'package:dartz/dartz.dart';
@@ -63,5 +64,11 @@ class GroceryRepositoryImpl implements GroceryRepository {
     } catch (e) {
       return left(GroceryListFailure());
     }
+  }
+
+  @override
+  Future<Either<Failure, Grocery>> addGroceryToList(Grocery grocery) {
+    // TODO: implement addGroceryToList
+    throw UnimplementedError();
   }
 }

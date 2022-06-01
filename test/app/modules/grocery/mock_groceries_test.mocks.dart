@@ -77,6 +77,13 @@ class MockGroceryRepositoryTest extends _i1.Mock
               returnValue: Future<_i2.Either<_i6.Failure, _i2.Unit>>.value(
                   _FakeEither_0<_i6.Failure, _i2.Unit>()))
           as _i4.Future<_i2.Either<_i6.Failure, _i2.Unit>>);
+  @override
+  _i4.Future<_i2.Either<_i6.Failure, _i7.Grocery>> addGroceryToList(
+          _i7.Grocery? grocery) =>
+      (super.noSuchMethod(Invocation.method(#addGroceryToList, [grocery]),
+              returnValue: Future<_i2.Either<_i6.Failure, _i7.Grocery>>.value(
+                  _FakeEither_0<_i6.Failure, _i7.Grocery>()))
+          as _i4.Future<_i2.Either<_i6.Failure, _i7.Grocery>>);
 }
 
 /// A class which mocks [GroceryDatasourceTest].

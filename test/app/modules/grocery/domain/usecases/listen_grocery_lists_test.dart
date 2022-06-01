@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:market_lists/app/modules/grocery/domain/entities/grocery_list.dart';
 import 'package:market_lists/app/modules/grocery/domain/errors/errors.dart';
 import 'package:market_lists/app/modules/grocery/domain/usecases/listen_grocery_lists.dart';
 import 'package:mockito/mockito.dart';
