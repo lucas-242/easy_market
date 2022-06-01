@@ -24,6 +24,16 @@ class GroceryModel extends Grocery {
     );
   }
 
+  Map<String, dynamic> toMapCreate() {
+    return {
+      'name': name,
+      'quantity': quantity,
+      'type': type != null ? GroceryTypeUtil.toText(type!) : null,
+      'price': price,
+      'groceryListId': groceryListId,
+    };
+  }
+
   Map<String, dynamic> toMap() {
     return {
       'id': id,

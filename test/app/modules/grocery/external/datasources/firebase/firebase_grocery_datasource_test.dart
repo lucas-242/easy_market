@@ -16,7 +16,7 @@ void main() {
     return result;
   }
 
-  group('Create', () {
+  group('Create GroceryList', () {
     test('Should create GroceryList', () async {
       var result = await _createMockGroceryList();
       expect(result.id, isNotEmpty);
@@ -24,7 +24,7 @@ void main() {
     });
   });
 
-  group('Get', () {
+  group('Get GroceryList', () {
     test('Should get all GroceryLists', () async {
       await _createMockGroceryList();
       var result = await datasource.getGroceryLists();
@@ -45,7 +45,7 @@ void main() {
     });
   });
 
-  group('Delete', () {
+  group('Delete GroceryList', () {
     test('Should delete GroceryList', () async {
       var groceryListToDelete = await _createMockGroceryList();
       await datasource.deleteGroceryList(groceryListToDelete.id);
@@ -55,7 +55,7 @@ void main() {
     });
   });
 
-  group('Update', () {
+  group('Update GroceryList', () {
     Future<GroceryListModel> _setupUpdateTest() async {
       var groceryListCreated = await _createMockGroceryList();
       var newName = 'testing update';
@@ -73,6 +73,15 @@ void main() {
           .firstWhere((element) => element.id == groceryListToUpdate.id);
 
       expect(result.name, groceryListToUpdate.name);
+    });
+  });
+
+  group('Add Grocery', () {
+    test('Should add Grocery', () async {
+      var grocery = mock.groceryModelToAdd;
+      var result = await datasource.addGroceryToList(grocery);
+      expect(result.id, isNotEmpty);
+      expect(result.groceryListId, isNotEmpty);
     });
   });
 }

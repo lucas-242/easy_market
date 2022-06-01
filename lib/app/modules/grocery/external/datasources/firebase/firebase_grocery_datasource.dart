@@ -7,6 +7,7 @@ import 'package:market_lists/app/modules/grocery/infra/models/grocery_model.dart
 
 class FirebaseGroceryDatasource implements GroceryDatasource {
   final String groceryListsTable = 'groceryLists';
+  final String groceryTable = 'grocery';
   final FirebaseFirestore _firestore;
   FirebaseGroceryDatasource(this._firestore);
 
@@ -98,8 +99,21 @@ class FirebaseGroceryDatasource implements GroceryDatasource {
   }
 
   @override
-  Future<GroceryModel> addGroceryToList(GroceryModel grocery) {
-    // TODO: implement addGroceryToList
-    throw UnimplementedError();
+  Future<GroceryModel> addGroceryToList(GroceryModel grocery) async {
+    try {
+      var reference = _firestore.collection(groceryTable).doc();
+      var toSave = grocery.toMapCreate();
+      await reference.set(toSave);
+      return GroceryModel(
+        id: reference.id,
+        name: grocery.name,
+        quantity: grocery.quantity,
+        price: grocery.price,
+        type: grocery.type,
+        groceryListId: grocery.groceryListId,
+      );
+    } catch (e) {
+      throw GroceryListFailure(message: 'Erro to save data on firebase');
+    }
   }
 }
