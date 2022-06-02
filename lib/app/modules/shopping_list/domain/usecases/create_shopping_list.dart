@@ -8,8 +8,8 @@ abstract class CreateShoppingList {
 }
 
 class CreateShoppingListImpl implements CreateShoppingList {
-  final ShoppingListRepository itemRepository;
-  CreateShoppingListImpl(this.itemRepository);
+  final ShoppingListRepository repository;
+  CreateShoppingListImpl(this.repository);
 
   @override
   Future<Either<Failure, ShoppingList>> call(ShoppingList shoppingList) async {
@@ -28,7 +28,7 @@ class CreateShoppingListImpl implements CreateShoppingList {
 
   Future<Either<Failure, ShoppingList>> _createShoppingList(
       ShoppingList shoppingList) async {
-    var result = await itemRepository.createShoppingList(shoppingList);
+    var result = await repository.createShoppingList(shoppingList);
     return result;
   }
 }

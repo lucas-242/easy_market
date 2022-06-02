@@ -7,7 +7,7 @@ import 'package:market_lists/app/modules/shopping_list/infra/models/shopping_lis
 
 class FirebaseShoppingListDatasource implements ShoppingListDatasource {
   final String shoppingListsTable = 'shoppingLists';
-  final String itemTable = 'item';
+  final String itemsTable = 'items';
   final FirebaseFirestore _firestore;
   FirebaseShoppingListDatasource(this._firestore);
 
@@ -101,7 +101,7 @@ class FirebaseShoppingListDatasource implements ShoppingListDatasource {
   @override
   Future<ItemModel> addItemToList(ItemModel item) async {
     try {
-      var reference = _firestore.collection(itemTable).doc();
+      var reference = _firestore.collection(itemsTable).doc();
       var toSave = item.toMapCreate();
       await reference.set(toSave);
       return ItemModel(
@@ -120,7 +120,7 @@ class FirebaseShoppingListDatasource implements ShoppingListDatasource {
   @override
   Future<void> updateItemInList(ItemModel item) async {
     try {
-      var reference = _firestore.collection(itemTable).doc(item.id);
+      var reference = _firestore.collection(itemsTable).doc(item.id);
       var toSave = item.toMapUpdate();
       await reference.update(toSave);
     } catch (e) {

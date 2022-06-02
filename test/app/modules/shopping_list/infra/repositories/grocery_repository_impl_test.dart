@@ -96,40 +96,4 @@ void main() {
       expect(result.leftMap((l) => l is ShoppingListFailure), const Left(true));
     });
   });
-
-  group('Add Item', () {
-    test('Should add and return Item', () async {
-      var item = mock.itemModelToAdd;
-      when(datasource.addItemToList(any)).thenAnswer((_) async => item);
-
-      var result = await repository.addItemToList(mock.itemToAdd);
-      expect(result, Right(item));
-    });
-
-    test('Should throw ShoppingListFailure when there are any errors to save',
-        () async {
-      when(datasource.addItemToList(any)).thenThrow((_) async => Exception());
-
-      var result = await repository.addItemToList(mock.itemToAdd);
-      expect(result.leftMap((l) => l is ShoppingListFailure), const Left(true));
-    });
-  });
-
-  group('Update Item', () {
-    test('Should update Item', () async {
-      when(datasource.updateItemInList(any)).thenAnswer((_) async => unit);
-
-      var result = await repository.updateItemInList(mock.itemToUpdate);
-      expect(result, const Right(unit));
-    });
-
-    test('Should throw ShoppingListFailure when there are any errors to save',
-        () async {
-      when(datasource.updateItemInList(any))
-          .thenThrow((_) async => Exception());
-
-      var result = await repository.addItemToList(mock.itemToUpdate);
-      expect(result.leftMap((l) => l is ShoppingListFailure), const Left(true));
-    });
-  });
 }

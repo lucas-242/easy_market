@@ -9,7 +9,7 @@ import '../../mock_shopping_list_test.dart' as mock;
 import '../../mock_shopping_list_test.mocks.dart';
 
 void main() {
-  final repository = MockShoppingListRepositoryTest();
+  final repository = MockItemRepositoryTest();
   final usecase = UpdateItemInListImpl(repository);
 
   test('Should update item', () async {

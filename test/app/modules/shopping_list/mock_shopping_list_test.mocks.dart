@@ -85,19 +85,6 @@ class MockShoppingListRepositoryTest extends _i1.Mock
               returnValue: Future<_i2.Either<_i7.Failure, _i2.Unit>>.value(
                   _FakeEither_0<_i7.Failure, _i2.Unit>()))
           as _i5.Future<_i2.Either<_i7.Failure, _i2.Unit>>);
-  @override
-  _i5.Future<_i2.Either<_i7.Failure, _i8.Item>> addItemToList(_i8.Item? item) =>
-      (super.noSuchMethod(Invocation.method(#addItemToList, [item]),
-              returnValue: Future<_i2.Either<_i7.Failure, _i8.Item>>.value(
-                  _FakeEither_0<_i7.Failure, _i8.Item>()))
-          as _i5.Future<_i2.Either<_i7.Failure, _i8.Item>>);
-  @override
-  _i5.Future<_i2.Either<_i7.Failure, _i2.Unit>> updateItemInList(
-          _i8.Item? item) =>
-      (super.noSuchMethod(Invocation.method(#updateItemInList, [item]),
-              returnValue: Future<_i2.Either<_i7.Failure, _i2.Unit>>.value(
-                  _FakeEither_0<_i7.Failure, _i2.Unit>()))
-          as _i5.Future<_i2.Either<_i7.Failure, _i2.Unit>>);
 }
 
 /// A class which mocks [ShoppingListDatasourceTest].
@@ -149,6 +136,30 @@ class MockShoppingListDatasourceTest extends _i1.Mock
       (super.noSuchMethod(Invocation.method(#updateItemInList, [item]),
           returnValue: Future<void>.value(),
           returnValueForMissingStub: Future<void>.value()) as _i5.Future<void>);
+}
+
+/// A class which mocks [ItemRepositoryTest].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockItemRepositoryTest extends _i1.Mock
+    implements _i6.ItemRepositoryTest {
+  MockItemRepositoryTest() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i5.Future<_i2.Either<_i7.Failure, _i8.Item>> addItemToList(_i8.Item? item) =>
+      (super.noSuchMethod(Invocation.method(#addItemToList, [item]),
+              returnValue: Future<_i2.Either<_i7.Failure, _i8.Item>>.value(
+                  _FakeEither_0<_i7.Failure, _i8.Item>()))
+          as _i5.Future<_i2.Either<_i7.Failure, _i8.Item>>);
+  @override
+  _i5.Future<_i2.Either<_i7.Failure, _i2.Unit>> updateItemInList(
+          _i8.Item? item) =>
+      (super.noSuchMethod(Invocation.method(#updateItemInList, [item]),
+              returnValue: Future<_i2.Either<_i7.Failure, _i2.Unit>>.value(
+                  _FakeEither_0<_i7.Failure, _i2.Unit>()))
+          as _i5.Future<_i2.Either<_i7.Failure, _i2.Unit>>);
 }
 
 /// A class which mocks [StreamShoppingListsTest].

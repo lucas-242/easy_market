@@ -8,13 +8,13 @@ abstract class ListenShoppingLists {
 }
 
 class ListenShoppingListsImpl implements ListenShoppingLists {
-  ShoppingListRepository itemRepository;
+  ShoppingListRepository repository;
 
-  ListenShoppingListsImpl(this.itemRepository);
+  ListenShoppingListsImpl(this.repository);
 
   @override
   Either<Failure, Stream<List<ShoppingList>>> call() {
-    var result = itemRepository.listenShoppingLists();
+    var result = repository.listenShoppingLists();
     return result;
   }
 }

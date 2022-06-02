@@ -8,8 +8,8 @@ abstract class UpdateShoppingList {
 }
 
 class UpdateShoppingListImpl implements UpdateShoppingList {
-  final ShoppingListRepository itemRepository;
-  UpdateShoppingListImpl(this.itemRepository);
+  final ShoppingListRepository repository;
+  UpdateShoppingListImpl(this.repository);
 
   @override
   Future<Either<Failure, Unit>> call(ShoppingList shoppingList) async {
@@ -27,7 +27,7 @@ class UpdateShoppingListImpl implements UpdateShoppingList {
 
   Future<Either<Failure, Unit>> _updateShoppingList(
       ShoppingList shoppingList) async {
-    var result = itemRepository.updateShoppingList(shoppingList);
+    var result = repository.updateShoppingList(shoppingList);
     return result;
   }
 }

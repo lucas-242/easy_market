@@ -98,7 +98,7 @@ void main() {
 
       var item = mock.itemModelToAdd.copyWith(shoppingListId: shoppingList.id);
       var itemReference = await database
-          .collection(datasource.itemTable)
+          .collection(datasource.itemsTable)
           .add(item.toMapCreate());
 
       var itemToUpdate = item.copyWith(

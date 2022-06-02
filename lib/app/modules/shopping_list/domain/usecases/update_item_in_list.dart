@@ -1,15 +1,15 @@
 import 'package:dartz/dartz.dart';
 import 'package:market_lists/app/modules/shopping_list/domain/entities/item.dart';
 import 'package:market_lists/app/modules/shopping_list/domain/errors/errors.dart';
-import 'package:market_lists/app/modules/shopping_list/domain/repositories/shopping_list_repository.dart';
+import 'package:market_lists/app/modules/shopping_list/domain/repositories/item_repository.dart';
 
 abstract class UpdateItemInList {
   Future<Either<Failure, Unit>> call(Item item);
 }
 
 class UpdateItemInListImpl implements UpdateItemInList {
-  final ShoppingListRepository itemRepository;
-  UpdateItemInListImpl(this.itemRepository);
+  final ItemRepository repository;
+  UpdateItemInListImpl(this.repository);
 
   @override
   Future<Either<Failure, Unit>> call(Item item) async {
@@ -26,7 +26,7 @@ class UpdateItemInListImpl implements UpdateItemInList {
   }
 
   Future<Either<Failure, Unit>> _updateItem(Item item) async {
-    var result = itemRepository.updateItemInList(item);
+    var result = repository.updateItemInList(item);
     return result;
   }
 }

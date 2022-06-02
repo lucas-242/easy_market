@@ -9,9 +9,9 @@ abstract class DeleteShoppingList {
 }
 
 class DeleteShoppingListImpl implements DeleteShoppingList {
-  ShoppingListRepository itemRepository;
+  ShoppingListRepository repository;
 
-  DeleteShoppingListImpl(this.itemRepository);
+  DeleteShoppingListImpl(this.repository);
 
   @override
   Future<Either<Failure, Unit>> call(ShoppingList shoppingList) async {
@@ -27,7 +27,7 @@ class DeleteShoppingListImpl implements DeleteShoppingList {
 
   Future<Either<Failure, Unit>> _deleteShoppingList(
       ShoppingList shoppingList) async {
-    var result = itemRepository.deleteShoppingList(shoppingList);
+    var result = repository.deleteShoppingList(shoppingList);
     return result;
   }
 }

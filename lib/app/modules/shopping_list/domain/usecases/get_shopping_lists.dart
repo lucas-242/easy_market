@@ -8,13 +8,13 @@ abstract class GetShoppingLists {
 }
 
 class GetShoppingListsImpl implements GetShoppingLists {
-  ShoppingListRepository itemRepository;
+  ShoppingListRepository repository;
 
-  GetShoppingListsImpl(this.itemRepository);
+  GetShoppingListsImpl(this.repository);
 
   @override
   Future<Either<Failure, List<ShoppingList>>> call() async {
-    var result = await itemRepository.getShoppingLists();
+    var result = await repository.getShoppingLists();
     return result;
   }
 }

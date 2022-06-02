@@ -1,3 +1,4 @@
+import 'package:market_lists/app/modules/shopping_list/domain/repositories/item_repository.dart';
 import 'package:market_lists/app/modules/shopping_list/infra/datasources/shopping_list_datasource.dart';
 import 'package:market_lists/app/modules/shopping_list/infra/models/item_model.dart';
 import 'package:market_lists/app/modules/shopping_list/infra/models/shopping_list_model.dart';
@@ -10,6 +11,8 @@ class ShoppingListRepositoryTest extends Mock
 
 class ShoppingListDatasourceTest extends Mock
     implements ShoppingListDatasource {}
+
+class ItemRepositoryTest extends Mock implements ItemRepository {}
 
 class StreamShoppingListsTest extends Mock
     implements Stream<List<ShoppingListModel>> {}
@@ -141,6 +144,7 @@ ItemModel get itemModelToUpdate => ItemModel(
 @GenerateMocks([
   ShoppingListRepositoryTest,
   ShoppingListDatasourceTest,
-  StreamShoppingListsTest
+  ItemRepositoryTest,
+  StreamShoppingListsTest,
 ])
 void main() {}
