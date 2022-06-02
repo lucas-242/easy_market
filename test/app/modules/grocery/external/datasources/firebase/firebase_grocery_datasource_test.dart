@@ -3,6 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:market_lists/app/modules/grocery/external/datasources/firebase/firebase_grocery_datasource.dart';
 import 'package:market_lists/app/modules/grocery/grocery.dart';
 import 'package:market_lists/app/modules/grocery/infra/models/grocery_list_model.dart';
+import 'package:market_lists/app/modules/grocery/infra/models/grocery_model.dart';
 
 import '../../../mock_groceries_test.dart' as mock;
 
@@ -12,7 +13,10 @@ void main() {
 
   Future<GroceryList> _createMockGroceryList() async {
     var groceryList = mock.groceryListModelToCreate;
-    var result = await datasource.createGroceryList(groceryList);
+    var listReference = await database
+        .collection(datasource.groceryListsTable)
+        .add(groceryList.toMapCreate());
+    var result = groceryList.copyWith(id: listReference.id);
     return result;
   }
 
@@ -76,12 +80,43 @@ void main() {
     });
   });
 
-  group('Add Grocery', () {
+  group('Grocery', () {
     test('Should add Grocery', () async {
-      var grocery = mock.groceryModelToAdd;
+      var groceryList = await _createMockGroceryList();
+      var grocery =
+          mock.groceryModelToAdd.copyWith(groceryListId: groceryList.id);
       var result = await datasource.addGroceryToList(grocery);
       expect(result.id, isNotEmpty);
-      expect(result.groceryListId, isNotEmpty);
+      expect(result.groceryListId, groceryList.id);
+    });
+
+    Future<GroceryModel> _setupUpdateTest() async {
+      var groceryList = mock.groceryListModelToCreate;
+      var listReference = await database
+          .collection(datasource.groceryListsTable)
+          .add(groceryList.toMapCreate());
+      groceryList = groceryList.copyWith(id: listReference.id);
+
+      var grocery =
+          mock.groceryModelToAdd.copyWith(groceryListId: groceryList.id);
+      var groceryReference = await database
+          .collection(datasource.groceryTable)
+          .add(grocery.toMapCreate());
+
+      var groceryToUpdate = grocery.copyWith(
+        name: 'Updated Name',
+        quantity: 40,
+        id: groceryReference.id,
+      );
+
+      return groceryToUpdate;
+    }
+
+    test('Should update Grocery', () async {
+      var groceryToUpdate = await _setupUpdateTest();
+      expect(
+          datasource.updateGroceryInList(groceryToUpdate), isA<Future<void>>());
+      //TODO: check in this test if the data is changing
     });
   });
 }

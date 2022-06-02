@@ -110,4 +110,22 @@ void main() {
       expect(result.leftMap((l) => l is GroceryListFailure), const Left(true));
     });
   });
+
+  group('Update Grocery', () {
+    test('Should update Grocery', () async {
+      when(datasource.updateGroceryInList(any)).thenAnswer((_) async => unit);
+
+      var result = await repository.updateGroceryInList(mock.groceryToUpdate);
+      expect(result, const Right(unit));
+    });
+
+    test('Should throw GroceryListFailure when there are any errors to save',
+        () async {
+      when(datasource.updateGroceryInList(any))
+          .thenThrow((_) async => Exception());
+
+      var result = await repository.addGroceryToList(mock.groceryToUpdate);
+      expect(result.leftMap((l) => l is GroceryListFailure), const Left(true));
+    });
+  });
 }

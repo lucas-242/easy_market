@@ -120,6 +120,22 @@ GroceryModel get groceryModelToAdd => GroceryModel(
       groceryListId: '123',
     );
 
+/// Grocery with id
+Grocery get groceryToUpdate => const Grocery(
+      id: '123',
+      name: 'product1',
+      quantity: 5,
+      groceryListId: '123',
+    );
+
+/// GroceryModel with id
+GroceryModel get groceryModelToUpdate => GroceryModel(
+      id: '123',
+      name: 'product1',
+      quantity: 5,
+      groceryListId: '123',
+    );
+
 @GenerateMocks(
     [GroceryRepositoryTest, GroceryDatasourceTest, StreamGroceryListsTest])
 void main() {}

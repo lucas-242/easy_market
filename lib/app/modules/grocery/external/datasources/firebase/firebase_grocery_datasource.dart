@@ -116,4 +116,15 @@ class FirebaseGroceryDatasource implements GroceryDatasource {
       throw GroceryListFailure(message: 'Erro to save data on firebase');
     }
   }
+
+  @override
+  Future<void> updateGroceryInList(GroceryModel grocery) async {
+    try {
+      var reference = _firestore.collection(groceryTable).doc(grocery.id);
+      var toSave = grocery.toMapUpdate();
+      await reference.update(toSave);
+    } catch (e) {
+      throw GroceryListFailure(message: 'Erro to save data on firebase');
+    }
+  }
 }

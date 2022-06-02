@@ -77,4 +77,15 @@ class GroceryRepositoryImpl implements GroceryRepository {
       return left(GroceryListFailure());
     }
   }
+
+  @override
+  Future<Either<Failure, Unit>> updateGroceryInList(Grocery grocery) async {
+    try {
+      var groceryToUpdate = GroceryModel.fromGrocery(grocery);
+      await datasource.updateGroceryInList(groceryToUpdate);
+      return right(unit);
+    } catch (e) {
+      return left(GroceryListFailure());
+    }
+  }
 }

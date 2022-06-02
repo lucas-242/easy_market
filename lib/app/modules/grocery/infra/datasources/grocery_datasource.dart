@@ -8,4 +8,5 @@ abstract class GroceryDatasource {
   Future<void> updateGroceryList(GroceryListModel groceryList);
   Future<void> deleteGroceryList(String id);
   Future<GroceryModel> addGroceryToList(GroceryModel grocery);
+  Future<void> updateGroceryInList(GroceryModel grocery);
 }

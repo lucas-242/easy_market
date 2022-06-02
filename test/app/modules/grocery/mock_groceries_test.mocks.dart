@@ -88,6 +88,13 @@ class MockGroceryRepositoryTest extends _i1.Mock
               returnValue: Future<_i2.Either<_i7.Failure, _i8.Grocery>>.value(
                   _FakeEither_0<_i7.Failure, _i8.Grocery>()))
           as _i5.Future<_i2.Either<_i7.Failure, _i8.Grocery>>);
+  @override
+  _i5.Future<_i2.Either<_i7.Failure, _i2.Unit>> updateGroceryInList(
+          _i8.Grocery? grocery) =>
+      (super.noSuchMethod(Invocation.method(#updateGroceryInList, [grocery]),
+              returnValue: Future<_i2.Either<_i7.Failure, _i2.Unit>>.value(
+                  _FakeEither_0<_i7.Failure, _i2.Unit>()))
+          as _i5.Future<_i2.Either<_i7.Failure, _i2.Unit>>);
 }
 
 /// A class which mocks [GroceryDatasourceTest].
@@ -133,6 +140,11 @@ class MockGroceryDatasourceTest extends _i1.Mock
               returnValue:
                   Future<_i4.GroceryModel>.value(_FakeGroceryModel_2()))
           as _i5.Future<_i4.GroceryModel>);
+  @override
+  _i5.Future<void> updateGroceryInList(_i4.GroceryModel? grocery) =>
+      (super.noSuchMethod(Invocation.method(#updateGroceryInList, [grocery]),
+          returnValue: Future<void>.value(),
+          returnValueForMissingStub: Future<void>.value()) as _i5.Future<void>);
 }
 
 /// A class which mocks [StreamGroceryListsTest].

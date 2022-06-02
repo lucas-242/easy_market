@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:market_lists/app/modules/grocery/domain/entities/grocery.dart';
+import 'package:market_lists/app/modules/grocery/grocery.dart';
 import 'package:market_lists/app/shared/utils/grocery_type_util.dart';
 
 class GroceryModel extends Grocery {
@@ -34,6 +35,15 @@ class GroceryModel extends Grocery {
     };
   }
 
+  Map<String, dynamic> toMapUpdate() {
+    return {
+      'name': name,
+      'quantity': quantity,
+      'type': type != null ? GroceryTypeUtil.toText(type!) : null,
+      'price': price,
+    };
+  }
+
   Map<String, dynamic> toMap() {
     return {
       'id': id,
@@ -60,4 +70,22 @@ class GroceryModel extends Grocery {
 
   factory GroceryModel.fromJson(String source) =>
       GroceryModel.fromMap(json.decode(source));
+
+  GroceryModel copyWith({
+    String? id,
+    String? name,
+    int? quantity,
+    GroceryType? type,
+    double? price,
+    String? groceryListId,
+  }) {
+    return GroceryModel(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      quantity: quantity ?? this.quantity,
+      type: type ?? this.type,
+      price: price ?? this.price,
+      groceryListId: groceryListId ?? this.groceryListId,
+    );
+  }
 }
