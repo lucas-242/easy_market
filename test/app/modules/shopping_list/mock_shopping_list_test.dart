@@ -17,6 +17,8 @@ class ItemRepositoryTest extends Mock implements ItemRepository {}
 class StreamShoppingListsTest extends Mock
     implements Stream<List<ShoppingListModel>> {}
 
+class StreamItemTest extends Mock implements Stream<List<ItemModel>> {}
+
 /// ShoppingList without id
 ShoppingList get shoppingListToCreate => ShoppingList(
       name: 'Test',
@@ -153,6 +155,7 @@ List<ItemModel> get itemModelList => [
   ShoppingListRepositoryTest,
   ShoppingListDatasourceTest,
   ItemRepositoryTest,
+  StreamItemTest,
   StreamShoppingListsTest,
 ])
 void main() {}

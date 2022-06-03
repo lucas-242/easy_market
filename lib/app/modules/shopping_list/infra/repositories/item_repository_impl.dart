@@ -22,6 +22,17 @@ class ItemRepositoryImpl implements ItemRepository {
   }
 
   @override
+  Either<Failure, Stream<List<Item>>> listenItemsFromList(
+      String shoppingListId) {
+    try {
+      var result = datasource.listenItemsFromList(shoppingListId);
+      return right(result);
+    } catch (e) {
+      return left(ShoppingListFailure());
+    }
+  }
+
+  @override
   Future<Either<Failure, Item>> addItemToList(Item item) async {
     try {
       var itemToAdd = ItemModel.fromItem(item);

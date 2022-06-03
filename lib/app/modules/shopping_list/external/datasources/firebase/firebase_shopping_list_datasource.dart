@@ -38,22 +38,24 @@ class FirebaseShoppingListDatasource implements ShoppingListDatasource {
     try {
       Stream<QuerySnapshot> snapshots =
           _firestore.collection(shoppingListsTable).snapshots();
-      var result = _convertQuerySnapshot(snapshots);
+      var result = _querySnapshotToShoppingListModel(snapshots);
       return result;
     } catch (e) {
       throw ShoppingListFailure(message: 'Erro to listen data from firebase');
     }
   }
 
-  Stream<List<ShoppingListModel>> _convertQuerySnapshot(
+  Stream<List<ShoppingListModel>> _querySnapshotToShoppingListModel(
       Stream<QuerySnapshot<Object?>> snapshot) {
     var result = snapshot.map((query) => query.docs
-        .map((DocumentSnapshot document) => _convertDocumentSnapshot(document))
+        .map((DocumentSnapshot document) =>
+            _documentSnapshotToShoppingListModel(document))
         .toList());
     return result;
   }
 
-  ShoppingListModel _convertDocumentSnapshot(DocumentSnapshot snapshot) {
+  ShoppingListModel _documentSnapshotToShoppingListModel(
+      DocumentSnapshot snapshot) {
     var data = snapshot.data() as Map<String, dynamic>;
     var result = ShoppingListModel.fromMap(data);
     return result.copyWith(id: snapshot.id);
@@ -118,6 +120,35 @@ class FirebaseShoppingListDatasource implements ShoppingListDatasource {
         .map((e) => ItemModel.fromMap(e.data()).copyWith(id: e.id))
         .toList();
     return result;
+  }
+
+  @override
+  Stream<List<ItemModel>> listenItemsFromList(String shoppingListId) {
+    try {
+      Stream<QuerySnapshot> snapshots = _firestore
+          .collection(itemsTable)
+          .where('shoppingListId', isEqualTo: shoppingListId)
+          .snapshots();
+      var result = _querySnapshotToItemModel(snapshots);
+      return result;
+    } catch (e) {
+      throw ShoppingListFailure(message: 'Erro to listen data from firebase');
+    }
+  }
+
+  Stream<List<ItemModel>> _querySnapshotToItemModel(
+      Stream<QuerySnapshot<Object?>> snapshot) {
+    var result = snapshot.map((query) => query.docs
+        .map((DocumentSnapshot document) =>
+            _documentSnapshotToItemModel(document))
+        .toList());
+    return result;
+  }
+
+  ItemModel _documentSnapshotToItemModel(DocumentSnapshot snapshot) {
+    var data = snapshot.data() as Map<String, dynamic>;
+    var result = ItemModel.fromMap(data);
+    return result.copyWith(id: snapshot.id);
   }
 
   @override

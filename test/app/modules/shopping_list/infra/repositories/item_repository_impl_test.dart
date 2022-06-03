@@ -48,6 +48,20 @@ void main() {
     });
   });
 
+  group('Listen Items', () {
+    test('Should listen to the items stream', () async {
+      var mockStream = MockStreamItemTest();
+      when(datasource.listenItemsFromList(any)).thenAnswer((_) => mockStream);
+      when(mockStream.first)
+          .thenAnswer((_) => Future.value(mock.itemModelList));
+
+      var result =
+          (repository.listenItemsFromList('id')).fold((l) => null, (r) => r);
+      expect(result, isNotNull);
+      expect(await result!.first, isNotEmpty);
+    });
+  });
+
   group('Update Item', () {
     test('Should update Item', () async {
       when(datasource.updateItemInList(any)).thenAnswer((_) async => unit);

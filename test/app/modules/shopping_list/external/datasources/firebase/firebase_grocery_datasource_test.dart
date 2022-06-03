@@ -117,6 +117,16 @@ void main() {
       expect(result, isNotEmpty);
     });
 
+    test('Should Listem Items stream', () async {
+      var result = datasource.listenItemsFromList(shoppingList.id);
+      result.listen((data) {
+        expect(data, isNotEmpty);
+        expect(
+            data.every((element) => element.shoppingListId == shoppingList.id),
+            true);
+      });
+    });
+
     test('Should update Item', () async {
       var itemToUpdate = item.copyWith(name: 'updated name');
       await datasource.updateItemInList(itemToUpdate);

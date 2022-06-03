@@ -7,7 +7,8 @@ abstract class ShoppingListDatasource {
   Future<ShoppingListModel> createShoppingList(ShoppingListModel shoppingList);
   Future<void> updateShoppingList(ShoppingListModel shoppingList);
   Future<void> deleteShoppingList(String id);
+  Stream<List<ItemModel>> listenItemsFromList(String shoppingListId);
+  Future<List<ItemModel>> getItemsFromList(String shoppingListId);
   Future<ItemModel> addItemToList(ItemModel item);
   Future<void> updateItemInList(ItemModel item);
-  Future<List<ItemModel>> getItemsFromList(String shoppingListId);
 }
