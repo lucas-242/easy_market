@@ -11,4 +11,5 @@ abstract class ShoppingListDatasource {
   Future<List<ItemModel>> getItemsFromList(String shoppingListId);
   Future<ItemModel> addItemToList(ItemModel item);
   Future<void> updateItemInList(ItemModel item);
+  Future<void> deleteItemFromList(String itemId);
 }

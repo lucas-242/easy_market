@@ -79,4 +79,22 @@ void main() {
       expect(result.leftMap((l) => l is ShoppingListFailure), const Left(true));
     });
   });
+
+  group('Delete Item', () {
+    test('Should delete Item', () async {
+      when(datasource.deleteItemFromList(any)).thenAnswer((_) async => unit);
+
+      var result = await repository.deleteItemFromList(mock.itemToUpdate);
+      expect(result, const Right(unit));
+    });
+
+    test('Should throw ShoppingListFailure when there are any errors to delete',
+        () async {
+      when(datasource.deleteItemFromList(any))
+          .thenThrow((_) async => Exception());
+
+      var result = await repository.deleteItemFromList(mock.itemToUpdate);
+      expect(result.leftMap((l) => l is ShoppingListFailure), const Left(true));
+    });
+  });
 }

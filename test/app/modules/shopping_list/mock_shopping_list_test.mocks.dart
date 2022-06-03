@@ -148,6 +148,11 @@ class MockShoppingListDatasourceTest extends _i1.Mock
       (super.noSuchMethod(Invocation.method(#updateItemInList, [item]),
           returnValue: Future<void>.value(),
           returnValueForMissingStub: Future<void>.value()) as _i5.Future<void>);
+  @override
+  _i5.Future<void> deleteItemFromList(String? itemId) =>
+      (super.noSuchMethod(Invocation.method(#deleteItemFromList, [itemId]),
+          returnValue: Future<void>.value(),
+          returnValueForMissingStub: Future<void>.value()) as _i5.Future<void>);
 }
 
 /// A class which mocks [ItemRepositoryTest].
@@ -185,6 +190,13 @@ class MockItemRepositoryTest extends _i1.Mock
   _i5.Future<_i2.Either<_i7.Failure, _i2.Unit>> updateItemInList(
           _i8.Item? item) =>
       (super.noSuchMethod(Invocation.method(#updateItemInList, [item]),
+              returnValue: Future<_i2.Either<_i7.Failure, _i2.Unit>>.value(
+                  _FakeEither_0<_i7.Failure, _i2.Unit>()))
+          as _i5.Future<_i2.Either<_i7.Failure, _i2.Unit>>);
+  @override
+  _i5.Future<_i2.Either<_i7.Failure, _i2.Unit>> deleteItemFromList(
+          _i8.Item? item) =>
+      (super.noSuchMethod(Invocation.method(#deleteItemFromList, [item]),
               returnValue: Future<_i2.Either<_i7.Failure, _i2.Unit>>.value(
                   _FakeEither_0<_i7.Failure, _i2.Unit>()))
           as _i5.Future<_i2.Either<_i7.Failure, _i2.Unit>>);

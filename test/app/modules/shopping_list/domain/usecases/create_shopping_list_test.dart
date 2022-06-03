@@ -1,7 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:market_lists/app/modules/shopping_list/domain/errors/errors.dart';
-import 'package:market_lists/app/modules/shopping_list/domain/usecases/create_shopping_list.dart';
 import 'package:market_lists/app/modules/shopping_list/shopping_list.dart';
 import 'package:mockito/mockito.dart';
 

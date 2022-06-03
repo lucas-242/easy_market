@@ -53,4 +53,14 @@ class ItemRepositoryImpl implements ItemRepository {
       return left(ShoppingListFailure());
     }
   }
+
+  @override
+  Future<Either<Failure, Unit>> deleteItemFromList(Item item) async {
+    try {
+      await datasource.deleteItemFromList(item.id);
+      return right(unit);
+    } catch (e) {
+      return left(ShoppingListFailure());
+    }
+  }
 }

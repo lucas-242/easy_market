@@ -180,4 +180,14 @@ class FirebaseShoppingListDatasource implements ShoppingListDatasource {
       throw ShoppingListFailure(message: 'Erro to save data on firebase');
     }
   }
+
+  @override
+  Future<void> deleteItemFromList(String itemId) async {
+    try {
+      var reference = _firestore.collection(itemsTable).doc(itemId);
+      await reference.delete();
+    } catch (e) {
+      throw ShoppingListFailure(message: 'Erro to delete data from firebase');
+    }
+  }
 }

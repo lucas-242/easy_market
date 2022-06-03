@@ -137,5 +137,14 @@ void main() {
       expect(result.name, itemToUpdate.name);
       expect(result.quantity, itemToUpdate.quantity);
     });
+
+    test('Should delete Item', () async {
+      await datasource.deleteItemFromList(item.id);
+      var itemsFromShoppingList =
+          await datasource.getItemsFromList(item.shoppingListId);
+      var result =
+          itemsFromShoppingList.where((element) => element.id == item.id);
+      expect(result, isEmpty);
+    });
   });
 }
