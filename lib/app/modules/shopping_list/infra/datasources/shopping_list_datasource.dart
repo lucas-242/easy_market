@@ -9,4 +9,5 @@ abstract class ShoppingListDatasource {
   Future<void> deleteShoppingList(String id);
   Future<ItemModel> addItemToList(ItemModel item);
   Future<void> updateItemInList(ItemModel item);
+  Future<List<ItemModel>> getItemsFromList(String shoppingListId);
 }

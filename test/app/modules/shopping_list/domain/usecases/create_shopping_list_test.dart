@@ -24,7 +24,7 @@ void main() {
   test('Should throw InvalidShoppingList when the list is invalid', () async {
     var shoppingList = ShoppingList(
       name: '',
-      groceries: const [
+      items: const [
         Item(name: 'product1', quantity: 5),
         Item(name: 'product2', quantity: 3),
       ],

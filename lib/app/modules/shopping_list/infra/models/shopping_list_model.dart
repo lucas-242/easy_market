@@ -5,11 +5,11 @@ import 'package:market_lists/app/modules/shopping_list/infra/models/item_model.d
 
 class ShoppingListModel extends ShoppingList {
   @override
-  List<ItemModel> groceries;
+  List<ItemModel> items;
 
   ShoppingListModel({
     required super.name,
-    required this.groceries,
+    required this.items,
     super.id,
     super.createdAt,
     super.updatedAt,
@@ -19,8 +19,8 @@ class ShoppingListModel extends ShoppingList {
     return ShoppingListModel(
       id: shoppingList.id,
       name: shoppingList.name,
-      groceries: List<ItemModel>.from(
-          shoppingList.groceries.map((x) => ItemModel.fromItem(x))),
+      items: List<ItemModel>.from(
+          shoppingList.items.map((x) => ItemModel.fromItem(x))),
       createdAt: shoppingList.createdAt,
       updatedAt: shoppingList.updatedAt,
     );
@@ -45,7 +45,7 @@ class ShoppingListModel extends ShoppingList {
     return {
       'id': id,
       'name': name,
-      'groceries': groceries.map((x) => x.toMap()).toList(),
+      'items': items.map((x) => x.toMap()).toList(),
       'createdAt': createdAt.millisecondsSinceEpoch,
       'updatedAt': updatedAt.millisecondsSinceEpoch,
     };
@@ -55,9 +55,8 @@ class ShoppingListModel extends ShoppingList {
     return ShoppingListModel(
       id: map['id'] ?? '',
       name: map['name'] ?? '',
-      groceries: map['groceries'] != null
-          ? List<ItemModel>.from(
-              map['groceries']?.map((x) => ItemModel.fromMap(x)))
+      items: map['items'] != null
+          ? List<ItemModel>.from(map['items']?.map((x) => ItemModel.fromMap(x)))
           : [],
       createdAt: DateTime.fromMillisecondsSinceEpoch(map['createdAt']),
       updatedAt: DateTime.fromMillisecondsSinceEpoch(map['updatedAt']),
@@ -72,14 +71,14 @@ class ShoppingListModel extends ShoppingList {
   ShoppingListModel copyWith({
     String? id,
     String? name,
-    List<ItemModel>? groceries,
+    List<ItemModel>? items,
     DateTime? createdAt,
     DateTime? updatedAt,
   }) {
     return ShoppingListModel(
       id: id ?? this.id,
       name: name ?? this.name,
-      groceries: groceries ?? this.groceries,
+      items: items ?? this.items,
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
     );

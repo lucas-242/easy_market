@@ -29,6 +29,25 @@ void main() {
     });
   });
 
+  group('Get Item', () {
+    test('Should get Items', () async {
+      var items = mock.itemModelList;
+      when(datasource.getItemsFromList(any)).thenAnswer((_) async => items);
+
+      var result = await repository.getItemsFromList('id');
+      expect(result, Right(items));
+    });
+
+    test('Should throw ShoppingListFailure when there are any errors to get',
+        () async {
+      when(datasource.getItemsFromList(any))
+          .thenThrow((_) async => Exception());
+
+      var result = await repository.getItemsFromList('id');
+      expect(result.leftMap((l) => l is ShoppingListFailure), const Left(true));
+    });
+  });
+
   group('Update Item', () {
     test('Should update Item', () async {
       when(datasource.updateItemInList(any)).thenAnswer((_) async => unit);

@@ -11,6 +11,17 @@ class ItemRepositoryImpl implements ItemRepository {
   ItemRepositoryImpl(this.datasource);
 
   @override
+  Future<Either<Failure, List<Item>>> getItemsFromList(
+      String shoppingListId) async {
+    try {
+      var result = await datasource.getItemsFromList(shoppingListId);
+      return right(result);
+    } catch (e) {
+      return left(ShoppingListFailure());
+    }
+  }
+
+  @override
   Future<Either<Failure, Item>> addItemToList(Item item) async {
     try {
       var itemToAdd = ItemModel.fromItem(item);

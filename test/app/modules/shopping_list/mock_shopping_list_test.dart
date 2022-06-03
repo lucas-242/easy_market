@@ -20,7 +20,7 @@ class StreamShoppingListsTest extends Mock
 /// ShoppingList without id
 ShoppingList get shoppingListToCreate => ShoppingList(
       name: 'Test',
-      groceries: const [
+      items: const [
         Item(name: 'product1', quantity: 5),
         Item(name: 'product2', quantity: 3),
       ],
@@ -29,7 +29,7 @@ ShoppingList get shoppingListToCreate => ShoppingList(
 /// ShoppingListmodel without id
 ShoppingListModel get shoppingListModelToCreate => ShoppingListModel(
       name: 'Test',
-      groceries: [
+      items: [
         ItemModel(name: 'product1', quantity: 5),
         ItemModel(name: 'product2', quantity: 3),
       ],
@@ -39,7 +39,7 @@ ShoppingListModel get shoppingListModelToCreate => ShoppingListModel(
 ShoppingList get shoppingListToUpdate => ShoppingList(
       id: '123',
       name: 'Test',
-      groceries: const [
+      items: const [
         Item(name: 'product1', quantity: 5),
         Item(name: 'product2', quantity: 3),
       ],
@@ -49,7 +49,7 @@ ShoppingList get shoppingListToUpdate => ShoppingList(
 ShoppingListModel get shoppingListModelToUpdate => ShoppingListModel(
       id: '123',
       name: 'Test',
-      groceries: [
+      items: [
         ItemModel(name: 'product1', quantity: 5),
         ItemModel(name: 'product2', quantity: 3),
       ],
@@ -60,7 +60,7 @@ List<ShoppingList> get shoppingLists => [
       ShoppingList(
         id: '123',
         name: 'Test1',
-        groceries: [
+        items: [
           const Item(name: 'product1', quantity: 5),
           const Item(name: 'product2', quantity: 3),
         ],
@@ -68,7 +68,7 @@ List<ShoppingList> get shoppingLists => [
       ShoppingList(
         id: '1234',
         name: 'Test2',
-        groceries: [
+        items: [
           const Item(name: 'product1', quantity: 5),
           const Item(name: 'product2', quantity: 3),
         ],
@@ -76,7 +76,7 @@ List<ShoppingList> get shoppingLists => [
       ShoppingList(
         id: '12345',
         name: 'Test3',
-        groceries: [
+        items: [
           const Item(name: 'product1', quantity: 5),
           const Item(name: 'product2', quantity: 3),
         ],
@@ -88,7 +88,7 @@ List<ShoppingListModel> get shoppingListModelList => [
       ShoppingListModel(
         id: '123',
         name: 'Test1',
-        groceries: [
+        items: [
           ItemModel(name: 'product1', quantity: 5),
           ItemModel(name: 'product2', quantity: 3),
         ],
@@ -96,7 +96,7 @@ List<ShoppingListModel> get shoppingListModelList => [
       ShoppingListModel(
         id: '1234',
         name: 'Test2',
-        groceries: [
+        items: [
           ItemModel(name: 'product1', quantity: 5),
           ItemModel(name: 'product2', quantity: 3),
         ],
@@ -104,7 +104,7 @@ List<ShoppingListModel> get shoppingListModelList => [
       ShoppingListModel(
         id: '12345',
         name: 'Test3',
-        groceries: [
+        items: [
           ItemModel(name: 'product1', quantity: 5),
           ItemModel(name: 'product2', quantity: 3),
         ],
@@ -140,6 +140,14 @@ ItemModel get itemModelToUpdate => ItemModel(
       quantity: 5,
       shoppingListId: '123',
     );
+
+///List of ItemModel
+List<ItemModel> get itemModelList => [
+      ItemModel(
+          id: '123', name: 'product1', quantity: 5, shoppingListId: 'abc'),
+      ItemModel(
+          id: '456', name: 'product1', quantity: 5, shoppingListId: 'def'),
+    ];
 
 @GenerateMocks([
   ShoppingListRepositoryTest,

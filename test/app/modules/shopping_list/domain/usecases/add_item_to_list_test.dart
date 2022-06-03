@@ -12,7 +12,7 @@ void main() {
   final repository = MockItemRepositoryTest();
   final usecase = AddItemToListImpl(repository);
 
-  test('Should return a Item', () async {
+  test('Should return an Item', () async {
     var item = mock.itemToAdd;
     when(repository.addItemToList(any)).thenAnswer((_) async => right(item));
 

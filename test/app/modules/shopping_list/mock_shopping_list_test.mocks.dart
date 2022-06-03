@@ -136,6 +136,12 @@ class MockShoppingListDatasourceTest extends _i1.Mock
       (super.noSuchMethod(Invocation.method(#updateItemInList, [item]),
           returnValue: Future<void>.value(),
           returnValueForMissingStub: Future<void>.value()) as _i5.Future<void>);
+  @override
+  _i5.Future<List<_i4.ItemModel>> getItemsFromList(String? shoppingListId) =>
+      (super.noSuchMethod(
+              Invocation.method(#getItemsFromList, [shoppingListId]),
+              returnValue: Future<List<_i4.ItemModel>>.value(<_i4.ItemModel>[]))
+          as _i5.Future<List<_i4.ItemModel>>);
 }
 
 /// A class which mocks [ItemRepositoryTest].
@@ -147,6 +153,14 @@ class MockItemRepositoryTest extends _i1.Mock
     _i1.throwOnMissingStub(this);
   }
 
+  @override
+  _i5.Future<_i2.Either<_i7.Failure, List<_i8.Item>>> getItemsFromList(
+          String? shoppingListId) =>
+      (super.noSuchMethod(
+          Invocation.method(#getItemsFromList, [shoppingListId]),
+          returnValue: Future<_i2.Either<_i7.Failure, List<_i8.Item>>>.value(
+              _FakeEither_0<_i7.Failure, List<_i8.Item>>())) as _i5
+          .Future<_i2.Either<_i7.Failure, List<_i8.Item>>>);
   @override
   _i5.Future<_i2.Either<_i7.Failure, _i8.Item>> addItemToList(_i8.Item? item) =>
       (super.noSuchMethod(Invocation.method(#addItemToList, [item]),

@@ -18,14 +18,14 @@ class FirebaseShoppingListDatasource implements ShoppingListDatasource {
     try {
       var reference = _firestore.collection(shoppingListsTable);
       var snapshot = await reference.get();
-      var result = _convertQueryDocumentSnapshot(snapshot.docs);
+      var result = _snapshotToListOfShoppingListModel(snapshot.docs);
       return result;
     } catch (e) {
       throw ShoppingListFailure(message: 'Erro to get data from firebase');
     }
   }
 
-  List<ShoppingListModel> _convertQueryDocumentSnapshot(
+  List<ShoppingListModel> _snapshotToListOfShoppingListModel(
       List<QueryDocumentSnapshot<Map<String, dynamic>>> snapshot) {
     var result = snapshot
         .map((e) => ShoppingListModel.fromMap(e.data()).copyWith(id: e.id))
@@ -69,7 +69,7 @@ class FirebaseShoppingListDatasource implements ShoppingListDatasource {
       return ShoppingListModel(
         id: reference.id,
         name: shoppingList.name,
-        groceries: [],
+        items: [],
       );
     } catch (e) {
       throw ShoppingListFailure(message: 'Erro to save data on firebase');
@@ -96,6 +96,28 @@ class FirebaseShoppingListDatasource implements ShoppingListDatasource {
     } catch (e) {
       throw ShoppingListFailure(message: 'Erro to save data on firebase');
     }
+  }
+
+  @override
+  Future<List<ItemModel>> getItemsFromList(String shoppingListId) async {
+    try {
+      var reference = _firestore
+          .collection(itemsTable)
+          .where('shoppingListId', isEqualTo: shoppingListId);
+      var snapshot = await reference.get();
+      var result = _snapshotToListOfItemModel(snapshot.docs);
+      return result;
+    } catch (e) {
+      throw ShoppingListFailure(message: 'Erro to save data on firebase');
+    }
+  }
+
+  List<ItemModel> _snapshotToListOfItemModel(
+      List<QueryDocumentSnapshot<Map<String, dynamic>>> snapshot) {
+    var result = snapshot
+        .map((e) => ItemModel.fromMap(e.data()).copyWith(id: e.id))
+        .toList();
+    return result;
   }
 
   @override

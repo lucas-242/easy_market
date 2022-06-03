@@ -81,39 +81,51 @@ void main() {
   });
 
   group('Item', () {
+    late ShoppingListModel shoppingList;
+    late ItemModel item;
+
+    setUp(() async {
+      var shoppingListToCreate = mock.shoppingListModelToCreate;
+      var listReference = await database
+          .collection(datasource.shoppingListsTable)
+          .add(shoppingListToCreate.toMapCreate());
+      shoppingList = shoppingListToCreate.copyWith(id: listReference.id);
+
+      var itemToAdd =
+          mock.itemModelToAdd.copyWith(shoppingListId: shoppingList.id);
+      var itemReference = await database
+          .collection(datasource.itemsTable)
+          .add(itemToAdd.toMapCreate());
+
+      item = itemToAdd.copyWith(
+        name: 'New Name',
+        quantity: 40,
+        id: itemReference.id,
+      );
+    });
+
     test('Should add Item', () async {
-      var shoppingList = await _createMockShoppingList();
-      var item = mock.itemModelToAdd.copyWith(shoppingListId: shoppingList.id);
-      var result = await datasource.addItemToList(item);
+      var itemToAdd =
+          mock.itemModelToAdd.copyWith(shoppingListId: shoppingList.id);
+      var result = await datasource.addItemToList(itemToAdd);
       expect(result.id, isNotEmpty);
       expect(result.shoppingListId, shoppingList.id);
     });
 
-    Future<ItemModel> _setupUpdateTest() async {
-      var shoppingList = mock.shoppingListModelToCreate;
-      var listReference = await database
-          .collection(datasource.shoppingListsTable)
-          .add(shoppingList.toMapCreate());
-      shoppingList = shoppingList.copyWith(id: listReference.id);
-
-      var item = mock.itemModelToAdd.copyWith(shoppingListId: shoppingList.id);
-      var itemReference = await database
-          .collection(datasource.itemsTable)
-          .add(item.toMapCreate());
-
-      var itemToUpdate = item.copyWith(
-        name: 'Updated Name',
-        quantity: 40,
-        id: itemReference.id,
-      );
-
-      return itemToUpdate;
-    }
+    test('Should Get Items', () async {
+      var result = await datasource.getItemsFromList(shoppingList.id);
+      expect(result, isNotEmpty);
+    });
 
     test('Should update Item', () async {
-      var itemToUpdate = await _setupUpdateTest();
-      expect(datasource.updateItemInList(itemToUpdate), isA<Future<void>>());
-      //TODO: check in this test if the data is changing
+      var itemToUpdate = item.copyWith(name: 'updated name');
+      await datasource.updateItemInList(itemToUpdate);
+      var itemsFromShoppingList =
+          await datasource.getItemsFromList(itemToUpdate.shoppingListId);
+      var result = itemsFromShoppingList
+          .firstWhere((element) => element.id == itemToUpdate.id);
+      expect(result.name, itemToUpdate.name);
+      expect(result.quantity, itemToUpdate.quantity);
     });
   });
 }

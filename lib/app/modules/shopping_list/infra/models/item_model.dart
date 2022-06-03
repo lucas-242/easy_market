@@ -57,7 +57,7 @@ class ItemModel extends Item {
 
   factory ItemModel.fromMap(Map<String, dynamic> map) {
     return ItemModel(
-      id: map['id'],
+      id: map['id'] ?? '',
       name: map['name'],
       quantity: map['quantity']?.toInt() ?? 0,
       type: map['type'] != null ? ItemTypeUtil.fromText(map['type']) : null,
