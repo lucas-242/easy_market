@@ -1,0 +1,39 @@
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:market_lists/app/modules/shopping_list/domain/usecases/add_item_to_list.dart';
+import 'package:market_lists/app/modules/shopping_list/domain/usecases/create_shopping_list.dart';
+import 'package:market_lists/app/modules/shopping_list/domain/usecases/delete_item_from_list.dart';
+import 'package:market_lists/app/modules/shopping_list/domain/usecases/delete_shopping_list.dart';
+import 'package:market_lists/app/modules/shopping_list/domain/usecases/get_items_from_list.dart';
+import 'package:market_lists/app/modules/shopping_list/domain/usecases/get_shopping_lists.dart';
+import 'package:market_lists/app/modules/shopping_list/domain/usecases/listen_items_from_list.dart';
+import 'package:market_lists/app/modules/shopping_list/domain/usecases/listen_shopping_lists.dart';
+import 'package:market_lists/app/modules/shopping_list/domain/usecases/update_item_in_list.dart';
+import 'package:market_lists/app/modules/shopping_list/domain/usecases/update_shopping_list.dart';
+import 'package:market_lists/app/modules/shopping_list/external/datasources/firebase/firebase_shopping_list_datasource.dart';
+import 'package:market_lists/app/modules/shopping_list/infra/repositories/item_repository_impl.dart';
+import 'package:market_lists/app/modules/shopping_list/infra/repositories/shopping_list_repository_impl.dart';
+import 'package:market_lists/app/modules/shopping_list/presenter/pages/shopping_lists_page.dart';
+
+class ShoppingListModule extends Module {
+  @override
+  final List<Bind> binds = [
+    $AddItemToListImpl,
+    $CreateShoppingListImpl,
+    $DeleteItemFromListImpl,
+    $DeleteShoppingListImpl,
+    $GetItemsFromListImpl,
+    $GetShoppingListsImpl,
+    $ListenItemsFromListImpl,
+    $ListenShoppingListsImpl,
+    $UpdateItemInListImpl,
+    $UpdateShoppingListImpl,
+    $ItemRepositoryImpl,
+    $ShoppingListRepositoryImpl,
+    $FirebaseShoppingListDatasource,
+  ];
+
+  @override
+  final List<ModularRoute> routes = [
+    ChildRoute('/', child: (_, __) => const ShoppingListsPage())
+  ];
+}

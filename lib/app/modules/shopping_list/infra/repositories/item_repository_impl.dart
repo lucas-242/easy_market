@@ -1,10 +1,13 @@
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:market_lists/app/modules/shopping_list/domain/errors/errors.dart';
 import 'package:market_lists/app/modules/shopping_list/domain/entities/item.dart';
 import 'package:dartz/dartz.dart';
 import 'package:market_lists/app/modules/shopping_list/domain/repositories/item_repository.dart';
 import 'package:market_lists/app/modules/shopping_list/infra/datasources/shopping_list_datasource.dart';
 import 'package:market_lists/app/modules/shopping_list/infra/models/item_model.dart';
+part 'item_repository_impl.g.dart';
 
+@Injectable(singleton: false)
 class ItemRepositoryImpl implements ItemRepository {
   final ShoppingListDatasource datasource;
 
