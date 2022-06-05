@@ -9,8 +9,10 @@ import 'package:market_lists/firebase_options.dart';
 class AppModule extends Module {
   @override
   List<Bind> get binds => [
-        Bind((i) => Firebase.initializeApp(
-            options: DefaultFirebaseOptions.currentPlatform)),
+        Bind(
+            (i) => Firebase.initializeApp(
+                options: DefaultFirebaseOptions.currentPlatform),
+            isLazy: false),
         Bind((i) => FirebaseFirestore.instance),
       ];
 

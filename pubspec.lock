@@ -204,6 +204,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.10.1"
+  dynamic_color:
+    dependency: "direct main"
+    description:
+      name: dynamic_color
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.4.0"
   fake_async:
     dependency: transitive
     description:
@@ -306,7 +313,7 @@ packages:
       name: flutter_modular
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.4.1+1"
+    version: "5.0.3"
   flutter_modular_annotations:
     dependency: transitive
     description:
@@ -450,6 +457,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "5.1.0"
+  modular_bloc_bind:
+    dependency: "direct main"
+    description:
+      name: modular_bloc_bind
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.1"
   modular_codegen:
     dependency: "direct dev"
     description:
@@ -457,6 +471,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.4"
+  modular_core:
+    dependency: transitive
+    description:
+      name: modular_core
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.3+1"
+  modular_interfaces:
+    dependency: transitive
+    description:
+      name: modular_interfaces
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.2"
   nested:
     dependency: transitive
     description:
@@ -672,13 +700,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.0"
-  triple:
-    dependency: transitive
-    description:
-      name: triple
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.5.0+1"
   typed_data:
     dependency: transitive
     description:

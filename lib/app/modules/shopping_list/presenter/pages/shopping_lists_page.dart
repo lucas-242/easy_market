@@ -15,8 +15,26 @@ class ShoppingListsPage extends StatelessWidget {
             Container(),
             Container(),
             Container(),
+            FloatingActionButton(onPressed: (() => null)),
           ],
         ),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const [
+          BottomNavigationBarItem(
+            activeIcon: Icon(Icons.home),
+            icon: Icon(Icons.home_outlined),
+            label: 'home',
+          ),
+          BottomNavigationBarItem(
+              activeIcon: Icon(Icons.account_balance_wallet),
+              icon: Icon(Icons.account_balance_wallet_outlined),
+              label: 'wallet'),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.history),
+            label: 'trades',
+          ),
+        ],
       ),
     );
   }
