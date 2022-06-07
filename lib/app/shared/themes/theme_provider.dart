@@ -103,7 +103,7 @@ class ThemeProvider extends InheritedWidget {
 
   CardTheme cardTheme() {
     return CardTheme(
-      elevation: 0,
+      elevation: 2,
       shape: shapeMedium,
       clipBehavior: Clip.antiAlias,
     );

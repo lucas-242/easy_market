@@ -6,6 +6,6 @@ import 'package:market_lists/app/core/app_routes.dart';
 import 'app/app_module.dart';
 
 Future<void> main() async {
-  Modular.setInitialRoute(AppRoutes.lists);
+  Modular.setInitialRoute(AppRoutes.main);
   runApp(ModularApp(module: AppModule(), child: const AppWidget()));
 }
