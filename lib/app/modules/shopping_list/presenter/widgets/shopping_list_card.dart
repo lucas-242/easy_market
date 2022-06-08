@@ -3,7 +3,6 @@ import 'package:market_lists/app/modules/shopping_list/shopping_list.dart';
 import 'package:market_lists/app/shared/themes/typography_utils.dart';
 
 class ShoppingListCard extends StatelessWidget {
-  //TODO: Receive ShoppingList instead String
   final ShoppingList shoppingList;
   final Function(String) onTap;
   const ShoppingListCard(

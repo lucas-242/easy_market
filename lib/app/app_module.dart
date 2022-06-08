@@ -19,6 +19,6 @@ class AppModule extends Module {
   @override
   List<ModularRoute> get routes => [
         ChildRoute(AppRoutes.main, child: (_, __) => SplashScreenPage()),
-        ModuleRoute(AppRoutes.lists, module: ShoppingListModule()),
+        ModuleRoute('${AppRoutes.lists}/', module: ShoppingListModule()),
       ];
 }
