@@ -1,10 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:market_lists/app/modules/shopping_list/domain/errors/errors.dart';
 
 import 'package:market_lists/app/modules/shopping_list/infra/datasources/shopping_list_datasource.dart';
 import 'package:market_lists/app/modules/shopping_list/infra/models/item_model.dart';
 import 'package:market_lists/app/modules/shopping_list/infra/models/shopping_list_model.dart';
+part 'firebase_shopping_list_datasource.g.dart';
 
+@Injectable(singleton: false)
 class FirebaseShoppingListDatasource implements ShoppingListDatasource {
   final String shoppingListsTable = 'shoppingLists';
   final String itemsTable = 'items';

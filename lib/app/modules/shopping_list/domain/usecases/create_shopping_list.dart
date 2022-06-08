@@ -1,12 +1,15 @@
 import 'package:dartz/dartz.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:market_lists/app/modules/shopping_list/domain/entities/shopping_list.dart';
 import 'package:market_lists/app/modules/shopping_list/domain/errors/errors.dart';
 import 'package:market_lists/app/modules/shopping_list/domain/repositories/shopping_list_repository.dart';
+part 'create_shopping_list.g.dart';
 
 abstract class CreateShoppingList {
   Future<Either<Failure, ShoppingList>> call(ShoppingList shoppingList);
 }
 
+@Injectable(singleton: false)
 class CreateShoppingListImpl implements CreateShoppingList {
   final ShoppingListRepository repository;
   CreateShoppingListImpl(this.repository);
