@@ -14,8 +14,10 @@ import 'package:market_lists/app/modules/shopping_list/domain/usecases/update_sh
 import 'package:market_lists/app/modules/shopping_list/external/datasources/firebase/firebase_shopping_list_datasource.dart';
 import 'package:market_lists/app/modules/shopping_list/infra/repositories/item_repository_impl.dart';
 import 'package:market_lists/app/modules/shopping_list/infra/repositories/shopping_list_repository_impl.dart';
+import 'package:market_lists/app/modules/shopping_list/presenter/bloc/shopping_list_bloc.dart';
 import 'package:market_lists/app/modules/shopping_list/presenter/pages/shopping_list_details_page.dart';
 import 'package:market_lists/app/modules/shopping_list/presenter/pages/shopping_lists_page.dart';
+import 'package:modular_bloc_bind/modular_bloc_bind.dart';
 
 class ShoppingListModule extends Module {
   @override
@@ -32,8 +34,12 @@ class ShoppingListModule extends Module {
     $UpdateShoppingListImpl,
     $ItemRepositoryImpl,
     $ShoppingListRepositoryImpl,
+    BlocBind.singleton(
+      (i) => ShoppingListBloc(i<ListenShoppingLists>()),
+    ),
     BindInject(
-      (i) => FirebaseShoppingListDatasource(i<FirebaseFirestore>()),
+      (i) => FirebaseShoppingListDatasource(i<FirebaseFirestore>(),
+          useFirebaseEmulator: true),
       isSingleton: false,
       isLazy: true,
     ),
