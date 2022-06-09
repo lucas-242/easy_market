@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:market_lists/app/core/app_routes.dart';
 import 'package:market_lists/app/modules/shopping_list/domain/usecases/add_item_to_list.dart';
@@ -31,7 +32,11 @@ class ShoppingListModule extends Module {
     $UpdateShoppingListImpl,
     $ItemRepositoryImpl,
     $ShoppingListRepositoryImpl,
-    $FirebaseShoppingListDatasource,
+    BindInject(
+      (i) => FirebaseShoppingListDatasource(i<FirebaseFirestore>()),
+      isSingleton: false,
+      isLazy: true,
+    ),
   ];
 
   @override
