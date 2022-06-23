@@ -13,3 +13,15 @@ class LogoutFailure extends Failure {
 
   LogoutFailure(this.message);
 }
+
+class LoginByEmailFailure extends Failure {
+  @override
+  final String message;
+
+  LoginByEmailFailure(this.message);
+}
+
+abstract class AuthErrorMessages {
+  static String get emailIsInvalid => 'Email is invalid';
+  static String get passwordIsInvalid => 'Password is invalid';
+}

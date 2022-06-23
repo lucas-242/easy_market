@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:market_lists/app/core/auth/domain/errors/errors.dart';
-import 'package:market_lists/app/core/auth/domain/usercases/logout.dart';
+import 'package:market_lists/app/core/auth/domain/usecases/logout.dart';
 import 'package:mockito/mockito.dart';
 
 import '../auth_mock_test.mocks.dart';

@@ -5,6 +5,8 @@
 import 'dart:async' as _i4;
 
 import 'package:dartz/dartz.dart' as _i2;
+import 'package:market_lists/app/core/auth/domain/entities/login_credentials.dart'
+    as _i7;
 import 'package:market_lists/app/core/auth/domain/entities/user.dart' as _i6;
 import 'package:market_lists/app/core/errors/errors.dart' as _i5;
 import 'package:mockito/mockito.dart' as _i1;
@@ -34,10 +36,8 @@ class MockAuthRepositoryTest extends _i1.Mock
 
   @override
   _i4.Future<_i2.Either<_i5.Failure, _i6.User>> loginByEmail(
-          {String? email, String? password}) =>
-      (super.noSuchMethod(
-              Invocation.method(
-                  #loginByEmail, [], {#email: email, #password: password}),
+          _i7.LoginCredentials? credentials) =>
+      (super.noSuchMethod(Invocation.method(#loginByEmail, [credentials]),
               returnValue: Future<_i2.Either<_i5.Failure, _i6.User>>.value(
                   _FakeEither_0<_i5.Failure, _i6.User>()))
           as _i4.Future<_i2.Either<_i5.Failure, _i6.User>>);
