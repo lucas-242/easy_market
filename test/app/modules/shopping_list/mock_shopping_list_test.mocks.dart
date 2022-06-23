@@ -5,8 +5,7 @@
 import 'dart:async' as _i5;
 
 import 'package:dartz/dartz.dart' as _i2;
-import 'package:market_lists/app/modules/shopping_list/domain/errors/errors.dart'
-    as _i7;
+import 'package:market_lists/app/core/errors/errors.dart' as _i7;
 import 'package:market_lists/app/modules/shopping_list/infra/models/item_model.dart'
     as _i4;
 import 'package:market_lists/app/modules/shopping_list/infra/models/shopping_list_model.dart'

@@ -1,11 +1,15 @@
-class Failure implements Exception {
-  final String message;
-
-  Failure({this.message = ''});
-}
+import 'package:market_lists/app/core/errors/errors.dart';
 
 class ShoppingListFailure extends Failure {
-  ShoppingListFailure({String message = ''}) : super(message: message);
+  @override
+  final String message;
+
+  ShoppingListFailure({this.message = ''});
 }
 
-class InvalidShoppingList extends Failure {}
+class InvalidShoppingList extends Failure {
+  @override
+  final String message;
+
+  InvalidShoppingList({this.message = ''});
+}
