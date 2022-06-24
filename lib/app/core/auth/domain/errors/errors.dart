@@ -21,7 +21,17 @@ class LoginByEmailFailure extends Failure {
   LoginByEmailFailure(this.message);
 }
 
+class LoginByPhoneFailure extends Failure {
+  @override
+  final String message;
+
+  LoginByPhoneFailure(this.message);
+}
+
 abstract class AuthErrorMessages {
   static String get emailIsInvalid => 'Email is invalid';
   static String get passwordIsInvalid => 'Password is invalid';
+  static String get phoneIsInvalid => 'Phone is invalid';
+  static String get codeIsInvalid => 'Code is invalid';
+  static String get verificationIdIsInvalid => 'VerificationId is invalid';
 }

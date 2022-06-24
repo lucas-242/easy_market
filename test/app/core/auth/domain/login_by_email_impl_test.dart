@@ -14,16 +14,18 @@ void main() {
 
   test('Should Login with email', () async {
     final loggedUser = user;
-    when(repository.loginByEmail(any))
+    final credentials = LoginCredentials.withEmailAndPassword(
+        password: '123456', email: 'test@email.com');
+    when(repository.loginByEmail(
+            email: credentials.email, password: credentials.password))
         .thenAnswer((_) async => right(loggedUser));
-    final credentials =
-        LoginCredentials(password: '123456', email: 'test@email.com');
     final result = await usecase(credentials);
     expect(result, Right(loggedUser));
   });
 
-  test('Should throw LoginByEmailFailure when email is wrong', () async {
-    final credentials = LoginCredentials(password: '123456', email: 'test');
+  test('Should throw LoginByEmailFailure when email is not valid', () async {
+    final credentials = LoginCredentials.withEmailAndPassword(
+        password: '123456', email: 'test');
     final result = await usecase(credentials);
 
     expect(
@@ -33,9 +35,9 @@ void main() {
         const Left(true));
   });
 
-  test('Should throw LoginByEmailFailure when password is wrong', () async {
-    final credentials =
-        LoginCredentials(password: '123', email: 'test@email.com');
+  test('Should throw LoginByEmailFailure when password is not valid', () async {
+    final credentials = LoginCredentials.withEmailAndPassword(
+        password: '123', email: 'test@email.com');
     final result = await usecase(credentials);
 
     expect(
