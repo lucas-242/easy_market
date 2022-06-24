@@ -1,19 +1,26 @@
-class User {
+import 'package:market_lists/app/core/auth/domain/entities/user_info.dart';
+
+class User implements UserInfo {
+  @override
   final String id;
+  @override
   final String name;
+  @override
   final String email;
-  final String phoneNumber;
-  final String? password;
+  @override
+  final String phone;
+  @override
   final String? imageUrl;
+  @override
   final DateTime createdAt;
+  @override
   final DateTime updatedAt;
 
   User({
     this.id = '',
     required this.name,
     required this.email,
-    required this.phoneNumber,
-    this.password,
+    required this.phone,
     this.imageUrl,
     DateTime? createdAt,
     DateTime? updatedAt,

@@ -2,14 +2,16 @@
 // in market_lists/test/app/core/auth/auth_mock_test.dart.
 // Do not manually edit this file.
 
-import 'dart:async' as _i4;
+import 'dart:async' as _i5;
 
 import 'package:dartz/dartz.dart' as _i2;
-import 'package:market_lists/app/core/auth/domain/entities/user.dart' as _i6;
-import 'package:market_lists/app/core/errors/errors.dart' as _i5;
+import 'package:market_lists/app/core/auth/domain/entities/user_info.dart'
+    as _i7;
+import 'package:market_lists/app/core/auth/infra/models/user_model.dart' as _i3;
+import 'package:market_lists/app/core/errors/errors.dart' as _i6;
 import 'package:mockito/mockito.dart' as _i1;
 
-import 'auth_mock_test.dart' as _i3;
+import 'auth_mock_test.dart' as _i4;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -23,49 +25,93 @@ import 'auth_mock_test.dart' as _i3;
 
 class _FakeEither_0<L, R> extends _i1.Fake implements _i2.Either<L, R> {}
 
+class _FakeUserModel_1 extends _i1.Fake implements _i3.UserModel {}
+
 /// A class which mocks [AuthRepositoryTest].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockAuthRepositoryTest extends _i1.Mock
-    implements _i3.AuthRepositoryTest {
+    implements _i4.AuthRepositoryTest {
   MockAuthRepositoryTest() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i4.Future<_i2.Either<_i5.Failure, _i6.User>> loginByEmail(
+  _i5.Future<_i2.Either<_i6.Failure, _i7.UserInfo>> loginByEmail(
           {String? email, String? password}) =>
       (super.noSuchMethod(
               Invocation.method(
                   #loginByEmail, [], {#email: email, #password: password}),
-              returnValue: Future<_i2.Either<_i5.Failure, _i6.User>>.value(
-                  _FakeEither_0<_i5.Failure, _i6.User>()))
-          as _i4.Future<_i2.Either<_i5.Failure, _i6.User>>);
+              returnValue: Future<_i2.Either<_i6.Failure, _i7.UserInfo>>.value(
+                  _FakeEither_0<_i6.Failure, _i7.UserInfo>()))
+          as _i5.Future<_i2.Either<_i6.Failure, _i7.UserInfo>>);
   @override
-  _i4.Future<_i2.Either<_i5.Failure, _i6.User>> loginByPhone({String? phone}) =>
+  _i5.Future<_i2.Either<_i6.Failure, _i7.UserInfo>> loginByPhone(
+          {String? phone}) =>
       (super.noSuchMethod(Invocation.method(#loginByPhone, [], {#phone: phone}),
-              returnValue: Future<_i2.Either<_i5.Failure, _i6.User>>.value(
-                  _FakeEither_0<_i5.Failure, _i6.User>()))
-          as _i4.Future<_i2.Either<_i5.Failure, _i6.User>>);
+              returnValue: Future<_i2.Either<_i6.Failure, _i7.UserInfo>>.value(
+                  _FakeEither_0<_i6.Failure, _i7.UserInfo>()))
+          as _i5.Future<_i2.Either<_i6.Failure, _i7.UserInfo>>);
   @override
-  _i4.Future<_i2.Either<_i5.Failure, _i6.User>> verifyPhoneCode(
+  _i5.Future<_i2.Either<_i6.Failure, _i7.UserInfo>> verifyPhoneCode(
           {String? verificationId, String? code}) =>
       (super.noSuchMethod(
               Invocation.method(#verifyPhoneCode, [],
                   {#verificationId: verificationId, #code: code}),
-              returnValue: Future<_i2.Either<_i5.Failure, _i6.User>>.value(
-                  _FakeEither_0<_i5.Failure, _i6.User>()))
-          as _i4.Future<_i2.Either<_i5.Failure, _i6.User>>);
+              returnValue: Future<_i2.Either<_i6.Failure, _i7.UserInfo>>.value(
+                  _FakeEither_0<_i6.Failure, _i7.UserInfo>()))
+          as _i5.Future<_i2.Either<_i6.Failure, _i7.UserInfo>>);
   @override
-  _i4.Future<_i2.Either<_i5.Failure, _i6.User>> getLoggedUser() =>
+  _i5.Future<_i2.Either<_i6.Failure, _i7.UserInfo>> getLoggedUser() =>
       (super.noSuchMethod(Invocation.method(#getLoggedUser, []),
-              returnValue: Future<_i2.Either<_i5.Failure, _i6.User>>.value(
-                  _FakeEither_0<_i5.Failure, _i6.User>()))
-          as _i4.Future<_i2.Either<_i5.Failure, _i6.User>>);
+              returnValue: Future<_i2.Either<_i6.Failure, _i7.UserInfo>>.value(
+                  _FakeEither_0<_i6.Failure, _i7.UserInfo>()))
+          as _i5.Future<_i2.Either<_i6.Failure, _i7.UserInfo>>);
   @override
-  _i4.Future<_i2.Either<_i5.Failure, _i2.Unit>> logout() =>
+  _i5.Future<_i2.Either<_i6.Failure, _i2.Unit>> logout() =>
       (super.noSuchMethod(Invocation.method(#logout, []),
-              returnValue: Future<_i2.Either<_i5.Failure, _i2.Unit>>.value(
-                  _FakeEither_0<_i5.Failure, _i2.Unit>()))
-          as _i4.Future<_i2.Either<_i5.Failure, _i2.Unit>>);
+              returnValue: Future<_i2.Either<_i6.Failure, _i2.Unit>>.value(
+                  _FakeEither_0<_i6.Failure, _i2.Unit>()))
+          as _i5.Future<_i2.Either<_i6.Failure, _i2.Unit>>);
+}
+
+/// A class which mocks [AuthDatasourceTest].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockAuthDatasourceTest extends _i1.Mock
+    implements _i4.AuthDatasourceTest {
+  MockAuthDatasourceTest() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i5.Future<_i3.UserModel> loginByEmail({String? email, String? password}) =>
+      (super.noSuchMethod(
+              Invocation.method(
+                  #loginByEmail, [], {#email: email, #password: password}),
+              returnValue: Future<_i3.UserModel>.value(_FakeUserModel_1()))
+          as _i5.Future<_i3.UserModel>);
+  @override
+  _i5.Future<_i3.UserModel> loginByPhone({String? phone}) =>
+      (super.noSuchMethod(Invocation.method(#loginByPhone, [], {#phone: phone}),
+              returnValue: Future<_i3.UserModel>.value(_FakeUserModel_1()))
+          as _i5.Future<_i3.UserModel>);
+  @override
+  _i5.Future<_i3.UserModel> verifyPhoneCode(
+          {String? verificationId, String? code}) =>
+      (super.noSuchMethod(
+              Invocation.method(#verifyPhoneCode, [],
+                  {#verificationId: verificationId, #code: code}),
+              returnValue: Future<_i3.UserModel>.value(_FakeUserModel_1()))
+          as _i5.Future<_i3.UserModel>);
+  @override
+  _i5.Future<_i3.UserModel> getLoggedUser() =>
+      (super.noSuchMethod(Invocation.method(#getLoggedUser, []),
+              returnValue: Future<_i3.UserModel>.value(_FakeUserModel_1()))
+          as _i5.Future<_i3.UserModel>);
+  @override
+  _i5.Future<void> logout() =>
+      (super.noSuchMethod(Invocation.method(#logout, []),
+          returnValue: Future<void>.value(),
+          returnValueForMissingStub: Future<void>.value()) as _i5.Future<void>);
 }

@@ -48,6 +48,5 @@ class LoginCredentials {
   bool _isAPhone() {
     return RegExp(r'^\(?[1-9]{2}\)? ?[9] ?[0-9]{4}\-?[0-9]{4}$')
         .hasMatch(phone);
-    // return RegExp(r'^(?:[0]([1-9]{2}))?(9)[0-9]{8}$').hasMatch(phone);
   }
 }
