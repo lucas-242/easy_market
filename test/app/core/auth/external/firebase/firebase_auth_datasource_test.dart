@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_auth_mocks/firebase_auth_mocks.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:market_lists/app/core/auth/domain/errors/errors.dart';
+import 'package:market_lists/app/core/auth/external/datasources/firebase/errors/errors.dart';
 import 'package:market_lists/app/core/auth/external/datasources/firebase/firebase_auth_datasource.dart';
 import 'package:market_lists/app/core/auth/infra/models/user_model.dart';
 import 'package:mockito/annotations.dart';
@@ -99,10 +99,16 @@ void main() {
       expectResultIsUserModel(result);
     });
 
-    test('Should throw exception when code was not retrieved automatically',
+    test('Should throw FirebaseSignInFailure if there is an error', () async {
+      expect(datasource.signInWithPhone(phone: "1"),
+          throwsA(isA<FirebaseSignInFailure>()));
+    });
+
+    test(
+        'Should throw FirebaseSignInFailure if code was not retrieved automatically',
         () async {
-      expect(datasource.signInWithPhone(phone: "3"),
-          throwsA(isA<SignInWithPhoneFailure>()));
+      expect(datasource.signInWithPhone(phone: "2"),
+          throwsA(isA<FirebaseSignInFailure>()));
     });
   });
 
@@ -127,11 +133,11 @@ void main() {
       expectResultIsUserModel(result);
     });
 
-    test('Should throw GetCurrentUserFailure when user is not logged in',
+    test('Should throw FirebaseSignInFailure when user is not logged in',
         () async {
       setDatasource();
       expect(
-          datasource.getCurrentUser(), throwsA(isA<GetCurrentUserFailure>()));
+          datasource.getCurrentUser(), throwsA(isA<FirebaseSignInFailure>()));
     });
   });
 
