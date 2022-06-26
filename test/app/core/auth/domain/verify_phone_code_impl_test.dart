@@ -9,7 +9,7 @@ import '../auth_mock_test.dart';
 import '../auth_mock_test.mocks.dart';
 
 void main() {
-  final repository = MockAuthRepositoryTest();
+  final repository = MockAuthRepository();
   final usecase = VerifyPhoneCodeImpl(repository);
 
   test('Should Verify phone code', () async {

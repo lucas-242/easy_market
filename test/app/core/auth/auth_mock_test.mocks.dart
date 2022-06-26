@@ -7,11 +7,13 @@ import 'dart:async' as _i5;
 import 'package:dartz/dartz.dart' as _i2;
 import 'package:market_lists/app/core/auth/domain/entities/user_info.dart'
     as _i7;
+import 'package:market_lists/app/core/auth/domain/repositories/auth_repository.dart'
+    as _i4;
+import 'package:market_lists/app/core/auth/infra/datasources/auth_datasource.dart'
+    as _i8;
 import 'package:market_lists/app/core/auth/infra/models/user_model.dart' as _i3;
 import 'package:market_lists/app/core/errors/errors.dart' as _i6;
 import 'package:mockito/mockito.dart' as _i1;
-
-import 'auth_mock_test.dart' as _i4;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -27,12 +29,11 @@ class _FakeEither_0<L, R> extends _i1.Fake implements _i2.Either<L, R> {}
 
 class _FakeUserModel_1 extends _i1.Fake implements _i3.UserModel {}
 
-/// A class which mocks [AuthRepositoryTest].
+/// A class which mocks [AuthRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockAuthRepositoryTest extends _i1.Mock
-    implements _i4.AuthRepositoryTest {
-  MockAuthRepositoryTest() {
+class MockAuthRepository extends _i1.Mock implements _i4.AuthRepository {
+  MockAuthRepository() {
     _i1.throwOnMissingStub(this);
   }
 
@@ -75,12 +76,11 @@ class MockAuthRepositoryTest extends _i1.Mock
           as _i5.Future<_i2.Either<_i6.Failure, _i2.Unit>>);
 }
 
-/// A class which mocks [AuthDatasourceTest].
+/// A class which mocks [AuthDatasource].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockAuthDatasourceTest extends _i1.Mock
-    implements _i4.AuthDatasourceTest {
-  MockAuthDatasourceTest() {
+class MockAuthDatasource extends _i1.Mock implements _i8.AuthDatasource {
+  MockAuthDatasource() {
     _i1.throwOnMissingStub(this);
   }
 

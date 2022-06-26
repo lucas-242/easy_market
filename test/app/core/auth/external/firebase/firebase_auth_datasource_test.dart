@@ -10,15 +10,15 @@ import 'package:mockito/mockito.dart';
 import '../../auth_mock_test.dart';
 import 'firebase_auth_datasource_test.mocks.dart';
 
-class FirebaseAuthTest extends Mock implements FirebaseAuth {
+class MockCustomFirebaseAuth extends Mock implements FirebaseAuth {
   @override
   Future<UserCredential> signInWithCredential(AuthCredential? credential) =>
       super.noSuchMethod(Invocation.method(#signInWithCredential, [credential]),
-          returnValue: Future.value(userCredential));
+          returnValue: Future.value(mockUserCredential));
 
   @override
-  User get currentUser => super.noSuchMethod(Invocation.getter(#currentUser),
-      returnValue: mockCurrentUser);
+  User get currentUser => super
+      .noSuchMethod(Invocation.getter(#currentUser), returnValue: mockUser);
 
   @override
   Future<void> verifyPhoneNumber(
@@ -32,7 +32,7 @@ class FirebaseAuthTest extends Mock implements FirebaseAuth {
       required void Function(FirebaseAuthException) verificationFailed}) async {
     Future.delayed(const Duration(milliseconds: 800)).then((value) {
       if (phoneNumber == "0") {
-        verificationCompleted(phoneAuthCredential);
+        verificationCompleted(mockPhoneAuthCredential);
       } else if (phoneNumber == "1") {
         verificationFailed(FirebaseAuthException(code: ''));
       } else if (phoneNumber == "2") {
@@ -46,9 +46,9 @@ class FirebaseAuthTest extends Mock implements FirebaseAuth {
   }
 }
 
-final phoneAuthCredential = MockPhoneAuthCredential();
-final userCredential = MockUserCredential();
-final mockCurrentUser = MockUser(
+final mockPhoneAuthCredential = MockPhoneAuthCredential();
+final mockUserCredential = MockUserCredential();
+final mockUser = MockUser(
   isAnonymous: false,
   uid: userModel.id,
   email: userModel.email,
@@ -56,20 +56,13 @@ final mockCurrentUser = MockUser(
   phoneNumber: userModel.phone,
 );
 
-@GenerateMocks([FirebaseAuthTest, PhoneAuthCredential, UserCredential])
+@GenerateMocks([PhoneAuthCredential, UserCredential])
 void main() {
-  MockUser user = MockUser(
-    isAnonymous: false,
-    uid: userModel.id,
-    email: userModel.email,
-    displayName: userModel.name,
-    phoneNumber: userModel.phone,
-  );
   late FirebaseAuth auth;
   late FirebaseAuthDatasource datasource;
 
   void setDatasource({bool signedIn = false}) {
-    auth = MockFirebaseAuth(mockUser: user, signedIn: signedIn);
+    auth = MockFirebaseAuth(mockUser: mockUser, signedIn: signedIn);
     datasource = FirebaseAuthDatasource(auth);
   }
 
@@ -93,15 +86,23 @@ void main() {
   });
 
   group('Sign in by phone', () {
-    test('Should login with phone', () async {
-      final auth = FirebaseAuthTest();
+    setUp(() {
+      final auth = MockCustomFirebaseAuth();
       datasource = FirebaseAuthDatasource(auth);
       when(auth.signInWithCredential(any))
-          .thenAnswer((_) async => userCredential);
-      when(userCredential.user).thenAnswer((_) => mockCurrentUser);
-      final result = await datasource.signInWithPhone(phone: "0");
+          .thenAnswer((_) async => mockUserCredential);
+      when(mockUserCredential.user).thenAnswer((_) => mockUser);
+    });
 
+    test('Should sign in with phone', () async {
+      final result = await datasource.signInWithPhone(phone: "0");
       expectResultIsUserModel(result);
+    });
+
+    test('Should throw exception when code was not retrieved automatically',
+        () async {
+      expect(datasource.signInWithPhone(phone: "3"),
+          throwsA(isA<SignInWithPhoneFailure>()));
     });
   });
 

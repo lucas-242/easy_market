@@ -36,8 +36,9 @@ class FirebaseAuthDatasource implements AuthDatasource {
 
   @override
   Future<UserModel> signInWithPhone({required String phone}) async {
-    final completer = Completer<AuthCredential>();
-    await auth.verifyPhoneNumber(
+    try {
+      final completer = Completer<AuthCredential>();
+      await auth.verifyPhoneNumber(
         phoneNumber: phone,
         verificationCompleted: (auth) {
           completer.complete(auth);
@@ -48,11 +49,14 @@ class FirebaseAuthDatasource implements AuthDatasource {
         codeSent: (String verificationId, int? forceResendingToken) {
           completer.completeError('Code was not retrieved automatically');
         },
-        codeAutoRetrievalTimeout: (String verificationId) {});
-
-    final credential = await completer.future;
-    final result = await auth.signInWithCredential(credential);
-    return _getUserModel(result.user!);
+        codeAutoRetrievalTimeout: (String verificationId) {},
+      );
+      final credential = await completer.future;
+      final result = await auth.signInWithCredential(credential);
+      return _getUserModel(result.user!);
+    } catch (error) {
+      throw SignInWithPhoneFailure('Error trying to login with phone');
+    }
   }
 
   @override

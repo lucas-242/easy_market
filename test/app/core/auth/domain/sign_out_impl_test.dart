@@ -7,7 +7,7 @@ import 'package:mockito/mockito.dart';
 import '../auth_mock_test.mocks.dart';
 
 void main() {
-  final repository = MockAuthRepositoryTest();
+  final repository = MockAuthRepository();
   final usecase = SignOutImpl(repository);
 
   test('Should Loggout user', () async {

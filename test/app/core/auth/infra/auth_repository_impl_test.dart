@@ -8,7 +8,7 @@ import '../auth_mock_test.dart';
 import '../auth_mock_test.mocks.dart';
 
 void main() {
-  final datasource = MockAuthDatasourceTest();
+  final datasource = MockAuthDatasource();
   final repository = AuthRepositoryImpl(datasource);
   final userToLogin = userModel;
 
