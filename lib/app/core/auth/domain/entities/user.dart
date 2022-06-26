@@ -17,13 +17,16 @@ class User implements UserInfo {
   final DateTime updatedAt;
 
   User({
-    this.id = '',
+    String? id,
     required this.name,
-    required this.email,
-    required this.phone,
+    String? email,
+    String? phone,
     this.imageUrl,
     DateTime? createdAt,
     DateTime? updatedAt,
-  })  : createdAt = createdAt ?? DateTime.now(),
+  })  : id = id ?? '',
+        email = email ?? '',
+        phone = phone ?? '',
+        createdAt = createdAt ?? DateTime.now(),
         updatedAt = updatedAt ?? DateTime.now();
 }

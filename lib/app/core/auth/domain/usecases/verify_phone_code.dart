@@ -26,12 +26,12 @@ class VerifyPhoneCodeImpl extends VerifyPhoneCode {
   Either<Failure, UserInfo>? _validateCredentials(
       LoginCredentials credentials) {
     if (!credentials.isValidCode) {
-      return Left(LoginByPhoneFailure(AuthErrorMessages.codeIsInvalid));
+      return Left(SignInWithPhoneFailure(AuthErrorMessages.codeIsInvalid));
     }
 
     if (!credentials.isValidVerificationId) {
       return Left(
-          LoginByPhoneFailure(AuthErrorMessages.verificationIdIsInvalid));
+          SignInWithPhoneFailure(AuthErrorMessages.verificationIdIsInvalid));
     }
 
     return null;

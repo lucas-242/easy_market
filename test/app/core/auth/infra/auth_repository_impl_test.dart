@@ -16,7 +16,7 @@ void main() {
     const passwordToLogin = '123456';
 
     test('Should login with email', () async {
-      when(datasource.loginByEmail(
+      when(datasource.signInWithEmail(
               email: userToLogin.email, password: passwordToLogin))
           .thenAnswer((_) async => userToLogin);
       final result = await repository.loginByEmail(
@@ -26,19 +26,20 @@ void main() {
     });
 
     test('Should throw LoginByEmailFailure', () async {
-      when(datasource.loginByEmail(
+      when(datasource.signInWithEmail(
               email: userToLogin.email, password: passwordToLogin))
-          .thenThrow((_) async => LoginByEmailFailure('test'));
+          .thenThrow((_) async => SignInWithEmailFailure('test'));
       final result = await repository.loginByEmail(
           email: userToLogin.email, password: passwordToLogin);
 
-      expect(result.leftMap((l) => l is LoginByEmailFailure), const Left(true));
+      expect(
+          result.leftMap((l) => l is SignInWithEmailFailure), const Left(true));
     });
   });
 
   group('Login by phone', () {
     test('Should login with phone', () async {
-      when(datasource.loginByPhone(phone: userToLogin.phone))
+      when(datasource.signInWithPhone(phone: userToLogin.phone))
           .thenAnswer((_) async => userToLogin);
       final result = await repository.loginByPhone(phone: userToLogin.phone);
 
@@ -46,11 +47,12 @@ void main() {
     });
 
     test('Should throw LoginByPhoneFailure', () async {
-      when(datasource.loginByPhone(phone: userToLogin.phone))
-          .thenThrow((_) async => LoginByPhoneFailure('test'));
+      when(datasource.signInWithPhone(phone: userToLogin.phone))
+          .thenThrow((_) async => SignInWithPhoneFailure('test'));
       final result = await repository.loginByPhone(phone: userToLogin.phone);
 
-      expect(result.leftMap((l) => l is LoginByPhoneFailure), const Left(true));
+      expect(
+          result.leftMap((l) => l is SignInWithPhoneFailure), const Left(true));
     });
   });
 
@@ -71,45 +73,46 @@ void main() {
     test('Should throw LoginByPhoneFailure', () async {
       when(datasource.verifyPhoneCode(
               code: code, verificationId: verificationId))
-          .thenThrow((_) async => LoginByPhoneFailure('test'));
+          .thenThrow((_) async => SignInWithPhoneFailure('test'));
       final result = await repository.verifyPhoneCode(
           code: code, verificationId: verificationId);
 
-      expect(result.leftMap((l) => l is LoginByPhoneFailure), const Left(true));
+      expect(
+          result.leftMap((l) => l is SignInWithPhoneFailure), const Left(true));
     });
   });
 
   group('Get Logged User', () {
     test('Should Get logged user', () async {
-      when(datasource.getLoggedUser()).thenAnswer((_) async => userToLogin);
-      final result = await repository.getLoggedUser();
+      when(datasource.getCurrentUser()).thenAnswer((_) async => userToLogin);
+      final result = await repository.getCurrentUser();
 
       expect(result, Right(userToLogin));
     });
 
     test('Should throw GetLoggedUserFailure', () async {
-      when(datasource.getLoggedUser())
-          .thenThrow((_) async => GetLoggedUserFailure('test'));
-      final result = await repository.getLoggedUser();
+      when(datasource.getCurrentUser())
+          .thenThrow((_) async => GetCurrentUserFailure('test'));
+      final result = await repository.getCurrentUser();
 
       expect(
-          result.leftMap((l) => l is GetLoggedUserFailure), const Left(true));
+          result.leftMap((l) => l is GetCurrentUserFailure), const Left(true));
     });
   });
 
   group('Logout', () {
     test('Should logout', () async {
-      when(datasource.logout()).thenAnswer((_) async => unit);
+      when(datasource.signOut()).thenAnswer((_) async => unit);
       final result = await repository.logout();
 
       expect(result, const Right(unit));
     });
 
     test('Should throw LogoutFailure', () async {
-      when(datasource.logout()).thenThrow((_) async => LogoutFailure('test'));
+      when(datasource.signOut()).thenThrow((_) async => SignOutFailure('test'));
       final result = await repository.logout();
 
-      expect(result.leftMap((l) => l is LogoutFailure), const Left(true));
+      expect(result.leftMap((l) => l is SignOutFailure), const Left(true));
     });
   });
 }

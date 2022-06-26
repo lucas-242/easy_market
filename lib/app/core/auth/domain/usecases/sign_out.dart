@@ -3,15 +3,15 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:market_lists/app/core/auth/domain/repositories/auth_repository.dart';
 import 'package:market_lists/app/core/errors/errors.dart';
 
-abstract class Logout {
+abstract class SignOut {
   Future<Either<Failure, Unit>> call();
 }
 
 @Injectable(singleton: false)
-class LogoutImpl extends Logout {
+class SignOutImpl extends SignOut {
   AuthRepository repository;
 
-  LogoutImpl(this.repository);
+  SignOutImpl(this.repository);
 
   @override
   Future<Either<Failure, Unit>> call() async {

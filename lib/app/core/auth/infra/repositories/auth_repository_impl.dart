@@ -13,12 +13,12 @@ class AuthRepositoryImpl implements AuthRepository {
   AuthRepositoryImpl(this.datasource);
 
   @override
-  Future<Either<Failure, UserInfo>> getLoggedUser() async {
+  Future<Either<Failure, UserInfo>> getCurrentUser() async {
     try {
-      final user = await datasource.getLoggedUser();
+      final user = await datasource.getCurrentUser();
       return Right(user);
     } catch (error) {
-      return Left(GetLoggedUserFailure("Erro to get logged user"));
+      return Left(GetCurrentUserFailure("Erro to get logged user"));
     }
   }
 
@@ -27,10 +27,10 @@ class AuthRepositoryImpl implements AuthRepository {
       {required String email, required String password}) async {
     try {
       final user =
-          await datasource.loginByEmail(email: email, password: password);
+          await datasource.signInWithEmail(email: email, password: password);
       return Right(user);
     } catch (error) {
-      return Left(LoginByEmailFailure("Erro to login with email"));
+      return Left(SignInWithEmailFailure("Erro to login with email"));
     }
   }
 
@@ -38,10 +38,10 @@ class AuthRepositoryImpl implements AuthRepository {
   Future<Either<Failure, UserInfo>> loginByPhone(
       {required String phone}) async {
     try {
-      final user = await datasource.loginByPhone(phone: phone);
+      final user = await datasource.signInWithPhone(phone: phone);
       return Right(user);
     } catch (error) {
-      return Left(LoginByPhoneFailure("Erro to login with phone"));
+      return Left(SignInWithPhoneFailure("Erro to login with phone"));
     }
   }
 
@@ -53,17 +53,17 @@ class AuthRepositoryImpl implements AuthRepository {
           code: code, verificationId: verificationId);
       return Right(user);
     } catch (error) {
-      return Left(LoginByPhoneFailure("Erro to verify phone code"));
+      return Left(SignInWithPhoneFailure("Erro to verify phone code"));
     }
   }
 
   @override
   Future<Either<Failure, Unit>> logout() async {
     try {
-      await datasource.logout();
+      await datasource.signOut();
       return const Right(unit);
     } catch (error) {
-      return Left(LogoutFailure("Erro to logout"));
+      return Left(SignOutFailure("Erro to logout"));
     }
   }
 }

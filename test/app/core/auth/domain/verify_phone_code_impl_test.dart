@@ -30,7 +30,7 @@ void main() {
 
     expect(
         result.leftMap((l) =>
-            l is LoginByPhoneFailure &&
+            l is SignInWithPhoneFailure &&
             l.message == AuthErrorMessages.codeIsInvalid),
         const Left(true));
   });
@@ -43,7 +43,7 @@ void main() {
 
     expect(
         result.leftMap((l) =>
-            l is LoginByPhoneFailure &&
+            l is SignInWithPhoneFailure &&
             l.message == AuthErrorMessages.verificationIdIsInvalid),
         const Left(true));
   });

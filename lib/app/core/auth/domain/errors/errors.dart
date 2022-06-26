@@ -1,31 +1,31 @@
 import 'package:market_lists/app/core/errors/errors.dart';
 
-class GetLoggedUserFailure extends Failure {
+class GetCurrentUserFailure extends Failure {
   @override
   final String message;
 
-  GetLoggedUserFailure(this.message);
+  GetCurrentUserFailure(this.message);
 }
 
-class LogoutFailure extends Failure {
+class SignOutFailure extends Failure {
   @override
   final String message;
 
-  LogoutFailure(this.message);
+  SignOutFailure(this.message);
 }
 
-class LoginByEmailFailure extends Failure {
+class SignInWithEmailFailure extends Failure {
   @override
   final String message;
 
-  LoginByEmailFailure(this.message);
+  SignInWithEmailFailure(this.message);
 }
 
-class LoginByPhoneFailure extends Failure {
+class SignInWithPhoneFailure extends Failure {
   @override
   final String message;
 
-  LoginByPhoneFailure(this.message);
+  SignInWithPhoneFailure(this.message);
 }
 
 abstract class AuthErrorMessages {

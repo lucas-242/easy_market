@@ -12,6 +12,6 @@ abstract class AuthRepository {
     required String verificationId,
     required String code,
   });
-  Future<Either<Failure, UserInfo>> getLoggedUser();
+  Future<Either<Failure, UserInfo>> getCurrentUser();
   Future<Either<Failure, Unit>> logout();
 }

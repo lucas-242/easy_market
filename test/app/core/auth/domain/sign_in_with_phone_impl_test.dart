@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:market_lists/app/core/auth/domain/entities/login_credentials.dart';
 import 'package:market_lists/app/core/auth/domain/errors/errors.dart';
-import 'package:market_lists/app/core/auth/domain/usecases/login_by_phone.dart';
+import 'package:market_lists/app/core/auth/domain/usecases/sign_in_with_phone.dart';
 import 'package:mockito/mockito.dart';
 
 import '../auth_mock_test.dart';
@@ -10,7 +10,7 @@ import '../auth_mock_test.mocks.dart';
 
 void main() {
   final repository = MockAuthRepositoryTest();
-  final usecase = LoginByPhoneImpl(repository);
+  final usecase = SignInWithPhoneImpl(repository);
 
   test('Should Login with phone', () async {
     final loggedUser = user;
@@ -27,7 +27,7 @@ void main() {
 
     expect(
         result.leftMap((l) =>
-            l is LoginByPhoneFailure &&
+            l is SignInWithPhoneFailure &&
             l.message == AuthErrorMessages.phoneIsInvalid),
         const Left(true));
   });

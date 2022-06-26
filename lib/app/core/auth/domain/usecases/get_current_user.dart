@@ -4,17 +4,17 @@ import 'package:market_lists/app/core/auth/domain/entities/user_info.dart';
 import 'package:market_lists/app/core/auth/domain/repositories/auth_repository.dart';
 import 'package:market_lists/app/core/errors/errors.dart';
 
-abstract class GetLoggedUser {
+abstract class GetCurrentUser {
   Future<Either<Failure, UserInfo>> call();
 }
 
 @Injectable(singleton: false)
-class GetLoggedUserImpl implements GetLoggedUser {
+class GetCurrentUserImpl implements GetCurrentUser {
   AuthRepository repository;
-  GetLoggedUserImpl(this.repository);
+  GetCurrentUserImpl(this.repository);
 
   @override
   Future<Either<Failure, UserInfo>> call() async {
-    return await repository.getLoggedUser();
+    return await repository.getCurrentUser();
   }
 }
