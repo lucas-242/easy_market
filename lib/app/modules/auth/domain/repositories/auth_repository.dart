@@ -14,4 +14,9 @@ abstract class AuthRepository {
   });
   Future<Either<Failure, UserInfo>> getCurrentUser();
   Future<Either<Failure, Unit>> logout();
+  Future<Either<Failure, Unit>> signUp({
+    required String name,
+    required String email,
+    required String password,
+  });
 }

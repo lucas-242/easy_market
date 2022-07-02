@@ -1,4 +1,6 @@
-class LoginCredentials {
+import 'package:market_lists/app/shared/utils/credentials_validator_util.dart';
+
+class LoginCredentials with CredentialsValidator {
   final String email;
   final String password;
   final String phone;
@@ -33,20 +35,9 @@ class LoginCredentials {
     );
   }
 
-  bool get isValidEmail => _isAnEmail();
-  bool get isValidPassword => password.isNotEmpty && password.length >= 6;
-  bool get isValidPhoneNumber => _isAPhone();
+  bool get isValidEmail => isAnEmail(email);
+  bool get isValidPassword => isAPassword(password);
+  bool get isValidPhoneNumber => isAPhone(phone);
   bool get isValidCode => code.isNotEmpty;
   bool get isValidVerificationId => verificationId.isNotEmpty;
-
-  bool _isAnEmail() {
-    return RegExp(
-            r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$')
-        .hasMatch(email);
-  }
-
-  bool _isAPhone() {
-    return RegExp(r'^\(?[1-9]{2}\)? ?[9] ?[0-9]{4}\-?[0-9]{4}$')
-        .hasMatch(phone);
-  }
 }

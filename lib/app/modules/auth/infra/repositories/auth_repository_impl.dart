@@ -17,8 +17,10 @@ class AuthRepositoryImpl implements AuthRepository {
     try {
       final user = await datasource.getCurrentUser();
       return Right(user);
+    } on Failure catch (error) {
+      return Left(GetCurrentUserFailure(error.message));
     } catch (error) {
-      return Left(GetCurrentUserFailure("Erro to get logged user"));
+      return Left(GetCurrentUserFailure("Error to get logged user"));
     }
   }
 
@@ -29,8 +31,10 @@ class AuthRepositoryImpl implements AuthRepository {
       final user =
           await datasource.signInWithEmail(email: email, password: password);
       return Right(user);
+    } on Failure catch (error) {
+      return Left(SignInWithEmailFailure(error.message));
     } catch (error) {
-      return Left(SignInWithEmailFailure("Erro to login with email"));
+      return Left(SignInWithEmailFailure("Error to login with email"));
     }
   }
 
@@ -40,8 +44,10 @@ class AuthRepositoryImpl implements AuthRepository {
     try {
       final user = await datasource.signInWithPhone(phone: phone);
       return Right(user);
+    } on Failure catch (error) {
+      return Left(SignInWithPhoneFailure(error.message));
     } catch (error) {
-      return Left(SignInWithPhoneFailure("Erro to login with phone"));
+      return Left(SignInWithPhoneFailure("Error to login with phone"));
     }
   }
 
@@ -52,8 +58,10 @@ class AuthRepositoryImpl implements AuthRepository {
       final user = await datasource.verifyPhoneCode(
           code: code, verificationId: verificationId);
       return Right(user);
+    } on Failure catch (error) {
+      return Left(SignInWithPhoneFailure(error.message));
     } catch (error) {
-      return Left(SignInWithPhoneFailure("Erro to verify phone code"));
+      return Left(SignInWithPhoneFailure("Error to verify phone code"));
     }
   }
 
@@ -62,8 +70,30 @@ class AuthRepositoryImpl implements AuthRepository {
     try {
       await datasource.signOut();
       return const Right(unit);
+    } on Failure catch (error) {
+      return Left(SignOutFailure(error.message));
     } catch (error) {
-      return Left(SignOutFailure("Erro to logout"));
+      return Left(SignOutFailure("Error to logout"));
+    }
+  }
+
+  @override
+  Future<Either<Failure, Unit>> signUp({
+    required String email,
+    required String password,
+    required String name,
+  }) async {
+    try {
+      await datasource.signUp(
+        name: name,
+        email: email,
+        password: password,
+      );
+      return const Right(unit);
+    } on Failure catch (error) {
+      return Left(SignUpFailure(error.message));
+    } catch (error) {
+      return Left(SignUpFailure("Error to sign up"));
     }
   }
 }

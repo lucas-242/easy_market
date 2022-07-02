@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:market_lists/app/modules/auth/external/datasources/firebase/errors/errors.dart';
 import 'package:market_lists/app/modules/auth/infra/datasources/auth_datasource.dart';
@@ -7,8 +8,10 @@ import 'package:market_lists/app/modules/auth/infra/models/user_model.dart';
 
 class FirebaseAuthDatasource implements AuthDatasource {
   final FirebaseAuth auth;
+  final FirebaseFirestore firestore;
+  final String usersTable = 'users';
 
-  FirebaseAuthDatasource(this.auth);
+  FirebaseAuthDatasource(this.auth, this.firestore);
 
   @override
   Future<UserModel> getCurrentUser() async {
@@ -88,6 +91,69 @@ class FirebaseAuthDatasource implements AuthDatasource {
     } catch (error) {
       throw FirebaseSignInFailure();
     }
+  }
+
+  @override
+  Future<void> signUp({
+    required String name,
+    required String email,
+    required String password,
+  }) async {
+    try {
+      await _deleteUserIfNotInDatabase(email);
+      await auth
+          .createUserWithEmailAndPassword(email: email, password: password)
+          .then((credential) async => await _onCreateUser(credential, name))
+          .catchError((error) => FirebaseSignUpFailure.fromCode(error.code));
+    } on FirebaseException catch (error) {
+      FirebaseSignUpFailure.fromCode(error.code);
+    } catch (error) {
+      FirebaseSignUpFailure();
+    }
+  }
+
+  Future<void> _deleteUserIfNotInDatabase(String email) async {
+    final ids = await _checkUserExistsOnDatabase(email);
+    if (ids.isNotEmpty) {
+      await _deleteUsersInDatabase(ids);
+    }
+  }
+
+  Future<List<String>> _checkUserExistsOnDatabase(String email) async {
+    final result = await firestore
+        .collection(usersTable)
+        .where('email', isEqualTo: email)
+        .get();
+    return result.docs.map((e) => e.id).toList();
+  }
+
+  Future<void> _deleteUsersInDatabase(List<String> ids) async {
+    for (var id in ids) {
+      await firestore.collection(usersTable).doc(id).delete();
+    }
+  }
+
+  Future<void> _onCreateUser(UserCredential credential, String name) async {
+    try {
+      await _saveUserData(credential.user!, name);
+    } catch (error) {
+      credential.user!.delete();
+      throw FirebaseSignUpFailure(message: 'Error to save user data');
+    }
+  }
+
+  Future<void> _saveUserData(User user, String name) async {
+    await firestore.collection(usersTable).add({
+      'id': user.uid,
+      'name': name,
+      'email': user.email,
+      'phone': '',
+      'imageUrl': '',
+      'createdAt':
+          Timestamp.fromDate(user.metadata.creationTime ?? DateTime.now()),
+      'updatedAt':
+          Timestamp.fromDate(user.metadata.creationTime ?? DateTime.now())
+    });
   }
 
   UserModel _getUserModel(User user) {

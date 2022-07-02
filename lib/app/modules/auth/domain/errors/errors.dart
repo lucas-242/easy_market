@@ -28,6 +28,13 @@ class SignInWithPhoneFailure extends Failure {
   SignInWithPhoneFailure(this.message);
 }
 
+class SignUpFailure extends Failure {
+  @override
+  final String message;
+
+  SignUpFailure(this.message);
+}
+
 abstract class AuthErrorMessages {
   static String get emailIsInvalid => 'Email is invalid';
   static String get passwordIsInvalid => 'Password is invalid';

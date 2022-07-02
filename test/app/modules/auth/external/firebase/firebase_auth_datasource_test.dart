@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fake_cloud_firestore/fake_cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_auth_mocks/firebase_auth_mocks.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -59,11 +61,13 @@ final mockUser = MockUser(
 @GenerateMocks([PhoneAuthCredential, UserCredential])
 void main() {
   late FirebaseAuth auth;
+  late FirebaseFirestore database;
   late FirebaseAuthDatasource datasource;
 
   void setDatasource({bool signedIn = false}) {
     auth = MockFirebaseAuth(mockUser: mockUser, signedIn: signedIn);
-    datasource = FirebaseAuthDatasource(auth);
+    database = FakeFirebaseFirestore();
+    datasource = FirebaseAuthDatasource(auth, database);
   }
 
   void expectResultIsUserModel(UserModel result) {
@@ -88,7 +92,7 @@ void main() {
   group('Sign in by phone', () {
     setUp(() {
       final auth = MockCustomFirebaseAuth();
-      datasource = FirebaseAuthDatasource(auth);
+      datasource = FirebaseAuthDatasource(auth, database);
       when(auth.signInWithCredential(any))
           .thenAnswer((_) async => mockUserCredential);
       when(mockUserCredential.user).thenAnswer((_) => mockUser);
@@ -145,6 +149,20 @@ void main() {
     test('Should logout', () async {
       setDatasource(signedIn: true);
       expect(datasource.signOut(), completes);
+    });
+  });
+
+  group('Sign up', () {
+    test('Should Sign up', () async {
+      setDatasource(signedIn: false);
+
+      expect(
+          datasource.signUp(
+            email: userModel.email,
+            name: userModel.name,
+            password: '123456',
+          ),
+          completes);
     });
   });
 }

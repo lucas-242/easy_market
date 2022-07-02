@@ -12,4 +12,24 @@ class UserModel extends User {
   });
 
   User toUserImpl() => this;
+
+  UserModel copyWith({
+    String? id,
+    String? name,
+    String? email,
+    String? phone,
+    String? imageUrl,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+  }) {
+    return UserModel(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      email: email ?? this.email,
+      phone: phone ?? this.phone,
+      imageUrl: imageUrl ?? this.imageUrl,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
+    );
+  }
 }

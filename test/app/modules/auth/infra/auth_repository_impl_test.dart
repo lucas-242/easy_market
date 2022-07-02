@@ -115,4 +115,36 @@ void main() {
       expect(result.leftMap((l) => l is SignOutFailure), const Left(true));
     });
   });
+
+  group('Sign up', () {
+    test('Should sign up', () async {
+      when(datasource.signUp(
+        name: anyNamed('name'),
+        email: anyNamed('email'),
+        password: anyNamed('password'),
+      )).thenAnswer((_) async => unit);
+      final result = await repository.signUp(
+        email: userToLogin.email,
+        password: 'abc123',
+        name: userToLogin.name,
+      );
+
+      expect(result, const Right(unit));
+    });
+
+    test('Should throw SignUpFailure', () async {
+      when(datasource.signUp(
+        name: anyNamed('name'),
+        email: anyNamed('email'),
+        password: anyNamed('password'),
+      )).thenThrow((_) async => SignUpFailure('test'));
+      final result = await repository.signUp(
+        email: userToLogin.email,
+        password: 'abc123',
+        name: userToLogin.name,
+      );
+
+      expect(result.leftMap((l) => l is SignUpFailure), const Left(true));
+    });
+  });
 }

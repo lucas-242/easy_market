@@ -12,4 +12,9 @@ abstract class AuthDatasource {
   });
   Future<UserModel> getCurrentUser();
   Future<void> signOut();
+  Future<void> signUp({
+    required String name,
+    required String email,
+    required String password,
+  });
 }
