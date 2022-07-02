@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:market_lists/app/modules/auth/domain/entities/login_credentials.dart';
+import 'package:market_lists/app/modules/auth/domain/entities/sign_in_credentials.dart';
 import 'package:market_lists/app/modules/auth/domain/usecases/sign_in_with_email.dart';
 import 'package:market_lists/app/modules/auth/domain/usecases/sign_in_with_phone.dart';
 import 'package:market_lists/app/shared/utils/form_validator_util.dart';
@@ -34,7 +34,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> with FormValidatorUtil {
       SignInWithEmailEvent event, Emitter<AuthState> emit) async {
     emit(LoadingState(state: state));
     final result = await signInWithEmailUsecase(
-      LoginCredentials.withEmailAndPassword(
+      SignInCredentials.withEmailAndPassword(
         email: state.email!,
         password: state.password!,
       ),
@@ -52,7 +52,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> with FormValidatorUtil {
       SignInWithPhoneEvent event, Emitter<AuthState> emit) async {
     emit(LoadingState(state: state));
     final result = await signInWithPhoneUsecase(
-      LoginCredentials.withPhone(phone: state.phone!),
+      SignInCredentials.withPhone(phone: state.phone!),
     );
 
     result.fold(

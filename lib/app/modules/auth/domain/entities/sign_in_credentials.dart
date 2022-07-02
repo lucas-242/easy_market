@@ -1,13 +1,13 @@
 import 'package:market_lists/app/shared/utils/credentials_validator_util.dart';
 
-class LoginCredentials with CredentialsValidator {
+class SignInCredentials with CredentialsValidator {
   final String email;
   final String password;
   final String phone;
   final String code;
   final String verificationId;
 
-  LoginCredentials._({
+  SignInCredentials._({
     this.email = '',
     this.password = '',
     this.phone = '',
@@ -15,21 +15,21 @@ class LoginCredentials with CredentialsValidator {
     this.verificationId = '',
   });
 
-  factory LoginCredentials.withEmailAndPassword(
+  factory SignInCredentials.withEmailAndPassword(
       {required String email, required String password}) {
-    return LoginCredentials._(
+    return SignInCredentials._(
       email: email,
       password: password,
     );
   }
 
-  factory LoginCredentials.withPhone({required String phone}) {
-    return LoginCredentials._(phone: phone);
+  factory SignInCredentials.withPhone({required String phone}) {
+    return SignInCredentials._(phone: phone);
   }
 
-  factory LoginCredentials.withVerificationCode(
+  factory SignInCredentials.withVerificationCode(
       {required String code, required String verificationId}) {
-    return LoginCredentials._(
+    return SignInCredentials._(
       code: code,
       verificationId: verificationId,
     );

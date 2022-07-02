@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:market_lists/app/modules/auth/domain/entities/login_credentials.dart';
+import 'package:market_lists/app/modules/auth/domain/entities/sign_in_credentials.dart';
 import 'package:market_lists/app/modules/auth/domain/errors/errors.dart';
 import 'package:market_lists/app/modules/auth/domain/usecases/sign_in_with_email.dart';
 import 'package:mockito/mockito.dart';
@@ -14,7 +14,7 @@ void main() {
 
   test('Should Login with email', () async {
     final loggedUser = user;
-    final credentials = LoginCredentials.withEmailAndPassword(
+    final credentials = SignInCredentials.withEmailAndPassword(
         password: '123456', email: 'test@email.com');
     when(repository.loginByEmail(
             email: credentials.email, password: credentials.password))
@@ -24,7 +24,7 @@ void main() {
   });
 
   test('Should throw LoginByEmailFailure when email is not valid', () async {
-    final credentials = LoginCredentials.withEmailAndPassword(
+    final credentials = SignInCredentials.withEmailAndPassword(
         password: '123456', email: 'test');
     final result = await usecase(credentials);
 
@@ -36,7 +36,7 @@ void main() {
   });
 
   test('Should throw LoginByEmailFailure when password is not valid', () async {
-    final credentials = LoginCredentials.withEmailAndPassword(
+    final credentials = SignInCredentials.withEmailAndPassword(
         password: '123', email: 'test@email.com');
     final result = await usecase(credentials);
 
