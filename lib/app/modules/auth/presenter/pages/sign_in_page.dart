@@ -2,6 +2,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart'
     hide ModularWatchExtension;
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:market_lists/app/core/app_routes.dart';
 import 'package:market_lists/app/modules/auth/presenter/bloc/auth_bloc.dart';
 import 'package:market_lists/app/shared/widgets/custom_elevated_button/custom_elevated_button.dart';
 import 'package:market_lists/app/shared/widgets/custom_snack_bar/custom_snack_bar.dart';
@@ -21,34 +23,38 @@ class _SignInPageState extends State<SignInPage> {
   Widget build(BuildContext context) {
     // final bloc = context.read<AuthBloc>();
 
-    return Scaffold(
-      body: SafeArea(
-        child: CustomScrollView(
-          slivers: [
-            SliverFillRemaining(
-              hasScrollBody: false,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  BlocListener<AuthBloc, AuthState>(
-                    listener: (context, state) {
-                      if (state is SuccessState) {
-                        Modular.to.pushNamed('/');
-                      } else if (state is ErrorState) {
-                        getCustomSnackBar(
-                          context: context,
-                          message: state.message,
-                          type: SnackBarType.error,
-                        );
-                      }
-                    },
-                    child: _BuildScreen(formKey: _formKey),
-                  ),
-                ],
+    return BlocProvider<AuthBloc>(
+      create: (_) => Modular.get<AuthBloc>(),
+      child: Scaffold(
+        body: SafeArea(
+          child: CustomScrollView(
+            slivers: [
+              SliverFillRemaining(
+                hasScrollBody: false,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    BlocListener<AuthBloc, AuthState>(
+                      listener: (context, state) {
+                        if (state is SuccessState) {
+                          Modular.to.pushNamedAndRemoveUntil(
+                              AppRoutes.lists, (_) => false);
+                        } else if (state is ErrorState) {
+                          getCustomSnackBar(
+                            context: context,
+                            message: state.message,
+                            type: SnackBarType.error,
+                          );
+                        }
+                      },
+                      child: _BuildScreen(formKey: _formKey),
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
@@ -103,9 +109,30 @@ class _Form extends StatelessWidget {
             const _EmailField(),
             const _PasswordField(),
             CustomElevatedButton(
-              text: 'Update',
+              text: 'Sign in',
               onTap: () => validateForm(context),
             ),
+            Row(children: const [
+              Expanded(child: Divider()),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 12),
+                child: Text("OR"),
+              ),
+              Expanded(child: Divider()),
+            ]),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: const [
+                IconButton(
+                    onPressed: null, icon: FaIcon(FontAwesomeIcons.google)),
+                IconButton(
+                    onPressed: null, icon: FaIcon(FontAwesomeIcons.facebook)),
+                IconButton(
+                    onPressed: null, icon: FaIcon(FontAwesomeIcons.twitter)),
+                IconButton(
+                    onPressed: null, icon: FaIcon(FontAwesomeIcons.github)),
+              ],
+            )
           ],
         ),
       ),

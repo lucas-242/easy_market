@@ -5,6 +5,7 @@ import 'package:market_lists/app/modules/auth/domain/entities/user_info.dart';
 import 'package:market_lists/app/modules/auth/domain/errors/errors.dart';
 import 'package:market_lists/app/modules/auth/domain/repositories/auth_repository.dart';
 import 'package:market_lists/app/core/errors/errors.dart';
+part 'verify_phone_code.g.dart';
 
 abstract class VerifyPhoneCode {
   Future<Either<Failure, UserInfo>> call(SignInCredentials credentials);

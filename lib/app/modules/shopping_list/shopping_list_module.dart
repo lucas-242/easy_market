@@ -38,8 +38,7 @@ class ShoppingListModule extends Module {
       (i) => ShoppingListBloc(i<ListenShoppingLists>()),
     ),
     BindInject(
-      (i) => FirebaseShoppingListDatasource(i<FirebaseFirestore>(),
-          useFirebaseEmulator: true),
+      (i) => FirebaseShoppingListDatasource(i<FirebaseFirestore>()),
       isSingleton: false,
       isLazy: true,
     ),

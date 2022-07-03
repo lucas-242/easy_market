@@ -5,6 +5,7 @@ import 'package:market_lists/app/modules/auth/domain/errors/errors.dart';
 import 'package:market_lists/app/modules/auth/domain/repositories/auth_repository.dart';
 import 'package:market_lists/app/modules/auth/infra/datasources/auth_datasource.dart';
 import 'package:market_lists/app/core/errors/errors.dart';
+part 'auth_repository_impl.g.dart';
 
 @Injectable(singleton: false)
 class AuthRepositoryImpl implements AuthRepository {

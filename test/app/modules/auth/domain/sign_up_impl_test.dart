@@ -3,14 +3,14 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:market_lists/app/core/errors/errors.dart';
 import 'package:market_lists/app/modules/auth/domain/entities/sign_up_credentials.dart';
 import 'package:market_lists/app/modules/auth/domain/errors/errors.dart';
-import 'package:market_lists/app/modules/auth/domain/usecases/sign_up.dart';
+import 'package:market_lists/app/modules/auth/domain/usecases/sign_up_with_email.dart';
 import 'package:mockito/mockito.dart';
 
 import '../auth_mock_test.mocks.dart';
 
 void main() {
   final repository = MockAuthRepository();
-  final usecase = SignUpImpl(repository);
+  final usecase = SignUpWithEmailImpl(repository);
   final credentials = SignUpCredentials(
       email: 'test@email.com', password: '123abc', name: 'Test man');
 
