@@ -2,7 +2,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart'
     hide ModularWatchExtension;
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:market_lists/app/core/app_routes.dart';
 import 'package:market_lists/app/modules/auth/presenter/bloc/auth_bloc.dart';
 import 'package:market_lists/app/shared/widgets/custom_elevated_button/custom_elevated_button.dart';
@@ -120,19 +119,6 @@ class _Form extends StatelessWidget {
               ),
               Expanded(child: Divider()),
             ]),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: const [
-                IconButton(
-                    onPressed: null, icon: FaIcon(FontAwesomeIcons.google)),
-                IconButton(
-                    onPressed: null, icon: FaIcon(FontAwesomeIcons.facebook)),
-                IconButton(
-                    onPressed: null, icon: FaIcon(FontAwesomeIcons.twitter)),
-                IconButton(
-                    onPressed: null, icon: FaIcon(FontAwesomeIcons.github)),
-              ],
-            )
           ],
         ),
       ),

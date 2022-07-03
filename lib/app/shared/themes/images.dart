@@ -1,3 +1,3 @@
 abstract class Images {
-  static const google = "assets/images/google.png";
+  // static const google = "assets/images/google.png";
 }
