@@ -55,8 +55,8 @@ Widget _buildList(ShoppingListState state) {
     itemCount: state.shoppingLists.length,
     itemBuilder: (context, index) => ShoppingListCard(
       shoppingList: state.shoppingLists[index],
-      onTap: (id) =>
-          Modular.to.pushNamed('${AppRoutes.lists}${AppRoutes.details}/$index'),
+      onTap: (id) => Modular.to
+          .pushNamed('${AppRoutes.lists}${AppRoutes.listDetails}$index'),
     ),
   );
 }

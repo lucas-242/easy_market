@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:market_lists/app/shared/themes/typography_utils.dart';
 
 class CustomTextFormField extends StatelessWidget {
   final TextInputType keyboardType;
@@ -31,32 +32,24 @@ class CustomTextFormField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
     return Padding(
       padding: const EdgeInsets.only(bottom: 14),
-      child: Column(
-        children: [
-          TextFormField(
-            controller: controller,
-            initialValue: initialValue,
-            validator: validator,
-            keyboardType: keyboardType,
-            textInputAction: textInputAction,
-            readOnly: readOnly,
-            onChanged: onChanged,
-            onTap: onTap,
-            style: textTheme.bodyLarge,
-            inputFormatters: inputFormatters,
-            decoration: InputDecoration(
-              floatingLabelBehavior: FloatingLabelBehavior.always,
-              labelText: labelText,
-              hintText: hintText,
-              hintStyle: textTheme.bodyLarge!,
-              contentPadding: const EdgeInsets.symmetric(horizontal: 8),
-              border: const OutlineInputBorder(),
-            ),
-          ),
-        ],
+      child: TextFormField(
+        controller: controller,
+        initialValue: initialValue,
+        validator: validator,
+        keyboardType: keyboardType,
+        textInputAction: textInputAction,
+        readOnly: readOnly,
+        onChanged: onChanged,
+        onTap: onTap,
+        style: context.bodyLarge,
+        inputFormatters: inputFormatters,
+        decoration: InputDecoration(
+          labelText: labelText,
+          hintText: hintText,
+          hintStyle: context.bodyLarge!,
+        ),
       ),
     );
   }

@@ -12,16 +12,24 @@ class WelcomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Column(
-          children: [
-            Container(
-              color: Colors.black,
-              width: context.width * 0.8,
-              height: context.height * 0.35,
-            ),
-            _ActionButtons(),
-            _SocialMediaRow(),
-          ],
+        child: Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: Column(
+            children: [
+              Container(
+                color: Colors.black,
+                height: context.height * 0.38,
+                child: const Center(
+                  child: Text(
+                    'Image',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+              ),
+              _ActionButtons(),
+              _SocialMediaRow(),
+            ],
+          ),
         ),
       ),
     );
@@ -33,7 +41,7 @@ class _ActionButtons extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const SizedBox(height: 25),
+        const SizedBox(height: 60),
         CustomElevatedButton(
           onTap: () => Modular.to.pushNamed(AppRoutes.signIn),
           size: Size(context.width * 0.7, context.height * 0.067),
@@ -43,7 +51,7 @@ class _ActionButtons extends StatelessWidget {
         CustomElevatedButton(
           onTap: () => Modular.to.pushNamed(AppRoutes.signUp),
           size: Size(context.width * 0.7, context.height * 0.067),
-          text: 'Create an Account',
+          text: 'Create Account',
         ),
         const SizedBox(height: 25),
       ],
@@ -76,15 +84,7 @@ class _SocialMediaRow extends StatelessWidget {
         IconButton(
           onPressed: null,
           icon: FaIcon(
-            FontAwesomeIcons.twitter,
-            color: context.colors.primary,
-          ),
-        ),
-        const SizedBox(width: 15),
-        IconButton(
-          onPressed: null,
-          icon: FaIcon(
-            FontAwesomeIcons.github,
+            FontAwesomeIcons.phone,
             color: context.colors.primary,
           ),
         ),

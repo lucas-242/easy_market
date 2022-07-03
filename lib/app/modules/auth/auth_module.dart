@@ -43,7 +43,7 @@ class AuthModule extends Module {
   @override
   final List<ModularRoute> routes = [
     ChildRoute(AppRoutes.main, child: (_, __) => const WelcomePage()),
-    ChildRoute(AppRoutes.signIn, child: (_, __) => const SignInPage()),
-    ChildRoute(AppRoutes.signUp, child: (_, __) => const SignUpPage()),
+    ChildRoute('/sign-in/', child: (_, __) => const SignInPage()),
+    ChildRoute('/sign-up/', child: (_, __) => const SignUpPage()),
   ];
 }

@@ -47,6 +47,7 @@ class ThemeProvider extends InheritedWidget {
       navigationRailTheme: navigationRailTheme(_colors),
       tabBarTheme: tabBarTheme(_colors),
       drawerTheme: drawerTheme(_colors),
+      inputDecorationTheme: inputDecorationTheme(),
       scaffoldBackgroundColor: _colors.background,
       useMaterial3: true,
     );
@@ -66,6 +67,7 @@ class ThemeProvider extends InheritedWidget {
       navigationRailTheme: navigationRailTheme(_colors),
       tabBarTheme: tabBarTheme(_colors),
       drawerTheme: drawerTheme(_colors),
+      inputDecorationTheme: inputDecorationTheme(),
       scaffoldBackgroundColor: _colors.background,
       useMaterial3: true,
     );
@@ -165,6 +167,18 @@ class ThemeProvider extends InheritedWidget {
   DrawerThemeData drawerTheme(ColorScheme colors) {
     return DrawerThemeData(
       backgroundColor: colors.surface,
+    );
+  }
+
+  InputDecorationTheme inputDecorationTheme() {
+    return const InputDecorationTheme(
+      floatingLabelBehavior: FloatingLabelBehavior.never,
+      contentPadding: EdgeInsets.symmetric(horizontal: 18),
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.all(
+          Radius.circular(25.0),
+        ),
+      ),
     );
   }
 

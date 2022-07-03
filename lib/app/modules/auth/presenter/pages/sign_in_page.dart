@@ -4,6 +4,8 @@ import 'package:flutter_modular/flutter_modular.dart'
     hide ModularWatchExtension;
 import 'package:market_lists/app/core/app_routes.dart';
 import 'package:market_lists/app/modules/auth/presenter/bloc/auth_bloc.dart';
+import 'package:market_lists/app/shared/themes/theme_utils.dart';
+import 'package:market_lists/app/shared/themes/typography_utils.dart';
 import 'package:market_lists/app/shared/widgets/custom_elevated_button/custom_elevated_button.dart';
 import 'package:market_lists/app/shared/widgets/custom_snack_bar/custom_snack_bar.dart';
 import 'package:market_lists/app/shared/widgets/custom_text_form_field/custom_text_form_field.dart';
@@ -20,8 +22,6 @@ class _SignInPageState extends State<SignInPage> {
 
   @override
   Widget build(BuildContext context) {
-    // final bloc = context.read<AuthBloc>();
-
     return BlocProvider<AuthBloc>(
       create: (_) => Modular.get<AuthBloc>(),
       child: Scaffold(
@@ -30,26 +30,28 @@ class _SignInPageState extends State<SignInPage> {
             slivers: [
               SliverFillRemaining(
                 hasScrollBody: false,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    BlocListener<AuthBloc, AuthState>(
-                      listener: (context, state) {
-                        if (state is SuccessState) {
-                          Modular.to.pushNamedAndRemoveUntil(
-                              AppRoutes.lists, (_) => false);
-                        } else if (state is ErrorState) {
-                          getCustomSnackBar(
-                            context: context,
-                            message: state.message,
-                            type: SnackBarType.error,
-                          );
-                        }
-                      },
-                      child: _BuildScreen(formKey: _formKey),
-                    ),
-                  ],
+                child: BlocListener<AuthBloc, AuthState>(
+                  listener: (context, state) {
+                    if (state is SuccessState) {
+                      Modular.to.pushNamedAndRemoveUntil(
+                          AppRoutes.lists, (_) => false);
+                    } else if (state is ErrorState) {
+                      getCustomSnackBar(
+                        context: context,
+                        message: state.message,
+                        type: SnackBarType.error,
+                      );
+                    }
+                  },
+                  child: BlocBuilder<AuthBloc, AuthState>(
+                    builder: (bloc, state) {
+                      return state.when(
+                        onState: (state) => _BuildScreen(formKey: _formKey),
+                        onLoading: () =>
+                            const Center(child: CircularProgressIndicator()),
+                      );
+                    },
+                  ),
                 ),
               ),
             ],
@@ -66,21 +68,24 @@ class _BuildScreen extends StatelessWidget {
   const _BuildScreen({required this.formKey});
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Column(
-        children: [
-          Expanded(
-            child: BlocBuilder<AuthBloc, AuthState>(builder: (bloc, state) {
-              return state.when(
-                onState: (state) => _Form(formKey: formKey),
-                onLoading: () =>
-                    const Center(child: CircularProgressIndicator()),
-              );
-            }),
-          ),
-        ],
-      ),
+    return Column(
+      children: [
+        const SizedBox(height: 25),
+        _Header(),
+        const SizedBox(height: 25),
+        _Form(formKey: formKey),
+        const TextButton(onPressed: null, child: Text('Forgot password?')),
+        const SizedBox(height: 25),
+        _SignUpButton(),
+      ],
     );
+  }
+}
+
+class _Header extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Text('Sign In', style: context.headlineLarge);
   }
 }
 
@@ -102,23 +107,19 @@ class _Form extends StatelessWidget {
     return Form(
       key: formKey,
       child: Padding(
-        padding: const EdgeInsets.only(left: 12, right: 12, bottom: 12),
+        padding: const EdgeInsets.only(left: 15, right: 15, bottom: 15),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const _EmailField(),
+            const SizedBox(height: 10),
             const _PasswordField(),
+            const SizedBox(height: 15),
             CustomElevatedButton(
-              text: 'Sign in',
               onTap: () => validateForm(context),
+              size: Size(context.width * 0.7, context.height * 0.067),
+              text: 'Sign In',
             ),
-            Row(children: const [
-              Expanded(child: Divider()),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 12),
-                child: Text("OR"),
-              ),
-              Expanded(child: Divider()),
-            ]),
           ],
         ),
       ),
@@ -159,6 +160,22 @@ class _PasswordField extends StatelessWidget {
       initialValue: bloc.state.password,
       onChanged: (value) =>
           context.read<AuthBloc>().add(ChangePasswordEvent(value)),
+    );
+  }
+}
+
+class _SignUpButton extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        const Text('Don\'t have an account?'),
+        TextButton(
+          onPressed: () => Modular.to.pushReplacementNamed(AppRoutes.signUp),
+          child: const Text('Sign Up'),
+        ),
+      ],
     );
   }
 }

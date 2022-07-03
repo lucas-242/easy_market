@@ -48,7 +48,7 @@ class ShoppingListModule extends Module {
   final List<ModularRoute> routes = [
     ChildRoute(AppRoutes.main, child: (_, __) => const ShoppingListsPage()),
     ChildRoute(
-      '${AppRoutes.details}/:id',
+      '${AppRoutes.listDetails}:id',
       child: (context, args) =>
           ShoppingListDetailsPage(shoppingListId: args.params['id']),
     ),
