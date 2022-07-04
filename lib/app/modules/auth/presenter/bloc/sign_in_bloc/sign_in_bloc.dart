@@ -5,8 +5,8 @@ import 'package:market_lists/app/modules/auth/domain/usecases/sign_in_with_email
 import 'package:market_lists/app/modules/auth/domain/usecases/sign_in_with_phone.dart';
 import 'package:market_lists/app/shared/utils/form_validator_util.dart';
 
-part 'auth_event.dart';
-part 'auth_state.dart';
+part 'sign_in_event.dart';
+part 'sign_in_state.dart';
 
 class SignInBloc extends Bloc<SignInEvent, SignInState> with FormValidatorUtil {
   final SignInWithEmail signInWithEmailUsecase;

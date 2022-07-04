@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart'
     hide ModularWatchExtension;
 import 'package:market_lists/app/core/app_routes.dart';
-import 'package:market_lists/app/modules/auth/presenter/bloc/sign_in_bloc/auth_bloc.dart';
+import 'package:market_lists/app/modules/auth/presenter/bloc/sign_in_bloc/sign_in_bloc.dart';
 import 'package:market_lists/app/shared/themes/theme_utils.dart';
 import 'package:market_lists/app/shared/themes/typography_utils.dart';
 import 'package:market_lists/app/shared/widgets/custom_elevated_button/custom_elevated_button.dart';

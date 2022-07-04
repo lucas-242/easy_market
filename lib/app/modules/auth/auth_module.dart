@@ -12,7 +12,7 @@ import 'domain/usecases/sign_up_with_email.dart';
 import 'domain/usecases/verify_phone_code.dart';
 import 'external/datasources/firebase/firebase_auth_datasource.dart';
 import 'infra/repositories/auth_repository_impl.dart';
-import 'presenter/bloc/sign_in_bloc/auth_bloc.dart';
+import 'presenter/bloc/sign_in_bloc/sign_in_bloc.dart';
 import 'presenter/bloc/sign_up_bloc/sign_up_bloc.dart';
 import 'presenter/pages/sign_in_page.dart';
 import 'presenter/pages/sign_up_page.dart';
