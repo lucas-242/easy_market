@@ -12,7 +12,8 @@ import 'domain/usecases/sign_up_with_email.dart';
 import 'domain/usecases/verify_phone_code.dart';
 import 'external/datasources/firebase/firebase_auth_datasource.dart';
 import 'infra/repositories/auth_repository_impl.dart';
-import 'presenter/bloc/auth_bloc.dart';
+import 'presenter/bloc/sign_in_bloc/auth_bloc.dart';
+import 'presenter/bloc/sign_up_bloc/sign_up_bloc.dart';
 import 'presenter/pages/sign_in_page.dart';
 import 'presenter/pages/sign_up_page.dart';
 import 'presenter/pages/welcome_page.dart';
@@ -36,7 +37,10 @@ class AuthModule extends Module {
     $SignUpWithEmailImpl,
     $VerifyPhoneCodeImpl,
     BlocBind.singleton(
-      (i) => AuthBloc(i<SignInWithEmail>(), i<SignInWithPhone>()),
+      (i) => SignInBloc(i<SignInWithEmail>(), i<SignInWithPhone>()),
+    ),
+    BlocBind.singleton(
+      (i) => SignUpBloc(i<SignUpWithEmail>()),
     ),
   ];
 

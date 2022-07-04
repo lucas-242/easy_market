@@ -8,11 +8,11 @@ import 'package:market_lists/app/shared/utils/form_validator_util.dart';
 part 'auth_event.dart';
 part 'auth_state.dart';
 
-class AuthBloc extends Bloc<AuthEvent, AuthState> with FormValidatorUtil {
+class SignInBloc extends Bloc<SignInEvent, SignInState> with FormValidatorUtil {
   final SignInWithEmail signInWithEmailUsecase;
   final SignInWithPhone signInWithPhoneUsecase;
 
-  AuthBloc(
+  SignInBloc(
     this.signInWithEmailUsecase,
     this.signInWithPhoneUsecase,
   ) : super(const InitialState()) {
@@ -22,16 +22,16 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> with FormValidatorUtil {
     on<SignInWithPhoneEvent>(_onSignInPhone);
   }
 
-  void _onChangeEmail(ChangeEmailEvent event, Emitter<AuthState> emit) {
+  void _onChangeEmail(ChangeEmailEvent event, Emitter<SignInState> emit) {
     emit(state.copyWith(email: event.email));
   }
 
-  void _onChangePassword(ChangePasswordEvent event, Emitter<AuthState> emit) {
+  void _onChangePassword(ChangePasswordEvent event, Emitter<SignInState> emit) {
     emit(state.copyWith(password: event.password));
   }
 
   Future<void> _onSignInWithEmail(
-      SignInWithEmailEvent event, Emitter<AuthState> emit) async {
+      SignInWithEmailEvent event, Emitter<SignInState> emit) async {
     emit(LoadingState(state: state));
     final result = await signInWithEmailUsecase(
       SignInCredentials.withEmailAndPassword(
@@ -49,7 +49,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> with FormValidatorUtil {
   }
 
   Future<void> _onSignInPhone(
-      SignInWithPhoneEvent event, Emitter<AuthState> emit) async {
+      SignInWithPhoneEvent event, Emitter<SignInState> emit) async {
     emit(LoadingState(state: state));
     final result = await signInWithPhoneUsecase(
       SignInCredentials.withPhone(phone: state.phone!),

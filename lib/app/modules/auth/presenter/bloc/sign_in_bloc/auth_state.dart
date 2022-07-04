@@ -1,17 +1,17 @@
 part of 'auth_bloc.dart';
 
 @immutable
-abstract class AuthState {
+abstract class SignInState {
   final String? email;
   final String? phone;
   final String? password;
 
-  const AuthState({this.email, this.password, this.phone});
+  const SignInState({this.email, this.password, this.phone});
 
-  AuthState copyWith({String? email, String? password, String? phone});
+  SignInState copyWith({String? email, String? password, String? phone});
 
   T when<T>({
-    T Function(AuthState state)? onState,
+    T Function(SignInState state)? onState,
     T Function(ErrorState error)? onError,
     T Function()? onLoading,
   }) {
@@ -19,7 +19,7 @@ abstract class AuthState {
   }
 }
 
-class InitialState extends AuthState {
+class InitialState extends SignInState {
   const InitialState({super.email, super.password, super.phone});
 
   @override
@@ -32,14 +32,14 @@ class InitialState extends AuthState {
   }
 }
 
-class ErrorState extends AuthState {
+class ErrorState extends SignInState {
   final String message;
   const ErrorState(
       {required this.message, super.email, super.password, super.phone});
 
   @override
   T when<T>({
-    T Function(AuthState state)? onState,
+    T Function(SignInState state)? onState,
     T Function(ErrorState error)? onError,
     T Function()? onLoading,
   }) =>
@@ -61,16 +61,16 @@ class ErrorState extends AuthState {
   }
 }
 
-class SuccessState extends AuthState {
+class SuccessState extends SignInState {
   @override
-  AuthState copyWith({String? email, String? password, String? phone}) {
+  SignInState copyWith({String? email, String? password, String? phone}) {
     return SuccessState();
   }
 }
 
-class LoadingState extends AuthState {
+class LoadingState extends SignInState {
   LoadingState({
-    AuthState? state,
+    SignInState? state,
     String? email,
     String? password,
     String? phone,
@@ -81,7 +81,7 @@ class LoadingState extends AuthState {
         );
 
   @override
-  AuthState copyWith({String? email, String? password, String? phone}) {
+  SignInState copyWith({String? email, String? password, String? phone}) {
     return LoadingState(email: email, password: password, phone: phone);
   }
 }

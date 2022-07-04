@@ -3,10 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart'
     hide ModularWatchExtension;
 import 'package:market_lists/app/core/app_routes.dart';
-import 'package:market_lists/app/modules/auth/presenter/bloc/auth_bloc.dart';
+import 'package:market_lists/app/modules/auth/presenter/bloc/sign_up_bloc/sign_up_bloc.dart';
 import 'package:market_lists/app/shared/themes/theme_utils.dart';
 import 'package:market_lists/app/shared/themes/typography_utils.dart';
 import 'package:market_lists/app/shared/widgets/custom_elevated_button/custom_elevated_button.dart';
+import 'package:market_lists/app/shared/widgets/custom_snack_bar/custom_snack_bar.dart';
 import 'package:market_lists/app/shared/widgets/custom_text_form_field/custom_text_form_field.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -21,13 +22,34 @@ class _SignUpPageState extends State<SignUpPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<AuthBloc>(
-      create: (_) => Modular.get<AuthBloc>(),
+    return BlocProvider<SignUpBloc>(
+      create: (_) => Modular.get<SignUpBloc>(),
       child: Scaffold(
         body: SafeArea(
           child: SingleChildScrollView(
-            child: _BuildScreen(
-              formKey: _formKey,
+            child: BlocListener<SignUpBloc, SignUpState>(
+              listenWhen: (previous, current) =>
+                  previous.status != current.status,
+              listener: (context, state) {
+                if (state.status == SignUpStatus.success) {
+                  Modular.to.pushReplacementNamed(AppRoutes.signIn);
+                } else if (state.status == SignUpStatus.error) {
+                  getCustomSnackBar(
+                    context: context,
+                    message: state.callbackMessage,
+                    type: SnackBarType.error,
+                  );
+                }
+              },
+              child: BlocBuilder<SignUpBloc, SignUpState>(
+                builder: (bloc, state) {
+                  return state.when(
+                    onState: (state) => _BuildScreen(formKey: _formKey),
+                    onLoading: () =>
+                        const Center(child: CircularProgressIndicator()),
+                  );
+                },
+              ),
             ),
           ),
         ),
@@ -70,8 +92,8 @@ class _Form extends StatelessWidget {
   void validateForm(BuildContext context) {
     final form = formKey.currentState!;
     if (form.validate()) {
-      final bloc = context.read<AuthBloc>();
-      bloc.add(SignInWithEmailEvent());
+      final bloc = context.read<SignUpBloc>();
+      bloc.add(SignUp());
     }
   }
 
@@ -109,7 +131,7 @@ class _NameField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bloc = context.watch<AuthBloc>();
+    final bloc = context.watch<SignUpBloc>();
     const label = 'Name';
 
     return CustomTextFormField(
@@ -127,7 +149,7 @@ class _EmailField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bloc = context.watch<AuthBloc>();
+    final bloc = context.watch<SignUpBloc>();
     const label = 'Email';
 
     return CustomTextFormField(
@@ -145,7 +167,7 @@ class _PasswordField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bloc = context.watch<AuthBloc>();
+    final bloc = context.watch<SignUpBloc>();
     const label = 'Password';
 
     return CustomTextFormField(
@@ -153,7 +175,7 @@ class _PasswordField extends StatelessWidget {
       labelText: label,
       initialValue: bloc.state.password,
       onChanged: (value) =>
-          context.read<AuthBloc>().add(ChangePasswordEvent(value)),
+          context.read<SignUpBloc>().add(ChangePasswordEvent(value)),
     );
   }
 }
@@ -163,7 +185,7 @@ class _ConfirmPasswordField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bloc = context.watch<AuthBloc>();
+    final bloc = context.watch<SignUpBloc>();
     const label = 'Confirm Password';
 
     return CustomTextFormField(
@@ -171,7 +193,7 @@ class _ConfirmPasswordField extends StatelessWidget {
       labelText: label,
       initialValue: bloc.state.password,
       onChanged: (value) =>
-          context.read<AuthBloc>().add(ChangePasswordEvent(value)),
+          context.read<SignUpBloc>().add(ChangePasswordEvent(value)),
     );
   }
 }
