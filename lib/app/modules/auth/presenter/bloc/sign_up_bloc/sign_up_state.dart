@@ -9,6 +9,8 @@ class SignUpState {
   final String? password;
   final String? confirmPassword;
   final String callbackMessage;
+  final bool showPassword;
+  final bool showConfirmPassword;
 
   SignUpState({
     this.name,
@@ -17,6 +19,8 @@ class SignUpState {
     this.confirmPassword,
     required this.status,
     this.callbackMessage = '',
+    this.showPassword = false,
+    this.showConfirmPassword = false,
   });
 
   SignUpState copyWith({
@@ -26,6 +30,8 @@ class SignUpState {
     String? password,
     String? confirmPassword,
     String? callbackMessage,
+    bool? showPassword,
+    bool? showConfirmPassword,
   }) {
     return SignUpState(
       status: status ?? this.status,
@@ -34,6 +40,8 @@ class SignUpState {
       password: password ?? this.password,
       confirmPassword: confirmPassword ?? this.confirmPassword,
       callbackMessage: callbackMessage ?? this.callbackMessage,
+      showPassword: showPassword ?? this.showPassword,
+      showConfirmPassword: showConfirmPassword ?? this.showConfirmPassword,
     );
   }
 

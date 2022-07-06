@@ -141,7 +141,7 @@ class _EmailField extends StatelessWidget {
       hintText: 'youremail@email.com',
       initialValue: bloc.state.email,
       onChanged: (value) => bloc.add(ChangeEmailEvent(value)),
-      validator: (value) => bloc.validateFieldIsEmpty(value, fieldName: label),
+      validator: (value) => bloc.validateEmailField(fieldValue: value),
     );
   }
 }

@@ -3,12 +3,15 @@ import 'package:flutter/services.dart';
 import 'package:market_lists/app/shared/themes/typography_utils.dart';
 
 class CustomTextFormField extends StatelessWidget {
+  final GlobalKey<FormFieldState>? textFormKey;
   final TextInputType keyboardType;
   final TextInputAction textInputAction;
   final String labelText;
   final String hintText;
   final String? initialValue;
   final bool readOnly;
+  final bool obscureText;
+  final Widget? suffix;
   final List<TextInputFormatter>? inputFormatters;
   final String? Function(String?)? validator;
   final TextEditingController? controller;
@@ -17,6 +20,7 @@ class CustomTextFormField extends StatelessWidget {
 
   const CustomTextFormField({
     Key? key,
+    this.textFormKey,
     this.keyboardType = TextInputType.text,
     this.textInputAction = TextInputAction.next,
     required this.labelText,
@@ -28,6 +32,8 @@ class CustomTextFormField extends StatelessWidget {
     this.inputFormatters,
     this.onTap,
     this.readOnly = false,
+    this.obscureText = false,
+    this.suffix,
   }) : super(key: key);
 
   @override
@@ -35,6 +41,7 @@ class CustomTextFormField extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(bottom: 14),
       child: TextFormField(
+        key: textFormKey,
         controller: controller,
         initialValue: initialValue,
         validator: validator,
@@ -45,10 +52,13 @@ class CustomTextFormField extends StatelessWidget {
         onTap: onTap,
         style: context.bodyLarge,
         inputFormatters: inputFormatters,
+        obscureText: obscureText,
+        autovalidateMode: AutovalidateMode.onUserInteraction,
         decoration: InputDecoration(
           labelText: labelText,
           hintText: hintText,
           hintStyle: context.bodyLarge!,
+          suffixIcon: suffix,
         ),
       ),
     );

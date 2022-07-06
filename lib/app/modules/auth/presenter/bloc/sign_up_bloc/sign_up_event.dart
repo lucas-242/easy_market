@@ -27,3 +27,7 @@ class ChangeConfirmPasswordEvent extends SignUpEvent {
 
   ChangeConfirmPasswordEvent(this.confirmPassword);
 }
+
+class ChangePasswordVisibilyEvent extends SignUpEvent {}
+
+class ChangeConfirmPasswordVisibilyEvent extends SignUpEvent {}
