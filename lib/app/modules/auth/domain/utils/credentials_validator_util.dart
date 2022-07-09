@@ -1,4 +1,4 @@
-abstract class CredentialsValidator {
+abstract class CredentialsValidatorUtil {
   static bool isAName(String name) => name.isNotEmpty && name.length >= 2;
 
   static bool isAPassword(String password) =>

@@ -1,4 +1,4 @@
-import 'package:market_lists/app/modules/auth/domain/entities/credentials_validator.dart';
+import 'package:market_lists/app/modules/auth/domain/utils/credentials_validator_util.dart';
 
 mixin FormValidatorUtil {
   String? validateNameField({
@@ -14,7 +14,7 @@ mixin FormValidatorUtil {
       return error;
     }
 
-    if (!CredentialsValidator.isAName(fieldValue!)) {
+    if (!CredentialsValidatorUtil.isAName(fieldValue!)) {
       error = 'Please, inform a valid name';
     }
 
@@ -34,7 +34,7 @@ mixin FormValidatorUtil {
       return error;
     }
 
-    if (!CredentialsValidator.isAnEmail(fieldValue!)) {
+    if (!CredentialsValidatorUtil.isAnEmail(fieldValue!)) {
       error = 'Please, inform a valid email';
     }
 
@@ -54,7 +54,7 @@ mixin FormValidatorUtil {
       return error;
     }
 
-    if (!CredentialsValidator.isAPassword(fieldValue!)) {
+    if (!CredentialsValidatorUtil.isAPassword(fieldValue!)) {
       error = 'Password too short';
     }
 

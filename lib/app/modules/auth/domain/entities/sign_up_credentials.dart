@@ -1,4 +1,4 @@
-import 'package:market_lists/app/modules/auth/domain/entities/credentials_validator.dart';
+import 'package:market_lists/app/modules/auth/domain/utils/credentials_validator_util.dart';
 
 class SignUpCredentials {
   final String name;
@@ -8,7 +8,7 @@ class SignUpCredentials {
   SignUpCredentials(
       {required this.email, required this.password, required this.name});
 
-  bool get isValidEmail => CredentialsValidator.isAnEmail(email);
-  bool get isValidName => CredentialsValidator.isAName(name);
-  bool get isValidPassword => CredentialsValidator.isAPassword(password);
+  bool get isValidEmail => CredentialsValidatorUtil.isAnEmail(email);
+  bool get isValidName => CredentialsValidatorUtil.isAName(name);
+  bool get isValidPassword => CredentialsValidatorUtil.isAPassword(password);
 }
