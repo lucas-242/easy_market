@@ -46,7 +46,7 @@ class SignUpState {
   }
 
   T when<T>({
-    T Function(SignUpState state)? onState,
+    required T Function(SignUpState state) onState,
     T Function(SignUpState error)? onError,
     T Function()? onLoading,
   }) {
@@ -54,9 +54,9 @@ class SignUpState {
       case SignUpStatus.loading:
         return onLoading!();
       case SignUpStatus.error:
-        return onError!(this);
+        return onError != null ? onError(this) : onState(this);
       default:
-        return onState!(this);
+        return onState(this);
     }
   }
 }

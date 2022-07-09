@@ -22,40 +22,37 @@ class _SignInPageState extends State<SignInPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<SignInBloc>(
-      create: (_) => Modular.get<SignInBloc>(),
-      child: Scaffold(
-        body: SafeArea(
-          child: CustomScrollView(
-            slivers: [
-              SliverFillRemaining(
-                hasScrollBody: false,
-                child: BlocListener<SignInBloc, SignInState>(
-                  listener: (context, state) {
-                    if (state is SuccessState) {
-                      Modular.to.pushNamedAndRemoveUntil(
-                          AppRoutes.lists, (_) => false);
-                    } else if (state is ErrorState) {
-                      getCustomSnackBar(
-                        context: context,
-                        message: state.message,
-                        type: SnackBarType.error,
-                      );
-                    }
+    return Scaffold(
+      body: SafeArea(
+        child: CustomScrollView(
+          slivers: [
+            SliverFillRemaining(
+              hasScrollBody: false,
+              child: BlocListener<SignInBloc, SignInState>(
+                listener: (context, state) {
+                  if (state is SuccessState) {
+                    Modular.to
+                        .pushNamedAndRemoveUntil(AppRoutes.lists, (_) => false);
+                  } else if (state is ErrorState) {
+                    getCustomSnackBar(
+                      context: context,
+                      message: state.message,
+                      type: SnackBarType.error,
+                    );
+                  }
+                },
+                child: BlocBuilder<SignInBloc, SignInState>(
+                  builder: (bloc, state) {
+                    return state.when(
+                      onState: (state) => _BuildScreen(formKey: _formKey),
+                      onLoading: () =>
+                          const Center(child: CircularProgressIndicator()),
+                    );
                   },
-                  child: BlocBuilder<SignInBloc, SignInState>(
-                    builder: (bloc, state) {
-                      return state.when(
-                        onState: (state) => _BuildScreen(formKey: _formKey),
-                        onLoading: () =>
-                            const Center(child: CircularProgressIndicator()),
-                      );
-                    },
-                  ),
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

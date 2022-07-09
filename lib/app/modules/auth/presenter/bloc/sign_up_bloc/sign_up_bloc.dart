@@ -1,4 +1,8 @@
+import 'dart:async';
+
 import 'package:bloc/bloc.dart';
+import 'package:market_lists/app/core/errors/errors.dart';
+import 'package:market_lists/app/modules/auth/domain/entities/sign_up_credentials.dart';
 import 'package:market_lists/app/modules/auth/domain/usecases/sign_up_with_email.dart';
 import 'package:market_lists/app/shared/utils/form_validator_util.dart';
 
@@ -15,6 +19,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> with FormValidatorUtil {
     on<ChangeConfirmPasswordEvent>(_onChangeConfirmPassword);
     on<ChangePasswordVisibilyEvent>(_onChangePasswordVisibility);
     on<ChangeConfirmPasswordVisibilyEvent>(_onChangeConfirmPasswordVisibility);
+    on<SignUpClickEvent>(_onSignUp);
   }
 
   void _onChangeName(ChangeNameEvent event, Emitter<SignUpState> emit) {
@@ -42,5 +47,32 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> with FormValidatorUtil {
   void _onChangeConfirmPasswordVisibility(
       ChangeConfirmPasswordVisibilyEvent event, Emitter<SignUpState> emit) {
     emit(state.copyWith(showConfirmPassword: !state.showConfirmPassword));
+  }
+
+  Future<void> _onSignUp(
+      SignUpClickEvent event, Emitter<SignUpState> emit) async {
+    emit(state.copyWith(status: SignUpStatus.loading));
+    final credentials = SignUpCredentials(
+      email: state.email!,
+      password: state.password!,
+      name: state.name!,
+    );
+    await _signUp(credentials, emit);
+  }
+
+  Future<void> _signUp(
+      SignUpCredentials credentials, Emitter<SignUpState> emit) async {
+    try {
+      final response = await signUpUsecase(credentials);
+      response.fold(
+        (l) => emit(state.copyWith(
+            status: SignUpStatus.error, callbackMessage: l.message)),
+        (r) => emit(SignUpState(status: SignUpStatus.success)),
+      );
+    } catch (error) {
+      emit(state.copyWith(
+          status: SignUpStatus.error,
+          callbackMessage: 'An unexpected error occurred'));
+    }
   }
 }

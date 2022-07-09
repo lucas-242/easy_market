@@ -2,7 +2,7 @@ part of 'sign_up_bloc.dart';
 
 abstract class SignUpEvent {}
 
-class SignUp extends SignUpEvent {}
+class SignUpClickEvent extends SignUpEvent {}
 
 class ChangeNameEvent extends SignUpEvent {
   final String? name;

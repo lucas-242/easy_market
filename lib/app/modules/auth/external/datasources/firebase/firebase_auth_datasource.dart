@@ -106,9 +106,9 @@ class FirebaseAuthDatasource implements AuthDatasource {
           .then((credential) async => await _onCreateUser(credential, name))
           .catchError((error) => FirebaseSignUpFailure.fromCode(error.code));
     } on FirebaseException catch (error) {
-      FirebaseSignUpFailure.fromCode(error.code);
+      throw FirebaseSignUpFailure.fromCode(error.code);
     } catch (error) {
-      FirebaseSignUpFailure();
+      throw FirebaseSignUpFailure();
     }
   }
 

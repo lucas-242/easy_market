@@ -27,42 +27,49 @@ class _SignUpPageState extends State<SignUpPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<SignUpBloc>(
-      create: (_) => Modular.get<SignUpBloc>(),
-      child: Scaffold(
-        body: SafeArea(
-          child: SingleChildScrollView(
-            child: BlocListener<SignUpBloc, SignUpState>(
-              listenWhen: (previous, current) =>
-                  previous.status != current.status,
-              listener: (context, state) {
-                if (state.status == SignUpStatus.success) {
-                  Modular.to.pushReplacementNamed(AppRoutes.signIn);
-                } else if (state.status == SignUpStatus.error) {
-                  getCustomSnackBar(
-                    context: context,
-                    message: state.callbackMessage,
-                    type: SnackBarType.error,
-                  );
-                }
-              },
-              child: BlocBuilder<SignUpBloc, SignUpState>(
-                builder: (bloc, state) {
-                  return state.when(
-                    onState: (state) => _BuildScreen(
-                      formKey: _formKey,
-                      nameKey: _nameKey,
-                      confirmPasswordKey: _confirmPasswordKey,
-                      emailKey: _emailKey,
-                      passwordKey: _passwordKey,
-                    ),
-                    onLoading: () =>
-                        const Center(child: CircularProgressIndicator()),
-                  );
+    return Scaffold(
+      body: SafeArea(
+        child: CustomScrollView(
+          slivers: [
+            SliverFillRemaining(
+              hasScrollBody: false,
+              child: BlocListener<SignUpBloc, SignUpState>(
+                listenWhen: (previous, current) =>
+                    previous.status != current.status,
+                listener: (context, state) {
+                  if (state.status == SignUpStatus.success) {
+                    getCustomSnackBar(
+                      context: context,
+                      message: 'Account created successfully',
+                      type: SnackBarType.success,
+                    );
+                    Modular.to.pushReplacementNamed(AppRoutes.signIn);
+                  } else if (state.status == SignUpStatus.error) {
+                    getCustomSnackBar(
+                      context: context,
+                      message: state.callbackMessage,
+                      type: SnackBarType.error,
+                    );
+                  }
                 },
+                child: BlocBuilder<SignUpBloc, SignUpState>(
+                  builder: (bloc, state) {
+                    return state.when(
+                      onState: (state) => _BuildScreen(
+                        formKey: _formKey,
+                        nameKey: _nameKey,
+                        confirmPasswordKey: _confirmPasswordKey,
+                        emailKey: _emailKey,
+                        passwordKey: _passwordKey,
+                      ),
+                      onLoading: () =>
+                          const Center(child: CircularProgressIndicator()),
+                    );
+                  },
+                ),
               ),
-            ),
-          ),
+            )
+          ],
         ),
       ),
     );
@@ -130,7 +137,7 @@ class _Form extends StatelessWidget {
     final isValid = formKey.currentState!.validate();
     if (isValid) {
       final bloc = context.read<SignUpBloc>();
-      bloc.add(SignUp());
+      bloc.add(SignUpClickEvent());
     }
   }
 
