@@ -1,11 +1,10 @@
+// ignore_for_file: avoid_print
+
 import 'dart:async';
 
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:market_lists/app/core/errors/errors.dart';
-import 'package:market_lists/app/modules/auth/domain/entities/user_info.dart';
 import 'package:market_lists/app/modules/auth/domain/errors/errors.dart';
-import 'package:market_lists/app/modules/auth/external/datasources/firebase/errors/errors.dart';
 import 'package:market_lists/app/modules/auth/infra/models/user_model.dart';
 import 'package:market_lists/app/modules/auth/infra/repositories/auth_repository_impl.dart';
 import 'package:mockito/mockito.dart';

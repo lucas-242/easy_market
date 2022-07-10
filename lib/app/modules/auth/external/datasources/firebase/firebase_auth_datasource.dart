@@ -151,9 +151,7 @@ class FirebaseAuthDatasource implements AuthDatasource {
   UserModel _getUserModel(User user) {
     return UserModel(
       id: user.uid,
-      name: user.displayName != null || user.displayName!.isNotEmpty
-          ? user.displayName!
-          : user.email ?? '',
+      name: user.displayName ?? '',
       email: user.email,
       phone: user.phoneNumber,
       imageUrl: user.photoURL,
