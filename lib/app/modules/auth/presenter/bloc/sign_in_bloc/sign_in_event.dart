@@ -17,3 +17,5 @@ class ChangePasswordEvent extends SignInEvent {
 
   ChangePasswordEvent(this.password);
 }
+
+class ChangePasswordVisibilyEvent extends SignInEvent {}

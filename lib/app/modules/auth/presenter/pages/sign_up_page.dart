@@ -7,6 +7,7 @@ import 'package:market_lists/app/modules/auth/presenter/bloc/sign_up_bloc/sign_u
 import 'package:market_lists/app/modules/auth/presenter/widgets/show_password_button.dart';
 import 'package:market_lists/app/shared/themes/theme_utils.dart';
 import 'package:market_lists/app/shared/themes/typography_utils.dart';
+import 'package:market_lists/app/shared/utils/base_state_status.dart';
 import 'package:market_lists/app/shared/widgets/custom_elevated_button/custom_elevated_button.dart';
 import 'package:market_lists/app/shared/widgets/custom_snack_bar/custom_snack_bar.dart';
 import 'package:market_lists/app/shared/widgets/custom_text_form_field/custom_text_form_field.dart';
@@ -37,14 +38,15 @@ class _SignUpPageState extends State<SignUpPage> {
                 listenWhen: (previous, current) =>
                     previous.status != current.status,
                 listener: (context, state) {
-                  if (state.status == SignUpStatus.success) {
+                  if (state.status == BaseStateStatus.success) {
                     getCustomSnackBar(
                       context: context,
                       message: 'Account created successfully',
                       type: SnackBarType.success,
                     );
-                    Modular.to.popAndPushNamed(AppRoutes.lists);
-                  } else if (state.status == SignUpStatus.error) {
+                    Modular.to
+                        .pushNamedAndRemoveUntil(AppRoutes.lists, (_) => false);
+                  } else if (state.status == BaseStateStatus.error) {
                     getCustomSnackBar(
                       context: context,
                       message: state.callbackMessage,

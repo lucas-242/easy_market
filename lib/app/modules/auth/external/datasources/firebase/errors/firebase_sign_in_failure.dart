@@ -47,11 +47,11 @@ class FirebaseSignInFailure implements Failure {
         );
       case 'user-not-found':
         return FirebaseSignInFailure(
-          message: 'Email is not found, please create an account.',
+          message: 'Email was not found, please create an account.',
         );
       case 'wrong-password':
         return FirebaseSignInFailure(
-          message: 'Incorrect password, please try again.',
+          message: 'Incorrect email or password.',
         );
       default:
         return FirebaseSignInFailure();

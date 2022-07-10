@@ -3,15 +3,16 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:market_lists/app/modules/auth/domain/entities/sign_up_credentials.dart';
 import 'package:market_lists/app/modules/auth/domain/usecases/sign_up_with_email.dart';
-import 'package:market_lists/app/shared/utils/form_validator_util.dart';
+import 'package:market_lists/app/shared/utils/base_state_status.dart';
+import 'package:market_lists/app/shared/utils/form_validator.dart';
 
 part 'sign_up_event.dart';
 part 'sign_up_state.dart';
 
-class SignUpBloc extends Bloc<SignUpEvent, SignUpState> with FormValidatorUtil {
+class SignUpBloc extends Bloc<SignUpEvent, SignUpState> with FormValidator {
   final SignUpWithEmail signUpUsecase;
   SignUpBloc(this.signUpUsecase)
-      : super(SignUpState(status: SignUpStatus.initial)) {
+      : super(SignUpState(status: BaseStateStatus.initial)) {
     on<ChangeNameEvent>(_onChangeName);
     on<ChangeEmailEvent>(_onChangeEmail);
     on<ChangePasswordEvent>(_onChangePassword);
@@ -50,7 +51,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> with FormValidatorUtil {
 
   Future<void> _onSignUp(
       SignUpClickEvent event, Emitter<SignUpState> emit) async {
-    emit(state.copyWith(status: SignUpStatus.loading));
+    emit(state.copyWith(status: BaseStateStatus.loading));
     final credentials = SignUpCredentials(
       email: state.email!,
       password: state.password!,
@@ -61,17 +62,11 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> with FormValidatorUtil {
 
   Future<void> _signUp(
       SignUpCredentials credentials, Emitter<SignUpState> emit) async {
-    try {
-      final response = await signUpUsecase(credentials);
-      response.fold(
-        (l) => emit(state.copyWith(
-            status: SignUpStatus.error, callbackMessage: l.message)),
-        (r) => emit(SignUpState(status: SignUpStatus.success)),
-      );
-    } catch (error) {
-      emit(state.copyWith(
-          status: SignUpStatus.error,
-          callbackMessage: 'An unexpected error occurred'));
-    }
+    final response = await signUpUsecase(credentials);
+    response.fold(
+      (l) => emit(state.copyWith(
+          status: BaseStateStatus.error, callbackMessage: l.message)),
+      (r) => emit(SignUpState(status: BaseStateStatus.success)),
+    );
   }
 }

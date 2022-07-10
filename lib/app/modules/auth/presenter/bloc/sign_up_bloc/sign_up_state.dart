@@ -1,9 +1,7 @@
 part of 'sign_up_bloc.dart';
 
-enum SignUpStatus { initial, loading, error, success }
-
 class SignUpState {
-  final SignUpStatus status;
+  final BaseStateStatus status;
   final String? name;
   final String? email;
   final String? password;
@@ -24,7 +22,7 @@ class SignUpState {
   });
 
   SignUpState copyWith({
-    SignUpStatus? status,
+    BaseStateStatus? status,
     String? name,
     String? email,
     String? password,
@@ -51,9 +49,9 @@ class SignUpState {
     T Function()? onLoading,
   }) {
     switch (status) {
-      case SignUpStatus.loading:
+      case BaseStateStatus.loading:
         return onLoading!();
-      case SignUpStatus.error:
+      case BaseStateStatus.error:
         return onError != null ? onError(this) : onState(this);
       default:
         return onState(this);

@@ -4,8 +4,10 @@ import 'package:flutter_modular/flutter_modular.dart'
     hide ModularWatchExtension;
 import 'package:market_lists/app/core/app_routes.dart';
 import 'package:market_lists/app/modules/auth/presenter/bloc/sign_in_bloc/sign_in_bloc.dart';
+import 'package:market_lists/app/modules/auth/presenter/widgets/show_password_button.dart';
 import 'package:market_lists/app/shared/themes/theme_utils.dart';
 import 'package:market_lists/app/shared/themes/typography_utils.dart';
+import 'package:market_lists/app/shared/utils/base_state_status.dart';
 import 'package:market_lists/app/shared/widgets/custom_elevated_button/custom_elevated_button.dart';
 import 'package:market_lists/app/shared/widgets/custom_snack_bar/custom_snack_bar.dart';
 import 'package:market_lists/app/shared/widgets/custom_text_form_field/custom_text_form_field.dart';
@@ -18,7 +20,9 @@ class SignInPage extends StatefulWidget {
 }
 
 class _SignInPageState extends State<SignInPage> {
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
+  final _emailKey = GlobalKey<FormFieldState>();
+  final _passwordKey = GlobalKey<FormFieldState>();
 
   @override
   Widget build(BuildContext context) {
@@ -29,14 +33,16 @@ class _SignInPageState extends State<SignInPage> {
             SliverFillRemaining(
               hasScrollBody: false,
               child: BlocListener<SignInBloc, SignInState>(
+                listenWhen: (previous, current) =>
+                    previous.status != current.status,
                 listener: (context, state) {
-                  if (state is SuccessState) {
+                  if (state.status == BaseStateStatus.success) {
                     Modular.to
                         .pushNamedAndRemoveUntil(AppRoutes.lists, (_) => false);
-                  } else if (state is ErrorState) {
+                  } else if (state.status == BaseStateStatus.error) {
                     getCustomSnackBar(
                       context: context,
-                      message: state.message,
+                      message: state.callbackMessage,
                       type: SnackBarType.error,
                     );
                   }
@@ -44,7 +50,11 @@ class _SignInPageState extends State<SignInPage> {
                 child: BlocBuilder<SignInBloc, SignInState>(
                   builder: (bloc, state) {
                     return state.when(
-                      onState: (state) => _BuildScreen(formKey: _formKey),
+                      onState: (state) => _BuildScreen(
+                        formKey: _formKey,
+                        emailKey: _emailKey,
+                        passwordKey: _passwordKey,
+                      ),
                       onLoading: () =>
                           const Center(child: CircularProgressIndicator()),
                     );
@@ -61,8 +71,13 @@ class _SignInPageState extends State<SignInPage> {
 
 class _BuildScreen extends StatelessWidget {
   final GlobalKey<FormState> formKey;
+  final GlobalKey<FormFieldState> emailKey;
+  final GlobalKey<FormFieldState> passwordKey;
 
-  const _BuildScreen({required this.formKey});
+  const _BuildScreen(
+      {required this.formKey,
+      required this.emailKey,
+      required this.passwordKey});
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -70,7 +85,11 @@ class _BuildScreen extends StatelessWidget {
         const SizedBox(height: 25),
         _Header(),
         const SizedBox(height: 25),
-        _Form(formKey: formKey),
+        _Form(
+          formKey: formKey,
+          emailKey: emailKey,
+          passwordKey: passwordKey,
+        ),
         const TextButton(onPressed: null, child: Text('Forgot password?')),
         const SizedBox(height: 25),
         _SignUpButton(),
@@ -88,12 +107,17 @@ class _Header extends StatelessWidget {
 
 class _Form extends StatelessWidget {
   final GlobalKey<FormState> formKey;
+  final GlobalKey<FormFieldState> emailKey;
+  final GlobalKey<FormFieldState> passwordKey;
 
-  const _Form({required this.formKey});
+  const _Form(
+      {required this.formKey,
+      required this.emailKey,
+      required this.passwordKey});
 
-  void validateForm(BuildContext context) {
-    final form = formKey.currentState!;
-    if (form.validate()) {
+  void signIn(BuildContext context) {
+    final isValid = formKey.currentState!.validate();
+    if (isValid) {
       final bloc = context.read<SignInBloc>();
       bloc.add(SignInWithEmailEvent());
     }
@@ -108,12 +132,12 @@ class _Form extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const _EmailField(),
+            _EmailField(fieldKey: emailKey),
             const SizedBox(height: 10),
-            const _PasswordField(),
+            _PasswordField(fieldKey: passwordKey),
             const SizedBox(height: 15),
             CustomElevatedButton(
-              onTap: () => validateForm(context),
+              onTap: () => signIn(context),
               size: Size(context.width * 0.7, context.height * 0.067),
               text: 'Sign In',
             ),
@@ -125,7 +149,8 @@ class _Form extends StatelessWidget {
 }
 
 class _EmailField extends StatelessWidget {
-  const _EmailField({Key? key}) : super(key: key);
+  final GlobalKey<FormFieldState> fieldKey;
+  const _EmailField({Key? key, required this.fieldKey}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -133,10 +158,10 @@ class _EmailField extends StatelessWidget {
     const label = 'Email';
 
     return CustomTextFormField(
-      key: const Key('email_formField'),
+      textFormKey: fieldKey,
       labelText: label,
-      hintText: 'youremail@email.com',
       initialValue: bloc.state.email,
+      keyboardType: TextInputType.emailAddress,
       onChanged: (value) => bloc.add(ChangeEmailEvent(value)),
       validator: (value) => bloc.validateEmailField(fieldValue: value),
     );
@@ -144,7 +169,8 @@ class _EmailField extends StatelessWidget {
 }
 
 class _PasswordField extends StatelessWidget {
-  const _PasswordField({Key? key}) : super(key: key);
+  final GlobalKey<FormFieldState> fieldKey;
+  const _PasswordField({Key? key, required this.fieldKey}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -152,11 +178,19 @@ class _PasswordField extends StatelessWidget {
     const label = 'Password';
 
     return CustomTextFormField(
-      key: const Key('password_formField'),
+      textFormKey: fieldKey,
       labelText: label,
       initialValue: bloc.state.password,
+      keyboardType: TextInputType.visiblePassword,
+      textInputAction: TextInputAction.done,
+      obscureText: bloc.state.showPassword ? false : true,
+      suffix: ShowPasswordButton(
+        onPressed: () => bloc.add(ChangePasswordVisibilyEvent()),
+        showing: bloc.state.showPassword,
+      ),
       onChanged: (value) =>
           context.read<SignInBloc>().add(ChangePasswordEvent(value)),
+      validator: (value) => bloc.validatePasswordField(fieldValue: value),
     );
   }
 }

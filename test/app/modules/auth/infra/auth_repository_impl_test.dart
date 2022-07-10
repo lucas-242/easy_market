@@ -25,7 +25,7 @@ void main() {
       when(datasource.signInWithEmail(
               email: userToLogin.email, password: passwordToLogin))
           .thenAnswer((_) async => userToLogin);
-      final result = await repository.loginByEmail(
+      final result = await repository.signInByEmail(
           email: userToLogin.email, password: passwordToLogin);
 
       expect(result, Right(userToLogin));
@@ -35,7 +35,7 @@ void main() {
       when(datasource.signInWithEmail(
               email: userToLogin.email, password: passwordToLogin))
           .thenThrow((_) async => SignInWithEmailFailure('test'));
-      final result = await repository.loginByEmail(
+      final result = await repository.signInByEmail(
           email: userToLogin.email, password: passwordToLogin);
 
       expect(
@@ -139,14 +139,14 @@ void main() {
   group('Logout', () {
     test('Should logout', () async {
       when(datasource.signOut()).thenAnswer((_) async => unit);
-      final result = await repository.logout();
+      final result = await repository.signOut();
 
       expect(result, const Right(unit));
     });
 
     test('Should throw LogoutFailure', () async {
       when(datasource.signOut()).thenThrow((_) async => SignOutFailure('test'));
-      final result = await repository.logout();
+      final result = await repository.signOut();
 
       expect(result.leftMap((l) => l is SignOutFailure), const Left(true));
     });

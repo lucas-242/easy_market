@@ -41,7 +41,7 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<Either<Failure, UserInfo>> loginByEmail(
+  Future<Either<Failure, UserInfo>> signInByEmail(
       {required String email, required String password}) async {
     try {
       final user =
@@ -82,7 +82,7 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<Either<Failure, Unit>> logout() async {
+  Future<Either<Failure, Unit>> signOut() async {
     try {
       await datasource.signOut();
       return const Right(unit);

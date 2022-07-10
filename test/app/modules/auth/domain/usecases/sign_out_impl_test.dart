@@ -11,13 +11,13 @@ void main() {
   final usecase = SignOutImpl(repository);
 
   test('Should Loggout user', () async {
-    when(repository.logout()).thenAnswer((_) async => const Right(unit));
+    when(repository.signOut()).thenAnswer((_) async => const Right(unit));
     final result = await usecase();
     expect(result, const Right(unit));
   });
 
   test('Should throw LogoutFailure', () async {
-    when(repository.logout())
+    when(repository.signOut())
         .thenAnswer((_) async => left(SignOutFailure('Test')));
     final result = await usecase();
 

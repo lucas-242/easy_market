@@ -16,7 +16,7 @@ void main() {
     final loggedUser = user;
     final credentials = SignInCredentials.withEmailAndPassword(
         password: '123456', email: 'test@email.com');
-    when(repository.loginByEmail(
+    when(repository.signInByEmail(
             email: credentials.email, password: credentials.password))
         .thenAnswer((_) async => right(loggedUser));
     final result = await usecase(credentials);

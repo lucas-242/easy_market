@@ -38,11 +38,14 @@ class _ShoppingListsPageState extends State<ShoppingListsPage> {
         ),
         toolbarHeight: kToolbarHeight * 1.3,
         actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 12.0),
-            child: CircleAvatar(
-              backgroundColor: theme.colorScheme.tertiary,
-              child: const Icon(Icons.person),
+          InkWell(
+            onTap: () => Modular.get<AuthStore>().signOut(),
+            child: Padding(
+              padding: const EdgeInsets.only(right: 12.0),
+              child: CircleAvatar(
+                backgroundColor: theme.colorScheme.tertiary,
+                child: const Icon(Icons.person),
+              ),
             ),
           )
         ],

@@ -3,7 +3,7 @@ import 'package:market_lists/app/modules/auth/domain/entities/user_info.dart';
 import 'package:market_lists/app/core/errors/errors.dart';
 
 abstract class AuthRepository {
-  Future<Either<Failure, UserInfo>> loginByEmail({
+  Future<Either<Failure, UserInfo>> signInByEmail({
     required String email,
     required String password,
   });
@@ -14,7 +14,7 @@ abstract class AuthRepository {
   });
   Future<Either<Failure, UserInfo>> getCurrentUser();
   Stream<Either<Failure, UserInfo?>> listenCurrentUser();
-  Future<Either<Failure, Unit>> logout();
+  Future<Either<Failure, Unit>> signOut();
   Future<Either<Failure, Unit>> signUp({
     required String name,
     required String email,

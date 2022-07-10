@@ -1,6 +1,6 @@
 import 'package:market_lists/app/modules/auth/domain/utils/credentials_validator_util.dart';
 
-mixin FormValidatorUtil {
+mixin FormValidator {
   String? validateNameField({
     required String? fieldValue,
     String? fieldName = 'Name',

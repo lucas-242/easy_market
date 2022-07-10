@@ -22,7 +22,7 @@ class SignInWithEmailImpl implements SignInWithEmail {
   Future<Either<Failure, UserInfo>> call(SignInCredentials credentials) async {
     final validateResult = _validateCredentials(credentials);
     if (validateResult != null) return validateResult;
-    return await _loginByEmail(credentials);
+    return await _signInByEmail(credentials);
   }
 
   Either<Failure, UserInfo>? _validateCredentials(
@@ -38,9 +38,9 @@ class SignInWithEmailImpl implements SignInWithEmail {
     return null;
   }
 
-  Future<Either<Failure, UserInfo>> _loginByEmail(
+  Future<Either<Failure, UserInfo>> _signInByEmail(
       SignInCredentials credentials) {
-    return repository.loginByEmail(
+    return repository.signInByEmail(
       email: credentials.email,
       password: credentials.password,
     );

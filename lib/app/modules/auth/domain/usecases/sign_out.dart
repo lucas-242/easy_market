@@ -16,6 +16,6 @@ class SignOutImpl extends SignOut {
 
   @override
   Future<Either<Failure, Unit>> call() async {
-    return await repository.logout();
+    return await repository.signOut();
   }
 }

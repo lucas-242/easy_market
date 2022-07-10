@@ -42,7 +42,7 @@ class MockAuthRepository extends _i1.Mock implements _i5.AuthRepository {
   }
 
   @override
-  _i4.Future<_i2.Either<_i6.Failure, _i7.UserInfo>> loginByEmail(
+  _i4.Future<_i2.Either<_i6.Failure, _i7.UserInfo>> signInByEmail(
           {String? email, String? password}) =>
       (super.noSuchMethod(
               Invocation.method(
@@ -79,7 +79,7 @@ class MockAuthRepository extends _i1.Mock implements _i5.AuthRepository {
                   Stream<_i2.Either<_i6.Failure, _i7.UserInfo?>>.empty())
           as _i4.Stream<_i2.Either<_i6.Failure, _i7.UserInfo?>>);
   @override
-  _i4.Future<_i2.Either<_i6.Failure, _i2.Unit>> logout() =>
+  _i4.Future<_i2.Either<_i6.Failure, _i2.Unit>> signOut() =>
       (super.noSuchMethod(Invocation.method(#logout, []),
               returnValue: Future<_i2.Either<_i6.Failure, _i2.Unit>>.value(
                   _FakeEither_0<_i6.Failure, _i2.Unit>()))
