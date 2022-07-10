@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:market_lists/app/core/app_routes.dart';
+import 'package:market_lists/app/core/stores/auth_store.dart';
 import 'package:market_lists/app/modules/shopping_list/presenter/bloc/shopping_list_bloc.dart';
 import 'package:market_lists/app/modules/shopping_list/presenter/widgets/shopping_list_card.dart';
 import 'package:market_lists/app/shared/themes/typography_utils.dart';
@@ -13,10 +14,13 @@ class ShoppingListsPage extends StatefulWidget {
 }
 
 class _ShoppingListsPageState extends State<ShoppingListsPage> {
+  late final AuthStore _auth;
+
   @override
   void initState() {
     super.initState();
-    var bloc = Modular.get<ShoppingListBloc>();
+    _auth = Modular.get<AuthStore>();
+    final bloc = Modular.get<ShoppingListBloc>();
     bloc.add(ListenShoppingListsEvent());
   }
 
@@ -28,8 +32,9 @@ class _ShoppingListsPageState extends State<ShoppingListsPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Welcome John',
+          'Welcome  ${_auth.user!.name}',
           style: context.titleLarge,
+          overflow: TextOverflow.visible,
         ),
         toolbarHeight: kToolbarHeight * 1.3,
         actions: [

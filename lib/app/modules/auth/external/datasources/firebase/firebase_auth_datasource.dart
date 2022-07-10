@@ -23,6 +23,20 @@ class FirebaseAuthDatasource implements AuthDatasource {
   }
 
   @override
+  Stream<UserModel?> listenCurrentUser() {
+    try {
+      return auth
+          .userChanges()
+          .handleError((error) => throw FirebaseSignInFailure())
+          .map((user) => user != null ? _getUserModel(user) : null);
+    } on FirebaseAuthException catch (error) {
+      throw FirebaseSignInFailure.fromCode(error.code);
+    } catch (error) {
+      throw FirebaseSignInFailure();
+    }
+  }
+
+  @override
   Future<UserModel> signInWithEmail(
       {required String email, required String password}) async {
     try {
@@ -100,7 +114,6 @@ class FirebaseAuthDatasource implements AuthDatasource {
     required String password,
   }) async {
     try {
-      await _deleteUserIfNotInDatabase(email);
       await auth
           .createUserWithEmailAndPassword(email: email, password: password)
           .then((credential) async => await _onCreateUser(credential, name))
@@ -109,27 +122,6 @@ class FirebaseAuthDatasource implements AuthDatasource {
       throw FirebaseSignUpFailure.fromCode(error.code);
     } catch (error) {
       throw FirebaseSignUpFailure();
-    }
-  }
-
-  Future<void> _deleteUserIfNotInDatabase(String email) async {
-    final ids = await _checkUserExistsOnDatabase(email);
-    if (ids.isNotEmpty) {
-      await _deleteUsersInDatabase(ids);
-    }
-  }
-
-  Future<List<String>> _checkUserExistsOnDatabase(String email) async {
-    final result = await firestore
-        .collection(usersTable)
-        .where('email', isEqualTo: email)
-        .get();
-    return result.docs.map((e) => e.id).toList();
-  }
-
-  Future<void> _deleteUsersInDatabase(List<String> ids) async {
-    for (var id in ids) {
-      await firestore.collection(usersTable).doc(id).delete();
     }
   }
 
@@ -159,7 +151,9 @@ class FirebaseAuthDatasource implements AuthDatasource {
   UserModel _getUserModel(User user) {
     return UserModel(
       id: user.uid,
-      name: user.displayName!,
+      name: user.displayName != null || user.displayName!.isNotEmpty
+          ? user.displayName!
+          : user.email ?? '',
       email: user.email,
       phone: user.phoneNumber,
       imageUrl: user.photoURL,

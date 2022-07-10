@@ -145,6 +145,26 @@ void main() {
     });
   });
 
+  group('Listen current user', () {
+    test('Should return current user', () {
+      setDatasource(signedIn: true);
+      final result = datasource.listenCurrentUser();
+
+      result.listen((event) {
+        expectResultIsUserModel(event!);
+      });
+    });
+
+    test('Should return null when user is not logged in', () {
+      setDatasource();
+      final result = datasource.listenCurrentUser();
+
+      result.listen((event) {
+        expect(event, isNull);
+      });
+    });
+  });
+
   group('Logout', () {
     test('Should logout', () async {
       setDatasource(signedIn: true);

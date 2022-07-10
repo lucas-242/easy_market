@@ -5,6 +5,7 @@ import 'package:market_lists/app/core/app_routes.dart';
 import 'package:modular_bloc_bind/modular_bloc_bind.dart';
 
 import 'domain/usecases/get_current_user.dart';
+import 'domain/usecases/listen_current_user.dart';
 import 'domain/usecases/sign_in_with_email.dart';
 import 'domain/usecases/sign_in_with_phone.dart';
 import 'domain/usecases/sign_out.dart';
@@ -21,6 +22,7 @@ import 'presenter/pages/welcome_page.dart';
 class AuthModule extends Module {
   static List<Bind> exportedBinds = [
     $GetCurrentUserImpl,
+    $ListenCurrentUserImpl,
     $SignOutImpl,
     $AuthRepositoryImpl,
     BindInject(

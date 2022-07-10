@@ -13,6 +13,7 @@ abstract class AuthRepository {
     required String code,
   });
   Future<Either<Failure, UserInfo>> getCurrentUser();
+  Stream<Either<Failure, UserInfo?>> listenCurrentUser();
   Future<Either<Failure, Unit>> logout();
   Future<Either<Failure, Unit>> signUp({
     required String name,

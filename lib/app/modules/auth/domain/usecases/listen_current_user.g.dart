@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'auth_store.dart';
+part of 'listen_current_user.dart';
 
 // **************************************************************************
 // InjectionGenerator
 // **************************************************************************
 
-final $AuthStore = BindInject(
-  (i) => AuthStore(i<ListenCurrentUser>(), i<GetCurrentUser>(), i<SignOut>()),
-  isSingleton: true,
-  isLazy: false,
+final $ListenCurrentUserImpl = BindInject(
+  (i) => ListenCurrentUserImpl(i<AuthRepository>()),
+  isSingleton: false,
+  isLazy: true,
 );

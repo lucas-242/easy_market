@@ -1,6 +1,12 @@
+import 'dart:async';
+
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:market_lists/app/core/errors/errors.dart';
+import 'package:market_lists/app/modules/auth/domain/entities/user_info.dart';
 import 'package:market_lists/app/modules/auth/domain/errors/errors.dart';
+import 'package:market_lists/app/modules/auth/external/datasources/firebase/errors/errors.dart';
+import 'package:market_lists/app/modules/auth/infra/models/user_model.dart';
 import 'package:market_lists/app/modules/auth/infra/repositories/auth_repository_impl.dart';
 import 'package:mockito/mockito.dart';
 
@@ -11,6 +17,7 @@ void main() {
   final datasource = MockAuthDatasource();
   final repository = AuthRepositoryImpl(datasource);
   final userToLogin = userModel;
+  final userStream = MockStream<UserModel?>();
 
   group('Login by Email', () {
     const passwordToLogin = '123456';
@@ -83,20 +90,50 @@ void main() {
   });
 
   group('Get Logged User', () {
-    test('Should Get logged user', () async {
+    test('Should Get current user', () async {
       when(datasource.getCurrentUser()).thenAnswer((_) async => userToLogin);
       final result = await repository.getCurrentUser();
 
       expect(result, Right(userToLogin));
     });
 
-    test('Should throw GetLoggedUserFailure', () async {
+    test('Should throw GetCurrentUserFailure', () async {
       when(datasource.getCurrentUser())
           .thenThrow((_) async => GetCurrentUserFailure('test'));
       final result = await repository.getCurrentUser();
 
       expect(
           result.leftMap((l) => l is GetCurrentUserFailure), const Left(true));
+    });
+  });
+
+  group('Listen Current User', () {
+    test('Should listen current user', () {
+      final user = userModel;
+      when(datasource.listenCurrentUser()).thenAnswer((_) => userStream);
+      when(userStream.listen(any)).thenAnswer((invocation) {
+        return Stream.value(user).listen(invocation.positionalArguments.first);
+      });
+      final result = repository.listenCurrentUser();
+
+      result.listen((event) {
+        event.fold((l) => print(l), (r) {
+          expect(r, user);
+        });
+      });
+    });
+
+    test('Should throw GetCurrentUserFailure', () {
+      when(datasource.listenCurrentUser())
+          .thenThrow((_) => GetCurrentUserFailure('test'));
+
+      final result = repository.listenCurrentUser();
+
+      expect(result, isNotNull);
+      result.listen((event) {
+        expect(
+            event.leftMap((l) => l is GetCurrentUserFailure), const Left(true));
+      });
     });
   });
 

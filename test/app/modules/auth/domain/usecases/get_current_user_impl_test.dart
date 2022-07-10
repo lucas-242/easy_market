@@ -4,8 +4,8 @@ import 'package:market_lists/app/modules/auth/domain/errors/errors.dart';
 import 'package:market_lists/app/modules/auth/domain/usecases/get_current_user.dart';
 import 'package:mockito/mockito.dart';
 
-import '../auth_mock_test.dart';
-import '../auth_mock_test.mocks.dart';
+import '../../auth_mock_test.dart';
+import '../../auth_mock_test.mocks.dart';
 
 void main() {
   final repository = MockAuthRepository();

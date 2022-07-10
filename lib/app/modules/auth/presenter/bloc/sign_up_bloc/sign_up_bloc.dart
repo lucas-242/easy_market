@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:market_lists/app/core/errors/errors.dart';
 import 'package:market_lists/app/modules/auth/domain/entities/sign_up_credentials.dart';
 import 'package:market_lists/app/modules/auth/domain/usecases/sign_up_with_email.dart';
 import 'package:market_lists/app/shared/utils/form_validator_util.dart';

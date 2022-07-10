@@ -11,6 +11,7 @@ abstract class AuthDatasource {
     required String code,
   });
   Future<UserModel> getCurrentUser();
+  Stream<UserModel?> listenCurrentUser();
   Future<void> signOut();
   Future<void> signUp({
     required String name,

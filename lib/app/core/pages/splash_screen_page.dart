@@ -5,12 +5,12 @@ import 'package:market_lists/app/core/stores/auth_store.dart';
 
 class SplashScreenPage extends StatelessWidget {
   SplashScreenPage({Key? key}) : super(key: key) {
-    var isLogged = false;
-    Modular.get<AuthStore>().getCurrentUser().then((result) {
-      Future.delayed(const Duration(seconds: 3));
-      isLogged = result;
-    }).then((value) {
-      if (isLogged) {
+    _checkUserIsLogged();
+  }
+
+  void _checkUserIsLogged() {
+    Modular.get<AuthStore>().listenCurrentUser().listen((user) {
+      if (user != null) {
         Modular.to.pushNamedAndRemoveUntil(AppRoutes.lists, (_) => false);
       } else {
         Modular.to.pushNamedAndRemoveUntil(AppRoutes.login, (_) => false);

@@ -26,6 +26,21 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
+  Stream<Either<Failure, UserInfo?>> listenCurrentUser() {
+    try {
+      return datasource
+          .listenCurrentUser()
+          .handleError((error) => Left(GetCurrentUserFailure(error.message)))
+          .map((user) => Right(user));
+    } on Failure catch (error) {
+      return Stream.value(Left(GetCurrentUserFailure(error.message)));
+    } catch (error) {
+      return Stream.value(
+          Left(GetCurrentUserFailure("Error to get logged user")));
+    }
+  }
+
+  @override
   Future<Either<Failure, UserInfo>> loginByEmail(
       {required String email, required String password}) async {
     try {
