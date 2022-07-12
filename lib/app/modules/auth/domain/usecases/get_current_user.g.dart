@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'firebase_shopping_list_datasource.dart';
+part of 'get_current_user.dart';
 
 // **************************************************************************
 // InjectionGenerator
 // **************************************************************************
 
-final $FirebaseShoppingListDatasource = BindInject(
-  (i) => FirebaseShoppingListDatasource(i<FirebaseFirestore>()),
+final $GetCurrentUserImpl = BindInject(
+  (i) => GetCurrentUserImpl(i<AuthRepository>()),
   isSingleton: false,
   isLazy: true,
 );

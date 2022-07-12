@@ -28,6 +28,9 @@ void main() {
     });
   });
 
+  //TODO: Create Errors to ShoppingList module
+  //TODO: Fix shoppingList Model creating a new ShoppingList model to firebase using Timestamp to date
+
   group('Get ShoppingList', () {
     test('Should get all ShoppingLists', () async {
       await _createMockShoppingList();

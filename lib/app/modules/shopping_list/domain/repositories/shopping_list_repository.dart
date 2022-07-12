@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:market_lists/app/modules/shopping_list/domain/entities/shopping_list.dart';
-import 'package:market_lists/app/modules/shopping_list/domain/errors/errors.dart';
+import 'package:market_lists/app/core/errors/errors.dart';
 
 abstract class ShoppingListRepository {
   Future<Either<Failure, List<ShoppingList>>> getShoppingLists();

@@ -1,11 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:market_lists/app/core/app_routes.dart';
+import 'package:market_lists/app/core/stores/auth_store.dart';
 
 class SplashScreenPage extends StatelessWidget {
   SplashScreenPage({Key? key}) : super(key: key) {
-    Future.delayed(const Duration(seconds: 3)).then((value) =>
-        Modular.to.pushNamedAndRemoveUntil(AppRoutes.lists, (_) => false));
+    _checkUserIsLogged();
+  }
+
+  void _checkUserIsLogged() {
+    Modular.get<AuthStore>().listenCurrentUser().listen((user) {
+      if (user != null) {
+        Modular.to.pushNamedAndRemoveUntil(AppRoutes.lists, (_) => false);
+      } else {
+        Modular.to.pushNamedAndRemoveUntil(AppRoutes.login, (_) => false);
+      }
+    });
   }
 
   @override

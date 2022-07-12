@@ -58,8 +58,8 @@ class ShoppingListModel extends ShoppingList {
       items: map['items'] != null
           ? List<ItemModel>.from(map['items']?.map((x) => ItemModel.fromMap(x)))
           : [],
-      createdAt: DateTime.fromMillisecondsSinceEpoch(map['createdAt']),
-      updatedAt: DateTime.fromMillisecondsSinceEpoch(map['updatedAt']),
+      createdAt: map['createdAt'].toDate(),
+      updatedAt: map['updatedAt'].toDate(),
     );
   }
 
