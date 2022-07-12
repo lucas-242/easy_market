@@ -21,7 +21,7 @@ class AuthRepositoryImpl implements AuthRepository {
     } on Failure catch (error) {
       return Left(GetCurrentUserFailure(error.message));
     } catch (error) {
-      return Left(GetCurrentUserFailure("Error to get logged user"));
+      return Left(GetCurrentUserFailure("Error to get logged user."));
     }
   }
 
@@ -36,7 +36,7 @@ class AuthRepositoryImpl implements AuthRepository {
       return Stream.value(Left(GetCurrentUserFailure(error.message)));
     } catch (error) {
       return Stream.value(
-          Left(GetCurrentUserFailure("Error to get logged user")));
+          Left(GetCurrentUserFailure("Error to get logged user.")));
     }
   }
 
@@ -50,7 +50,7 @@ class AuthRepositoryImpl implements AuthRepository {
     } on Failure catch (error) {
       return Left(SignInWithEmailFailure(error.message));
     } catch (error) {
-      return Left(SignInWithEmailFailure("Error to login with email"));
+      return Left(SignInWithEmailFailure("Error to login with email."));
     }
   }
 
@@ -63,7 +63,7 @@ class AuthRepositoryImpl implements AuthRepository {
     } on Failure catch (error) {
       return Left(SignInWithPhoneFailure(error.message));
     } catch (error) {
-      return Left(SignInWithPhoneFailure("Error to login with phone"));
+      return Left(SignInWithPhoneFailure("Error to login with phone."));
     }
   }
 
@@ -77,7 +77,7 @@ class AuthRepositoryImpl implements AuthRepository {
     } on Failure catch (error) {
       return Left(SignInWithPhoneFailure(error.message));
     } catch (error) {
-      return Left(SignInWithPhoneFailure("Error to verify phone code"));
+      return Left(SignInWithPhoneFailure("Error to verify phone code."));
     }
   }
 
@@ -89,7 +89,7 @@ class AuthRepositoryImpl implements AuthRepository {
     } on Failure catch (error) {
       return Left(SignOutFailure(error.message));
     } catch (error) {
-      return Left(SignOutFailure("Error to logout"));
+      return Left(SignOutFailure("Error to logout."));
     }
   }
 
@@ -109,7 +109,37 @@ class AuthRepositoryImpl implements AuthRepository {
     } on Failure catch (error) {
       return Left(SignUpFailure(error.message));
     } catch (error) {
-      return Left(SignUpFailure("Error to sign up"));
+      return Left(SignUpFailure("Error to sign up."));
+    }
+  }
+
+  @override
+  Future<Either<Failure, Unit>> sendPasswordResetEmail({
+    required String email,
+  }) async {
+    try {
+      await datasource.sendPasswordResetEmail(email: email);
+      return const Right(unit);
+    } on Failure catch (error) {
+      return Left(ResetPasswordFailure(error.message));
+    } catch (error) {
+      return Left(ResetPasswordFailure("Error to reset password."));
+    }
+  }
+
+  @override
+  Future<Either<Failure, Unit>> confirmPasswordReset({
+    required String code,
+    required String newPassword,
+  }) async {
+    try {
+      await datasource.confirmPasswordReset(
+          code: code, newPassword: newPassword);
+      return const Right(unit);
+    } on Failure catch (error) {
+      return Left(ResetPasswordFailure(error.message));
+    } catch (error) {
+      return Left(ResetPasswordFailure("Error to reset password."));
     }
   }
 }

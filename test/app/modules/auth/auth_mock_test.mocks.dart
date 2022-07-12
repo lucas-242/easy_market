@@ -46,7 +46,7 @@ class MockAuthRepository extends _i1.Mock implements _i5.AuthRepository {
           {String? email, String? password}) =>
       (super.noSuchMethod(
               Invocation.method(
-                  #loginByEmail, [], {#email: email, #password: password}),
+                  #signInByEmail, [], {#email: email, #password: password}),
               returnValue: Future<_i2.Either<_i6.Failure, _i7.UserInfo>>.value(
                   _FakeEither_0<_i6.Failure, _i7.UserInfo>()))
           as _i4.Future<_i2.Either<_i6.Failure, _i7.UserInfo>>);
@@ -67,6 +67,23 @@ class MockAuthRepository extends _i1.Mock implements _i5.AuthRepository {
                   _FakeEither_0<_i6.Failure, _i7.UserInfo>()))
           as _i4.Future<_i2.Either<_i6.Failure, _i7.UserInfo>>);
   @override
+  _i4.Future<_i2.Either<_i6.Failure, _i2.Unit>> sendPasswordResetEmail(
+          {String? email}) =>
+      (super.noSuchMethod(
+              Invocation.method(#sendPasswordResetEmail, [], {#email: email}),
+              returnValue: Future<_i2.Either<_i6.Failure, _i2.Unit>>.value(
+                  _FakeEither_0<_i6.Failure, _i2.Unit>()))
+          as _i4.Future<_i2.Either<_i6.Failure, _i2.Unit>>);
+  @override
+  _i4.Future<_i2.Either<_i6.Failure, _i2.Unit>> confirmPasswordReset(
+          {String? code, String? newPassword}) =>
+      (super.noSuchMethod(
+              Invocation.method(#confirmPasswordReset, [],
+                  {#code: code, #newPassword: newPassword}),
+              returnValue: Future<_i2.Either<_i6.Failure, _i2.Unit>>.value(
+                  _FakeEither_0<_i6.Failure, _i2.Unit>()))
+          as _i4.Future<_i2.Either<_i6.Failure, _i2.Unit>>);
+  @override
   _i4.Future<_i2.Either<_i6.Failure, _i7.UserInfo>> getCurrentUser() =>
       (super.noSuchMethod(Invocation.method(#getCurrentUser, []),
               returnValue: Future<_i2.Either<_i6.Failure, _i7.UserInfo>>.value(
@@ -80,7 +97,7 @@ class MockAuthRepository extends _i1.Mock implements _i5.AuthRepository {
           as _i4.Stream<_i2.Either<_i6.Failure, _i7.UserInfo?>>);
   @override
   _i4.Future<_i2.Either<_i6.Failure, _i2.Unit>> signOut() =>
-      (super.noSuchMethod(Invocation.method(#logout, []),
+      (super.noSuchMethod(Invocation.method(#signOut, []),
               returnValue: Future<_i2.Either<_i6.Failure, _i2.Unit>>.value(
                   _FakeEither_0<_i6.Failure, _i2.Unit>()))
           as _i4.Future<_i2.Either<_i6.Failure, _i2.Unit>>);
@@ -124,6 +141,19 @@ class MockAuthDatasource extends _i1.Mock implements _i8.AuthDatasource {
                   {#verificationId: verificationId, #code: code}),
               returnValue: Future<_i3.UserModel>.value(_FakeUserModel_1()))
           as _i4.Future<_i3.UserModel>);
+  @override
+  _i4.Future<void> sendPasswordResetEmail({String? email}) =>
+      (super.noSuchMethod(
+          Invocation.method(#sendPasswordResetEmail, [], {#email: email}),
+          returnValue: Future<void>.value(),
+          returnValueForMissingStub: Future<void>.value()) as _i4.Future<void>);
+  @override
+  _i4.Future<void> confirmPasswordReset({String? code, String? newPassword}) =>
+      (super.noSuchMethod(
+          Invocation.method(#confirmPasswordReset, [],
+              {#code: code, #newPassword: newPassword}),
+          returnValue: Future<void>.value(),
+          returnValueForMissingStub: Future<void>.value()) as _i4.Future<void>);
   @override
   _i4.Future<_i3.UserModel> getCurrentUser() =>
       (super.noSuchMethod(Invocation.method(#getCurrentUser, []),

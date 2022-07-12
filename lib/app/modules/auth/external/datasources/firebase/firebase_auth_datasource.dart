@@ -159,4 +159,27 @@ class FirebaseAuthDatasource implements AuthDatasource {
       updatedAt: user.metadata.creationTime,
     );
   }
+
+  @override
+  Future<void> sendPasswordResetEmail({required String email}) async {
+    try {
+      await auth.sendPasswordResetEmail(email: email);
+    } on FirebaseException catch (error) {
+      throw FirebaseSignUpFailure.fromCode(error.code);
+    } catch (error) {
+      throw FirebaseSignUpFailure();
+    }
+  }
+
+  @override
+  Future<void> confirmPasswordReset(
+      {required String code, required String newPassword}) async {
+    try {
+      await auth.confirmPasswordReset(code: code, newPassword: newPassword);
+    } on FirebaseException catch (error) {
+      throw FirebaseSignUpFailure.fromCode(error.code);
+    } catch (error) {
+      throw FirebaseSignUpFailure();
+    }
+  }
 }

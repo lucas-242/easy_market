@@ -46,6 +46,21 @@ class MockCustomFirebaseAuth extends Mock implements FirebaseAuth {
     });
     return;
   }
+
+  @override
+  Future<void> sendPasswordResetEmail(
+          {String? email, ActionCodeSettings? actionCodeSettings}) =>
+      super.noSuchMethod(
+          Invocation.method(#sendPasswordResetEmail, null,
+              {#email: email, #actionCodeSettings: actionCodeSettings}),
+          returnValue: Future.value());
+
+  @override
+  Future<void> confirmPasswordReset({String? code, String? newPassword}) =>
+      super.noSuchMethod(
+          Invocation.method(#confirmPasswordReset, null,
+              {#code: code, #newPassword: newPassword}),
+          returnValue: Future.value());
 }
 
 final mockPhoneAuthCredential = MockPhoneAuthCredential();
@@ -92,6 +107,7 @@ void main() {
   group('Sign in by phone', () {
     setUp(() {
       final auth = MockCustomFirebaseAuth();
+      final database = FakeFirebaseFirestore();
       datasource = FirebaseAuthDatasource(auth, database);
       when(auth.signInWithCredential(any))
           .thenAnswer((_) async => mockUserCredential);
@@ -168,7 +184,7 @@ void main() {
   group('Logout', () {
     test('Should logout', () async {
       setDatasource(signedIn: true);
-      expect(datasource.signOut(), completes);
+      expectLater(datasource.signOut(), completes);
     });
   });
 
@@ -176,12 +192,39 @@ void main() {
     test('Should Sign up', () async {
       setDatasource(signedIn: false);
 
-      expect(
+      expectLater(
           datasource.signUp(
             email: userModel.email,
             name: userModel.name,
             password: '123456',
           ),
+          completes);
+    });
+  });
+
+  group('Reset password', () {
+    final auth = MockCustomFirebaseAuth();
+    final database = FakeFirebaseFirestore();
+    datasource = FirebaseAuthDatasource(auth, database);
+
+    test('Should send reset password email', () async {
+      when(auth.sendPasswordResetEmail(
+              email: anyNamed('email'),
+              actionCodeSettings: anyNamed('actionCodeSettings')))
+          .thenAnswer((_) async => Future);
+
+      expectLater(
+          datasource.sendPasswordResetEmail(email: userModel.email), completes);
+    });
+
+    test('Should confirm reset password', () async {
+      when(auth.confirmPasswordReset(
+              code: anyNamed('code'), newPassword: anyNamed('newPassword')))
+          .thenAnswer((_) async => Future);
+
+      expectLater(
+          datasource.confirmPasswordReset(
+              code: 'abc123', newPassword: '123456'),
           completes);
     });
   });

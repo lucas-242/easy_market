@@ -12,6 +12,11 @@ abstract class AuthRepository {
     required String verificationId,
     required String code,
   });
+  Future<Either<Failure, Unit>> sendPasswordResetEmail({required String email});
+  Future<Either<Failure, Unit>> confirmPasswordReset({
+    required String code,
+    required String newPassword,
+  });
   Future<Either<Failure, UserInfo>> getCurrentUser();
   Stream<Either<Failure, UserInfo?>> listenCurrentUser();
   Future<Either<Failure, Unit>> signOut();

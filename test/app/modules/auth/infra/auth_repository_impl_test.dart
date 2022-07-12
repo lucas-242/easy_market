@@ -183,4 +183,54 @@ void main() {
       expect(result.leftMap((l) => l is SignUpFailure), const Left(true));
     });
   });
+
+  group('Send reset password email', () {
+    test('Should send reset password email', () async {
+      when(datasource.sendPasswordResetEmail(
+        email: anyNamed('email'),
+      )).thenAnswer((_) async => unit);
+      final result =
+          await repository.sendPasswordResetEmail(email: userToLogin.email);
+
+      expect(result, const Right(unit));
+    });
+
+    test('Should throw ResetPasswordFailure', () async {
+      when(datasource.sendPasswordResetEmail(
+        email: anyNamed('email'),
+      )).thenThrow((_) async => ResetPasswordFailure('test'));
+      final result =
+          await repository.sendPasswordResetEmail(email: userToLogin.email);
+
+      expect(
+          result.leftMap((l) => l is ResetPasswordFailure), const Left(true));
+    });
+  });
+
+  group('Confirm reset password', () {
+    test('Should confirm reset password', () async {
+      when(datasource.confirmPasswordReset(
+        code: anyNamed('code'),
+        newPassword: anyNamed('newPassword'),
+      )).thenAnswer((_) async => unit);
+
+      final result = await repository.confirmPasswordReset(
+          code: '123', newPassword: '123456');
+
+      expect(result, const Right(unit));
+    });
+
+    test('Should throw ResetPasswordFailure', () async {
+      when(datasource.confirmPasswordReset(
+        code: anyNamed('code'),
+        newPassword: anyNamed('newPassword'),
+      )).thenThrow((_) async => ResetPasswordFailure('test'));
+
+      final result = await repository.confirmPasswordReset(
+          code: '123', newPassword: '123456');
+
+      expect(
+          result.leftMap((l) => l is ResetPasswordFailure), const Left(true));
+    });
+  });
 }

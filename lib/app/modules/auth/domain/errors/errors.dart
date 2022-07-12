@@ -35,6 +35,13 @@ class SignUpFailure extends Failure {
   SignUpFailure(this.message);
 }
 
+class ResetPasswordFailure extends Failure {
+  @override
+  final String message;
+
+  ResetPasswordFailure(this.message);
+}
+
 abstract class AuthErrorMessages {
   static String get emailIsInvalid => 'Email is invalid';
   static String get passwordIsInvalid => 'Password is invalid';

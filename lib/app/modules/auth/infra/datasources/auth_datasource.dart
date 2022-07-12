@@ -10,6 +10,11 @@ abstract class AuthDatasource {
     required String verificationId,
     required String code,
   });
+  Future<void> sendPasswordResetEmail({required String email});
+  Future<void> confirmPasswordReset({
+    required String code,
+    required String newPassword,
+  });
   Future<UserModel> getCurrentUser();
   Stream<UserModel?> listenCurrentUser();
   Future<void> signOut();
