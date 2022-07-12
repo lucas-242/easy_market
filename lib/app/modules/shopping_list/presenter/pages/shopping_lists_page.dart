@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:market_lists/app/core/app_routes.dart';
+import 'package:market_lists/app/core/routes/app_routes.dart';
 import 'package:market_lists/app/core/stores/auth_store.dart';
 import 'package:market_lists/app/modules/shopping_list/presenter/bloc/shopping_list_bloc.dart';
 import 'package:market_lists/app/modules/shopping_list/presenter/widgets/shopping_list_card.dart';

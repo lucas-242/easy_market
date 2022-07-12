@@ -5,6 +5,8 @@ import 'package:market_lists/app/modules/auth/domain/entities/reset_password_cre
 import 'package:market_lists/app/modules/auth/domain/errors/errors.dart';
 import 'package:market_lists/app/modules/auth/domain/repositories/auth_repository.dart';
 
+part 'send_password_reset_email.g.dart';
+
 abstract class SendPasswordResetEmail {
   Future<Either<Failure, Unit>> call(ResetPasswordCredentials credentials);
 }

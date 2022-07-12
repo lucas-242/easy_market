@@ -9,12 +9,12 @@ part 'sign_in_event.dart';
 part 'sign_in_state.dart';
 
 class SignInBloc extends Bloc<SignInEvent, SignInState> with FormValidator {
-  final SignInWithEmail signInWithEmailUsecase;
-  final SignInWithPhone signInWithPhoneUsecase;
+  final SignInWithEmail signInWithEmail;
+  final SignInWithPhone signInWithPhone;
 
   SignInBloc(
-    this.signInWithEmailUsecase,
-    this.signInWithPhoneUsecase,
+    this.signInWithEmail,
+    this.signInWithPhone,
   ) : super(const SignInState(status: BaseStateStatus.initial)) {
     on<ChangeEmailEvent>(_onChangeEmail);
     on<ChangePasswordEvent>(_onChangePassword);
@@ -40,7 +40,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> with FormValidator {
       SignInWithEmailEvent event, Emitter<SignInState> emit) async {
     emit(state.copyWith(status: BaseStateStatus.loading));
 
-    final result = await signInWithEmailUsecase(
+    final result = await signInWithEmail(
       SignInCredentials.withEmailAndPassword(
         email: state.email!,
         password: state.password!,
@@ -57,7 +57,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> with FormValidator {
   Future<void> _onSignInPhone(
       SignInWithPhoneEvent event, Emitter<SignInState> emit) async {
     emit(state.copyWith(status: BaseStateStatus.loading));
-    final result = await signInWithPhoneUsecase(
+    final result = await signInWithPhone(
       SignInCredentials.withPhone(phone: state.phone!),
     );
 

@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:market_lists/app/core/app_routes.dart';
+import 'package:market_lists/app/core/routes/app_routes.dart';
 import 'package:market_lists/app/modules/shopping_list/domain/usecases/add_item_to_list.dart';
 import 'package:market_lists/app/modules/shopping_list/domain/usecases/create_shopping_list.dart';
 import 'package:market_lists/app/modules/shopping_list/domain/usecases/delete_item_from_list.dart';

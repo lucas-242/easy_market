@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart'
     hide ModularWatchExtension;
-import 'package:market_lists/app/core/app_routes.dart';
+import 'package:market_lists/app/core/routes/app_routes.dart';
 import 'package:market_lists/app/modules/auth/presenter/bloc/sign_up_bloc/sign_up_bloc.dart';
 import 'package:market_lists/app/modules/auth/presenter/widgets/show_password_button.dart';
 import 'package:market_lists/app/shared/themes/theme_utils.dart';

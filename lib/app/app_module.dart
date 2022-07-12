@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:market_lists/app/core/app_routes.dart';
+import 'package:market_lists/app/core/routes/app_routes.dart';
 import 'package:market_lists/app/core/auth/auth_guard.dart';
 import 'package:market_lists/app/core/pages/splash_screen_page.dart';
 import 'package:market_lists/app/core/stores/auth_store.dart';

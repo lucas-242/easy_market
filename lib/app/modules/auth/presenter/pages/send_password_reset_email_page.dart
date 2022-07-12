@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart'
     hide ModularWatchExtension;
 import 'package:market_lists/app/core/routes/app_routes.dart';
-import 'package:market_lists/app/modules/auth/presenter/bloc/sign_in_bloc/sign_in_bloc.dart';
-import 'package:market_lists/app/modules/auth/presenter/widgets/show_password_button.dart';
+import 'package:market_lists/app/modules/auth/presenter/bloc/reset_password_bloc/reset_password_bloc.dart';
 import 'package:market_lists/app/shared/themes/theme_utils.dart';
 import 'package:market_lists/app/shared/themes/typography_utils.dart';
 import 'package:market_lists/app/shared/utils/base_state_status.dart';
@@ -12,17 +11,18 @@ import 'package:market_lists/app/shared/widgets/custom_elevated_button/custom_el
 import 'package:market_lists/app/shared/widgets/custom_snack_bar/custom_snack_bar.dart';
 import 'package:market_lists/app/shared/widgets/custom_text_form_field/custom_text_form_field.dart';
 
-class SignInPage extends StatefulWidget {
-  const SignInPage({Key? key}) : super(key: key);
+class SendPasswordResetEmailPage extends StatefulWidget {
+  const SendPasswordResetEmailPage({Key? key}) : super(key: key);
 
   @override
-  State<SignInPage> createState() => _SignInPageState();
+  State<SendPasswordResetEmailPage> createState() =>
+      _SendPasswordResetEmailPageState();
 }
 
-class _SignInPageState extends State<SignInPage> {
+class _SendPasswordResetEmailPageState
+    extends State<SendPasswordResetEmailPage> {
   final _formKey = GlobalKey<FormState>();
   final _emailKey = GlobalKey<FormFieldState>();
-  final _passwordKey = GlobalKey<FormFieldState>();
 
   @override
   Widget build(BuildContext context) {
@@ -32,13 +32,13 @@ class _SignInPageState extends State<SignInPage> {
           slivers: [
             SliverFillRemaining(
               hasScrollBody: false,
-              child: BlocListener<SignInBloc, SignInState>(
+              child: BlocListener<ResetPasswordBloc, ResetPasswordState>(
                 listenWhen: (previous, current) =>
                     previous.status != current.status,
                 listener: (context, state) {
                   if (state.status == BaseStateStatus.success) {
                     Modular.to
-                        .pushNamedAndRemoveUntil(AppRoutes.lists, (_) => false);
+                        .pushReplacementNamed(AppRoutes.confirmPasswordReset);
                   } else if (state.status == BaseStateStatus.error) {
                     getCustomSnackBar(
                       context: context,
@@ -47,13 +47,12 @@ class _SignInPageState extends State<SignInPage> {
                     );
                   }
                 },
-                child: BlocBuilder<SignInBloc, SignInState>(
+                child: BlocBuilder<ResetPasswordBloc, ResetPasswordState>(
                   builder: (bloc, state) {
                     return state.when(
                       onState: (state) => _BuildScreen(
                         formKey: _formKey,
                         emailKey: _emailKey,
-                        passwordKey: _passwordKey,
                       ),
                       onLoading: () =>
                           const Center(child: CircularProgressIndicator()),
@@ -72,12 +71,11 @@ class _SignInPageState extends State<SignInPage> {
 class _BuildScreen extends StatelessWidget {
   final GlobalKey<FormState> formKey;
   final GlobalKey<FormFieldState> emailKey;
-  final GlobalKey<FormFieldState> passwordKey;
 
-  const _BuildScreen(
-      {required this.formKey,
-      required this.emailKey,
-      required this.passwordKey});
+  const _BuildScreen({
+    required this.formKey,
+    required this.emailKey,
+  });
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -85,14 +83,17 @@ class _BuildScreen extends StatelessWidget {
         const SizedBox(height: 25),
         _Header(),
         const SizedBox(height: 25),
+        Padding(
+          padding: const EdgeInsets.only(left: 15, right: 15, bottom: 25),
+          child: Text(
+            'An email will be send to you with a code to confirm the password reset.',
+            style: context.bodyMedium,
+          ),
+        ),
         _Form(
           formKey: formKey,
           emailKey: emailKey,
-          passwordKey: passwordKey,
         ),
-        _ForgotPasswordButton(),
-        const SizedBox(height: 25),
-        _SignUpButton(),
       ],
     );
   }
@@ -101,25 +102,24 @@ class _BuildScreen extends StatelessWidget {
 class _Header extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Text('Sign In', style: context.headlineLarge);
+    return Text('Reset Password', style: context.headlineLarge);
   }
 }
 
 class _Form extends StatelessWidget {
   final GlobalKey<FormState> formKey;
   final GlobalKey<FormFieldState> emailKey;
-  final GlobalKey<FormFieldState> passwordKey;
 
-  const _Form(
-      {required this.formKey,
-      required this.emailKey,
-      required this.passwordKey});
+  const _Form({
+    required this.formKey,
+    required this.emailKey,
+  });
 
-  void signIn(BuildContext context) {
+  void sendResetPasswordEmail(BuildContext context) {
     final isValid = formKey.currentState!.validate();
     if (isValid) {
-      final bloc = context.read<SignInBloc>();
-      bloc.add(SignInWithEmailEvent());
+      final bloc = context.read<ResetPasswordBloc>();
+      bloc.add(SendPasswordResetEmailEvent());
     }
   }
 
@@ -133,13 +133,11 @@ class _Form extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             _EmailField(fieldKey: emailKey),
-            const SizedBox(height: 10),
-            _PasswordField(fieldKey: passwordKey),
             const SizedBox(height: 15),
             CustomElevatedButton(
-              onTap: () => signIn(context),
+              onTap: () => sendResetPasswordEmail(context),
               size: Size(context.width * 0.7, context.height * 0.067),
-              text: 'Sign In',
+              text: 'Send email',
             ),
           ],
         ),
@@ -154,7 +152,7 @@ class _EmailField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bloc = context.watch<SignInBloc>();
+    final bloc = context.watch<ResetPasswordBloc>();
     const label = 'Email';
 
     return CustomTextFormField(
@@ -164,59 +162,6 @@ class _EmailField extends StatelessWidget {
       keyboardType: TextInputType.emailAddress,
       onChanged: (value) => bloc.add(ChangeEmailEvent(value)),
       validator: (value) => bloc.validateEmailField(fieldValue: value),
-    );
-  }
-}
-
-class _PasswordField extends StatelessWidget {
-  final GlobalKey<FormFieldState> fieldKey;
-  const _PasswordField({Key? key, required this.fieldKey}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final bloc = context.watch<SignInBloc>();
-    const label = 'Password';
-
-    return CustomTextFormField(
-      textFormKey: fieldKey,
-      labelText: label,
-      initialValue: bloc.state.password,
-      keyboardType: TextInputType.visiblePassword,
-      textInputAction: TextInputAction.done,
-      obscureText: bloc.state.showPassword ? false : true,
-      suffix: ShowPasswordButton(
-        onPressed: () => bloc.add(ChangePasswordVisibilyEvent()),
-        showing: bloc.state.showPassword,
-      ),
-      onChanged: (value) =>
-          context.read<SignInBloc>().add(ChangePasswordEvent(value)),
-      validator: (value) => bloc.validatePasswordField(fieldValue: value),
-    );
-  }
-}
-
-class _ForgotPasswordButton extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return TextButton(
-      onPressed: () => Modular.to.pushNamed(AppRoutes.sendPasswordResetEmail),
-      child: const Text('Forgot your password?'),
-    );
-  }
-}
-
-class _SignUpButton extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        const Text('Don\'t have an account?'),
-        TextButton(
-          onPressed: () => Modular.to.pushReplacementNamed(AppRoutes.signUp),
-          child: const Text('Sign Up'),
-        ),
-      ],
     );
   }
 }
