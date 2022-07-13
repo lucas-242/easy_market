@@ -35,7 +35,7 @@ class SendPasswordResetEmailImpl implements SendPasswordResetEmail {
   }
 
   Future<Either<Failure, Unit>> _sendPasswordResetEmail(
-      ResetPasswordCredentials credentials) {
-    return repository.sendPasswordResetEmail(email: credentials.email);
+      ResetPasswordCredentials credentials) async {
+    return await repository.sendPasswordResetEmail(email: credentials.email);
   }
 }

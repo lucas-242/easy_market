@@ -84,9 +84,16 @@ class _BuildScreen extends StatelessWidget {
         _Header(),
         const SizedBox(height: 25),
         Padding(
+          padding: const EdgeInsets.only(left: 15, right: 15),
+          child: Text(
+            'Enter the email associated with your account and we will send an email with a code that you will use to reset your password.',
+            style: context.bodyMedium,
+          ),
+        ),
+        Padding(
           padding: const EdgeInsets.only(left: 15, right: 15, bottom: 25),
           child: Text(
-            'An email will be send to you with a code to confirm the password reset.',
+            'If you won\'t receive an email in a few minutes, check your spam folder.',
             style: context.bodyMedium,
           ),
         ),

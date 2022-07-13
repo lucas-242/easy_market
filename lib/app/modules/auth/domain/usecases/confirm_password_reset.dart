@@ -39,8 +39,8 @@ class ConfirmPasswordResetImpl implements ConfirmPasswordReset {
   }
 
   Future<Either<Failure, Unit>> _confirmPasswordReset(
-      ResetPasswordCredentials credentials) {
-    return repository.confirmPasswordReset(
+      ResetPasswordCredentials credentials) async {
+    return await repository.confirmPasswordReset(
         code: credentials.code, newPassword: credentials.newPassword);
   }
 }

@@ -77,6 +77,18 @@ mixin FormValidator {
     return error;
   }
 
+  String? validateCodeField({
+    required String? fieldValue,
+    String? fieldName = 'Code',
+  }) {
+    String? error = _validateFieldIsEmpty(
+      fieldValue: fieldValue,
+      fieldName: fieldName,
+    );
+
+    return error;
+  }
+
   String? _validateFieldIsEqual({
     String? fieldValue,
     String? targetValue,
