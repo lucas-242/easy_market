@@ -20,7 +20,7 @@ class AppModule extends Module {
   @override
   List<ModularRoute> get routes => [
         ChildRoute(AppRoutes.main, child: (_, __) => SplashScreenPage()),
-        ModuleRoute(AppRoutes.login, module: AuthModule()),
+        ModuleRoute(AppRoutes.auth, module: AuthModule()),
         ModuleRoute(
           AppRoutes.lists,
           module: ShoppingListModule(),

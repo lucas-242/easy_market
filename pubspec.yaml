@@ -1,5 +1,5 @@
 name: easy_market
-description: A new Flutter project.
+description: The project consists in creating, editing, and sharing grocery lists by users in real time.
 
 publish_to: 'none'
 version: 1.0.0+1

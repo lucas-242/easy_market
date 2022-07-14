@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_market/app/core/routes/deep_links.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:easy_market/app/modules/auth/external/datasources/firebase/errors/errors.dart';
 import 'package:easy_market/app/modules/auth/infra/datasources/auth_datasource.dart';
@@ -163,7 +164,14 @@ class FirebaseAuthDatasource implements AuthDatasource {
   @override
   Future<void> sendPasswordResetEmail({required String email}) async {
     try {
-      await auth.sendPasswordResetEmail(email: email);
+      await auth.sendPasswordResetEmail(
+          email: email,
+          actionCodeSettings: ActionCodeSettings(
+            url: DeepLinks.resetPassword,
+            handleCodeInApp: true,
+            androidInstallApp: true,
+            androidPackageName: 'com.easymarket.yourmarketlist',
+          ));
     } on FirebaseException catch (error) {
       throw FirebaseSignUpFailure.fromCode(error.code);
     } catch (error) {

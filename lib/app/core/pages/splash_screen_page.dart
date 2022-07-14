@@ -13,7 +13,7 @@ class SplashScreenPage extends StatelessWidget {
       if (user != null) {
         Modular.to.pushNamedAndRemoveUntil(AppRoutes.lists, (_) => false);
       } else {
-        Modular.to.pushNamedAndRemoveUntil(AppRoutes.login, (_) => false);
+        Modular.to.pushNamedAndRemoveUntil(AppRoutes.auth, (_) => false);
       }
     });
   }
