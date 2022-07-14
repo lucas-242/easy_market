@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:easy_market/app/modules/auth/domain/entities/sign_up_credentials.dart';
 import 'package:easy_market/app/modules/auth/domain/usecases/sign_up_with_email.dart';
-import 'package:easy_market/app/shared/utils/base_state_status.dart';
+import 'package:easy_market/app/shared/utils/base_bloc_state.dart';
 import 'package:easy_market/app/shared/utils/form_validator.dart';
 
 part 'sign_up_event.dart';

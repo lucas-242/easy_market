@@ -2,7 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:easy_market/app/modules/auth/domain/entities/sign_in_credentials.dart';
 import 'package:easy_market/app/modules/auth/domain/usecases/sign_in_with_email.dart';
 import 'package:easy_market/app/modules/auth/domain/usecases/sign_in_with_phone.dart';
-import 'package:easy_market/app/shared/utils/base_state_status.dart';
+import 'package:easy_market/app/shared/utils/base_bloc_state.dart';
 import 'package:easy_market/app/shared/utils/form_validator.dart';
 
 part 'sign_in_event.dart';
@@ -15,7 +15,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> with FormValidator {
   SignInBloc(
     this.signInWithEmail,
     this.signInWithPhone,
-  ) : super(const SignInState(status: BaseStateStatus.initial)) {
+  ) : super(SignInState(status: BaseStateStatus.initial)) {
     on<ChangeEmailEvent>(_onChangeEmail);
     on<ChangePasswordEvent>(_onChangePassword);
     on<ChangePasswordVisibilyEvent>(_onChangePasswordVisibility);
@@ -50,7 +50,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> with FormValidator {
     result.fold(
       (l) => emit(state.copyWith(
           status: BaseStateStatus.error, callbackMessage: l.message)),
-      (r) => emit(const SignInState(status: BaseStateStatus.success)),
+      (r) => emit(SignInState(status: BaseStateStatus.success)),
     );
   }
 
@@ -64,7 +64,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> with FormValidator {
     result.fold(
       (l) => emit(state.copyWith(
           status: BaseStateStatus.error, callbackMessage: l.message)),
-      (r) => emit(const SignInState(status: BaseStateStatus.success)),
+      (r) => emit(SignInState(status: BaseStateStatus.success)),
     );
   }
 }

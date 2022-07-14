@@ -1,3 +1,4 @@
+import 'package:easy_market/app/shared/utils/base_bloc_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart'
@@ -7,7 +8,6 @@ import 'package:easy_market/app/modules/auth/presenter/bloc/sign_up_bloc/sign_up
 import 'package:easy_market/app/modules/auth/presenter/widgets/show_password_button.dart';
 import 'package:easy_market/app/shared/themes/theme_utils.dart';
 import 'package:easy_market/app/shared/themes/typography_utils.dart';
-import 'package:easy_market/app/shared/utils/base_state_status.dart';
 import 'package:easy_market/app/shared/widgets/custom_elevated_button/custom_elevated_button.dart';
 import 'package:easy_market/app/shared/widgets/custom_snack_bar/custom_snack_bar.dart';
 import 'package:easy_market/app/shared/widgets/custom_text_form_field/custom_text_form_field.dart';
@@ -44,8 +44,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       message: 'Account created successfully',
                       type: SnackBarType.success,
                     );
-                    Modular.to
-                        .pushNamedAndRemoveUntil(AppRoutes.lists, (_) => false);
+                    Modular.to.pushReplacementNamed(AppRoutes.lists);
                   } else if (state.status == BaseStateStatus.error) {
                     getCustomSnackBar(
                       context: context,

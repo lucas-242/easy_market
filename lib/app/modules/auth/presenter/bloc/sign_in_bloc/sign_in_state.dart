@@ -1,24 +1,23 @@
 part of 'sign_in_bloc.dart';
 
-class SignInState {
-  final BaseStateStatus status;
+class SignInState extends BaseBlocState {
   final String? email;
   final String? phone;
   final String? password;
-  final String callbackMessage;
   final bool showPassword;
   final bool showConfirmPassword;
 
-  const SignInState({
+  SignInState({
     this.email,
     this.password,
     this.phone,
-    required this.status,
-    this.callbackMessage = '',
+    required super.status,
+    super.callbackMessage = '',
     this.showPassword = false,
     this.showConfirmPassword = false,
   });
 
+  @override
   SignInState copyWith({
     BaseStateStatus? status,
     String? email,
@@ -35,20 +34,5 @@ class SignInState {
       callbackMessage: callbackMessage ?? this.callbackMessage,
       showPassword: showPassword ?? this.showPassword,
     );
-  }
-
-  T when<T>({
-    required T Function(SignInState state) onState,
-    T Function(SignInState error)? onError,
-    T Function()? onLoading,
-  }) {
-    switch (status) {
-      case BaseStateStatus.loading:
-        return onLoading!();
-      case BaseStateStatus.error:
-        return onError != null ? onError(this) : onState(this);
-      default:
-        return onState(this);
-    }
   }
 }
