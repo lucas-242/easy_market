@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:market_lists/app/core/routes/app_routes.dart';
+import 'package:easy_market/app/core/routes/app_routes.dart';
 import 'package:modular_bloc_bind/modular_bloc_bind.dart';
 
 import 'domain/usecases/confirm_password_reset.dart';

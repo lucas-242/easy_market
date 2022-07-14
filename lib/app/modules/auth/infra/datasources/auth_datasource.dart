@@ -1,4 +1,4 @@
-import 'package:market_lists/app/modules/auth/infra/models/user_model.dart';
+import 'package:easy_market/app/modules/auth/infra/models/user_model.dart';
 
 abstract class AuthDatasource {
   Future<UserModel> signInWithEmail({

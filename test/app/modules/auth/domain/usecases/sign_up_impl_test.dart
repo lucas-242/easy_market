@@ -1,9 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:market_lists/app/core/errors/errors.dart';
-import 'package:market_lists/app/modules/auth/domain/entities/sign_up_credentials.dart';
-import 'package:market_lists/app/modules/auth/domain/errors/errors.dart';
-import 'package:market_lists/app/modules/auth/domain/usecases/sign_up_with_email.dart';
+import 'package:easy_market/app/core/errors/errors.dart';
+import 'package:easy_market/app/modules/auth/domain/entities/sign_up_credentials.dart';
+import 'package:easy_market/app/modules/auth/domain/errors/errors.dart';
+import 'package:easy_market/app/modules/auth/domain/usecases/sign_up_with_email.dart';
 import 'package:mockito/mockito.dart';
 
 import '../../auth_mock_test.mocks.dart';

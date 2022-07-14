@@ -1,8 +1,8 @@
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:market_lists/app/modules/auth/domain/entities/user_info.dart';
-import 'package:market_lists/app/modules/auth/domain/usecases/get_current_user.dart';
-import 'package:market_lists/app/modules/auth/domain/usecases/listen_current_user.dart';
-import 'package:market_lists/app/modules/auth/domain/usecases/sign_out.dart';
+import 'package:easy_market/app/modules/auth/domain/entities/user_info.dart';
+import 'package:easy_market/app/modules/auth/domain/usecases/get_current_user.dart';
+import 'package:easy_market/app/modules/auth/domain/usecases/listen_current_user.dart';
+import 'package:easy_market/app/modules/auth/domain/usecases/sign_out.dart';
 part 'auth_store.g.dart';
 
 @Injectable(lazy: false)

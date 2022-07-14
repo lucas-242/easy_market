@@ -1,8 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:market_lists/app/app_widget.dart';
-import 'package:market_lists/firebase_options.dart';
+import 'package:easy_market/app/app_widget.dart';
+import 'package:easy_market/firebase_options.dart';
 
 import 'app/app_module.dart';
 

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:market_lists/app/core/routes/app_routes.dart';
-import 'package:market_lists/app/shared/themes/theme_utils.dart';
-import 'package:market_lists/app/shared/widgets/custom_elevated_button/custom_elevated_button.dart';
+import 'package:easy_market/app/core/routes/app_routes.dart';
+import 'package:easy_market/app/shared/themes/theme_utils.dart';
+import 'package:easy_market/app/shared/widgets/custom_elevated_button/custom_elevated_button.dart';
 
 class WelcomePage extends StatelessWidget {
   const WelcomePage({Key? key}) : super(key: key);

@@ -4,10 +4,10 @@ import 'dart:async';
 
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:market_lists/app/core/errors/errors.dart';
-import 'package:market_lists/app/modules/auth/domain/entities/user_info.dart';
-import 'package:market_lists/app/modules/auth/domain/errors/errors.dart';
-import 'package:market_lists/app/modules/auth/domain/usecases/listen_current_user.dart';
+import 'package:easy_market/app/core/errors/errors.dart';
+import 'package:easy_market/app/modules/auth/domain/entities/user_info.dart';
+import 'package:easy_market/app/modules/auth/domain/errors/errors.dart';
+import 'package:easy_market/app/modules/auth/domain/usecases/listen_current_user.dart';
 import 'package:mockito/mockito.dart';
 
 import '../../auth_mock_test.dart';

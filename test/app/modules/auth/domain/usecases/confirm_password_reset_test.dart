@@ -1,8 +1,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:market_lists/app/modules/auth/domain/entities/reset_password_credentials.dart';
-import 'package:market_lists/app/modules/auth/domain/errors/errors.dart';
-import 'package:market_lists/app/modules/auth/domain/usecases/confirm_password_reset.dart';
+import 'package:easy_market/app/modules/auth/domain/entities/reset_password_credentials.dart';
+import 'package:easy_market/app/modules/auth/domain/errors/errors.dart';
+import 'package:easy_market/app/modules/auth/domain/usecases/confirm_password_reset.dart';
 import 'package:mockito/mockito.dart';
 
 import '../../auth_mock_test.mocks.dart';

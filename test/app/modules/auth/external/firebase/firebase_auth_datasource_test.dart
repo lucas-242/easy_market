@@ -3,9 +3,9 @@ import 'package:fake_cloud_firestore/fake_cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_auth_mocks/firebase_auth_mocks.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:market_lists/app/modules/auth/external/datasources/firebase/errors/errors.dart';
-import 'package:market_lists/app/modules/auth/external/datasources/firebase/firebase_auth_datasource.dart';
-import 'package:market_lists/app/modules/auth/infra/models/user_model.dart';
+import 'package:easy_market/app/modules/auth/external/datasources/firebase/errors/errors.dart';
+import 'package:easy_market/app/modules/auth/external/datasources/firebase/firebase_auth_datasource.dart';
+import 'package:easy_market/app/modules/auth/infra/models/user_model.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 

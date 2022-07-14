@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:market_lists/app/core/routes/app_routes.dart';
+import 'package:easy_market/app/core/routes/app_routes.dart';
 
 void main() {
   const simpleRoute = '/login/';

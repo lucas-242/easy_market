@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart'
     hide ModularWatchExtension;
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:market_lists/app/core/routes/app_routes.dart';
-import 'package:market_lists/app/modules/auth/presenter/bloc/reset_password_bloc/reset_password_bloc.dart';
-import 'package:market_lists/app/modules/auth/presenter/widgets/show_password_button.dart';
-import 'package:market_lists/app/shared/themes/theme_utils.dart';
-import 'package:market_lists/app/shared/themes/typography_utils.dart';
-import 'package:market_lists/app/shared/utils/base_bloc_state.dart';
-import 'package:market_lists/app/shared/widgets/custom_elevated_button/custom_elevated_button.dart';
-import 'package:market_lists/app/shared/widgets/custom_snack_bar/custom_snack_bar.dart';
-import 'package:market_lists/app/shared/widgets/custom_text_form_field/custom_text_form_field.dart';
+import 'package:easy_market/app/core/routes/app_routes.dart';
+import 'package:easy_market/app/modules/auth/presenter/bloc/reset_password_bloc/reset_password_bloc.dart';
+import 'package:easy_market/app/modules/auth/presenter/widgets/show_password_button.dart';
+import 'package:easy_market/app/shared/themes/theme_utils.dart';
+import 'package:easy_market/app/shared/themes/typography_utils.dart';
+import 'package:easy_market/app/shared/utils/base_bloc_state.dart';
+import 'package:easy_market/app/shared/widgets/custom_elevated_button/custom_elevated_button.dart';
+import 'package:easy_market/app/shared/widgets/custom_snack_bar/custom_snack_bar.dart';
+import 'package:easy_market/app/shared/widgets/custom_text_form_field/custom_text_form_field.dart';
 
 class ConfirmPasswordResetPage extends StatefulWidget {
   const ConfirmPasswordResetPage({Key? key}) : super(key: key);

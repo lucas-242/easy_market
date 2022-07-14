@@ -1,6 +1,6 @@
 {
-    "name": "market_lists",
-    "short_name": "market_lists",
+    "name": "easy_market",
+    "short_name": "easy_market",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

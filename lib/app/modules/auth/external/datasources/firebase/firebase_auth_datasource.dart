@@ -2,9 +2,9 @@ import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:market_lists/app/modules/auth/external/datasources/firebase/errors/errors.dart';
-import 'package:market_lists/app/modules/auth/infra/datasources/auth_datasource.dart';
-import 'package:market_lists/app/modules/auth/infra/models/user_model.dart';
+import 'package:easy_market/app/modules/auth/external/datasources/firebase/errors/errors.dart';
+import 'package:easy_market/app/modules/auth/infra/datasources/auth_datasource.dart';
+import 'package:easy_market/app/modules/auth/infra/models/user_model.dart';
 
 class FirebaseAuthDatasource implements AuthDatasource {
   final FirebaseAuth auth;

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:market_lists/app/shared/themes/typography_utils.dart';
+import 'package:easy_market/app/shared/themes/typography_utils.dart';
 
 class CustomTextFormField extends StatelessWidget {
   final GlobalKey<FormFieldState>? textFormKey;

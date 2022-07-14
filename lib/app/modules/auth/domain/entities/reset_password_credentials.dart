@@ -1,4 +1,4 @@
-import 'package:market_lists/app/modules/auth/domain/utils/credentials_validator_util.dart';
+import 'package:easy_market/app/modules/auth/domain/utils/credentials_validator_util.dart';
 
 class ResetPasswordCredentials {
   final String email;

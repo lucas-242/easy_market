@@ -1,4 +1,4 @@
-import 'package:market_lists/app/core/errors/errors.dart';
+import 'package:easy_market/app/core/errors/errors.dart';
 
 /// {@template firebase_sign_in_failure}
 /// Thrown during the login process if a failure occurs.

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:market_lists/app/core/routes/app_routes.dart';
-import 'package:market_lists/app/core/stores/auth_store.dart';
+import 'package:easy_market/app/core/routes/app_routes.dart';
+import 'package:easy_market/app/core/stores/auth_store.dart';
 
 class SplashScreenPage extends StatelessWidget {
   SplashScreenPage({Key? key}) : super(key: key) {

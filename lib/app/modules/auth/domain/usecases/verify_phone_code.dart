@@ -1,10 +1,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:market_lists/app/modules/auth/domain/entities/sign_in_credentials.dart';
-import 'package:market_lists/app/modules/auth/domain/entities/user_info.dart';
-import 'package:market_lists/app/modules/auth/domain/errors/errors.dart';
-import 'package:market_lists/app/modules/auth/domain/repositories/auth_repository.dart';
-import 'package:market_lists/app/core/errors/errors.dart';
+import 'package:easy_market/app/modules/auth/domain/entities/sign_in_credentials.dart';
+import 'package:easy_market/app/modules/auth/domain/entities/user_info.dart';
+import 'package:easy_market/app/modules/auth/domain/errors/errors.dart';
+import 'package:easy_market/app/modules/auth/domain/repositories/auth_repository.dart';
+import 'package:easy_market/app/core/errors/errors.dart';
 part 'verify_phone_code.g.dart';
 
 abstract class VerifyPhoneCode {

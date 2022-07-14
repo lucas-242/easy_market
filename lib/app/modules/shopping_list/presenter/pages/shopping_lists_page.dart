@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:market_lists/app/core/routes/app_routes.dart';
-import 'package:market_lists/app/core/stores/auth_store.dart';
-import 'package:market_lists/app/modules/shopping_list/presenter/bloc/shopping_list_bloc.dart';
-import 'package:market_lists/app/modules/shopping_list/presenter/widgets/shopping_list_card.dart';
-import 'package:market_lists/app/shared/themes/typography_utils.dart';
+import 'package:easy_market/app/core/routes/app_routes.dart';
+import 'package:easy_market/app/core/stores/auth_store.dart';
+import 'package:easy_market/app/modules/shopping_list/presenter/bloc/shopping_list_bloc.dart';
+import 'package:easy_market/app/modules/shopping_list/presenter/widgets/shopping_list_card.dart';
+import 'package:easy_market/app/shared/themes/typography_utils.dart';
 
 class ShoppingListsPage extends StatefulWidget {
   const ShoppingListsPage({Key? key}) : super(key: key);

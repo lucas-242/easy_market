@@ -1,9 +1,9 @@
 import 'package:fake_cloud_firestore/fake_cloud_firestore.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:market_lists/app/modules/shopping_list/external/datasources/firebase/firebase_shopping_list_datasource.dart';
-import 'package:market_lists/app/modules/shopping_list/infra/models/shopping_list_model.dart';
-import 'package:market_lists/app/modules/shopping_list/infra/models/item_model.dart';
-import 'package:market_lists/app/modules/shopping_list/shopping_list.dart';
+import 'package:easy_market/app/modules/shopping_list/external/datasources/firebase/firebase_shopping_list_datasource.dart';
+import 'package:easy_market/app/modules/shopping_list/infra/models/shopping_list_model.dart';
+import 'package:easy_market/app/modules/shopping_list/infra/models/item_model.dart';
+import 'package:easy_market/app/modules/shopping_list/shopping_list.dart';
 
 import '../../../mock_shopping_list_test.dart' as mock;
 

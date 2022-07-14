@@ -1,4 +1,4 @@
-import 'package:market_lists/app/modules/auth/domain/entities/user.dart';
+import 'package:easy_market/app/modules/auth/domain/entities/user.dart';
 
 class UserModel extends User {
   UserModel({

@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
-import 'package:market_lists/app/modules/shopping_list/domain/entities/item.dart';
-import 'package:market_lists/app/core/errors/errors.dart';
+import 'package:easy_market/app/modules/shopping_list/domain/entities/item.dart';
+import 'package:easy_market/app/core/errors/errors.dart';
 
 abstract class ItemRepository {
   Future<Either<Failure, List<Item>>> getItemsFromList(String shoppingListId);

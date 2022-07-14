@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:market_lists/app/modules/shopping_list/shopping_list.dart';
-import 'package:market_lists/app/shared/themes/typography_utils.dart';
+import 'package:easy_market/app/modules/shopping_list/shopping_list.dart';
+import 'package:easy_market/app/shared/themes/typography_utils.dart';
 
 class ShoppingListDetailsPage extends StatefulWidget {
   final String shoppingListId;

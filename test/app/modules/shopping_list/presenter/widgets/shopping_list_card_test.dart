@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:market_lists/app/modules/shopping_list/presenter/widgets/shopping_list_card.dart';
+import 'package:easy_market/app/modules/shopping_list/presenter/widgets/shopping_list_card.dart';
 
 import '../../../../test_widget_wrapper.dart';
 import '../../mock_shopping_list_test.dart' as mock;

@@ -1,8 +1,8 @@
-import 'package:market_lists/app/modules/shopping_list/domain/repositories/item_repository.dart';
-import 'package:market_lists/app/modules/shopping_list/infra/datasources/shopping_list_datasource.dart';
-import 'package:market_lists/app/modules/shopping_list/infra/models/item_model.dart';
-import 'package:market_lists/app/modules/shopping_list/infra/models/shopping_list_model.dart';
-import 'package:market_lists/app/modules/shopping_list/shopping_list.dart';
+import 'package:easy_market/app/modules/shopping_list/domain/repositories/item_repository.dart';
+import 'package:easy_market/app/modules/shopping_list/infra/datasources/shopping_list_datasource.dart';
+import 'package:easy_market/app/modules/shopping_list/infra/models/item_model.dart';
+import 'package:easy_market/app/modules/shopping_list/infra/models/shopping_list_model.dart';
+import 'package:easy_market/app/modules/shopping_list/shopping_list.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 

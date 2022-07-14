@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:market_lists/app/modules/shopping_list/domain/errors/errors.dart';
+import 'package:easy_market/app/modules/shopping_list/domain/errors/errors.dart';
 
-import 'package:market_lists/app/modules/shopping_list/infra/datasources/shopping_list_datasource.dart';
-import 'package:market_lists/app/modules/shopping_list/infra/models/item_model.dart';
-import 'package:market_lists/app/modules/shopping_list/infra/models/shopping_list_model.dart';
+import 'package:easy_market/app/modules/shopping_list/infra/datasources/shopping_list_datasource.dart';
+import 'package:easy_market/app/modules/shopping_list/infra/models/item_model.dart';
+import 'package:easy_market/app/modules/shopping_list/infra/models/shopping_list_model.dart';
 
 class FirebaseShoppingListDatasource implements ShoppingListDatasource {
   final String shoppingListsTable = 'shoppingLists';

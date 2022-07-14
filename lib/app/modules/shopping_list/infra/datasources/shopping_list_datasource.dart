@@ -1,5 +1,5 @@
-import 'package:market_lists/app/modules/shopping_list/infra/models/item_model.dart';
-import 'package:market_lists/app/modules/shopping_list/infra/models/shopping_list_model.dart';
+import 'package:easy_market/app/modules/shopping_list/infra/models/item_model.dart';
+import 'package:easy_market/app/modules/shopping_list/infra/models/shopping_list_model.dart';
 
 abstract class ShoppingListDatasource {
   Future<List<ShoppingListModel>> getShoppingLists();
