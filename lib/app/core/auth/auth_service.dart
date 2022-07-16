@@ -1,17 +1,17 @@
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:easy_market/app/modules/auth/domain/entities/user_info.dart';
 import 'package:easy_market/app/modules/auth/domain/usecases/get_current_user.dart';
 import 'package:easy_market/app/modules/auth/domain/usecases/listen_current_user.dart';
 import 'package:easy_market/app/modules/auth/domain/usecases/sign_out.dart';
-part 'auth_store.g.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+part 'auth_service.g.dart';
 
 @Injectable(lazy: false)
-class AuthStore {
+class AuthService {
   final ListenCurrentUser _listenCurrentUser;
   final GetCurrentUser _getCurrentUser;
   final SignOut _signOut;
 
-  AuthStore(this._listenCurrentUser, this._getCurrentUser, this._signOut);
+  AuthService(this._listenCurrentUser, this._getCurrentUser, this._signOut);
 
   UserInfo? user;
 

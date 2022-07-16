@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'auth_store.dart';
+part of 'auth_service.dart';
 
 // **************************************************************************
 // InjectionGenerator
 // **************************************************************************
 
-final $AuthStore = BindInject(
-  (i) => AuthStore(i<ListenCurrentUser>(), i<GetCurrentUser>(), i<SignOut>()),
+final $AuthService = BindInject(
+  (i) => AuthService(i<ListenCurrentUser>(), i<GetCurrentUser>(), i<SignOut>()),
   isSingleton: true,
   isLazy: false,
 );

@@ -1,7 +1,7 @@
+import 'package:easy_market/app/core/auth/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:easy_market/app/core/routes/app_routes.dart';
-import 'package:easy_market/app/core/stores/auth_store.dart';
 import 'package:easy_market/app/modules/shopping_list/presenter/bloc/shopping_list_bloc.dart';
 import 'package:easy_market/app/modules/shopping_list/presenter/widgets/shopping_list_card.dart';
 import 'package:easy_market/app/shared/themes/typography_utils.dart';
@@ -14,12 +14,12 @@ class ShoppingListsPage extends StatefulWidget {
 }
 
 class _ShoppingListsPageState extends State<ShoppingListsPage> {
-  late final AuthStore _auth;
+  late final AuthService _auth;
 
   @override
   void initState() {
     super.initState();
-    _auth = Modular.get<AuthStore>();
+    _auth = Modular.get<AuthService>();
     final bloc = Modular.get<ShoppingListBloc>();
     bloc.add(ListenShoppingListsEvent());
   }
@@ -39,7 +39,7 @@ class _ShoppingListsPageState extends State<ShoppingListsPage> {
         toolbarHeight: kToolbarHeight * 1.3,
         actions: [
           InkWell(
-            onTap: () => Modular.get<AuthStore>().signOut(),
+            onTap: () => Modular.get<AuthService>().signOut(),
             child: Padding(
               padding: const EdgeInsets.only(right: 12.0),
               child: CircleAvatar(

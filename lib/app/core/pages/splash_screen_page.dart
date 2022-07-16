@@ -1,7 +1,7 @@
+import 'package:easy_market/app/core/auth/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:easy_market/app/core/routes/app_routes.dart';
-import 'package:easy_market/app/core/stores/auth_store.dart';
 
 class SplashScreenPage extends StatelessWidget {
   SplashScreenPage({Key? key}) : super(key: key) {
@@ -9,7 +9,7 @@ class SplashScreenPage extends StatelessWidget {
   }
 
   void _checkUserIsLogged() {
-    Modular.get<AuthStore>().listenCurrentUser().listen((user) {
+    Modular.get<AuthService>().listenCurrentUser().listen((user) {
       if (user != null) {
         Modular.to.pushNamedAndRemoveUntil(AppRoutes.lists, (_) => false);
       } else {
