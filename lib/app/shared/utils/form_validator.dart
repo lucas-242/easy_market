@@ -1,4 +1,4 @@
-import 'package:easy_market/app/modules/auth/domain/utils/credentials_validator_util.dart';
+import 'package:easy_market/app/core/auth/domain/utils/credentials_validator_util.dart';
 
 mixin FormValidator {
   String? validateNameField({

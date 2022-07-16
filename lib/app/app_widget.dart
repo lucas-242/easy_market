@@ -1,12 +1,12 @@
 import 'package:dynamic_color/dynamic_color.dart';
+import 'package:easy_market/app/modules/corroboration/presenter/bloc/reset_password_bloc/reset_password_bloc.dart';
+import 'package:easy_market/app/modules/corroboration/presenter/bloc/sign_in_bloc/sign_in_bloc.dart';
+import 'package:easy_market/app/modules/corroboration/presenter/bloc/sign_up_bloc/sign_up_bloc.dart';
+import 'package:easy_market/app/modules/shopping_list/presenter/bloc/shopping_list_bloc.dart';
+import 'package:easy_market/app/shared/themes/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:easy_market/app/modules/auth/presenter/bloc/reset_password_bloc/reset_password_bloc.dart';
-import 'package:easy_market/app/modules/auth/presenter/bloc/sign_in_bloc/sign_in_bloc.dart';
-import 'package:easy_market/app/modules/auth/presenter/bloc/sign_up_bloc/sign_up_bloc.dart';
-import 'package:easy_market/app/modules/shopping_list/presenter/bloc/shopping_list_bloc.dart';
-import 'package:easy_market/app/shared/themes/theme_provider.dart';
 
 import 'shared/themes/theme_settings.dart';
 

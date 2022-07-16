@@ -1,4 +1,4 @@
-import 'package:easy_market/app/core/auth/auth_service.dart';
+import 'package:easy_market/app/core/auth/services/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:easy_market/app/core/routes/app_routes.dart';
