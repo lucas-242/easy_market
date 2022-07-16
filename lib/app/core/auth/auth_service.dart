@@ -19,7 +19,7 @@ class AuthService {
 
   Stream<UserInfo?> listenCurrentUser() {
     return _listenCurrentUser().map((response) {
-      response.fold((l) => throw Exception(), (r) => user = r);
+      response.fold((l) => throw l, (r) => user = r);
       return user;
     });
   }

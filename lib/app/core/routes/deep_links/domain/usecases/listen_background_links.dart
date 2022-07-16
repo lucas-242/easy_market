@@ -7,7 +7,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 part 'listen_background_links.g.dart';
 
 abstract class ListenBackgroundLinks {
-  Stream<Either<Failure, DeepLinkData?>> call();
+  Stream<Either<Failure, DeepLinkData>> call();
 }
 
 @Injectable(singleton: false)
@@ -17,7 +17,7 @@ class ListenBackgroundLinksImpl implements ListenBackgroundLinks {
   ListenBackgroundLinksImpl(this._repository);
 
   @override
-  Stream<Either<Failure, DeepLinkData?>> call() {
+  Stream<Either<Failure, DeepLinkData>> call() {
     return _repository.listenBackgroudLinks();
   }
 }
