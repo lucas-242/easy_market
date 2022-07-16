@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_market/app/core/routes/utils/routes_utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:easy_market/app/core/routes/app_routes.dart';
@@ -66,19 +67,19 @@ class AuthModule extends Module {
   final List<ModularRoute> routes = [
     ChildRoute(AppRoutes.main, child: (_, __) => const WelcomePage()),
     ChildRoute(
-      AppRoutes.lastPathInRoute(AppRoutes.signIn),
+      RoutesUtils.lastPathInRoute(AppRoutes.signIn),
       child: (_, __) => const SignInPage(),
     ),
     ChildRoute(
-      AppRoutes.lastPathInRoute(AppRoutes.signUp),
+      RoutesUtils.lastPathInRoute(AppRoutes.signUp),
       child: (_, __) => const SignUpPage(),
     ),
     ChildRoute(
-      AppRoutes.lastPathInRoute(AppRoutes.sendPasswordResetEmail),
+      RoutesUtils.lastPathInRoute(AppRoutes.sendPasswordResetEmail),
       child: (_, __) => const SendPasswordResetEmailPage(),
     ),
     ChildRoute(
-      AppRoutes.lastPathInRoute(AppRoutes.confirmPasswordReset),
+      RoutesUtils.lastPathInRoute(AppRoutes.confirmPasswordReset),
       child: (_, __) => const ConfirmPasswordResetPage(),
     ),
   ];

@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:easy_market/app/core/routes/deep_links.dart';
+import 'package:easy_market/app/core/routes/deep_links_routes.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:easy_market/app/modules/auth/external/datasources/firebase/errors/errors.dart';
 import 'package:easy_market/app/modules/auth/infra/datasources/auth_datasource.dart';
@@ -167,7 +167,7 @@ class FirebaseAuthDatasource implements AuthDatasource {
       await auth.sendPasswordResetEmail(
           email: email,
           actionCodeSettings: ActionCodeSettings(
-            url: DeepLinks.resetPassword,
+            url: DeepLinksRoutes.domain + DeepLinksRoutes.resetPassword,
             handleCodeInApp: true,
             androidInstallApp: true,
             androidPackageName: 'com.easymarket.yourmarketlist',

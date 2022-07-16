@@ -8,10 +8,4 @@ abstract class AppRoutes {
   static String get sendPasswordResetEmail =>
       '/auth/send-password-reset-email/';
   static String get confirmPasswordReset => '/auth/confirm-password-reset/';
-
-  static String lastPathInRoute(String appRoute) {
-    final splitted = appRoute.split('/');
-    final result = '/${splitted[splitted.length - 2]}/';
-    return result;
-  }
 }

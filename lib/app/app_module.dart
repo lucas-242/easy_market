@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_market/app/core/routes/deep_links/deep_links_module.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:easy_market/app/core/routes/app_routes.dart';
 import 'package:easy_market/app/core/auth/auth_guard.dart';
@@ -13,6 +15,8 @@ class AppModule extends Module {
   List<Bind> get binds => [
         Bind((i) => FirebaseFirestore.instance),
         Bind((i) => FirebaseAuth.instance),
+        Bind((i) => FirebaseDynamicLinks.instance),
+        ...DeepLinksModule.exportedBinds,
         ...AuthModule.exportedBinds,
         $AuthStore,
       ];
