@@ -4,6 +4,7 @@ import 'package:easy_market/app/core/auth/domain/usecases/sign_in_with_email.dar
 import 'package:easy_market/app/core/auth/domain/usecases/sign_in_with_phone.dart';
 import 'package:easy_market/app/core/auth/domain/usecases/sign_up_with_email.dart';
 import 'package:easy_market/app/core/routes/utils/routes_utils.dart';
+import 'package:easy_market/app/modules/corroboration/presenter/pages/feedback_password_reset_email.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:easy_market/app/core/routes/app_routes.dart';
 import 'package:modular_bloc_bind/modular_bloc_bind.dart';
@@ -55,6 +56,10 @@ class CorroborationModule extends Module {
     ChildRoute(
       RoutesUtils.lastPathInRoute(AppRoutes.confirmPasswordReset),
       child: (_, __) => const ConfirmPasswordResetPage(),
+    ),
+    ChildRoute(
+      RoutesUtils.lastPathInRoute(AppRoutes.feedbackPasswordResetEmail),
+      child: (_, __) => const FeedbackPasswordResetEmail(),
     ),
   ];
 }

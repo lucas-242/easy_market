@@ -7,5 +7,7 @@ abstract class AppRoutes {
   static String get signUp => '/auth/sign-up/';
   static String get sendPasswordResetEmail =>
       '/auth/send-password-reset-email/';
+  static String get feedbackPasswordResetEmail =>
+      '/auth/feedback-password-reset-email/';
   static String get confirmPasswordReset => '/auth/confirm-password-reset/';
 }

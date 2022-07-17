@@ -37,8 +37,8 @@ class _SendPasswordResetEmailPageState
                     previous.status != current.status,
                 listener: (context, state) {
                   if (state.status == BaseStateStatus.success) {
-                    Modular.to
-                        .pushReplacementNamed(AppRoutes.confirmPasswordReset);
+                    Modular.to.pushReplacementNamed(
+                        AppRoutes.feedbackPasswordResetEmail);
                   } else if (state.status == BaseStateStatus.error) {
                     getCustomSnackBar(
                       context: context,
