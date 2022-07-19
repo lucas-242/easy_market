@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:market_lists/app/modules/shopping_list/domain/entities/item.dart';
+import 'package:easy_market/app/modules/shopping_list/domain/entities/item.dart';
 
 class ShoppingListFirebase {
   final String id;

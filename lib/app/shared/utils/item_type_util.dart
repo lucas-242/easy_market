@@ -1,4 +1,4 @@
-import 'package:market_lists/app/shared/extensions/extensions.dart';
+import 'package:easy_market/app/shared/extensions/extensions.dart';
 
 import '../../modules/shopping_list/shopping_list.dart';
 

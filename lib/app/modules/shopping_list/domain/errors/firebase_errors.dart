@@ -1,4 +1,4 @@
-import 'package:market_lists/app/core/errors/errors.dart';
+import 'package:easy_market/app/core/errors/errors.dart';
 
 class ShoppingListFirebaseFailure extends Failure {
   @override

@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:market_lists/app/modules/shopping_list/shopping_list.dart';
+import 'package:easy_market/app/modules/shopping_list/shopping_list.dart';
 // ignore: depend_on_referenced_packages
 import 'package:meta/meta.dart';
 

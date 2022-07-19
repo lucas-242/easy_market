@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:market_lists/app/modules/shopping_list/domain/entities/shopping_list.dart';
-import 'package:market_lists/app/modules/shopping_list/infra/models/item_model.dart';
+import 'package:easy_market/app/modules/shopping_list/domain/entities/shopping_list.dart';
+import 'package:easy_market/app/modules/shopping_list/infra/models/item_model.dart';
 
 class ShoppingListModel extends ShoppingList {
   @override

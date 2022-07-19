@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:market_lists/app/shared/extensions/extensions.dart';
+import 'package:easy_market/app/shared/extensions/extensions.dart';
 
 enum Test { a, b, abc }
 

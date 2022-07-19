@@ -1,4 +1,4 @@
-import 'package:market_lists/app/modules/auth/domain/utils/credentials_validator_util.dart';
+import 'package:easy_market/app/core/auth/domain/utils/credentials_validator_util.dart';
 
 mixin FormValidator {
   String? validateNameField({
@@ -72,6 +72,18 @@ mixin FormValidator {
       targetValue: targetValue,
       fieldName: fieldName,
       targetName: targetName,
+    );
+
+    return error;
+  }
+
+  String? validateCodeField({
+    required String? fieldValue,
+    String? fieldName = 'Code',
+  }) {
+    String? error = _validateFieldIsEmpty(
+      fieldValue: fieldValue,
+      fieldName: fieldName,
     );
 
     return error;

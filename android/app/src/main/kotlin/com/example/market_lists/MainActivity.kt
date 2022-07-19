@@ -1,4 +1,4 @@
-package com.example.market_lists
+package com.easymarket.yourmarketlist
 
 import io.flutter.embedding.android.FlutterActivity
 

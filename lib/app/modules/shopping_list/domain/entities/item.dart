@@ -1,4 +1,4 @@
-import 'package:market_lists/app/modules/shopping_list/domain/entities/item_type.dart';
+import 'package:easy_market/app/modules/shopping_list/domain/entities/item_type.dart';
 
 class Item {
   final String id;
