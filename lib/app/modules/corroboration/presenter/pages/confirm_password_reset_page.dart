@@ -13,7 +13,9 @@ import 'package:easy_market/app/shared/widgets/custom_snack_bar/custom_snack_bar
 import 'package:easy_market/app/shared/widgets/custom_text_form_field/custom_text_form_field.dart';
 
 class ConfirmPasswordResetPage extends StatefulWidget {
-  const ConfirmPasswordResetPage({Key? key}) : super(key: key);
+  final String code;
+  const ConfirmPasswordResetPage({Key? key, required this.code})
+      : super(key: key);
 
   @override
   State<ConfirmPasswordResetPage> createState() =>
@@ -22,9 +24,15 @@ class ConfirmPasswordResetPage extends StatefulWidget {
 
 class _ConfirmPasswordResetPageState extends State<ConfirmPasswordResetPage> {
   final _formKey = GlobalKey<FormState>();
-  final _codeKey = GlobalKey<FormFieldState>();
   final _passwordKey = GlobalKey<FormFieldState>();
   final _confirmPasswordKey = GlobalKey<FormFieldState>();
+
+  @override
+  void initState() {
+    final bloc = context.read<ResetPasswordBloc>();
+    bloc.add(ChangeCodeEvent(widget.code));
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +48,7 @@ class _ConfirmPasswordResetPageState extends State<ConfirmPasswordResetPage> {
                 listener: (context, state) {
                   if (state.status == BaseStateStatus.success) {
                     Modular.to
-                        .pushReplacementNamed(AppRoutes.confirmPasswordReset);
+                        .pushNamedAndRemoveUntil(AppRoutes.auth, (_) => false);
                   } else if (state.status == BaseStateStatus.error) {
                     getCustomSnackBar(
                       context: context,
@@ -54,7 +62,6 @@ class _ConfirmPasswordResetPageState extends State<ConfirmPasswordResetPage> {
                     return state.when(
                       onState: (state) => _BuildScreen(
                         formKey: _formKey,
-                        codeKey: _codeKey,
                         confirmPasswordKey: _confirmPasswordKey,
                         passwordKey: _passwordKey,
                       ),
@@ -74,13 +81,11 @@ class _ConfirmPasswordResetPageState extends State<ConfirmPasswordResetPage> {
 
 class _BuildScreen extends StatelessWidget {
   final GlobalKey<FormState> formKey;
-  final GlobalKey<FormFieldState> codeKey;
   final GlobalKey<FormFieldState> passwordKey;
   final GlobalKey<FormFieldState> confirmPasswordKey;
 
   const _BuildScreen({
     required this.formKey,
-    required this.codeKey,
     required this.passwordKey,
     required this.confirmPasswordKey,
   });
@@ -94,13 +99,12 @@ class _BuildScreen extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(left: 15, right: 15, bottom: 25),
           child: Text(
-            'An email will be send to you with a code to confirm the password reset.',
+            'Type your new password.',
             style: context.bodyMedium,
           ),
         ),
         _Form(
           formKey: formKey,
-          codeKey: codeKey,
           passwordKey: passwordKey,
           confirmPasswordKey: confirmPasswordKey,
         ),
@@ -118,13 +122,11 @@ class _Header extends StatelessWidget {
 
 class _Form extends StatelessWidget {
   final GlobalKey<FormState> formKey;
-  final GlobalKey<FormFieldState> codeKey;
   final GlobalKey<FormFieldState> passwordKey;
   final GlobalKey<FormFieldState> confirmPasswordKey;
 
   const _Form({
     required this.formKey,
-    required this.codeKey,
     required this.passwordKey,
     required this.confirmPasswordKey,
   });
@@ -146,7 +148,6 @@ class _Form extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            _CodeField(fieldKey: codeKey),
             const SizedBox(height: 10),
             _PasswordField(fieldKey: passwordKey),
             const SizedBox(height: 10),
@@ -160,25 +161,6 @@ class _Form extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-}
-
-class _CodeField extends StatelessWidget {
-  final GlobalKey<FormFieldState> fieldKey;
-  const _CodeField({Key? key, required this.fieldKey}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final bloc = context.read<ResetPasswordBloc>();
-    const label = 'Code';
-
-    return CustomTextFormField(
-      textFormKey: fieldKey,
-      labelText: label,
-      initialValue: bloc.state.code,
-      onChanged: (value) => bloc.add(ChangeCodeEvent(value)),
-      validator: (value) => bloc.validateCodeField(fieldValue: value),
     );
   }
 }

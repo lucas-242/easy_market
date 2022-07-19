@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_market/app/core/auth/external/datasources/firebase/errors/firebase_reset_password_failure.dart';
 import 'package:easy_market/app/core/routes/deep_links_routes.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:easy_market/app/core/auth/external/datasources/firebase/errors/errors.dart';
@@ -173,9 +174,9 @@ class FirebaseAuthDatasource implements AuthDatasource {
             androidPackageName: 'com.easymarket.yourmarketlist',
           ));
     } on FirebaseException catch (error) {
-      throw FirebaseSignUpFailure.fromCode(error.code);
+      throw FirebaseResetPasswordFailure.fromCode(error.code);
     } catch (error) {
-      throw FirebaseSignUpFailure();
+      throw FirebaseResetPasswordFailure();
     }
   }
 
@@ -185,9 +186,9 @@ class FirebaseAuthDatasource implements AuthDatasource {
     try {
       await auth.confirmPasswordReset(code: code, newPassword: newPassword);
     } on FirebaseException catch (error) {
-      throw FirebaseSignUpFailure.fromCode(error.code);
+      throw FirebaseResetPasswordFailure.fromCode(error.code);
     } catch (error) {
-      throw FirebaseSignUpFailure();
+      throw FirebaseResetPasswordFailure();
     }
   }
 }

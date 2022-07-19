@@ -37,7 +37,8 @@ class _SignInPageState extends State<SignInPage> {
                     previous.status != current.status,
                 listener: (context, state) {
                   if (state.status == BaseStateStatus.success) {
-                    Modular.to.pushReplacementNamed(AppRoutes.lists);
+                    Modular.to
+                        .pushNamedAndRemoveUntil(AppRoutes.lists, (_) => false);
                   } else if (state.status == BaseStateStatus.error) {
                     getCustomSnackBar(
                       context: context,

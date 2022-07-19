@@ -43,23 +43,24 @@ class CorroborationModule extends Module {
     ChildRoute(AppRoutes.main, child: (_, __) => const WelcomePage()),
     ChildRoute(
       RoutesUtils.lastPathInRoute(AppRoutes.signIn),
-      child: (_, __) => const SignInPage(),
+      child: (context, args) => const SignInPage(),
     ),
     ChildRoute(
       RoutesUtils.lastPathInRoute(AppRoutes.signUp),
-      child: (_, __) => const SignUpPage(),
+      child: (context, args) => const SignUpPage(),
     ),
     ChildRoute(
       RoutesUtils.lastPathInRoute(AppRoutes.sendPasswordResetEmail),
-      child: (_, __) => const SendPasswordResetEmailPage(),
+      child: (context, args) => const SendPasswordResetEmailPage(),
     ),
     ChildRoute(
-      RoutesUtils.lastPathInRoute(AppRoutes.confirmPasswordReset),
-      child: (_, __) => const ConfirmPasswordResetPage(),
+      '${RoutesUtils.lastPathInRoute(AppRoutes.confirmPasswordReset)}:code',
+      child: (context, args) =>
+          ConfirmPasswordResetPage(code: args.params['code']),
     ),
     ChildRoute(
       RoutesUtils.lastPathInRoute(AppRoutes.feedbackPasswordResetEmail),
-      child: (_, __) => const FeedbackPasswordResetEmail(),
+      child: (context, args) => const FeedbackPasswordResetEmail(),
     ),
   ];
 }

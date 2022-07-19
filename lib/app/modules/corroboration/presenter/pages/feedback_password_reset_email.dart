@@ -61,7 +61,7 @@ class FeedbackPasswordResetEmail extends StatelessWidget {
                 ),
                 const SizedBox(height: 15),
                 Text(
-                  'We have sent a password recover instructions to your email',
+                  'We have sent a link to reset your password',
                   style: context.bodyLarge,
                   textAlign: TextAlign.center,
                 ),

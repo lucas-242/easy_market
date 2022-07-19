@@ -43,7 +43,10 @@ class SplashScreenPage extends StatelessWidget {
   void _handleDeepLink(DeepLinkData data) {
     switch (data.path) {
       case DeepLinksRoutes.resetPassword:
-        Modular.to.pushNamed(AppRoutes.confirmPasswordReset);
+        Modular.to.pushNamed(
+          AppRoutes.confirmPasswordReset + (data.parameters['oobCode'] ?? ''),
+        );
+        break;
     }
   }
 
