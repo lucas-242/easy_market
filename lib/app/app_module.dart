@@ -4,6 +4,7 @@ import 'package:easy_market/app/core/auth/guard/auth_guard.dart';
 import 'package:easy_market/app/core/auth/services/auth_service.dart';
 import 'package:easy_market/app/core/routes/deep_links/deep_links_module.dart';
 import 'package:easy_market/app/modules/corroboration/corroboration_module.dart';
+import 'package:easy_market/app/shared/services/stream_subscriptions_cancel.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -20,6 +21,7 @@ class AppModule extends Module {
         ...DeepLinksModule.exportedBinds,
         ...AuthModule.exportedBinds,
         $AuthService,
+        $StreamSubscriptionsCancel,
       ];
 
   @override
