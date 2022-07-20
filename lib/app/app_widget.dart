@@ -1,4 +1,5 @@
 import 'package:dynamic_color/dynamic_color.dart';
+import 'package:easy_market/app/shared/services/stream_subscriptions_cancel.dart';
 import 'package:easy_market/app/modules/corroboration/presenter/bloc/reset_password_bloc/reset_password_bloc.dart';
 import 'package:easy_market/app/modules/corroboration/presenter/bloc/sign_in_bloc/sign_in_bloc.dart';
 import 'package:easy_market/app/modules/corroboration/presenter/bloc/sign_up_bloc/sign_up_bloc.dart';
@@ -10,8 +11,19 @@ import 'package:flutter_modular/flutter_modular.dart';
 
 import 'shared/themes/theme_settings.dart';
 
-class AppWidget extends StatelessWidget {
+class AppWidget extends StatefulWidget {
   const AppWidget({Key? key}) : super(key: key);
+
+  @override
+  State<AppWidget> createState() => _AppWidgetState();
+}
+
+class _AppWidgetState extends State<AppWidget> {
+  @override
+  void dispose() async {
+    await Modular.get<StreamSubscriptionsCancel>().cancelSubscriptions();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {

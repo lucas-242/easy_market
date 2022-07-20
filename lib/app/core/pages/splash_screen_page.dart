@@ -2,6 +2,7 @@ import 'package:easy_market/app/core/auth/services/auth_service.dart';
 import 'package:easy_market/app/core/routes/deep_links/domain/entities/deep_link_data.dart';
 import 'package:easy_market/app/core/routes/deep_links/services/routes_service.dart';
 import 'package:easy_market/app/core/routes/deep_links_routes.dart';
+import 'package:easy_market/app/shared/extensions/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:easy_market/app/core/routes/app_routes.dart';
@@ -18,7 +19,7 @@ class SplashScreenPage extends StatelessWidget {
       if (user == null) {
         Modular.to.pushNamedAndRemoveUntil(AppRoutes.auth, (_) => false);
       }
-    });
+    }).cancelOnFinishApp();
   }
 
   void _listenInitialLink() {
@@ -31,13 +32,14 @@ class SplashScreenPage extends StatelessWidget {
         }
       },
       cancelOnError: true,
-    );
+    ).cancelOnFinishApp();
   }
 
   void _listenBackgroudLinks() {
     Modular.get<RoutesService>()
         .listenBackgroundLinks()
-        .listen((data) => _handleDeepLink(data));
+        .listen((data) => _handleDeepLink(data))
+        .cancelOnFinishApp();
   }
 
   void _handleDeepLink(DeepLinkData data) {

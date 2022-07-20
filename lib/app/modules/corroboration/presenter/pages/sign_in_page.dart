@@ -1,6 +1,6 @@
 import 'package:easy_market/app/modules/corroboration/presenter/bloc/sign_in_bloc/sign_in_bloc.dart';
 import 'package:easy_market/app/modules/corroboration/presenter/widgets/show_password_button.dart';
-import 'package:easy_market/app/shared/utils/base_bloc_state.dart';
+import 'package:easy_market/app/shared/entities/base_bloc_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart'
