@@ -12,7 +12,8 @@ void main() {
   final itemRepository = MockShoppingListRepositoryTest();
   final usecase = DeleteShoppingListImpl(itemRepository);
 
-  final shoppingListMock = ShoppingList(id: '123', name: 'name');
+  final shoppingListMock =
+      ShoppingList(id: '123', name: 'name', owner: 'owner');
 
   test('Should delete ShoppingList', () async {
     when(itemRepository.deleteShoppingList(any))

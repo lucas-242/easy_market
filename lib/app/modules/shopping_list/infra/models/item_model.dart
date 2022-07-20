@@ -25,7 +25,7 @@ class ItemModel extends Item {
     );
   }
 
-  Map<String, dynamic> toMapCreate() {
+  Map<String, dynamic> toCreate() {
     return {
       'name': name,
       'quantity': quantity,
@@ -35,7 +35,7 @@ class ItemModel extends Item {
     };
   }
 
-  Map<String, dynamic> toMapUpdate() {
+  Map<String, dynamic> toUpdate() {
     return {
       'name': name,
       'quantity': quantity,

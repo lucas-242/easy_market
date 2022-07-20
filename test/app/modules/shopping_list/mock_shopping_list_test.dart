@@ -26,6 +26,7 @@ ShoppingList get shoppingListToCreate => ShoppingList(
         Item(name: 'product1', quantity: 5),
         Item(name: 'product2', quantity: 3),
       ],
+      owner: 'xpto',
     );
 
 /// ShoppingListmodel without id
@@ -35,6 +36,7 @@ ShoppingListModel get shoppingListModelToCreate => ShoppingListModel(
         ItemModel(name: 'product1', quantity: 5),
         ItemModel(name: 'product2', quantity: 3),
       ],
+      owner: 'xpto',
     );
 
 /// ShoppingList with id
@@ -45,6 +47,7 @@ ShoppingList get shoppingListToUpdate => ShoppingList(
         Item(name: 'product1', quantity: 5),
         Item(name: 'product2', quantity: 3),
       ],
+      owner: 'xpto',
     );
 
 /// ShoppingListModel with id
@@ -55,6 +58,7 @@ ShoppingListModel get shoppingListModelToUpdate => ShoppingListModel(
         ItemModel(name: 'product1', quantity: 5),
         ItemModel(name: 'product2', quantity: 3),
       ],
+      owner: 'xpto',
     );
 
 ///List of ShoppingList
@@ -66,6 +70,7 @@ List<ShoppingList> get shoppingLists => [
           const Item(name: 'product1', quantity: 5),
           const Item(name: 'product2', quantity: 3),
         ],
+        owner: 'xpto',
       ),
       ShoppingList(
         id: '1234',
@@ -74,6 +79,7 @@ List<ShoppingList> get shoppingLists => [
           const Item(name: 'product1', quantity: 5),
           const Item(name: 'product2', quantity: 3),
         ],
+        owner: 'xpto',
       ),
       ShoppingList(
         id: '12345',
@@ -82,6 +88,7 @@ List<ShoppingList> get shoppingLists => [
           const Item(name: 'product1', quantity: 5),
           const Item(name: 'product2', quantity: 3),
         ],
+        owner: 'xpto',
       ),
     ];
 
@@ -94,6 +101,7 @@ List<ShoppingListModel> get shoppingListModelList => [
           ItemModel(name: 'product1', quantity: 5),
           ItemModel(name: 'product2', quantity: 3),
         ],
+        owner: 'xpto',
       ),
       ShoppingListModel(
         id: '1234',
@@ -102,6 +110,7 @@ List<ShoppingListModel> get shoppingListModelList => [
           ItemModel(name: 'product1', quantity: 5),
           ItemModel(name: 'product2', quantity: 3),
         ],
+        owner: 'xpto',
       ),
       ShoppingListModel(
         id: '12345',
@@ -110,6 +119,7 @@ List<ShoppingListModel> get shoppingListModelList => [
           ItemModel(name: 'product1', quantity: 5),
           ItemModel(name: 'product2', quantity: 3),
         ],
+        owner: 'xpto',
       ),
     ];
 

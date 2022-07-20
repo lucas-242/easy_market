@@ -6,6 +6,8 @@ class ShoppingList {
   final List<Item> items;
   final DateTime createdAt;
   final DateTime updatedAt;
+  final String owner;
+  final List<String> users;
 
   ShoppingList({
     this.id = '',
@@ -13,7 +15,10 @@ class ShoppingList {
     List<Item>? items,
     DateTime? createdAt,
     DateTime? updatedAt,
+    required this.owner,
+    List<String>? users,
   })  : items = items ?? [],
+        users = users ?? [],
         createdAt = createdAt ?? DateTime.now(),
         updatedAt = updatedAt ?? DateTime.now();
 

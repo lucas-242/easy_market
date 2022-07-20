@@ -5,11 +5,14 @@ import 'package:easy_market/app/modules/shopping_list/infra/datasources/shopping
 import 'package:easy_market/app/modules/shopping_list/infra/models/item_model.dart';
 import 'package:easy_market/app/modules/shopping_list/infra/models/shopping_list_model.dart';
 
+import 'models/firebase_shopping_list_model.dart';
+
 class FirebaseShoppingListDatasource implements ShoppingListDatasource {
   final String shoppingListsTable = 'shoppingLists';
   final String itemsTable = 'items';
   final FirebaseFirestore _firestore;
   final bool _useFirebaseEmulator;
+
   FirebaseShoppingListDatasource(this._firestore,
       {bool useFirebaseEmulator = false})
       : _useFirebaseEmulator = useFirebaseEmulator {
@@ -18,67 +21,68 @@ class FirebaseShoppingListDatasource implements ShoppingListDatasource {
     }
   }
 
-  //TODO: ADD userId in the created data and where clauses to the gets
-
   @override
-  Future<List<ShoppingListModel>> getShoppingLists() async {
+  Future<List<FirebaseShoppingListModel>> getShoppingLists() async {
     try {
-      var reference = _firestore.collection(shoppingListsTable);
-      var snapshot = await reference.get();
-      var result = _snapshotToListOfShoppingListModel(snapshot.docs);
+      final snapshot = await _firestore.collection(shoppingListsTable).get();
+      final result = _snapshotToListOfShoppingListModel(snapshot.docs);
       return result;
     } catch (e) {
       throw ShoppingListFailure(message: 'Erro to get data from firebase');
     }
   }
 
-  List<ShoppingListModel> _snapshotToListOfShoppingListModel(
+  List<FirebaseShoppingListModel> _snapshotToListOfShoppingListModel(
       List<QueryDocumentSnapshot<Map<String, dynamic>>> snapshot) {
-    var result = snapshot
-        .map((e) => ShoppingListModel.fromMap(e.data()).copyWith(id: e.id))
+    final result = snapshot
+        .map((e) =>
+            FirebaseShoppingListModel.fromMap(e.data()).copyWith(id: e.id))
         .toList();
     return result;
   }
 
   @override
-  Stream<List<ShoppingListModel>> listenShoppingLists() {
+  Stream<List<FirebaseShoppingListModel>> listenShoppingLists() {
     try {
       Stream<QuerySnapshot> snapshots =
           _firestore.collection(shoppingListsTable).snapshots();
-      var result = _querySnapshotToShoppingListModel(snapshots);
+      final result = _querySnapshotToShoppingListModel(snapshots);
       return result;
     } catch (e) {
       throw ShoppingListFailure(message: 'Erro to listen data from firebase');
     }
   }
 
-  Stream<List<ShoppingListModel>> _querySnapshotToShoppingListModel(
+  Stream<List<FirebaseShoppingListModel>> _querySnapshotToShoppingListModel(
       Stream<QuerySnapshot<Object?>> snapshot) {
-    var result = snapshot.map((query) => query.docs
+    final result = snapshot.map((query) => query.docs
         .map((DocumentSnapshot document) =>
             _documentSnapshotToShoppingListModel(document))
         .toList());
     return result;
   }
 
-  ShoppingListModel _documentSnapshotToShoppingListModel(
+  FirebaseShoppingListModel _documentSnapshotToShoppingListModel(
       DocumentSnapshot snapshot) {
-    var data = snapshot.data() as Map<String, dynamic>;
-    var result = ShoppingListModel.fromMap(data);
+    final data = snapshot.data() as Map<String, dynamic>;
+    final result = FirebaseShoppingListModel.fromMap(data);
     return result.copyWith(id: snapshot.id);
   }
 
   @override
-  Future<ShoppingListModel> createShoppingList(
+  Future<FirebaseShoppingListModel> createShoppingList(
       ShoppingListModel shoppingList) async {
     try {
-      var reference = _firestore.collection(shoppingListsTable).doc();
-      var toSave = shoppingList.toMapCreate();
-      await reference.set(toSave);
-      return ShoppingListModel(
+      final toSave =
+          FirebaseShoppingListModel.fromShoppingListModel(shoppingList)
+              .toCreate();
+      final reference =
+          await _firestore.collection(shoppingListsTable).add(toSave);
+      return FirebaseShoppingListModel(
         id: reference.id,
         name: shoppingList.name,
         items: [],
+        owner: shoppingList.owner,
       );
     } catch (e) {
       throw ShoppingListFailure(message: 'Erro to save data on firebase');
@@ -88,7 +92,7 @@ class FirebaseShoppingListDatasource implements ShoppingListDatasource {
   @override
   Future<void> deleteShoppingList(String id) async {
     try {
-      var reference = _firestore.collection(shoppingListsTable).doc(id);
+      final reference = _firestore.collection(shoppingListsTable).doc(id);
       await reference.delete();
     } catch (e) {
       throw ShoppingListFailure(message: 'Erro to delete data from firebase');
@@ -98,10 +102,13 @@ class FirebaseShoppingListDatasource implements ShoppingListDatasource {
   @override
   Future<void> updateShoppingList(ShoppingListModel shoppingList) async {
     try {
-      var reference =
-          _firestore.collection(shoppingListsTable).doc(shoppingList.id);
-      var toSave = shoppingList.toMapUpdate();
-      await reference.update(toSave);
+      final toSave =
+          FirebaseShoppingListModel.fromShoppingListModel(shoppingList)
+              .toUpdate();
+      await _firestore
+          .collection(shoppingListsTable)
+          .doc(shoppingList.id)
+          .update(toSave);
     } catch (e) {
       throw ShoppingListFailure(message: 'Erro to save data on firebase');
     }
@@ -110,11 +117,11 @@ class FirebaseShoppingListDatasource implements ShoppingListDatasource {
   @override
   Future<List<ItemModel>> getItemsFromList(String shoppingListId) async {
     try {
-      var reference = _firestore
+      final snapshot = await _firestore
           .collection(itemsTable)
-          .where('shoppingListId', isEqualTo: shoppingListId);
-      var snapshot = await reference.get();
-      var result = _snapshotToListOfItemModel(snapshot.docs);
+          .where('shoppingListId', isEqualTo: shoppingListId)
+          .get();
+      final result = _snapshotToListOfItemModel(snapshot.docs);
       return result;
     } catch (e) {
       throw ShoppingListFailure(message: 'Erro to save data on firebase');
@@ -123,7 +130,7 @@ class FirebaseShoppingListDatasource implements ShoppingListDatasource {
 
   List<ItemModel> _snapshotToListOfItemModel(
       List<QueryDocumentSnapshot<Map<String, dynamic>>> snapshot) {
-    var result = snapshot
+    final result = snapshot
         .map((e) => ItemModel.fromMap(e.data()).copyWith(id: e.id))
         .toList();
     return result;
@@ -136,7 +143,7 @@ class FirebaseShoppingListDatasource implements ShoppingListDatasource {
           .collection(itemsTable)
           .where('shoppingListId', isEqualTo: shoppingListId)
           .snapshots();
-      var result = _querySnapshotToItemModel(snapshots);
+      final result = _querySnapshotToItemModel(snapshots);
       return result;
     } catch (e) {
       throw ShoppingListFailure(message: 'Erro to listen data from firebase');
@@ -145,7 +152,7 @@ class FirebaseShoppingListDatasource implements ShoppingListDatasource {
 
   Stream<List<ItemModel>> _querySnapshotToItemModel(
       Stream<QuerySnapshot<Object?>> snapshot) {
-    var result = snapshot.map((query) => query.docs
+    final result = snapshot.map((query) => query.docs
         .map((DocumentSnapshot document) =>
             _documentSnapshotToItemModel(document))
         .toList());
@@ -153,17 +160,16 @@ class FirebaseShoppingListDatasource implements ShoppingListDatasource {
   }
 
   ItemModel _documentSnapshotToItemModel(DocumentSnapshot snapshot) {
-    var data = snapshot.data() as Map<String, dynamic>;
-    var result = ItemModel.fromMap(data);
+    final data = snapshot.data() as Map<String, dynamic>;
+    final result = ItemModel.fromMap(data);
     return result.copyWith(id: snapshot.id);
   }
 
   @override
   Future<ItemModel> addItemToList(ItemModel item) async {
     try {
-      var reference = _firestore.collection(itemsTable).doc();
-      var toSave = item.toMapCreate();
-      await reference.set(toSave);
+      final toSave = item.toCreate();
+      final reference = await _firestore.collection(itemsTable).add(toSave);
       return ItemModel(
         id: reference.id,
         name: item.name,
@@ -180,9 +186,8 @@ class FirebaseShoppingListDatasource implements ShoppingListDatasource {
   @override
   Future<void> updateItemInList(ItemModel item) async {
     try {
-      var reference = _firestore.collection(itemsTable).doc(item.id);
-      var toSave = item.toMapUpdate();
-      await reference.update(toSave);
+      final toSave = item.toUpdate();
+      await _firestore.collection(itemsTable).doc(item.id).update(toSave);
     } catch (e) {
       throw ShoppingListFailure(message: 'Erro to save data on firebase');
     }
@@ -191,8 +196,7 @@ class FirebaseShoppingListDatasource implements ShoppingListDatasource {
   @override
   Future<void> deleteItemFromList(String itemId) async {
     try {
-      var reference = _firestore.collection(itemsTable).doc(itemId);
-      await reference.delete();
+      await _firestore.collection(itemsTable).doc(itemId).delete();
     } catch (e) {
       throw ShoppingListFailure(message: 'Erro to delete data from firebase');
     }

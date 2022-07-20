@@ -19,15 +19,17 @@ class _ShoppingListDetailsPageState extends State<ShoppingListDetailsPage> {
   void initState() {
     // TODO: listen to shoppingList and groceryLists
     shoppingList = ShoppingList(
-        id: widget.shoppingListId,
-        name: 'List ${widget.shoppingListId}',
-        items: List<Item>.generate(
-          20,
-          (index) => Item(
-              id: index.toString(),
-              name: 'Item ${index + 1}',
-              quantity: index * 2),
-        ));
+      id: widget.shoppingListId,
+      name: 'List ${widget.shoppingListId}',
+      items: List<Item>.generate(
+        20,
+        (index) => Item(
+            id: index.toString(),
+            name: 'Item ${index + 1}',
+            quantity: index * 2),
+      ),
+      owner: '',
+    );
     super.initState();
   }
 

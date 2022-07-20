@@ -27,6 +27,7 @@ void main() {
         Item(name: 'product1', quantity: 5),
         Item(name: 'product2', quantity: 3),
       ],
+      owner: 'onwner',
     );
 
     var result = await usecase(shoppingList);
