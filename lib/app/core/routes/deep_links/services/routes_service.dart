@@ -9,9 +9,6 @@ class RoutesService {
   final ListenInitialLink _listenInitialLink;
   final ListenBackgroundLinks _listenBackgroundLinks;
 
-  DeepLinkData? _deepLinkData;
-  DeepLinkData? get deepLinkData => _deepLinkData;
-
   RoutesService(this._listenInitialLink, this._listenBackgroundLinks);
 
   Stream<DeepLinkData?> listenInitialLink() {

@@ -21,7 +21,8 @@ class FirebaseDeepLinksHandleDatasource implements DeepLinksHandleDatasource {
     return Stream.fromFuture(_dynamicLinks.getInitialLink()).map(
       (dynamicLink) => dynamicLink != null
           ? DeepLinkData(
-              path: dynamicLink.link.path,
+              path: RoutesUtils.lastPathInRoute(
+                  dynamicLink.link.queryParameters['continueUrl']!),
               parameters: dynamicLink.link.queryParameters)
           : null,
     );
