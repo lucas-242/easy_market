@@ -3,8 +3,9 @@ import 'package:easy_market/app/modules/shopping_list/domain/entities/shopping_l
 import 'package:easy_market/app/core/errors/errors.dart';
 
 abstract class ShoppingListRepository {
-  Future<Either<Failure, List<ShoppingList>>> getShoppingLists();
-  Either<Failure, Stream<List<ShoppingList>>> listenShoppingLists();
+  Future<Either<Failure, List<ShoppingList>>> getShoppingLists(String userId);
+  Either<Failure, Stream<List<ShoppingList>>> listenShoppingLists(
+      String userId);
   Future<Either<Failure, ShoppingList>> createShoppingList(
       ShoppingList shoppingList);
   Future<Either<Failure, Unit>> updateShoppingList(ShoppingList shoppingList);

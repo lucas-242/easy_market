@@ -15,9 +15,10 @@ class ShoppingListRepositoryImpl implements ShoppingListRepository {
   ShoppingListRepositoryImpl(this.datasource);
 
   @override
-  Future<Either<Failure, List<ShoppingList>>> getShoppingLists() async {
+  Future<Either<Failure, List<ShoppingList>>> getShoppingLists(
+      String userId) async {
     try {
-      var result = await datasource.getShoppingLists();
+      final result = await datasource.getShoppingLists(userId);
       return right(result);
     } catch (e) {
       return left(ShoppingListFailure());
@@ -25,9 +26,10 @@ class ShoppingListRepositoryImpl implements ShoppingListRepository {
   }
 
   @override
-  Either<Failure, Stream<List<ShoppingList>>> listenShoppingLists() {
+  Either<Failure, Stream<List<ShoppingList>>> listenShoppingLists(
+      String userId) {
     try {
-      var result = datasource.listenShoppingLists();
+      final result = datasource.listenShoppingLists(userId);
       return right(result);
     } catch (e) {
       return left(ShoppingListFailure());
@@ -38,9 +40,9 @@ class ShoppingListRepositoryImpl implements ShoppingListRepository {
   Future<Either<Failure, ShoppingList>> createShoppingList(
       ShoppingList shoppingList) async {
     try {
-      var shoppingListToCreate =
+      final shoppingListToCreate =
           ShoppingListModel.fromShoppingList(shoppingList);
-      var result = await datasource.createShoppingList(shoppingListToCreate);
+      final result = await datasource.createShoppingList(shoppingListToCreate);
       return right(result);
     } catch (e) {
       return left(ShoppingListFailure());
@@ -62,7 +64,7 @@ class ShoppingListRepositoryImpl implements ShoppingListRepository {
   Future<Either<Failure, Unit>> updateShoppingList(
       ShoppingList shoppingList) async {
     try {
-      var shoppingListToUpdate =
+      final shoppingListToUpdate =
           ShoppingListModel.fromShoppingList(shoppingList);
       await datasource.updateShoppingList(shoppingListToUpdate);
       return right(unit);

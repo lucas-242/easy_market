@@ -6,7 +6,7 @@ import 'package:easy_market/app/modules/shopping_list/domain/repositories/shoppi
 part 'get_shopping_lists.g.dart';
 
 abstract class GetShoppingLists {
-  Future<Either<Failure, List<ShoppingList>>> call();
+  Future<Either<Failure, List<ShoppingList>>> call(String userId);
 }
 
 @Injectable(singleton: false)
@@ -16,8 +16,8 @@ class GetShoppingListsImpl implements GetShoppingLists {
   GetShoppingListsImpl(this.repository);
 
   @override
-  Future<Either<Failure, List<ShoppingList>>> call() async {
-    var result = await repository.getShoppingLists();
+  Future<Either<Failure, List<ShoppingList>>> call(String userId) async {
+    var result = await repository.getShoppingLists(userId);
     return result;
   }
 }
