@@ -7,7 +7,7 @@ part of 'add_item_to_list.dart';
 // **************************************************************************
 
 final $AddItemToListImpl = BindInject(
-  (i) => AddItemToListImpl(i<ItemRepository>()),
+  (i) => AddItemToListImpl(i<ShoppingListRepository>()),
   isSingleton: false,
   isLazy: true,
 );

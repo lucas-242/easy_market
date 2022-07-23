@@ -7,7 +7,7 @@ part of 'delete_item_from_list.dart';
 // **************************************************************************
 
 final $DeleteItemFromListImpl = BindInject(
-  (i) => DeleteItemFromListImpl(i<ItemRepository>()),
+  (i) => DeleteItemFromListImpl(i<ShoppingListRepository>()),
   isSingleton: false,
   isLazy: true,
 );

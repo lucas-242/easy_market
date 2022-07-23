@@ -76,25 +76,6 @@ class FirebaseShoppingListDatasource implements ShoppingListDatasource {
   }
 
   @override
-  Stream<FirebaseShoppingListModel> listenShoppingListById(String id) {
-    try {
-      Stream<DocumentSnapshot> snapshots =
-          _firestore.collection(shoppingListsTable).doc(id).snapshots();
-      final result = _streamDocumentSnapshotToShoppingListModel(snapshots);
-      return result;
-    } catch (e) {
-      throw ShoppingListFailure(message: 'Error to listen data from firebase');
-    }
-  }
-
-  Stream<FirebaseShoppingListModel> _streamDocumentSnapshotToShoppingListModel(
-      Stream<DocumentSnapshot<Object?>> snapshot) {
-    final result = snapshot
-        .map((document) => _documentSnapshotToShoppingListModel(document));
-    return result;
-  }
-
-  @override
   Future<FirebaseShoppingListModel> createShoppingList(
       ShoppingListModel shoppingList) async {
     try {

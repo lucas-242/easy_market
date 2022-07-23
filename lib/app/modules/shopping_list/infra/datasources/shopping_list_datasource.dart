@@ -4,7 +4,6 @@ import 'package:easy_market/app/modules/shopping_list/infra/models/shopping_list
 abstract class ShoppingListDatasource {
   Future<List<ShoppingListModel>> getShoppingLists(String userId);
   Stream<List<ShoppingListModel>> listenShoppingLists(String userId);
-  Stream<ShoppingListModel> listenShoppingListById(String id);
   Future<ShoppingListModel> createShoppingList(ShoppingListModel shoppingList);
   Future<void> updateShoppingList(ShoppingListModel shoppingList);
   Future<void> deleteShoppingList(String id);

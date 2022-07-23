@@ -86,7 +86,6 @@ class _BuildScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('aqui paizão');
     return Column(
       children: [
         const SizedBox(height: 25),

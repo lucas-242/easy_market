@@ -7,7 +7,7 @@ part of 'get_items_from_list.dart';
 // **************************************************************************
 
 final $GetItemsFromListImpl = BindInject(
-  (i) => GetItemsFromListImpl(i<ItemRepository>()),
+  (i) => GetItemsFromListImpl(i<ShoppingListRepository>()),
   isSingleton: false,
   isLazy: true,
 );

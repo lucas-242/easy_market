@@ -7,7 +7,7 @@ part of 'listen_items_from_list.dart';
 // **************************************************************************
 
 final $ListenItemsFromListImpl = BindInject(
-  (i) => ListenItemsFromListImpl(i<ItemRepository>()),
+  (i) => ListenItemsFromListImpl(i<ShoppingListRepository>()),
   isSingleton: false,
   isLazy: true,
 );
