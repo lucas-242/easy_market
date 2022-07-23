@@ -95,7 +95,9 @@ class _BuildScreen extends StatelessWidget {
             itemBuilder: (context, index) => ShoppingListCard(
               shoppingList: lists[index],
               onTap: (id) => Modular.to.pushNamed(
-                  '${AppRoutes.lists}${AppRoutes.listDetails}$index'),
+                '${AppRoutes.listDetails}$index',
+                arguments: {'shoppingList': lists[index]},
+              ),
             ),
           ),
         ),

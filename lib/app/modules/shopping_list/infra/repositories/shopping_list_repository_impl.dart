@@ -22,8 +22,10 @@ class ShoppingListRepositoryImpl implements ShoppingListRepository {
     try {
       final result = await datasource.getShoppingLists(userId);
       return right(result);
+    } on Failure catch (e) {
+      return left(GetShoppingListFailure(e.message));
     } catch (e) {
-      return left(ShoppingListFailure());
+      return left(GetShoppingListFailure('Error to get shopping lists.'));
     }
   }
 
@@ -33,8 +35,10 @@ class ShoppingListRepositoryImpl implements ShoppingListRepository {
     try {
       final result = datasource.listenShoppingLists(userId);
       return right(result);
+    } on Failure catch (e) {
+      return left(GetShoppingListFailure(e.message));
     } catch (e) {
-      return left(ShoppingListFailure());
+      return left(GetShoppingListFailure('Error to get shopping lists.'));
     }
   }
 
@@ -46,19 +50,10 @@ class ShoppingListRepositoryImpl implements ShoppingListRepository {
           ShoppingListModel.fromShoppingList(shoppingList);
       final result = await datasource.createShoppingList(shoppingListToCreate);
       return right(result);
+    } on Failure catch (e) {
+      return left(CreateShoppingListFailure(e.message));
     } catch (e) {
-      return left(ShoppingListFailure());
-    }
-  }
-
-  @override
-  Future<Either<Failure, Unit>> deleteShoppingList(
-      ShoppingList shoppingList) async {
-    try {
-      await datasource.deleteShoppingList(shoppingList.id);
-      return right(unit);
-    } catch (e) {
-      return left(ShoppingListFailure());
+      return left(CreateShoppingListFailure('Error to create shopping list.'));
     }
   }
 
@@ -70,8 +65,23 @@ class ShoppingListRepositoryImpl implements ShoppingListRepository {
           ShoppingListModel.fromShoppingList(shoppingList);
       await datasource.updateShoppingList(shoppingListToUpdate);
       return right(unit);
+    } on Failure catch (e) {
+      return left(UpdateShoppingListFailure(e.message));
     } catch (e) {
-      return left(ShoppingListFailure());
+      return left(UpdateShoppingListFailure('Error to update shopping list.'));
+    }
+  }
+
+  @override
+  Future<Either<Failure, Unit>> deleteShoppingList(
+      ShoppingList shoppingList) async {
+    try {
+      await datasource.deleteShoppingList(shoppingList.id);
+      return right(unit);
+    } on Failure catch (e) {
+      return left(DeleteShoppingListFailure(e.message));
+    } catch (e) {
+      return left(DeleteShoppingListFailure('Error to delete shopping list.'));
     }
   }
 
@@ -79,10 +89,12 @@ class ShoppingListRepositoryImpl implements ShoppingListRepository {
   Future<Either<Failure, List<Item>>> getItemsFromList(
       String shoppingListId) async {
     try {
-      var result = await datasource.getItemsFromList(shoppingListId);
+      final result = await datasource.getItemsFromList(shoppingListId);
       return right(result);
+    } on Failure catch (e) {
+      return left(GetItemsFailure(e.message));
     } catch (e) {
-      return left(ShoppingListFailure());
+      return left(GetItemsFailure('Error to get items.'));
     }
   }
 
@@ -90,42 +102,51 @@ class ShoppingListRepositoryImpl implements ShoppingListRepository {
   Either<Failure, Stream<List<Item>>> listenItemsFromList(
       String shoppingListId) {
     try {
-      var result = datasource.listenItemsFromList(shoppingListId);
+      final result = datasource.listenItemsFromList(shoppingListId);
       return right(result);
+    } on Failure catch (e) {
+      return left(GetItemsFailure(e.message));
     } catch (e) {
-      return left(ShoppingListFailure());
+      return left(GetItemsFailure('Error to get items.'));
     }
   }
 
   @override
   Future<Either<Failure, Item>> addItemToList(Item item) async {
     try {
-      var itemToAdd = ItemModel.fromItem(item);
-      var result = await datasource.addItemToList(itemToAdd);
+      final itemToAdd = ItemModel.fromItem(item);
+      final result = await datasource.addItemToList(itemToAdd);
       return right(result);
+    } on Failure catch (e) {
+      return left(AddItemFailure(e.message));
     } catch (e) {
-      return left(ShoppingListFailure());
+      return left(AddItemFailure('Error to add item.'));
     }
   }
 
   @override
   Future<Either<Failure, Unit>> updateItemInList(Item item) async {
     try {
-      var itemToUpdate = ItemModel.fromItem(item);
+      final itemToUpdate = ItemModel.fromItem(item);
       await datasource.updateItemInList(itemToUpdate);
       return right(unit);
+    } on Failure catch (e) {
+      return left(UpdateItemFailure(e.message));
     } catch (e) {
-      return left(ShoppingListFailure());
+      return left(UpdateItemFailure('Error to update item.'));
     }
   }
 
   @override
   Future<Either<Failure, Unit>> deleteItemFromList(Item item) async {
     try {
-      await datasource.deleteItemFromList(item.id);
+      final itemToDelete = ItemModel.fromItem(item);
+      await datasource.deleteItemFromList(itemToDelete);
       return right(unit);
+    } on Failure catch (e) {
+      return left(DeleteItemFailure(e.message));
     } catch (e) {
-      return left(ShoppingListFailure());
+      return left(DeleteItemFailure('Error to delete item.'));
     }
   }
 }

@@ -32,7 +32,7 @@ class FirebaseShoppingListDatasource implements ShoppingListDatasource {
       final result = _snapshotToListOfShoppingListModel(snapshot.docs);
       return result;
     } catch (e) {
-      throw ShoppingListFailure(message: 'Error to get data from firebase');
+      throw GetShoppingListFailure('Error to get shopping lists.');
     }
   }
 
@@ -55,7 +55,7 @@ class FirebaseShoppingListDatasource implements ShoppingListDatasource {
       final result = _querySnapshotToShoppingListModel(snapshots);
       return result;
     } catch (e) {
-      throw ShoppingListFailure(message: 'Error to listen data from firebase');
+      throw GetShoppingListFailure('Error to get shopping lists.');
     }
   }
 
@@ -91,7 +91,7 @@ class FirebaseShoppingListDatasource implements ShoppingListDatasource {
           owner: shoppingList.owner,
           users: [shoppingList.owner]);
     } catch (e) {
-      throw ShoppingListFailure(message: 'Error to save data on firebase');
+      throw CreateShoppingListFailure('Error to create shopping list.');
     }
   }
 
@@ -101,7 +101,7 @@ class FirebaseShoppingListDatasource implements ShoppingListDatasource {
       final reference = _firestore.collection(shoppingListsTable).doc(id);
       await reference.delete();
     } catch (e) {
-      throw ShoppingListFailure(message: 'Error to delete data from firebase');
+      throw DeleteShoppingListFailure('Error to delete shopping list.');
     }
   }
 
@@ -116,7 +116,7 @@ class FirebaseShoppingListDatasource implements ShoppingListDatasource {
           .doc(shoppingList.id)
           .update(toSave);
     } catch (e) {
-      throw ShoppingListFailure(message: 'Error to save data on firebase');
+      throw UpdateShoppingListFailure('Error to delete shopping list.');
     }
   }
 
@@ -124,13 +124,14 @@ class FirebaseShoppingListDatasource implements ShoppingListDatasource {
   Future<List<ItemModel>> getItemsFromList(String shoppingListId) async {
     try {
       final snapshot = await _firestore
+          .collection(shoppingListsTable)
+          .doc(shoppingListId)
           .collection(itemsTable)
-          .where('shoppingListId', isEqualTo: shoppingListId)
           .get();
       final result = _snapshotToListOfItemModel(snapshot.docs);
       return result;
     } catch (e) {
-      throw ShoppingListFailure(message: 'Error to save data on firebase');
+      throw GetItemsFailure('Error to get items.');
     }
   }
 
@@ -146,13 +147,14 @@ class FirebaseShoppingListDatasource implements ShoppingListDatasource {
   Stream<List<ItemModel>> listenItemsFromList(String shoppingListId) {
     try {
       Stream<QuerySnapshot> snapshots = _firestore
+          .collection(shoppingListsTable)
+          .doc(shoppingListId)
           .collection(itemsTable)
-          .where('shoppingListId', isEqualTo: shoppingListId)
           .snapshots();
       final result = _querySnapshotToItemModel(snapshots);
       return result;
     } catch (e) {
-      throw ShoppingListFailure(message: 'Error to listen data from firebase');
+      throw GetItemsFailure('Error to get items.');
     }
   }
 
@@ -175,7 +177,11 @@ class FirebaseShoppingListDatasource implements ShoppingListDatasource {
   Future<ItemModel> addItemToList(ItemModel item) async {
     try {
       final toSave = item.toCreate();
-      final reference = await _firestore.collection(itemsTable).add(toSave);
+      final reference = await _firestore
+          .collection(shoppingListsTable)
+          .doc(item.shoppingListId)
+          .collection(itemsTable)
+          .add(toSave);
       return ItemModel(
         id: reference.id,
         name: item.name,
@@ -184,8 +190,13 @@ class FirebaseShoppingListDatasource implements ShoppingListDatasource {
         type: item.type,
         shoppingListId: item.shoppingListId,
       );
-    } catch (e) {
-      throw ShoppingListFailure(message: 'Error to save data on firebase');
+    }
+    //TODO: Implement errors by code
+    /// } on FirebaseException catch (error) {
+    ///   throw FirebaseSignUpFailure.fromCode(error.code);
+    /// }
+    catch (e) {
+      throw AddItemFailure('Error to add item.');
     }
   }
 
@@ -193,18 +204,28 @@ class FirebaseShoppingListDatasource implements ShoppingListDatasource {
   Future<void> updateItemInList(ItemModel item) async {
     try {
       final toSave = item.toUpdate();
-      await _firestore.collection(itemsTable).doc(item.id).update(toSave);
+      await _firestore
+          .collection(shoppingListsTable)
+          .doc(item.shoppingListId)
+          .collection(itemsTable)
+          .doc(item.id)
+          .update(toSave);
     } catch (e) {
-      throw ShoppingListFailure(message: 'Error to save data on firebase');
+      throw UpdateItemFailure('Error to update item.');
     }
   }
 
   @override
-  Future<void> deleteItemFromList(String itemId) async {
+  Future<void> deleteItemFromList(ItemModel item) async {
     try {
-      await _firestore.collection(itemsTable).doc(itemId).delete();
+      await _firestore
+          .collection(shoppingListsTable)
+          .doc(item.shoppingListId)
+          .collection(itemsTable)
+          .doc(item.id)
+          .delete();
     } catch (e) {
-      throw ShoppingListFailure(message: 'Error to delete data from firebase');
+      throw DeleteItemFailure('Error to delete item.');
     }
   }
 }

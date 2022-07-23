@@ -1,10 +1,16 @@
+import 'package:easy_market/app/modules/shopping_list/presenter/bloc/items_bloc/items_bloc.dart';
+import 'package:easy_market/app/modules/shopping_list/presenter/bloc/shopping_list_bloc.dart';
+import 'package:easy_market/app/shared/entities/base_bloc_state.dart';
+import 'package:easy_market/app/shared/widgets/custom_snack_bar/custom_snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_market/app/modules/shopping_list/shopping_list.dart';
 import 'package:easy_market/app/shared/themes/typography_utils.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 class ShoppingListDetailsPage extends StatefulWidget {
-  final String shoppingListId;
-  const ShoppingListDetailsPage({Key? key, required this.shoppingListId})
+  final ShoppingList shoppingList;
+  const ShoppingListDetailsPage({Key? key, required this.shoppingList})
       : super(key: key);
 
   @override
@@ -13,23 +19,10 @@ class ShoppingListDetailsPage extends StatefulWidget {
 }
 
 class _ShoppingListDetailsPageState extends State<ShoppingListDetailsPage> {
-  late ShoppingList shoppingList;
-
   @override
   void initState() {
-    // TODO: listen to shoppingList and groceryLists
-    shoppingList = ShoppingList(
-      id: widget.shoppingListId,
-      name: 'List ${widget.shoppingListId}',
-      items: List<Item>.generate(
-        20,
-        (index) => Item(
-            id: index.toString(),
-            name: 'Item ${index + 1}',
-            quantity: index * 2),
-      ),
-      owner: '',
-    );
+    final bloc = Modular.get<ItemsBloc>();
+    bloc.add(ListenShoppingListItemsEvent(widget.shoppingList.id));
     super.initState();
   }
 
@@ -38,7 +31,7 @@ class _ShoppingListDetailsPageState extends State<ShoppingListDetailsPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          shoppingList.name,
+          widget.shoppingList.name,
           style: context.titleLarge,
         ),
         actions: const [
@@ -46,13 +39,52 @@ class _ShoppingListDetailsPageState extends State<ShoppingListDetailsPage> {
           IconButton(onPressed: null, icon: Icon(Icons.more_horiz))
         ],
       ),
-      body: ListView.builder(
-        itemCount: shoppingList.items.length,
-        itemBuilder: ((context, index) => ListTile(
-              title: Text(shoppingList.items[index].name),
-              trailing: Text(shoppingList.items[index].quantity.toString()),
-            )),
+      body: SafeArea(
+        child: BlocListener<ItemsBloc, ItemsState>(
+          listenWhen: (previous, current) => previous.status != current.status,
+          listener: (context, state) {
+            if (state.status == BaseStateStatus.error) {
+              getCustomSnackBar(
+                context: context,
+                message: state.callbackMessage,
+                type: SnackBarType.error,
+              );
+            }
+          },
+          child: BlocBuilder<ItemsBloc, ItemsState>(
+            builder: (bloc, state) {
+              return state.when(
+                onState: (_) => _BuildScreen(items: state.items),
+                onLoading: () =>
+                    const Center(child: CircularProgressIndicator()),
+              );
+            },
+          ),
+        ),
       ),
+    );
+  }
+}
+
+class _BuildScreen extends StatelessWidget {
+  final List<Item> items;
+  const _BuildScreen({Key? key, required this.items}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        const SizedBox(height: 25),
+        Expanded(
+          child: ListView.builder(
+            itemCount: items.length,
+            itemBuilder: ((context, index) => ListTile(
+                  title: Text(items[index].name),
+                  trailing: Text(items[index].quantity.toString()),
+                )),
+          ),
+        ),
+      ],
     );
   }
 }

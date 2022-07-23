@@ -1,4 +1,5 @@
 import 'package:dynamic_color/dynamic_color.dart';
+import 'package:easy_market/app/modules/shopping_list/presenter/bloc/items_bloc/items_bloc.dart';
 import 'package:easy_market/app/shared/services/stream_subscriptions_cancel.dart';
 import 'package:easy_market/app/modules/corroboration/presenter/bloc/reset_password_bloc/reset_password_bloc.dart';
 import 'package:easy_market/app/modules/corroboration/presenter/bloc/sign_in_bloc/sign_in_bloc.dart';
@@ -46,6 +47,9 @@ class _AppWidgetState extends State<AppWidget> {
                       create: (_) => Modular.get<ResetPasswordBloc>()),
                   BlocProvider<ShoppingListBloc>(
                     create: (_) => Modular.get<ShoppingListBloc>(),
+                  ),
+                  BlocProvider<ItemsBloc>(
+                    create: (_) => Modular.get<ItemsBloc>(),
                   ),
                 ],
                 child: MaterialApp.router(

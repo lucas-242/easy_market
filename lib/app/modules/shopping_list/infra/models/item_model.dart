@@ -59,7 +59,7 @@ class ItemModel extends Item {
     return ItemModel(
       id: map['id'] ?? '',
       name: map['name'],
-      quantity: map['quantity']?.toInt() ?? 0,
+      quantity: int.tryParse(map['quantity'].toString()) ?? 0,
       type: map['type'] != null ? ItemTypeUtil.fromText(map['type']) : null,
       price: map['price']?.toDouble(),
       shoppingListId: map['shoppingListId'],
