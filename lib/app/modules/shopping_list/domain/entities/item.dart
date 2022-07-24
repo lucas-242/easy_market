@@ -6,6 +6,7 @@ class Item {
   final int quantity;
   final ItemType? type;
   final double? price;
+  final String orderKey;
   final String shoppingListId;
 
   const Item({
@@ -14,6 +15,7 @@ class Item {
     required this.quantity,
     this.type,
     this.price,
+    required this.orderKey,
     this.shoppingListId = '',
   });
 

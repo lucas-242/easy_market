@@ -11,6 +11,7 @@ class ItemModel extends Item {
     required super.quantity,
     super.price,
     super.type,
+    required super.orderKey,
     super.shoppingListId,
   });
 
@@ -21,6 +22,7 @@ class ItemModel extends Item {
       quantity: item.quantity,
       type: item.type,
       price: item.price,
+      orderKey: item.orderKey,
       shoppingListId: item.shoppingListId,
     );
   }
@@ -31,6 +33,7 @@ class ItemModel extends Item {
       'quantity': quantity,
       'type': type != null ? ItemTypeUtil.toText(type!) : null,
       'price': price,
+      'orderKey': orderKey,
       'shoppingListId': shoppingListId,
     };
   }
@@ -41,6 +44,7 @@ class ItemModel extends Item {
       'quantity': quantity,
       'type': type != null ? ItemTypeUtil.toText(type!) : null,
       'price': price,
+      'orderKey': orderKey,
     };
   }
 
@@ -62,6 +66,7 @@ class ItemModel extends Item {
       quantity: int.tryParse(map['quantity'].toString()) ?? 0,
       type: map['type'] != null ? ItemTypeUtil.fromText(map['type']) : null,
       price: map['price']?.toDouble(),
+      orderKey: map['order'],
       shoppingListId: map['shoppingListId'],
     );
   }
@@ -77,6 +82,7 @@ class ItemModel extends Item {
     int? quantity,
     ItemType? type,
     double? price,
+    String? orderkey,
     String? shoppingListId,
   }) {
     return ItemModel(
@@ -85,6 +91,7 @@ class ItemModel extends Item {
       quantity: quantity ?? this.quantity,
       type: type ?? this.type,
       price: price ?? this.price,
+      orderKey: orderkey ?? this.orderKey,
       shoppingListId: shoppingListId ?? this.shoppingListId,
     );
   }

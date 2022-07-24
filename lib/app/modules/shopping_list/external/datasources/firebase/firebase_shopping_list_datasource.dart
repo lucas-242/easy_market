@@ -127,6 +127,7 @@ class FirebaseShoppingListDatasource implements ShoppingListDatasource {
           .collection(shoppingListsTable)
           .doc(shoppingListId)
           .collection(itemsTable)
+          .orderBy('orderKey')
           .get();
       final result = _snapshotToListOfItemModel(snapshot.docs);
       return result;
@@ -150,6 +151,7 @@ class FirebaseShoppingListDatasource implements ShoppingListDatasource {
           .collection(shoppingListsTable)
           .doc(shoppingListId)
           .collection(itemsTable)
+          .orderBy('orderKey')
           .snapshots();
       final result = _querySnapshotToItemModel(snapshots);
       return result;
@@ -182,12 +184,14 @@ class FirebaseShoppingListDatasource implements ShoppingListDatasource {
           .doc(item.shoppingListId)
           .collection(itemsTable)
           .add(toSave);
+
       return ItemModel(
         id: reference.id,
         name: item.name,
         quantity: item.quantity,
         price: item.price,
         type: item.type,
+        orderKey: item.orderKey,
         shoppingListId: item.shoppingListId,
       );
     }
