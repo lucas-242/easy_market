@@ -4,42 +4,36 @@ import 'package:easy_market/app/modules/shopping_list/domain/errors/errors.dart'
 import 'package:easy_market/app/modules/shopping_list/shopping_list.dart';
 import 'package:mockito/mockito.dart';
 
-import '../../mock_shopping_list_test.dart' as mock;
+import '../../mock_shopping_list_test.dart';
 import '../../mock_shopping_list_test.mocks.dart';
 
 void main() {
-  final repository = MockShoppingListRepositoryTest();
+  final repository = MockShoppingListRepository();
   final usecase = CreateShoppingListImpl(repository);
 
   test('Should return a ShoppingList', () async {
-    var shoppingList = mock.shoppingListToCreate;
+    final list = shoppingList;
     when(repository.createShoppingList(any))
-        .thenAnswer((_) async => right(shoppingList));
+        .thenAnswer((_) async => right(list));
 
-    var result = await usecase(shoppingList);
-    expect(result, Right(shoppingList));
+    final result = await usecase(list);
+    expect(result, Right(list));
   });
 
   test('Should throw InvalidShoppingList when the list is invalid', () async {
-    var shoppingList = ShoppingList(
-      name: '',
-      items: const [
-        Item(name: 'product1', quantity: 5),
-        Item(name: 'product2', quantity: 3),
-      ],
-      owner: 'onwner',
-    );
-
-    var result = await usecase(shoppingList);
+    final shoppingListMock = shoppingList.copyWith(name: '');
+    final result = await usecase(shoppingListMock);
     expect(result.leftMap((l) => l is InvalidShoppingList), const Left(true));
   });
 
-  test('Should throw ShoppingListFailure when there are any errors to save',
+  test(
+      'Should throw CreateShoppingListFailure when there are any errors to save',
       () async {
     when(repository.createShoppingList(any))
-        .thenAnswer((_) async => left(ShoppingListFailure()));
+        .thenAnswer((_) async => left(CreateShoppingListFailure('test')));
 
-    var result = await usecase(mock.shoppingListToCreate);
-    expect(result.leftMap((l) => l is ShoppingListFailure), const Left(true));
+    final result = await usecase(shoppingList);
+    expect(result.leftMap((l) => l is CreateShoppingListFailure),
+        const Left(true));
   });
 }

@@ -6,19 +6,19 @@ import 'package:easy_market/app/modules/shopping_list/infra/models/shopping_list
 import 'package:easy_market/app/modules/shopping_list/infra/models/item_model.dart';
 import 'package:easy_market/app/modules/shopping_list/shopping_list.dart';
 
-import '../../../mock_shopping_list_test.dart' as mock;
+import '../../../mock_shopping_list_test.dart';
 
 void main() {
   final database = FakeFirebaseFirestore();
   final datasource = FirebaseShoppingListDatasource(database);
+  const userId = 'userId';
 
   Future<ShoppingList> _createMockShoppingList() async {
-    final shoppingList = mock.shoppingListModelToCreate;
+    final list = shoppingList;
     final listReference = await database
         .collection(datasource.shoppingListsTable)
-        .add(FirebaseShoppingListModel.fromShoppingListModel(shoppingList)
-            .toCreate());
-    final result = shoppingList.copyWith(id: listReference.id);
+        .add(FirebaseShoppingListModel.fromShoppingListModel(list).toCreate());
+    final result = list.copyWith(id: listReference.id);
     return result;
   }
 
@@ -26,16 +26,14 @@ void main() {
     test('Should create ShoppingList', () async {
       final result = await _createMockShoppingList();
       expect(result.id, isNotEmpty);
-      expect(result.name, mock.shoppingListModelToCreate.name);
+      expect(result.name, shoppingList.name);
     });
   });
-
-  //TODO: Create Errors to ShoppingList module
 
   group('Get ShoppingList', () {
     test('Should get all ShoppingLists', () async {
       await _createMockShoppingList();
-      final result = await datasource.getShoppingLists();
+      final result = await datasource.getShoppingLists(userId);
       expect(result, isNotEmpty);
       expect(
           result
@@ -45,7 +43,7 @@ void main() {
 
     test('Should listen all ShoppingLists', () async {
       await _createMockShoppingList();
-      final result = datasource.listenShoppingLists();
+      final result = datasource.listenShoppingLists(userId);
       result.listen((data) {
         expect(data, isNotEmpty);
         expect(data.every((element) => element.id.isNotEmpty), true);
@@ -57,7 +55,7 @@ void main() {
     test('Should delete ShoppingList', () async {
       final shoppingListToDelete = await _createMockShoppingList();
       await datasource.deleteShoppingList(shoppingListToDelete.id);
-      final shoppingLists = await datasource.getShoppingLists();
+      final shoppingLists = await datasource.getShoppingLists(userId);
       expect(shoppingLists.map((e) => e.id),
           isNot(contains(shoppingListToDelete.id)));
     });
@@ -76,7 +74,7 @@ void main() {
     test('Should update ShoppingList', () async {
       final shoppingListToUpdate = await _setupUpdateTest();
       await datasource.updateShoppingList(shoppingListToUpdate);
-      final shoppingLists = await datasource.getShoppingLists();
+      final shoppingLists = await datasource.getShoppingLists(userId);
       final result = shoppingLists
           .firstWhere((element) => element.id == shoppingListToUpdate.id);
 
@@ -85,56 +83,62 @@ void main() {
   });
 
   group('Item', () {
-    late ShoppingListModel shoppingList;
-    late ItemModel item;
+    late ShoppingListModel mockShoppingList;
+    late ItemModel mockItem;
 
-    setUp(() async {
-      final shoppingListToCreate = mock.shoppingListModelToCreate;
+    Future<void> _setUpMockShoppingList() async {
       final listReference = await database
           .collection(datasource.shoppingListsTable)
-          .add(FirebaseShoppingListModel.fromShoppingListModel(
-                  shoppingListToCreate)
+          .add(FirebaseShoppingListModel.fromShoppingListModel(shoppingList)
               .toCreate());
-      shoppingList = shoppingListToCreate.copyWith(id: listReference.id);
+      mockShoppingList = shoppingList.copyWith(id: listReference.id);
+    }
 
-      final itemToAdd =
-          mock.itemModelToAdd.copyWith(shoppingListId: shoppingList.id);
+    Future<void> _setUpMockItem() async {
+      final itemToAdd = item.copyWith(shoppingListId: mockShoppingList.id);
       final itemReference = await database
+          .collection(datasource.shoppingListsTable)
+          .doc(itemToAdd.shoppingListId)
           .collection(datasource.itemsTable)
           .add(itemToAdd.toCreate());
 
-      item = itemToAdd.copyWith(
+      mockItem = itemToAdd.copyWith(
         name: 'New Name',
         quantity: 40,
         id: itemReference.id,
       );
+    }
+
+    setUp(() async {
+      await _setUpMockShoppingList();
+      await _setUpMockItem();
     });
 
     test('Should add Item', () async {
-      final itemToAdd =
-          mock.itemModelToAdd.copyWith(shoppingListId: shoppingList.id);
+      final itemToAdd = mockItem.copyWith(shoppingListId: mockShoppingList.id);
       final result = await datasource.addItemToList(itemToAdd);
       expect(result.id, isNotEmpty);
-      expect(result.shoppingListId, shoppingList.id);
+      expect(result.shoppingListId, mockShoppingList.id);
     });
 
     test('Should Get Items', () async {
-      final result = await datasource.getItemsFromList(shoppingList.id);
+      final result = await datasource.getItemsFromList(mockShoppingList.id);
       expect(result, isNotEmpty);
     });
 
     test('Should Listem Items stream', () async {
-      final result = datasource.listenItemsFromList(shoppingList.id);
+      final result = datasource.listenItemsFromList(mockShoppingList.id);
       result.listen((data) {
         expect(data, isNotEmpty);
         expect(
-            data.every((element) => element.shoppingListId == shoppingList.id),
+            data.every(
+                (element) => element.shoppingListId == mockShoppingList.id),
             true);
       });
     });
 
     test('Should update Item', () async {
-      final itemToUpdate = item.copyWith(name: 'updated name');
+      final itemToUpdate = mockItem.copyWith(name: 'updated name');
       await datasource.updateItemInList(itemToUpdate);
       final itemsFromShoppingList =
           await datasource.getItemsFromList(itemToUpdate.shoppingListId);
@@ -145,11 +149,11 @@ void main() {
     });
 
     test('Should delete Item', () async {
-      await datasource.deleteItemFromList(item.id);
+      await datasource.deleteItemFromList(mockItem);
       final itemsFromShoppingList =
-          await datasource.getItemsFromList(item.shoppingListId);
+          await datasource.getItemsFromList(mockItem.shoppingListId);
       final result =
-          itemsFromShoppingList.where((element) => element.id == item.id);
+          itemsFromShoppingList.where((element) => element.id == mockItem.id);
       expect(result, isEmpty);
     });
   });

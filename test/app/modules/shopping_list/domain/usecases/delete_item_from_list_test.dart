@@ -4,32 +4,32 @@ import 'package:easy_market/app/modules/shopping_list/domain/errors/errors.dart'
 import 'package:easy_market/app/modules/shopping_list/domain/usecases/delete_item_from_list.dart';
 import 'package:mockito/mockito.dart';
 
-import '../../mock_shopping_list_test.dart' as mock;
+import '../../mock_shopping_list_test.dart';
 import '../../mock_shopping_list_test.mocks.dart';
 
 void main() {
-  final repository = MockItemRepositoryTest();
+  final repository = MockShoppingListRepository();
   final usecase = DeleteItemFromListImpl(repository);
 
   test('Should delete an Item', () async {
     when(repository.deleteItemFromList(any))
         .thenAnswer((_) async => right(unit));
-
-    var result = await usecase(mock.itemToUpdate);
+    final result = await usecase(item);
     expect(result, const Right(unit));
   });
 
   test('Should throw InvalidShoppingList when the item is invalid', () async {
-    var result = await usecase(mock.itemToAdd);
+    final mockItem = item.copyWith(id: '');
+    final result = await usecase(mockItem);
     expect(result.leftMap((l) => l is InvalidShoppingList), const Left(true));
   });
 
-  test('Should throw ShoppingListFail when the are any errors to delete',
+  test('Should throw DeleteItemFailure when the are any errors to delete',
       () async {
     when(repository.deleteItemFromList(any))
-        .thenAnswer((_) async => left(ShoppingListFailure()));
+        .thenAnswer((_) async => left(DeleteItemFailure('test')));
 
-    var result = await usecase(mock.itemToUpdate);
-    expect(result.leftMap((l) => l is ShoppingListFailure), const Left(true));
+    final result = await usecase(item);
+    expect(result.leftMap((l) => l is DeleteItemFailure), const Left(true));
   });
 }
