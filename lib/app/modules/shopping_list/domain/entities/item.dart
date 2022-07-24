@@ -21,4 +21,24 @@ class Item {
 
   bool get isValidName => name.isNotEmpty;
   bool get isValidQuantity => quantity > 0;
+
+  Item copyWith({
+    String? id,
+    String? name,
+    int? quantity,
+    ItemType? type,
+    double? price,
+    String? orderkey,
+    String? shoppingListId,
+  }) {
+    return Item(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      quantity: quantity ?? this.quantity,
+      type: type ?? this.type,
+      price: price ?? this.price,
+      orderKey: orderkey ?? this.orderKey,
+      shoppingListId: shoppingListId ?? this.shoppingListId,
+    );
+  }
 }

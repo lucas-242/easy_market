@@ -5,12 +5,11 @@ import 'package:easy_market/app/modules/corroboration/presenter/bloc/reset_passw
 import 'package:easy_market/app/modules/corroboration/presenter/bloc/sign_in_bloc/sign_in_bloc.dart';
 import 'package:easy_market/app/modules/corroboration/presenter/bloc/sign_up_bloc/sign_up_bloc.dart';
 import 'package:easy_market/app/modules/shopping_list/presenter/bloc/shopping_list_bloc.dart';
-import 'package:easy_market/app/shared/themes/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-import 'shared/themes/theme_settings.dart';
+import 'shared/themes/themes.dart';
 
 class AppWidget extends StatefulWidget {
   const AppWidget({Key? key}) : super(key: key);

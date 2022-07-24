@@ -38,7 +38,11 @@ class ShoppingListModule extends Module {
       (i) => ShoppingListBloc(i<ListenShoppingLists>()),
     ),
     BlocBind.singleton(
-      (i) => ItemsBloc(i<ListenItemsFromList>()),
+      (i) => ItemsBloc(
+          listenItemsFromListUsecase: i<ListenItemsFromList>(),
+          addItemToListUsecase: i<AddItemToList>(),
+          updateItemInListUsecase: i<UpdateItemInList>(),
+          deleteItemFromListUsecase: i<DeleteItemFromList>()),
     ),
     BindInject(
       (i) => FirebaseShoppingListDatasource(i<FirebaseFirestore>()),

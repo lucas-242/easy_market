@@ -66,7 +66,7 @@ class ItemModel extends Item {
       quantity: int.tryParse(map['quantity'].toString()) ?? 0,
       type: map['type'] != null ? ItemTypeUtil.fromText(map['type']) : null,
       price: map['price']?.toDouble(),
-      orderKey: map['order'],
+      orderKey: map['orderKey'],
       shoppingListId: map['shoppingListId'],
     );
   }
@@ -76,6 +76,7 @@ class ItemModel extends Item {
   factory ItemModel.fromJson(String source) =>
       ItemModel.fromMap(json.decode(source));
 
+  @override
   ItemModel copyWith({
     String? id,
     String? name,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:easy_market/app/shared/themes/typography_utils.dart';
+import 'package:easy_market/app/shared/themes/themes.dart';
 
 class CustomTextFormField extends StatelessWidget {
   final GlobalKey<FormFieldState>? textFormKey;
@@ -38,28 +38,25 @@ class CustomTextFormField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 14),
-      child: TextFormField(
-        key: textFormKey,
-        controller: controller,
-        initialValue: initialValue,
-        validator: validator,
-        keyboardType: keyboardType,
-        textInputAction: textInputAction,
-        readOnly: readOnly,
-        onChanged: onChanged,
-        onTap: onTap,
-        style: context.bodyLarge,
-        inputFormatters: inputFormatters,
-        obscureText: obscureText,
-        autovalidateMode: AutovalidateMode.onUserInteraction,
-        decoration: InputDecoration(
-          labelText: labelText,
-          hintText: hintText,
-          hintStyle: context.bodyLarge!,
-          suffixIcon: suffix,
-        ),
+    return TextFormField(
+      key: textFormKey,
+      controller: controller,
+      initialValue: initialValue,
+      validator: validator,
+      keyboardType: keyboardType,
+      textInputAction: textInputAction,
+      readOnly: readOnly,
+      onChanged: onChanged,
+      onTap: onTap,
+      style: context.bodyLarge,
+      inputFormatters: inputFormatters,
+      obscureText: obscureText,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      decoration: InputDecoration(
+        labelText: labelText,
+        hintText: hintText,
+        hintStyle: context.bodyLarge!,
+        suffixIcon: suffix,
       ),
     );
   }
