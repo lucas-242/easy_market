@@ -2,6 +2,8 @@ import 'package:easy_market/app/modules/shopping_list/presenter/bloc/items_bloc/
 import 'package:easy_market/app/modules/shopping_list/presenter/widgets/item_form.dart';
 import 'package:easy_market/app/shared/entities/base_bloc_state.dart';
 import 'package:easy_market/app/shared/themes/themes.dart';
+import 'package:easy_market/app/shared/widgets/confirmation_dialog/confirmation_dialog.dart';
+import 'package:easy_market/app/shared/widgets/custom_slidable/custom_slidable.dart';
 import 'package:easy_market/app/shared/widgets/custom_snack_bar/custom_snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_market/app/modules/shopping_list/shopping_list.dart';
@@ -86,6 +88,27 @@ class _BuildScreen extends StatelessWidget {
   final List<Item> items;
   const _BuildScreen({Key? key, required this.items}) : super(key: key);
 
+  void _onDelete({
+    required BuildContext context,
+    required Item item,
+  }) async {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return ConfirmationDialog(
+          title: 'Delete item',
+          confirmButton: 'Delete',
+          message: 'Would you like to delete ${item.name}?',
+          onConfirm: () {
+            Navigator.of(context).pop();
+            Modular.get<ItemsBloc>().add(DeleteItemEvent(item));
+          },
+          onCancel: () => Navigator.of(context).pop(),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -94,7 +117,16 @@ class _BuildScreen extends StatelessWidget {
         Expanded(
           child: ListView.builder(
             itemCount: items.length,
-            itemBuilder: ((context, index) => _Item(item: items[index])),
+            itemBuilder: (context, index) {
+              final item = items[index];
+              return CustomSlidable(
+                leftPanel: true,
+                rightPanel: true,
+                onRightSlide: (context) =>
+                    _onDelete(context: context, item: item),
+                child: _Item(item: item),
+              );
+            },
           ),
         ),
       ],
@@ -150,7 +182,6 @@ class _BottomSheet extends StatelessWidget {
             EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 20),
-          // padding: MediaQuery.of(context).viewInsets,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [

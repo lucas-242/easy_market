@@ -19,7 +19,8 @@ class ItemsBloc extends Bloc<ItemsEvent, ItemsState> {
     required this.deleteItemFromListUsecase,
   }) : super(ItemsState(status: BaseStateStatus.initial)) {
     on<ListenShoppingListItemsEvent>(_onInit);
-    on<AddItemEvent>(_onAddItemEvent);
+    on<AddItemEvent>(_onAddItem);
+    on<DeleteItemEvent>(_onDeleteItem);
     on<ChangeNameEvent>(_onChangeName);
     on<ChangeTypeEvent>(_onChangeType);
     on<ChangePriceEvent>(_onChangePrice);
@@ -43,12 +44,13 @@ class ItemsBloc extends Bloc<ItemsEvent, ItemsState> {
         (error) async => emit(state.copyWith(
             status: BaseStateStatus.error, callbackMessage: error.message)),
         (stream) async => await emit.forEach(stream,
-            onData: (List<Item> data) =>
-                state.copyWith(status: BaseStateStatus.success, items: data)));
+            onData: (List<Item> data) => state.copyWith(
+                  status: BaseStateStatus.success,
+                  items: data,
+                )));
   }
 
-  Future<void> _onAddItemEvent(
-      AddItemEvent event, Emitter<ItemsState> emit) async {
+  Future<void> _onAddItem(AddItemEvent event, Emitter<ItemsState> emit) async {
     emit.call(state.copyWith(status: BaseStateStatus.loading));
     await _addItem(event, emit);
   }
@@ -58,7 +60,45 @@ class ItemsBloc extends Bloc<ItemsEvent, ItemsState> {
     result.fold(
       (error) async => emit(state.copyWith(
           status: BaseStateStatus.error, callbackMessage: error.message)),
-      (result) => emit(state.copyWith(status: BaseStateStatus.success)),
+      (result) => emit(ItemsState(
+        status: BaseStateStatus.success,
+        //TODO: make shoppingListId required and remove all this emit from here
+        shoppingListId: state.shoppingListId,
+        items: state.items,
+        itemToAdd: Item(
+          name: '',
+          quantity: 0,
+          orderKey: '',
+          shoppingListId: state.shoppingListId!,
+        ),
+      )),
+    );
+  }
+
+  Future<void> _onDeleteItem(
+      DeleteItemEvent event, Emitter<ItemsState> emit) async {
+    emit.call(state.copyWith(status: BaseStateStatus.loading));
+    await _deleteItem(event, emit);
+  }
+
+  Future<void> _deleteItem(
+      DeleteItemEvent event, Emitter<ItemsState> emit) async {
+    final result = await deleteItemFromListUsecase(event.item);
+    result.fold(
+      (error) async => emit(state.copyWith(
+          status: BaseStateStatus.error, callbackMessage: error.message)),
+      (result) => emit(ItemsState(
+        status: BaseStateStatus.success,
+        //TODO: make shoppingListId required and remove all this emit from here
+        shoppingListId: state.shoppingListId,
+        items: state.items,
+        itemToAdd: Item(
+          name: '',
+          quantity: 0,
+          orderKey: '',
+          shoppingListId: state.shoppingListId!,
+        ),
+      )),
     );
   }
 

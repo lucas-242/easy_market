@@ -4,7 +4,7 @@ class InvalidShoppingList extends Failure {
   @override
   final String message;
 
-  InvalidShoppingList({this.message = ''});
+  InvalidShoppingList({this.message = 'Invalid shopping list'});
 }
 
 class GetShoppingListFailure extends Failure {

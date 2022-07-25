@@ -12,8 +12,12 @@ class ItemsState extends BaseBlocState {
     List<Item>? items,
     Item? itemToAdd,
   })  : items = items ?? [],
-        itemToAdd =
-            itemToAdd ?? const Item(name: '', quantity: 0, orderKey: '');
+        itemToAdd = itemToAdd ??
+            const Item(
+              name: '',
+              quantity: 0,
+              orderKey: '',
+            );
 
   @override
   ItemsState copyWith({

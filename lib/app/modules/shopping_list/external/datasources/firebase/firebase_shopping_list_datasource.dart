@@ -182,8 +182,7 @@ class FirebaseShoppingListDatasource implements ShoppingListDatasource {
   }
 
   @override
-  Future<ItemModel> addItemToList(ItemModel item,
-      [List<ItemModel>? items]) async {
+  Future<ItemModel> addItemToList(ItemModel item) async {
     try {
       final toSave =
           item.copyWith(orderKey: _generateOrderKeyToNewItem()).toCreate();

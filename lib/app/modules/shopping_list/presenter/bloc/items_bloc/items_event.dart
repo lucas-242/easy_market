@@ -7,8 +7,14 @@ class ListenShoppingListItemsEvent extends ItemsEvent {
   ListenShoppingListItemsEvent(this.shoppingListId);
 }
 
-class AddItemEvent extends ItemsEvent {
-  AddItemEvent();
+class AddItemEvent extends ItemsEvent {}
+
+class UpdateItemEvent extends ItemsEvent {}
+
+class DeleteItemEvent extends ItemsEvent {
+  final Item item;
+
+  DeleteItemEvent(this.item);
 }
 
 class ChangeNameEvent extends ItemsEvent {
