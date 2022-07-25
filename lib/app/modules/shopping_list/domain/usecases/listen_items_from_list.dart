@@ -1,8 +1,8 @@
 import 'package:dartz/dartz.dart';
+import 'package:easy_market/app/modules/shopping_list/domain/repositories/shopping_list_repository.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:easy_market/app/modules/shopping_list/domain/entities/item.dart';
 import 'package:easy_market/app/core/errors/errors.dart';
-import 'package:easy_market/app/modules/shopping_list/domain/repositories/item_repository.dart';
 part 'listen_items_from_list.g.dart';
 
 abstract class ListenItemsFromList {
@@ -11,7 +11,7 @@ abstract class ListenItemsFromList {
 
 @Injectable(singleton: false)
 class ListenItemsFromListImpl implements ListenItemsFromList {
-  ItemRepository repository;
+  ShoppingListRepository repository;
 
   ListenItemsFromListImpl(this.repository);
 

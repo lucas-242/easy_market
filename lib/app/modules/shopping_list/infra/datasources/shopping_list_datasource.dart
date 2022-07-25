@@ -2,8 +2,8 @@ import 'package:easy_market/app/modules/shopping_list/infra/models/item_model.da
 import 'package:easy_market/app/modules/shopping_list/infra/models/shopping_list_model.dart';
 
 abstract class ShoppingListDatasource {
-  Future<List<ShoppingListModel>> getShoppingLists();
-  Stream<List<ShoppingListModel>> listenShoppingLists();
+  Future<List<ShoppingListModel>> getShoppingLists(String userId);
+  Stream<List<ShoppingListModel>> listenShoppingLists(String userId);
   Future<ShoppingListModel> createShoppingList(ShoppingListModel shoppingList);
   Future<void> updateShoppingList(ShoppingListModel shoppingList);
   Future<void> deleteShoppingList(String id);
@@ -11,5 +11,5 @@ abstract class ShoppingListDatasource {
   Future<List<ItemModel>> getItemsFromList(String shoppingListId);
   Future<ItemModel> addItemToList(ItemModel item);
   Future<void> updateItemInList(ItemModel item);
-  Future<void> deleteItemFromList(String itemId);
+  Future<void> deleteItemFromList(ItemModel item);
 }

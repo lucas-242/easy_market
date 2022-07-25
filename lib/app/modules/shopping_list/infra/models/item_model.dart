@@ -11,6 +11,7 @@ class ItemModel extends Item {
     required super.quantity,
     super.price,
     super.type,
+    required super.orderKey,
     super.shoppingListId,
   });
 
@@ -21,26 +22,29 @@ class ItemModel extends Item {
       quantity: item.quantity,
       type: item.type,
       price: item.price,
+      orderKey: item.orderKey,
       shoppingListId: item.shoppingListId,
     );
   }
 
-  Map<String, dynamic> toMapCreate() {
+  Map<String, dynamic> toCreate() {
     return {
       'name': name,
       'quantity': quantity,
       'type': type != null ? ItemTypeUtil.toText(type!) : null,
       'price': price,
+      'orderKey': orderKey,
       'shoppingListId': shoppingListId,
     };
   }
 
-  Map<String, dynamic> toMapUpdate() {
+  Map<String, dynamic> toUpdate() {
     return {
       'name': name,
       'quantity': quantity,
       'type': type != null ? ItemTypeUtil.toText(type!) : null,
       'price': price,
+      'orderKey': orderKey,
     };
   }
 
@@ -59,9 +63,10 @@ class ItemModel extends Item {
     return ItemModel(
       id: map['id'] ?? '',
       name: map['name'],
-      quantity: map['quantity']?.toInt() ?? 0,
+      quantity: int.tryParse(map['quantity'].toString()) ?? 0,
       type: map['type'] != null ? ItemTypeUtil.fromText(map['type']) : null,
       price: map['price']?.toDouble(),
+      orderKey: map['orderKey'],
       shoppingListId: map['shoppingListId'],
     );
   }
@@ -71,12 +76,14 @@ class ItemModel extends Item {
   factory ItemModel.fromJson(String source) =>
       ItemModel.fromMap(json.decode(source));
 
+  @override
   ItemModel copyWith({
     String? id,
     String? name,
     int? quantity,
     ItemType? type,
     double? price,
+    String? orderKey,
     String? shoppingListId,
   }) {
     return ItemModel(
@@ -85,6 +92,7 @@ class ItemModel extends Item {
       quantity: quantity ?? this.quantity,
       type: type ?? this.type,
       price: price ?? this.price,
+      orderKey: orderKey ?? this.orderKey,
       shoppingListId: shoppingListId ?? this.shoppingListId,
     );
   }

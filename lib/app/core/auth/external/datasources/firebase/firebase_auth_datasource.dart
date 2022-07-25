@@ -137,8 +137,7 @@ class FirebaseAuthDatasource implements AuthDatasource {
   }
 
   Future<void> _saveUserData(User user, String name) async {
-    await firestore.collection(usersTable).add({
-      'id': user.uid,
+    await firestore.collection(usersTable).doc(user.uid).set({
       'name': name,
       'email': user.email,
       'phone': '',

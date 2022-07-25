@@ -1,4 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_market/app/core/routes/utils/routes_utils.dart';
+import 'package:easy_market/app/modules/shopping_list/presenter/bloc/items_bloc/items_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:easy_market/app/core/routes/app_routes.dart';
 import 'package:easy_market/app/modules/shopping_list/domain/usecases/add_item_to_list.dart';
@@ -12,7 +14,6 @@ import 'package:easy_market/app/modules/shopping_list/domain/usecases/listen_sho
 import 'package:easy_market/app/modules/shopping_list/domain/usecases/update_item_in_list.dart';
 import 'package:easy_market/app/modules/shopping_list/domain/usecases/update_shopping_list.dart';
 import 'package:easy_market/app/modules/shopping_list/external/datasources/firebase/firebase_shopping_list_datasource.dart';
-import 'package:easy_market/app/modules/shopping_list/infra/repositories/item_repository_impl.dart';
 import 'package:easy_market/app/modules/shopping_list/infra/repositories/shopping_list_repository_impl.dart';
 import 'package:easy_market/app/modules/shopping_list/presenter/bloc/shopping_list_bloc.dart';
 import 'package:easy_market/app/modules/shopping_list/presenter/pages/shopping_list_details_page.dart';
@@ -32,10 +33,16 @@ class ShoppingListModule extends Module {
     $ListenShoppingListsImpl,
     $UpdateItemInListImpl,
     $UpdateShoppingListImpl,
-    $ItemRepositoryImpl,
     $ShoppingListRepositoryImpl,
     BlocBind.singleton(
       (i) => ShoppingListBloc(i<ListenShoppingLists>()),
+    ),
+    BlocBind.singleton(
+      (i) => ItemsBloc(
+          listenItemsFromListUsecase: i<ListenItemsFromList>(),
+          addItemToListUsecase: i<AddItemToList>(),
+          updateItemInListUsecase: i<UpdateItemInList>(),
+          deleteItemFromListUsecase: i<DeleteItemFromList>()),
     ),
     BindInject(
       (i) => FirebaseShoppingListDatasource(i<FirebaseFirestore>()),
@@ -48,9 +55,10 @@ class ShoppingListModule extends Module {
   final List<ModularRoute> routes = [
     ChildRoute(AppRoutes.main, child: (_, __) => const ShoppingListsPage()),
     ChildRoute(
-      '${AppRoutes.listDetails}:id',
+      '${RoutesUtils.lastPathInRoute(AppRoutes.listDetails)}:id',
       child: (context, args) =>
-          ShoppingListDetailsPage(shoppingListId: args.params['id']),
+          ShoppingListDetailsPage(shoppingList: args.data['shoppingList']),
+      // ShoppingListDetailsPage(shoppingListId: args.params['id']),
     ),
   ];
 }

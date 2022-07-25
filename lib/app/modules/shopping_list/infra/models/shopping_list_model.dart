@@ -4,25 +4,25 @@ import 'package:easy_market/app/modules/shopping_list/domain/entities/shopping_l
 import 'package:easy_market/app/modules/shopping_list/infra/models/item_model.dart';
 
 class ShoppingListModel extends ShoppingList {
-  @override
-  List<ItemModel> items;
-
   ShoppingListModel({
     required super.name,
-    required this.items,
+    required super.items,
     super.id,
     super.createdAt,
     super.updatedAt,
+    required super.owner,
+    super.users,
   });
 
   factory ShoppingListModel.fromShoppingList(ShoppingList shoppingList) {
     return ShoppingListModel(
       id: shoppingList.id,
       name: shoppingList.name,
-      items: List<ItemModel>.from(
-          shoppingList.items.map((x) => ItemModel.fromItem(x))),
+      items: shoppingList.items,
       createdAt: shoppingList.createdAt,
       updatedAt: shoppingList.updatedAt,
+      owner: shoppingList.owner,
+      users: shoppingList.users,
     );
   }
 
@@ -45,9 +45,11 @@ class ShoppingListModel extends ShoppingList {
     return {
       'id': id,
       'name': name,
-      'items': items.map((x) => x.toMap()).toList(),
+      'items': items.map((x) => ItemModel.fromItem(x).toMap()).toList(),
       'createdAt': createdAt.millisecondsSinceEpoch,
       'updatedAt': updatedAt.millisecondsSinceEpoch,
+      'owner': owner,
+      'users': users,
     };
   }
 
@@ -60,6 +62,8 @@ class ShoppingListModel extends ShoppingList {
           : [],
       createdAt: map['createdAt'].toDate(),
       updatedAt: map['updatedAt'].toDate(),
+      owner: map['owner'],
+      users: map['users'],
     );
   }
 
@@ -74,6 +78,8 @@ class ShoppingListModel extends ShoppingList {
     List<ItemModel>? items,
     DateTime? createdAt,
     DateTime? updatedAt,
+    String? owner,
+    List<String>? users,
   }) {
     return ShoppingListModel(
       id: id ?? this.id,
@@ -81,6 +87,8 @@ class ShoppingListModel extends ShoppingList {
       items: items ?? this.items,
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
+      owner: owner ?? this.owner,
+      users: users ?? this.users,
     );
   }
 }

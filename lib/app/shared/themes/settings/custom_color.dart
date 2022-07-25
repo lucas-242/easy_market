@@ -1,5 +1,5 @@
+import 'package:easy_market/app/shared/themes/settings/theme_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:easy_market/app/shared/themes/theme_provider.dart';
 
 class CustomColor {
   const CustomColor({

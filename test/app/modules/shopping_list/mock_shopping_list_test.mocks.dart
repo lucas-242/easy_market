@@ -6,15 +6,21 @@ import 'dart:async' as _i5;
 
 import 'package:dartz/dartz.dart' as _i2;
 import 'package:easy_market/app/core/errors/errors.dart' as _i7;
+import 'package:easy_market/app/modules/shopping_list/domain/entities/item.dart'
+    as _i9;
+import 'package:easy_market/app/modules/shopping_list/domain/entities/shopping_list.dart'
+    as _i8;
+import 'package:easy_market/app/modules/shopping_list/infra/datasources/shopping_list_datasource.dart'
+    as _i10;
 import 'package:easy_market/app/modules/shopping_list/infra/models/item_model.dart'
     as _i4;
 import 'package:easy_market/app/modules/shopping_list/infra/models/shopping_list_model.dart'
     as _i3;
 import 'package:easy_market/app/modules/shopping_list/shopping_list.dart'
-    as _i8;
+    as _i6;
 import 'package:mockito/mockito.dart' as _i1;
 
-import 'mock_shopping_list_test.dart' as _i6;
+import 'mock_shopping_list_test.dart' as _i11;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -36,27 +42,27 @@ class _FakeItemModel_2 extends _i1.Fake implements _i4.ItemModel {}
 class _FakeStreamSubscription_3<T> extends _i1.Fake
     implements _i5.StreamSubscription<T> {}
 
-/// A class which mocks [ShoppingListRepositoryTest].
+/// A class which mocks [ShoppingListRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockShoppingListRepositoryTest extends _i1.Mock
-    implements _i6.ShoppingListRepositoryTest {
-  MockShoppingListRepositoryTest() {
+class MockShoppingListRepository extends _i1.Mock
+    implements _i6.ShoppingListRepository {
+  MockShoppingListRepository() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i5.Future<_i2.Either<_i7.Failure, List<_i8.ShoppingList>>>
-      getShoppingLists() => (super.noSuchMethod(
-              Invocation.method(#getShoppingLists, []),
+  _i5.Future<_i2.Either<_i7.Failure, List<_i8.ShoppingList>>> getShoppingLists(
+          String? userId) =>
+      (super.noSuchMethod(Invocation.method(#getShoppingLists, [userId]),
               returnValue:
                   Future<_i2.Either<_i7.Failure, List<_i8.ShoppingList>>>.value(
                       _FakeEither_0<_i7.Failure, List<_i8.ShoppingList>>()))
           as _i5.Future<_i2.Either<_i7.Failure, List<_i8.ShoppingList>>>);
   @override
   _i2.Either<_i7.Failure, _i5.Stream<List<_i8.ShoppingList>>>
-      listenShoppingLists() =>
-          (super.noSuchMethod(Invocation.method(#listenShoppingLists, []),
+      listenShoppingLists(String? userId) =>
+          (super.noSuchMethod(Invocation.method(#listenShoppingLists, [userId]),
                   returnValue: _FakeEither_0<_i7.Failure,
                       _i5.Stream<List<_i8.ShoppingList>>>())
               as _i2.Either<_i7.Failure, _i5.Stream<List<_i8.ShoppingList>>>);
@@ -84,26 +90,62 @@ class MockShoppingListRepositoryTest extends _i1.Mock
               returnValue: Future<_i2.Either<_i7.Failure, _i2.Unit>>.value(
                   _FakeEither_0<_i7.Failure, _i2.Unit>()))
           as _i5.Future<_i2.Either<_i7.Failure, _i2.Unit>>);
+  @override
+  _i5.Future<_i2.Either<_i7.Failure, List<_i9.Item>>> getItemsFromList(
+          String? shoppingListId) =>
+      (super.noSuchMethod(
+          Invocation.method(#getItemsFromList, [shoppingListId]),
+          returnValue: Future<_i2.Either<_i7.Failure, List<_i9.Item>>>.value(
+              _FakeEither_0<_i7.Failure, List<_i9.Item>>())) as _i5
+          .Future<_i2.Either<_i7.Failure, List<_i9.Item>>>);
+  @override
+  _i2.Either<_i7.Failure, _i5.Stream<List<_i9.Item>>> listenItemsFromList(
+          String? shoppingListId) =>
+      (super.noSuchMethod(
+              Invocation.method(#listenItemsFromList, [shoppingListId]),
+              returnValue:
+                  _FakeEither_0<_i7.Failure, _i5.Stream<List<_i9.Item>>>())
+          as _i2.Either<_i7.Failure, _i5.Stream<List<_i9.Item>>>);
+  @override
+  _i5.Future<_i2.Either<_i7.Failure, _i9.Item>> addItemToList(_i9.Item? item) =>
+      (super.noSuchMethod(Invocation.method(#addItemToList, [item]),
+              returnValue: Future<_i2.Either<_i7.Failure, _i9.Item>>.value(
+                  _FakeEither_0<_i7.Failure, _i9.Item>()))
+          as _i5.Future<_i2.Either<_i7.Failure, _i9.Item>>);
+  @override
+  _i5.Future<_i2.Either<_i7.Failure, _i2.Unit>> updateItemInList(
+          _i9.Item? item) =>
+      (super.noSuchMethod(Invocation.method(#updateItemInList, [item]),
+              returnValue: Future<_i2.Either<_i7.Failure, _i2.Unit>>.value(
+                  _FakeEither_0<_i7.Failure, _i2.Unit>()))
+          as _i5.Future<_i2.Either<_i7.Failure, _i2.Unit>>);
+  @override
+  _i5.Future<_i2.Either<_i7.Failure, _i2.Unit>> deleteItemFromList(
+          _i9.Item? item) =>
+      (super.noSuchMethod(Invocation.method(#deleteItemFromList, [item]),
+              returnValue: Future<_i2.Either<_i7.Failure, _i2.Unit>>.value(
+                  _FakeEither_0<_i7.Failure, _i2.Unit>()))
+          as _i5.Future<_i2.Either<_i7.Failure, _i2.Unit>>);
 }
 
-/// A class which mocks [ShoppingListDatasourceTest].
+/// A class which mocks [ShoppingListDatasource].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockShoppingListDatasourceTest extends _i1.Mock
-    implements _i6.ShoppingListDatasourceTest {
-  MockShoppingListDatasourceTest() {
+class MockShoppingListDatasource extends _i1.Mock
+    implements _i10.ShoppingListDatasource {
+  MockShoppingListDatasource() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i5.Future<List<_i3.ShoppingListModel>> getShoppingLists() =>
-      (super.noSuchMethod(Invocation.method(#getShoppingLists, []),
+  _i5.Future<List<_i3.ShoppingListModel>> getShoppingLists(String? userId) =>
+      (super.noSuchMethod(Invocation.method(#getShoppingLists, [userId]),
               returnValue: Future<List<_i3.ShoppingListModel>>.value(
                   <_i3.ShoppingListModel>[]))
           as _i5.Future<List<_i3.ShoppingListModel>>);
   @override
-  _i5.Stream<List<_i3.ShoppingListModel>> listenShoppingLists() =>
-      (super.noSuchMethod(Invocation.method(#listenShoppingLists, []),
+  _i5.Stream<List<_i3.ShoppingListModel>> listenShoppingLists(String? userId) =>
+      (super.noSuchMethod(Invocation.method(#listenShoppingLists, [userId]),
               returnValue: Stream<List<_i3.ShoppingListModel>>.empty())
           as _i5.Stream<List<_i3.ShoppingListModel>>);
   @override
@@ -148,64 +190,17 @@ class MockShoppingListDatasourceTest extends _i1.Mock
           returnValue: Future<void>.value(),
           returnValueForMissingStub: Future<void>.value()) as _i5.Future<void>);
   @override
-  _i5.Future<void> deleteItemFromList(String? itemId) =>
-      (super.noSuchMethod(Invocation.method(#deleteItemFromList, [itemId]),
+  _i5.Future<void> deleteItemFromList(_i4.ItemModel? item) =>
+      (super.noSuchMethod(Invocation.method(#deleteItemFromList, [item]),
           returnValue: Future<void>.value(),
           returnValueForMissingStub: Future<void>.value()) as _i5.Future<void>);
 }
 
-/// A class which mocks [ItemRepositoryTest].
+/// A class which mocks [StreamItem].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockItemRepositoryTest extends _i1.Mock
-    implements _i6.ItemRepositoryTest {
-  MockItemRepositoryTest() {
-    _i1.throwOnMissingStub(this);
-  }
-
-  @override
-  _i5.Future<_i2.Either<_i7.Failure, List<_i8.Item>>> getItemsFromList(
-          String? shoppingListId) =>
-      (super.noSuchMethod(
-          Invocation.method(#getItemsFromList, [shoppingListId]),
-          returnValue: Future<_i2.Either<_i7.Failure, List<_i8.Item>>>.value(
-              _FakeEither_0<_i7.Failure, List<_i8.Item>>())) as _i5
-          .Future<_i2.Either<_i7.Failure, List<_i8.Item>>>);
-  @override
-  _i2.Either<_i7.Failure, _i5.Stream<List<_i8.Item>>> listenItemsFromList(
-          String? shoppingListId) =>
-      (super.noSuchMethod(
-              Invocation.method(#listenItemsFromList, [shoppingListId]),
-              returnValue:
-                  _FakeEither_0<_i7.Failure, _i5.Stream<List<_i8.Item>>>())
-          as _i2.Either<_i7.Failure, _i5.Stream<List<_i8.Item>>>);
-  @override
-  _i5.Future<_i2.Either<_i7.Failure, _i8.Item>> addItemToList(_i8.Item? item) =>
-      (super.noSuchMethod(Invocation.method(#addItemToList, [item]),
-              returnValue: Future<_i2.Either<_i7.Failure, _i8.Item>>.value(
-                  _FakeEither_0<_i7.Failure, _i8.Item>()))
-          as _i5.Future<_i2.Either<_i7.Failure, _i8.Item>>);
-  @override
-  _i5.Future<_i2.Either<_i7.Failure, _i2.Unit>> updateItemInList(
-          _i8.Item? item) =>
-      (super.noSuchMethod(Invocation.method(#updateItemInList, [item]),
-              returnValue: Future<_i2.Either<_i7.Failure, _i2.Unit>>.value(
-                  _FakeEither_0<_i7.Failure, _i2.Unit>()))
-          as _i5.Future<_i2.Either<_i7.Failure, _i2.Unit>>);
-  @override
-  _i5.Future<_i2.Either<_i7.Failure, _i2.Unit>> deleteItemFromList(
-          _i8.Item? item) =>
-      (super.noSuchMethod(Invocation.method(#deleteItemFromList, [item]),
-              returnValue: Future<_i2.Either<_i7.Failure, _i2.Unit>>.value(
-                  _FakeEither_0<_i7.Failure, _i2.Unit>()))
-          as _i5.Future<_i2.Either<_i7.Failure, _i2.Unit>>);
-}
-
-/// A class which mocks [StreamItemTest].
-///
-/// See the documentation for Mockito's code generation for more information.
-class MockStreamItemTest extends _i1.Mock implements _i6.StreamItemTest {
-  MockStreamItemTest() {
+class MockStreamItem extends _i1.Mock implements _i11.StreamItem {
+  MockStreamItem() {
     _i1.throwOnMissingStub(this);
   }
 
@@ -420,12 +415,12 @@ class MockStreamItemTest extends _i1.Mock implements _i6.StreamItemTest {
           as _i5.Stream<List<_i4.ItemModel>>);
 }
 
-/// A class which mocks [StreamShoppingListsTest].
+/// A class which mocks [StreamShoppingLists].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockStreamShoppingListsTest extends _i1.Mock
-    implements _i6.StreamShoppingListsTest {
-  MockStreamShoppingListsTest() {
+class MockStreamShoppingLists extends _i1.Mock
+    implements _i11.StreamShoppingLists {
+  MockStreamShoppingLists() {
     _i1.throwOnMissingStub(this);
   }
 

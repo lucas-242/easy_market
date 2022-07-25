@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:easy_market/app/modules/shopping_list/shopping_list.dart';
-import 'package:easy_market/app/shared/themes/typography_utils.dart';
+import 'package:easy_market/app/shared/themes/themes.dart';
 
 class ShoppingListCard extends StatelessWidget {
   final ShoppingList shoppingList;

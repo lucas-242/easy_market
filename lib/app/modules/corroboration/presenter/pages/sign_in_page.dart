@@ -6,8 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart'
     hide ModularWatchExtension;
 import 'package:easy_market/app/core/routes/app_routes.dart';
-import 'package:easy_market/app/shared/themes/theme_utils.dart';
-import 'package:easy_market/app/shared/themes/typography_utils.dart';
+import 'package:easy_market/app/shared/themes/themes.dart';
 import 'package:easy_market/app/shared/widgets/custom_elevated_button/custom_elevated_button.dart';
 import 'package:easy_market/app/shared/widgets/custom_snack_bar/custom_snack_bar.dart';
 import 'package:easy_market/app/shared/widgets/custom_text_form_field/custom_text_form_field.dart';

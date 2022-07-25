@@ -6,7 +6,7 @@ import 'package:easy_market/app/modules/shopping_list/domain/repositories/shoppi
 part 'listen_shopping_lists.g.dart';
 
 abstract class ListenShoppingLists {
-  Either<Failure, Stream<List<ShoppingList>>> call();
+  Either<Failure, Stream<List<ShoppingList>>> call(String userId);
 }
 
 @Injectable(singleton: false)
@@ -16,8 +16,8 @@ class ListenShoppingListsImpl implements ListenShoppingLists {
   ListenShoppingListsImpl(this.repository);
 
   @override
-  Either<Failure, Stream<List<ShoppingList>>> call() {
-    var result = repository.listenShoppingLists();
+  Either<Failure, Stream<List<ShoppingList>>> call(String userId) {
+    var result = repository.listenShoppingLists(userId);
     return result;
   }
 }
