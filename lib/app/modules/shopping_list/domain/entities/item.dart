@@ -28,7 +28,7 @@ class Item {
     int? quantity,
     ItemType? type,
     double? price,
-    String? orderkey,
+    String? orderKey,
     String? shoppingListId,
   }) {
     return Item(
@@ -37,7 +37,7 @@ class Item {
       quantity: quantity ?? this.quantity,
       type: type ?? this.type,
       price: price ?? this.price,
-      orderKey: orderkey ?? this.orderKey,
+      orderKey: orderKey ?? this.orderKey,
       shoppingListId: shoppingListId ?? this.shoppingListId,
     );
   }
