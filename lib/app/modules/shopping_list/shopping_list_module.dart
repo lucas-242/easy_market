@@ -46,7 +46,7 @@ class ShoppingListModule extends Module {
     ),
     BindInject(
       (i) => FirebaseShoppingListDatasource(i<FirebaseFirestore>()),
-      isSingleton: false,
+      isSingleton: true,
       isLazy: true,
     ),
   ];

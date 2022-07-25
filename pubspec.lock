@@ -457,6 +457,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.5.0"
+  lexicographical_order:
+    dependency: "direct main"
+    description:
+      name: lexicographical_order
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.3.5"
   lints:
     dependency: transitive
     description:

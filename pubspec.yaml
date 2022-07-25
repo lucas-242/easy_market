@@ -24,6 +24,7 @@ dependencies:
   flutter_modular: ^5.0.3
   font_awesome_flutter: ^10.1.0
   intl: ^0.17.0
+  lexicographical_order: ^1.3.5
   modular_bloc_bind: ^1.0.1
   google_fonts: ^3.0.1
   url_launcher: ^6.1.5

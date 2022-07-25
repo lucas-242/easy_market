@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_market/app/modules/shopping_list/domain/errors/errors.dart';
-
 import 'package:easy_market/app/modules/shopping_list/infra/datasources/shopping_list_datasource.dart';
 import 'package:easy_market/app/modules/shopping_list/infra/models/item_model.dart';
 import 'package:easy_market/app/modules/shopping_list/infra/models/shopping_list_model.dart';
+import 'package:lexicographical_order/lexicographical_order.dart';
 
 import 'models/firebase_shopping_list_model.dart';
 
@@ -12,6 +12,7 @@ class FirebaseShoppingListDatasource implements ShoppingListDatasource {
   final String itemsTable = 'items';
   final FirebaseFirestore _firestore;
   final bool _useFirebaseEmulator;
+  List<ItemModel>? _cachedItems;
 
   FirebaseShoppingListDatasource(this._firestore,
       {bool useFirebaseEmulator = false})
@@ -141,6 +142,7 @@ class FirebaseShoppingListDatasource implements ShoppingListDatasource {
     final result = snapshot
         .map((e) => ItemModel.fromMap(e.data()).copyWith(id: e.id))
         .toList();
+    _cachedItems = result;
     return result;
   }
 
@@ -162,23 +164,29 @@ class FirebaseShoppingListDatasource implements ShoppingListDatasource {
 
   Stream<List<ItemModel>> _querySnapshotToItemModel(
       Stream<QuerySnapshot<Object?>> snapshot) {
-    final result = snapshot.map((query) => query.docs
-        .map((DocumentSnapshot document) =>
-            _documentSnapshotToItemModel(document))
-        .toList());
+    final result = snapshot.map((query) {
+      final items = query.docs
+          .map((DocumentSnapshot document) =>
+              _documentSnapshotToItemModel(document))
+          .toList();
+      _cachedItems = items;
+      return items;
+    });
     return result;
   }
 
   ItemModel _documentSnapshotToItemModel(DocumentSnapshot snapshot) {
     final data = snapshot.data() as Map<String, dynamic>;
-    final result = ItemModel.fromMap(data);
-    return result.copyWith(id: snapshot.id);
+    final result = ItemModel.fromMap(data).copyWith(id: snapshot.id);
+    return result;
   }
 
   @override
-  Future<ItemModel> addItemToList(ItemModel item) async {
+  Future<ItemModel> addItemToList(ItemModel item,
+      [List<ItemModel>? items]) async {
     try {
-      final toSave = item.toCreate();
+      final toSave =
+          item.copyWith(orderKey: _generateOrderKeyToNewItem()).toCreate();
       final reference = await _firestore
           .collection(shoppingListsTable)
           .doc(item.shoppingListId)
@@ -202,6 +210,14 @@ class FirebaseShoppingListDatasource implements ShoppingListDatasource {
     catch (e) {
       throw AddItemFailure('Error to add item.');
     }
+  }
+
+  String _generateOrderKeyToNewItem() {
+    if (_cachedItems == null || _cachedItems!.isEmpty) {
+      return generateOrderKeys(1).first;
+    }
+
+    return between(prev: _cachedItems!.last.orderKey);
   }
 
   @override
