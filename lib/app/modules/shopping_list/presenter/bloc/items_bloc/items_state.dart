@@ -35,4 +35,18 @@ class ItemsState extends BaseBlocState {
       itemToAdd: itemToAdd ?? this.itemToAdd,
     );
   }
+
+  ItemsState successState() {
+    return ItemsState(
+      status: BaseStateStatus.success,
+      shoppingListId: shoppingListId,
+      items: items,
+      itemToAdd: Item(
+        name: '',
+        quantity: 0,
+        orderKey: '',
+        shoppingListId: shoppingListId!,
+      ),
+    );
+  }
 }

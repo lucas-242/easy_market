@@ -2,11 +2,12 @@ import 'package:bloc/bloc.dart';
 import 'package:easy_market/app/modules/shopping_list/domain/usecases/listen_items_from_list.dart';
 import 'package:easy_market/app/modules/shopping_list/shopping_list.dart';
 import 'package:easy_market/app/shared/entities/base_bloc_state.dart';
+import 'package:easy_market/app/shared/validators/form_validator.dart';
 
 part 'items_event.dart';
 part 'items_state.dart';
 
-class ItemsBloc extends Bloc<ItemsEvent, ItemsState> {
+class ItemsBloc extends Bloc<ItemsEvent, ItemsState> with FormValidator {
   final ListenItemsFromList listenItemsFromListUsecase;
   final AddItemToList addItemToListUsecase;
   final UpdateItemInList updateItemInListUsecase;
@@ -60,18 +61,7 @@ class ItemsBloc extends Bloc<ItemsEvent, ItemsState> {
     result.fold(
       (error) async => emit(state.copyWith(
           status: BaseStateStatus.error, callbackMessage: error.message)),
-      (result) => emit(ItemsState(
-        status: BaseStateStatus.success,
-        //TODO: make shoppingListId required and remove all this emit from here
-        shoppingListId: state.shoppingListId,
-        items: state.items,
-        itemToAdd: Item(
-          name: '',
-          quantity: 0,
-          orderKey: '',
-          shoppingListId: state.shoppingListId!,
-        ),
-      )),
+      (result) => emit(state.successState()),
     );
   }
 
@@ -87,18 +77,7 @@ class ItemsBloc extends Bloc<ItemsEvent, ItemsState> {
     result.fold(
       (error) async => emit(state.copyWith(
           status: BaseStateStatus.error, callbackMessage: error.message)),
-      (result) => emit(ItemsState(
-        status: BaseStateStatus.success,
-        //TODO: make shoppingListId required and remove all this emit from here
-        shoppingListId: state.shoppingListId,
-        items: state.items,
-        itemToAdd: Item(
-          name: '',
-          quantity: 0,
-          orderKey: '',
-          shoppingListId: state.shoppingListId!,
-        ),
-      )),
+      (result) => (result) => emit(state.successState()),
     );
   }
 

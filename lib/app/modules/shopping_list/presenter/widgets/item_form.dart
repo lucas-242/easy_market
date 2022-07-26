@@ -18,7 +18,6 @@ class ItemForm extends StatefulWidget {
 }
 
 class _ItemFormState extends State<ItemForm> {
-  //TODO: Add form validators
   final _formKey = GlobalKey<FormState>();
   final _namelKey = GlobalKey<FormFieldState>();
   final _quantityKey = GlobalKey<FormFieldState>();
@@ -65,6 +64,8 @@ class _NameField extends StatelessWidget {
       initialValue: bloc.state.itemToAdd.name,
       keyboardType: TextInputType.text,
       onChanged: (value) => bloc.add(ChangeNameEvent(value)),
+      validator: (value) =>
+          bloc.validateTextField(fieldValue: value, fieldName: label),
     );
   }
 }
@@ -83,6 +84,7 @@ class _TypeField extends StatelessWidget {
       itemAsString: (ItemType? i) => i!.toShortString(),
       compareFn: (item1, item2) => item1.toString() == item2.toShortString(),
       onChanged: (value) => bloc.add(ChangeTypeEvent(value)),
+      validator: (value) => bloc.validateItemTypeField(fieldValue: value),
       autoValidateMode: AutovalidateMode.onUserInteraction,
       popupProps: const PopupProps.menu(
         showSelectedItems: true,
@@ -123,6 +125,10 @@ class _QuantityField extends StatelessWidget {
           : '',
       keyboardType: TextInputType.number,
       onChanged: (value) => bloc.add(ChangeQuantityEvent(value)),
+      validator: (value) => bloc.validateNumberField(
+        fieldValue: value,
+        fieldName: label,
+      ),
     );
   }
 }
@@ -142,6 +148,10 @@ class _PriceField extends StatelessWidget {
       initialValue: bloc.state.itemToAdd.price?.toString(),
       keyboardType: TextInputType.number,
       onChanged: (value) => bloc.add(ChangePriceEvent(value)),
+      validator: (value) => bloc.validateNumberField(
+        fieldValue: value,
+        fieldName: label,
+      ),
     );
   }
 }

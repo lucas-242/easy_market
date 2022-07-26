@@ -169,8 +169,6 @@ class _BottomSheet extends StatelessWidget {
   void _addItem(BuildContext context) {
     final bloc = Modular.get<ItemsBloc>();
     bloc.add(AddItemEvent());
-
-    //TODO: Pop only when the operation is complete
     Navigator.pop(context);
   }
 
