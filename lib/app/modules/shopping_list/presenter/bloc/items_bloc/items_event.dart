@@ -7,6 +7,12 @@ class ListenShoppingListItemsEvent extends ItemsEvent {
   ListenShoppingListItemsEvent(this.shoppingListId);
 }
 
+class ChangeCurrentItemEvent extends ItemsEvent {
+  final Item? item;
+
+  ChangeCurrentItemEvent({this.item});
+}
+
 class AddItemEvent extends ItemsEvent {}
 
 class UpdateItemEvent extends ItemsEvent {}

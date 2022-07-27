@@ -37,6 +37,22 @@ mixin FormValidator {
     return error;
   }
 
+  String? validatePriceField({
+    required String? fieldValue,
+    String fieldName = 'Price',
+  }) {
+    String? error;
+    final convertedValue = double.tryParse(fieldValue!);
+
+    if (convertedValue == null) {
+      error = 'Please, inform a valid number';
+    } else if (convertedValue < 0) {
+      error = 'Please, inform a number greater than 0';
+    }
+
+    return error;
+  }
+
   String? validateItemTypeField({
     required ItemType? fieldValue,
     String? fieldName = 'Type',

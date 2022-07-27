@@ -9,9 +9,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ItemForm extends StatefulWidget {
-  final void Function() onAdd;
+  final void Function() onSubmit;
 
-  const ItemForm({Key? key, required this.onAdd}) : super(key: key);
+  const ItemForm({Key? key, required this.onSubmit}) : super(key: key);
 
   @override
   State<ItemForm> createState() => _ItemFormState();
@@ -39,7 +39,7 @@ class _ItemFormState extends State<ItemForm> {
           _PriceField(fieldKey: _priceKey),
           const SizedBox(height: 30),
           CustomElevatedButton(
-            onTap: widget.onAdd,
+            onTap: widget.onSubmit,
             size: Size(context.width * 0.7, context.height * 0.067),
             text: 'Add',
           ),
@@ -61,7 +61,7 @@ class _NameField extends StatelessWidget {
     return CustomTextFormField(
       textFormKey: fieldKey,
       labelText: label,
-      initialValue: bloc.state.itemToAdd.name,
+      initialValue: bloc.state.currentItem.name,
       keyboardType: TextInputType.text,
       onChanged: (value) => bloc.add(ChangeNameEvent(value)),
       validator: (value) =>
@@ -82,6 +82,7 @@ class _TypeField extends StatelessWidget {
     return DropdownSearch<ItemType>(
       items: ItemType.values,
       itemAsString: (ItemType? i) => i!.toShortString(),
+      selectedItem: bloc.state.currentItem.type,
       compareFn: (item1, item2) => item1.toString() == item2.toShortString(),
       onChanged: (value) => bloc.add(ChangeTypeEvent(value)),
       validator: (value) => bloc.validateItemTypeField(fieldValue: value),
@@ -120,8 +121,8 @@ class _QuantityField extends StatelessWidget {
     return CustomTextFormField(
       textFormKey: fieldKey,
       labelText: label,
-      initialValue: bloc.state.itemToAdd.quantity > 0
-          ? bloc.state.itemToAdd.quantity.toString()
+      initialValue: bloc.state.currentItem.quantity > 0
+          ? bloc.state.currentItem.quantity.toString()
           : '',
       keyboardType: TextInputType.number,
       onChanged: (value) => bloc.add(ChangeQuantityEvent(value)),
@@ -145,10 +146,10 @@ class _PriceField extends StatelessWidget {
     return CustomTextFormField(
       textFormKey: fieldKey,
       labelText: label,
-      initialValue: bloc.state.itemToAdd.price?.toString(),
+      initialValue: bloc.state.currentItem.price?.toString(),
       keyboardType: TextInputType.number,
       onChanged: (value) => bloc.add(ChangePriceEvent(value)),
-      validator: (value) => bloc.validateNumberField(
+      validator: (value) => bloc.validatePriceField(
         fieldValue: value,
         fieldName: label,
       ),

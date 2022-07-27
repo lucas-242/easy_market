@@ -3,16 +3,16 @@ part of 'items_bloc.dart';
 class ItemsState extends BaseBlocState {
   final List<Item> items;
   final String? shoppingListId;
-  final Item itemToAdd;
+  final Item currentItem;
 
   ItemsState({
     required super.status,
     this.shoppingListId,
     super.callbackMessage,
     List<Item>? items,
-    Item? itemToAdd,
+    Item? currentItem,
   })  : items = items ?? [],
-        itemToAdd = itemToAdd ??
+        currentItem = currentItem ??
             const Item(
               name: '',
               quantity: 0,
@@ -25,14 +25,14 @@ class ItemsState extends BaseBlocState {
     String? callbackMessage,
     String? shoppingListId,
     List<Item>? items,
-    Item? itemToAdd,
+    Item? currentItem,
   }) {
     return ItemsState(
       status: status ?? this.status,
       callbackMessage: callbackMessage ?? this.callbackMessage,
       shoppingListId: shoppingListId ?? this.shoppingListId,
       items: items ?? this.items,
-      itemToAdd: itemToAdd ?? this.itemToAdd,
+      currentItem: currentItem ?? this.currentItem,
     );
   }
 
@@ -41,10 +41,8 @@ class ItemsState extends BaseBlocState {
       status: BaseStateStatus.success,
       shoppingListId: shoppingListId,
       items: items,
-      itemToAdd: Item(
+      currentItem: Item(
         name: '',
-        quantity: 0,
-        orderKey: '',
         shoppingListId: shoppingListId!,
       ),
     );
