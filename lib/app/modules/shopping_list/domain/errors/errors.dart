@@ -1,18 +1,10 @@
 import 'package:easy_market/app/core/errors/errors.dart';
 
-@Deprecated('Use another failure')
-class ShoppingListFailure extends Failure {
-  @override
-  final String message;
-
-  ShoppingListFailure({this.message = ''});
-}
-
 class InvalidShoppingList extends Failure {
   @override
   final String message;
 
-  InvalidShoppingList({this.message = ''});
+  InvalidShoppingList({this.message = 'Invalid shopping list'});
 }
 
 class GetShoppingListFailure extends Failure {

@@ -3,17 +3,21 @@ part of 'items_bloc.dart';
 class ItemsState extends BaseBlocState {
   final List<Item> items;
   final String? shoppingListId;
-  final Item itemToAdd;
+  final Item currentItem;
 
   ItemsState({
     required super.status,
     this.shoppingListId,
     super.callbackMessage,
     List<Item>? items,
-    Item? itemToAdd,
+    Item? currentItem,
   })  : items = items ?? [],
-        itemToAdd =
-            itemToAdd ?? const Item(name: '', quantity: 0, orderKey: '');
+        currentItem = currentItem ??
+            const Item(
+              name: '',
+              quantity: 0,
+              orderKey: '',
+            );
 
   @override
   ItemsState copyWith({
@@ -21,14 +25,26 @@ class ItemsState extends BaseBlocState {
     String? callbackMessage,
     String? shoppingListId,
     List<Item>? items,
-    Item? itemToAdd,
+    Item? currentItem,
   }) {
     return ItemsState(
       status: status ?? this.status,
       callbackMessage: callbackMessage ?? this.callbackMessage,
       shoppingListId: shoppingListId ?? this.shoppingListId,
       items: items ?? this.items,
-      itemToAdd: itemToAdd ?? this.itemToAdd,
+      currentItem: currentItem ?? this.currentItem,
+    );
+  }
+
+  ItemsState successState() {
+    return ItemsState(
+      status: BaseStateStatus.success,
+      shoppingListId: shoppingListId,
+      items: items,
+      currentItem: Item(
+        name: '',
+        shoppingListId: shoppingListId!,
+      ),
     );
   }
 }

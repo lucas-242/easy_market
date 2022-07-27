@@ -12,10 +12,10 @@ class Item {
   const Item({
     this.id = '',
     required this.name,
-    required this.quantity,
+    this.quantity = 0,
     this.type,
     this.price,
-    required this.orderKey,
+    this.orderKey = '',
     this.shoppingListId = '',
   });
 
