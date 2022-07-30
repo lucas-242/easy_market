@@ -17,4 +17,6 @@ abstract class ShoppingListRepository {
   Future<Either<Failure, Item>> addItemToList(Item item);
   Future<Either<Failure, Unit>> updateItemInList(Item item);
   Future<Either<Failure, Unit>> deleteItemFromList(Item item);
+  Future<Either<Failure, Unit>> reorderItemInList(Item item,
+      {Item? prev, Item? next});
 }

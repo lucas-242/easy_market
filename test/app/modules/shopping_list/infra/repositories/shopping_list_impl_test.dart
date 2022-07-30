@@ -180,4 +180,29 @@ void main() {
       expect(result.leftMap((l) => l is DeleteItemFailure), const Left(true));
     });
   });
+
+  group('Reorderd Item', () {
+    test('Should reorderd Item', () async {
+      when(datasource.reorderItemInList(
+        any,
+        next: anyNamed('next'),
+        prev: anyNamed('prev'),
+      )).thenAnswer((_) async => unit);
+
+      final result = await repository.reorderItemInList(item, prev: item);
+      expect(result, const Right(unit));
+    });
+
+    test('Should throw ReorderItemFailure when there are any errors to reorder',
+        () async {
+      when(datasource.reorderItemInList(
+        any,
+        next: anyNamed('next'),
+        prev: anyNamed('prev'),
+      )).thenThrow((_) async => Exception());
+
+      final result = await repository.reorderItemInList(item, prev: item);
+      expect(result.leftMap((l) => l is ReorderItemFailure), const Left(true));
+    });
+  });
 }

@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:easy_market/app/modules/shopping_list/domain/usecases/listen_items_from_list.dart';
+import 'package:easy_market/app/modules/shopping_list/domain/usecases/reorder_items_in_list.dart';
 import 'package:easy_market/app/modules/shopping_list/shopping_list.dart';
 import 'package:easy_market/app/shared/entities/base_bloc_state.dart';
 import 'package:easy_market/app/shared/validators/form_validator.dart';
@@ -12,17 +15,20 @@ class ItemsBloc extends Bloc<ItemsEvent, ItemsState> with FormValidator {
   final AddItemToList addItemToListUsecase;
   final UpdateItemInList updateItemInListUsecase;
   final DeleteItemFromList deleteItemFromListUsecase;
+  final ReorderItemInList reorderItemInListUsecase;
 
   ItemsBloc({
     required this.listenItemsFromListUsecase,
     required this.addItemToListUsecase,
     required this.updateItemInListUsecase,
     required this.deleteItemFromListUsecase,
+    required this.reorderItemInListUsecase,
   }) : super(ItemsState(status: BaseStateStatus.initial)) {
     on<ListenShoppingListItemsEvent>(_onInit);
     on<AddItemEvent>(_onAddItem);
     on<UpdateItemEvent>(_onUpdateItem);
     on<DeleteItemEvent>(_onDeleteItem);
+    on<ReorderItemsEvent>(_onReorderItems);
     on<ChangeCurrentItemEvent>(_onChangeCurrentItem);
     on<ChangeNameEvent>(_onChangeName);
     on<ChangeTypeEvent>(_onChangeType);
@@ -38,11 +44,10 @@ class ItemsBloc extends Bloc<ItemsEvent, ItemsState> with FormValidator {
       currentItem:
           state.currentItem.copyWith(shoppingListId: event.shoppingListId),
     ));
-    await _listenItemsFromList(event, emit);
+    await _listenItemsFromList(emit);
   }
 
-  Future<void> _listenItemsFromList(
-      ListenShoppingListItemsEvent event, Emitter<ItemsState> emit) async {
+  Future<void> _listenItemsFromList(Emitter<ItemsState> emit) async {
     final result = listenItemsFromListUsecase(state.shoppingListId!);
     await result.fold(
         (error) async => emit(state.copyWith(
@@ -56,10 +61,10 @@ class ItemsBloc extends Bloc<ItemsEvent, ItemsState> with FormValidator {
 
   Future<void> _onAddItem(AddItemEvent event, Emitter<ItemsState> emit) async {
     emit.call(state.copyWith(status: BaseStateStatus.loading));
-    await _addItem(event, emit);
+    await _addItem(emit);
   }
 
-  Future<void> _addItem(AddItemEvent event, Emitter<ItemsState> emit) async {
+  Future<void> _addItem(Emitter<ItemsState> emit) async {
     final result = await addItemToListUsecase(state.currentItem);
     result.fold(
       (error) async => emit(state.copyWith(
@@ -87,12 +92,61 @@ class ItemsBloc extends Bloc<ItemsEvent, ItemsState> with FormValidator {
   Future<void> _onUpdateItem(
       UpdateItemEvent event, Emitter<ItemsState> emit) async {
     emit.call(state.copyWith(status: BaseStateStatus.loading));
-    await _updateItem(event, emit);
+    await _updateItem(emit);
   }
 
-  Future<void> _updateItem(
-      UpdateItemEvent event, Emitter<ItemsState> emit) async {
+  Future<void> _updateItem(Emitter<ItemsState> emit) async {
     final result = await updateItemInListUsecase(state.currentItem);
+    result.fold(
+      (error) async => emit(state.copyWith(
+          status: BaseStateStatus.error, callbackMessage: error.message)),
+      (result) => (result) => emit(state.successState()),
+    );
+  }
+
+  Future<void> _onReorderItems(
+      ReorderItemsEvent event, Emitter<ItemsState> emit) async {
+    emit.call(state.copyWith(status: BaseStateStatus.loading));
+    final itemsToReorder = _getItemsToReorder(event.oldIndex, event.newIndex);
+    await _reorderItems(
+      emit: emit,
+      item: itemsToReorder['item']!,
+      prev: itemsToReorder['prev'],
+      next: itemsToReorder['next'],
+    );
+  }
+
+  Map<String, Item?> _getItemsToReorder(int oldIndex, int newIndex) {
+    final itemToUpdate = state.items[oldIndex];
+    Item? prevItem;
+    Item? nextItem;
+
+    final willBeFirstItem = newIndex == 0;
+    final willBeLastItem = state.items.length == newIndex;
+
+    if (willBeFirstItem) {
+      nextItem = state.items.first;
+    } else if (willBeLastItem) {
+      prevItem = state.items.last;
+    } else {
+      prevItem = state.items[newIndex - 1];
+      nextItem = state.items[newIndex];
+    }
+
+    return {
+      'item': itemToUpdate,
+      'prev': prevItem,
+      'next': nextItem,
+    };
+  }
+
+  Future<void> _reorderItems({
+    required Emitter<ItemsState> emit,
+    required Item item,
+    Item? prev,
+    Item? next,
+  }) async {
+    final result = await reorderItemInListUsecase(item, prev: prev, next: next);
     result.fold(
       (error) async => emit(state.copyWith(
           status: BaseStateStatus.error, callbackMessage: error.message)),

@@ -156,5 +156,20 @@ void main() {
           itemsFromShoppingList.where((element) => element.id == mockItem.id);
       expect(result, isEmpty);
     });
+
+    test('Should reorder Item', () async {
+      var itemToAdd = mockItem.copyWith(name: 'new item');
+      itemToAdd = await datasource.addItemToList(itemToAdd);
+
+      final itemsFromShoppingList =
+          await datasource.getItemsFromList(itemToAdd.shoppingListId);
+      final firstItem = itemsFromShoppingList.first;
+      await datasource.reorderItemInList(itemToAdd, next: firstItem);
+
+      final reorderedItems =
+          await datasource.getItemsFromList(itemToAdd.shoppingListId);
+      expect(reorderedItems.first.id, itemToAdd.id);
+      expect(reorderedItems[1].id, firstItem.id);
+    });
   });
 }

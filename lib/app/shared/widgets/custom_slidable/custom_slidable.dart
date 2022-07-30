@@ -5,8 +5,8 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 class CustomSlidable extends StatelessWidget {
   final bool leftPanel;
   final bool rightPanel;
-  final void Function(BuildContext)? onLeftSlide;
-  final void Function(BuildContext)? onRightSlide;
+  final void Function()? onLeftSlide;
+  final void Function()? onRightSlide;
   final Widget child;
 
   const CustomSlidable({
@@ -27,7 +27,8 @@ class CustomSlidable extends StatelessWidget {
               motion: const ScrollMotion(),
               children: [
                 SlidableAction(
-                  onPressed: onLeftSlide,
+                  onPressed: (context) =>
+                      onLeftSlide != null ? onLeftSlide!() : null,
                   backgroundColor: context.colors.primaryContainer,
                   foregroundColor: context.colors.onPrimaryContainer,
                   icon: Icons.edit,
@@ -41,7 +42,8 @@ class CustomSlidable extends StatelessWidget {
               motion: const ScrollMotion(),
               children: [
                 SlidableAction(
-                  onPressed: onRightSlide,
+                  onPressed: (context) =>
+                      onRightSlide != null ? onRightSlide!() : null,
                   backgroundColor: context.colors.primaryContainer,
                   foregroundColor: context.colors.onPrimaryContainer,
                   icon: Icons.delete,

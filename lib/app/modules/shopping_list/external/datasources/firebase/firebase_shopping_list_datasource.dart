@@ -247,4 +247,46 @@ class FirebaseShoppingListDatasource implements ShoppingListDatasource {
       throw DeleteItemFailure('Error to delete item.');
     }
   }
+
+  @override
+  Future<void> reorderItemInList(ItemModel item,
+      {ItemModel? prev, ItemModel? next}) async {
+    try {
+      final newOrderKey = _generateOrderKeyToOldItem(prev: prev, next: next);
+      final toSave = item.copyWith(orderKey: newOrderKey).toUpdate();
+      await _firestore
+          .collection(shoppingListsTable)
+          .doc(item.shoppingListId)
+          .collection(itemsTable)
+          .doc(item.id)
+          .update(toSave);
+    } catch (e) {
+      throw UpdateItemFailure('Error to reorder item.');
+    }
+  }
+
+  String _generateOrderKeyToOldItem({ItemModel? prev, ItemModel? next}) {
+    // final itemIndex =
+    //     _cachedItems!.indexWhere((element) => element.id == item.id);
+
+    // if (itemIndex == -1) {
+    //   throw ReorderItemFailure('Unexpected error trying to generete key');
+    // }
+
+    // final lastIndex = _cachedItems!.length - 1;
+    // const firstIndex = 0;
+
+    // return between(
+    //   prev:  itemIndex != firstIndex
+    //       ? _cachedItems![itemIndex - 1].orderKey
+    //       : null,
+    //   next:
+    //       itemIndex != lastIndex ? _cachedItems![itemIndex + 1].orderKey : null,
+    // );
+
+    return between(
+      prev: prev?.orderKey,
+      next: next?.orderKey,
+    );
+  }
 }

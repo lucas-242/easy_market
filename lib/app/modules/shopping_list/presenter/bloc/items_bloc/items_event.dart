@@ -13,6 +13,13 @@ class ChangeCurrentItemEvent extends ItemsEvent {
   ChangeCurrentItemEvent({this.item});
 }
 
+class ReorderItemsEvent extends ItemsEvent {
+  final int oldIndex;
+  final int newIndex;
+
+  ReorderItemsEvent(this.oldIndex, this.newIndex);
+}
+
 class AddItemEvent extends ItemsEvent {}
 
 class UpdateItemEvent extends ItemsEvent {}

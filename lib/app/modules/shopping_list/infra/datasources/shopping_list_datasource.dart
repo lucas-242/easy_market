@@ -12,4 +12,6 @@ abstract class ShoppingListDatasource {
   Future<ItemModel> addItemToList(ItemModel item);
   Future<void> updateItemInList(ItemModel item);
   Future<void> deleteItemFromList(ItemModel item);
+  Future<void> reorderItemInList(ItemModel item,
+      {ItemModel? prev, ItemModel? next});
 }

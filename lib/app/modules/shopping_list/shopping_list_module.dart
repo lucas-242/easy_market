@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_market/app/core/routes/utils/routes_utils.dart';
+import 'package:easy_market/app/modules/shopping_list/domain/usecases/reorder_items_in_list.dart';
 import 'package:easy_market/app/modules/shopping_list/presenter/bloc/items_bloc/items_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:easy_market/app/core/routes/app_routes.dart';
@@ -33,16 +34,19 @@ class ShoppingListModule extends Module {
     $ListenShoppingListsImpl,
     $UpdateItemInListImpl,
     $UpdateShoppingListImpl,
+    $ReorderItemInListImpl,
     $ShoppingListRepositoryImpl,
     BlocBind.singleton(
       (i) => ShoppingListBloc(i<ListenShoppingLists>()),
     ),
     BlocBind.singleton(
       (i) => ItemsBloc(
-          listenItemsFromListUsecase: i<ListenItemsFromList>(),
-          addItemToListUsecase: i<AddItemToList>(),
-          updateItemInListUsecase: i<UpdateItemInList>(),
-          deleteItemFromListUsecase: i<DeleteItemFromList>()),
+        listenItemsFromListUsecase: i<ListenItemsFromList>(),
+        addItemToListUsecase: i<AddItemToList>(),
+        updateItemInListUsecase: i<UpdateItemInList>(),
+        deleteItemFromListUsecase: i<DeleteItemFromList>(),
+        reorderItemInListUsecase: i<ReorderItemInList>(),
+      ),
     ),
     BindInject(
       (i) => FirebaseShoppingListDatasource(i<FirebaseFirestore>()),

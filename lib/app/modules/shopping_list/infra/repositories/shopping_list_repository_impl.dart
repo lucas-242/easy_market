@@ -149,4 +149,21 @@ class ShoppingListRepositoryImpl implements ShoppingListRepository {
       return left(DeleteItemFailure('Error to delete item.'));
     }
   }
+
+  @override
+  Future<Either<Failure, Unit>> reorderItemInList(Item item,
+      {Item? prev, Item? next}) async {
+    try {
+      await datasource.reorderItemInList(
+        ItemModel.fromItem(item),
+        prev: prev != null ? ItemModel.fromItem(prev) : null,
+        next: next != null ? ItemModel.fromItem(next) : null,
+      );
+      return right(unit);
+    } on Failure catch (e) {
+      return left(ReorderItemFailure(e.message));
+    } catch (e) {
+      return left(ReorderItemFailure('Error to reorder item.'));
+    }
+  }
 }
