@@ -31,7 +31,7 @@ ItemModel get item => ItemModel(
       name: 'product1',
       quantity: 5,
       shoppingListId: '123',
-      orderKey: 'abc',
+      orderKey: 'B',
     );
 
 List<ItemModel> get items => List.generate(10, (index) => item);

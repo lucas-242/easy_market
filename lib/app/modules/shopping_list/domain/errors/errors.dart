@@ -62,3 +62,15 @@ class DeleteItemFailure extends Failure {
 
   DeleteItemFailure(this.message);
 }
+
+class ReorderItemFailure extends Failure {
+  @override
+  final String message;
+
+  ReorderItemFailure(this.message);
+}
+
+abstract class ShoppingListErrorMessages {
+  static String get oneItemNeedToBeInformed =>
+      'At least one previous or next item needs to be informed';
+}
