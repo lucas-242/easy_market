@@ -1,16 +1,15 @@
-import 'package:easy_market/app/modules/shopping_list/presenter/bloc/items_bloc/items_bloc.dart';
-import 'package:easy_market/app/modules/shopping_list/presenter/widgets/item_form.dart';
-import 'package:easy_market/app/shared/entities/base_bloc_state.dart';
-import 'package:easy_market/app/shared/themes/themes.dart';
-import 'package:easy_market/app/shared/widgets/confirmation_dialog/confirmation_dialog.dart';
-import 'package:easy_market/app/shared/widgets/custom_slidable/custom_slidable.dart';
-import 'package:easy_market/app/shared/widgets/custom_snack_bar/custom_snack_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:easy_market/app/modules/shopping_list/shopping_list.dart';
-import 'package:easy_market/app/shared/extensions/extensions.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:intl/intl.dart';
+
+import '/app/modules/shopping_list/presenter/bloc/items_bloc/items_bloc.dart';
+import '/app/modules/shopping_list/presenter/widgets/item_card.dart';
+import '/app/modules/shopping_list/presenter/widgets/bottom_sheet_item_form.dart';
+import '/app/modules/shopping_list/shopping_list.dart';
+import '/app/shared/entities/base_bloc_state.dart';
+import '/app/shared/themes/themes.dart';
+import '/app/shared/widgets/confirmation_dialog/confirmation_dialog.dart';
+import '/app/shared/widgets/custom_snack_bar/custom_snack_bar.dart';
 
 final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -136,58 +135,30 @@ class _BuildScreen extends StatelessWidget {
     Modular.to.pop();
   }
 
+  void _reorderItems(BuildContext context, int oldIndex, int newIndex) {
+    final bloc = Modular.get<ItemsBloc>();
+    bloc.add(ReorderItemsEvent(oldIndex, newIndex));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         const SizedBox(height: 25),
         Expanded(
-          child: ListView.builder(
+          child: ReorderableListView.builder(
             itemCount: items.length,
-            itemBuilder: (context, index) {
-              final item = items[index];
-              return CustomSlidable(
-                leftPanel: true,
-                rightPanel: true,
-                onLeftSlide: (context) =>
-                    _onTapUpdate(context: context, item: item),
-                onRightSlide: (context) =>
-                    _onTapDelete(context: context, item: item),
-                child: _Item(item: item),
-              );
-            },
+            onReorder: (oldIndex, newIndex) =>
+                _reorderItems(context, oldIndex, newIndex),
+            itemBuilder: (context, index) => ItemCard(
+              key: Key(items[index].id),
+              item: items[index],
+              onTapUpdate: (item) => _onTapUpdate(context: context, item: item),
+              onTapDelete: (item) => _onTapDelete(context: context, item: item),
+            ),
           ),
         ),
       ],
-    );
-  }
-}
-
-class _Item extends StatelessWidget {
-  final Item item;
-  const _Item({Key? key, required this.item}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      title: Text(item.name),
-      trailing: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: [
-          Text(
-            item.quantity.toString(),
-            textAlign: TextAlign.end,
-          ),
-          const SizedBox(height: 5.0),
-          Text(
-            item.price != null
-                ? NumberFormat.simpleCurrency().format(item.price)
-                : '',
-            textAlign: TextAlign.end,
-          ),
-        ],
-      ),
-      subtitle: Text(item.type.toShortString() ?? ''),
     );
   }
 }
@@ -201,32 +172,6 @@ Future<void> _openBottomSheet({
     isScrollControlled: true,
     shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(25.0))),
-    builder: ((dialogContext) => _BottomSheet(onSubmit: onSubmit)),
+    builder: ((dialogContext) => BottomSheetItemForm(onSubmit: onSubmit)),
   );
-}
-
-class _BottomSheet extends StatelessWidget {
-  final void Function() onSubmit;
-  const _BottomSheet({Key? key, required this.onSubmit}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Container(
-        padding:
-            EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 20),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text('Add new item', style: context.titleLarge),
-              const SizedBox(height: 25),
-              ItemForm(onSubmit: onSubmit),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
 }
