@@ -27,7 +27,8 @@ class CustomSlidable extends StatelessWidget {
               motion: const ScrollMotion(),
               children: [
                 SlidableAction(
-                  onPressed: (context) => onLeftSlide,
+                  onPressed: (context) =>
+                      onLeftSlide != null ? onLeftSlide!() : null,
                   backgroundColor: context.colors.primaryContainer,
                   foregroundColor: context.colors.onPrimaryContainer,
                   icon: Icons.edit,
@@ -41,7 +42,8 @@ class CustomSlidable extends StatelessWidget {
               motion: const ScrollMotion(),
               children: [
                 SlidableAction(
-                  onPressed: (context) => onRightSlide,
+                  onPressed: (context) =>
+                      onRightSlide != null ? onRightSlide!() : null,
                   backgroundColor: context.colors.primaryContainer,
                   foregroundColor: context.colors.onPrimaryContainer,
                   icon: Icons.delete,

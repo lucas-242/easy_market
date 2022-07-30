@@ -4,8 +4,10 @@ import '/app/shared/themes/themes.dart';
 import 'item_form.dart';
 
 class BottomSheetItemForm extends StatelessWidget {
+  final String title;
   final void Function() onSubmit;
-  const BottomSheetItemForm({Key? key, required this.onSubmit})
+  const BottomSheetItemForm(
+      {Key? key, required this.onSubmit, this.title = 'Add new item'})
       : super(key: key);
 
   @override
@@ -19,7 +21,7 @@ class BottomSheetItemForm extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text('Add new item', style: context.titleLarge),
+              Text(title, style: context.titleLarge),
               const SizedBox(height: 25),
               ItemForm(onSubmit: onSubmit),
             ],

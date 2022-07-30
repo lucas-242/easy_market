@@ -125,6 +125,7 @@ class _BuildScreen extends StatelessWidget {
     bloc.add(ChangeCurrentItemEvent(item: item));
     await _openBottomSheet(
       context: context,
+      title: 'Update ${item.name}',
       onSubmit: () => _updateItem(context),
     );
   }
@@ -166,12 +167,16 @@ class _BuildScreen extends StatelessWidget {
 Future<void> _openBottomSheet({
   required BuildContext context,
   required void Function() onSubmit,
+  String title = 'Add new item',
 }) async {
   await showModalBottomSheet(
     context: _scaffoldKey.currentContext!,
     isScrollControlled: true,
     shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(25.0))),
-    builder: ((dialogContext) => BottomSheetItemForm(onSubmit: onSubmit)),
+    builder: ((dialogContext) => BottomSheetItemForm(
+          onSubmit: onSubmit,
+          title: title,
+        )),
   );
 }
