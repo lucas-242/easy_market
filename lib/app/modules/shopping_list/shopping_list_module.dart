@@ -37,7 +37,12 @@ class ShoppingListModule extends Module {
     $ReorderItemInListImpl,
     $ShoppingListRepositoryImpl,
     BlocBind.singleton(
-      (i) => ShoppingListBloc(i<ListenShoppingLists>()),
+      (i) => ShoppingListBloc(
+        listenShoppingListsUsecase: i<ListenShoppingLists>(),
+        createShoppingListUsecase: i<CreateShoppingList>(),
+        updateShoppingListUsecase: i<UpdateShoppingList>(),
+        deleteShoppingListUsecase: i<DeleteShoppingList>(),
+      ),
     ),
     BlocBind.singleton(
       (i) => ItemsBloc(

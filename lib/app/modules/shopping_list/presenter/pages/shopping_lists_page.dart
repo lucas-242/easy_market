@@ -1,4 +1,5 @@
 import 'package:easy_market/app/core/auth/services/auth_service.dart';
+import 'package:easy_market/app/modules/shopping_list/presenter/widgets/shopping_list_form.dart';
 import 'package:easy_market/app/modules/shopping_list/shopping_list.dart';
 import 'package:easy_market/app/shared/entities/base_bloc_state.dart';
 import 'package:easy_market/app/shared/widgets/custom_snack_bar/custom_snack_bar.dart';
@@ -9,6 +10,10 @@ import 'package:easy_market/app/core/routes/app_routes.dart';
 import 'package:easy_market/app/modules/shopping_list/presenter/bloc/shopping_list_bloc.dart';
 import 'package:easy_market/app/modules/shopping_list/presenter/widgets/shopping_list_card.dart';
 import 'package:easy_market/app/shared/themes/themes.dart';
+
+import '../widgets/bottom_sheet_form.dart';
+
+final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
 class ShoppingListsPage extends StatefulWidget {
   const ShoppingListsPage({Key? key}) : super(key: key);
@@ -33,6 +38,7 @@ class _ShoppingListsPageState extends State<ShoppingListsPage> {
     final theme = Theme.of(context);
 
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(
         title: Text(
           'Welcome  ${_auth.user!.name}',
@@ -86,22 +92,64 @@ class _BuildScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Stack(
       children: [
         const SizedBox(height: 25),
-        Expanded(
-          child: ListView.builder(
-            itemCount: lists.length,
-            itemBuilder: (context, index) => ShoppingListCard(
-              shoppingList: lists[index],
-              onTap: (id) => Modular.to.pushNamed(
-                '${AppRoutes.listDetails}$index',
-                arguments: {'shoppingList': lists[index]},
-              ),
+        ListView.builder(
+          itemCount: lists.length,
+          itemBuilder: (context, index) => ShoppingListCard(
+            shoppingList: lists[index],
+            onTap: (id) => Modular.to.pushNamed(
+              '${AppRoutes.listDetails}$index',
+              arguments: {'shoppingList': lists[index]},
             ),
           ),
+        ),
+        const Positioned(
+          bottom: 25,
+          right: 25,
+          child: _CreateButton(),
         ),
       ],
     );
   }
+}
+
+class _CreateButton extends StatelessWidget {
+  const _CreateButton({Key? key}) : super(key: key);
+
+  void _createShoppingList() {
+    final bloc = Modular.get<ShoppingListBloc>();
+    bloc.add(CreateShoppingListEvent());
+    Modular.to.pop();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return FloatingActionButton(
+      onPressed: () => _openBottomSheet(
+        context: context,
+        onSubmit: () => _createShoppingList(),
+      ),
+      child: const Icon(Icons.add),
+    );
+  }
+}
+
+Future<void> _openBottomSheet({
+  required BuildContext context,
+  required void Function() onSubmit,
+  String title = 'Create new list',
+}) async {
+  await showModalBottomSheet(
+    context: _scaffoldKey.currentContext!,
+    isScrollControlled: true,
+    shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(25.0))),
+    builder: ((dialogContext) => BottomSheetForm(
+          onSubmit: onSubmit,
+          title: title,
+          child: ShoppingListForm(onSubmit: onSubmit),
+        )),
+  );
 }

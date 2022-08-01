@@ -29,6 +29,7 @@ class FirebaseShoppingListDatasource implements ShoppingListDatasource {
       final snapshot = await _firestore
           .collection(shoppingListsTable)
           .where('users', arrayContains: userId)
+          .orderBy('createdAt')
           .get();
       final result = _snapshotToListOfShoppingListModel(snapshot.docs);
       return result;
@@ -52,6 +53,7 @@ class FirebaseShoppingListDatasource implements ShoppingListDatasource {
       Stream<QuerySnapshot> snapshots = _firestore
           .collection(shoppingListsTable)
           .where('users', arrayContains: userId)
+          .orderBy('createdAt')
           .snapshots();
       final result = _querySnapshotToShoppingListModel(snapshots);
       return result;

@@ -24,8 +24,13 @@ class CreateShoppingListImpl implements CreateShoppingList {
 
   Either<Failure, ShoppingList>? _validateShoppingList(
       ShoppingList shoppingList) {
+    if (shoppingList.owner.isEmpty) {
+      return Left(InvalidShoppingList(
+          message: ShoppingListErrorMessages.ownerIsInvalid));
+    }
     if (!shoppingList.isValidName) {
-      return Left(InvalidShoppingList());
+      return Left(InvalidShoppingList(
+          message: ShoppingListErrorMessages.nameIsInvalid));
     }
     return null;
   }

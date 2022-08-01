@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:easy_market/app/modules/shopping_list/domain/entities/item.dart';
 import 'package:easy_market/app/modules/shopping_list/domain/entities/shopping_list.dart';
 import 'package:easy_market/app/modules/shopping_list/infra/models/item_model.dart';
 
@@ -72,10 +73,11 @@ class ShoppingListModel extends ShoppingList {
   factory ShoppingListModel.fromJson(String source) =>
       ShoppingListModel.fromMap(json.decode(source));
 
+  @override
   ShoppingListModel copyWith({
     String? id,
     String? name,
-    List<ItemModel>? items,
+    List<Item>? items,
     DateTime? createdAt,
     DateTime? updatedAt,
     String? owner,

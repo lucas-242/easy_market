@@ -24,6 +24,10 @@ class SignUpWithEmailImpl implements SignUpWithEmail {
   }
 
   Either<Failure, Unit>? _validateCredentials(SignUpCredentials credentials) {
+    if (!credentials.isValidName) {
+      return Left(SignUpFailure(AuthErrorMessages.nameIsInvalid));
+    }
+
     if (!credentials.isValidEmail) {
       return Left(SignUpFailure(AuthErrorMessages.emailIsInvalid));
     }

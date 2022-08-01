@@ -43,6 +43,7 @@ class ResetPasswordFailure extends Failure {
 }
 
 abstract class AuthErrorMessages {
+  static String get nameIsInvalid => 'Name is invalid';
   static String get emailIsInvalid => 'Email is invalid';
   static String get passwordIsInvalid => 'Password is invalid';
   static String get phoneIsInvalid => 'Phone is invalid';

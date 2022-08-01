@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 
 import '/app/shared/themes/themes.dart';
-import 'item_form.dart';
 
-class BottomSheetItemForm extends StatelessWidget {
+class BottomSheetForm extends StatelessWidget {
   final String title;
   final void Function() onSubmit;
-  const BottomSheetItemForm(
-      {Key? key, required this.onSubmit, this.title = 'Add new item'})
-      : super(key: key);
+  final Widget child;
+  const BottomSheetForm({
+    Key? key,
+    required this.onSubmit,
+    required this.title,
+    required this.child,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +26,7 @@ class BottomSheetItemForm extends StatelessWidget {
             children: [
               Text(title, style: context.titleLarge),
               const SizedBox(height: 25),
-              ItemForm(onSubmit: onSubmit),
+              child,
             ],
           ),
         ),

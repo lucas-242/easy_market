@@ -23,8 +23,16 @@ class UpdateShoppingListImpl implements UpdateShoppingList {
   }
 
   Either<Failure, Unit>? _validateShoppingList(ShoppingList shoppingList) {
-    if (!shoppingList.isValidName || shoppingList.id.isEmpty) {
+    if (shoppingList.id.isEmpty) {
       return Left(InvalidShoppingList());
+    }
+    if (shoppingList.owner.isEmpty) {
+      return Left(InvalidShoppingList(
+          message: ShoppingListErrorMessages.ownerIsInvalid));
+    }
+    if (!shoppingList.isValidName) {
+      return Left(InvalidShoppingList(
+          message: ShoppingListErrorMessages.nameIsInvalid));
     }
     return null;
   }

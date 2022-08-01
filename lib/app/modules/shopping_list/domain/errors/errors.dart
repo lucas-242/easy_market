@@ -71,6 +71,8 @@ class ReorderItemFailure extends Failure {
 }
 
 abstract class ShoppingListErrorMessages {
+  static String get nameIsInvalid => 'Name is invalid';
+  static String get ownerIsInvalid => 'Owner is invalid';
   static String get oneItemNeedToBeInformed =>
       'At least one previous or next item needs to be informed';
 }

@@ -23,4 +23,24 @@ class ShoppingList {
         updatedAt = updatedAt ?? DateTime.now();
 
   bool get isValidName => name.isNotEmpty;
+
+  ShoppingList copyWith({
+    String? id,
+    String? name,
+    List<Item>? items,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+    String? owner,
+    List<String>? users,
+  }) {
+    return ShoppingList(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      items: items ?? this.items,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
+      owner: owner ?? this.owner,
+      users: users ?? this.users,
+    );
+  }
 }

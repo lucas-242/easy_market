@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
+import '../widgets/item_form.dart';
 import '/app/modules/shopping_list/presenter/bloc/items_bloc/items_bloc.dart';
 import '/app/modules/shopping_list/presenter/widgets/item_card.dart';
-import '/app/modules/shopping_list/presenter/widgets/bottom_sheet_item_form.dart';
+import '../widgets/bottom_sheet_form.dart';
 import '/app/modules/shopping_list/shopping_list.dart';
 import '/app/shared/entities/base_bloc_state.dart';
 import '/app/shared/themes/themes.dart';
@@ -37,11 +38,11 @@ class _ShoppingListDetailsPageState extends State<ShoppingListDetailsPage> {
     bloc.add(ChangeCurrentItemEvent());
     await _openBottomSheet(
       context: context,
-      onSubmit: () => _addItem(context),
+      onSubmit: () => _addItem(),
     );
   }
 
-  void _addItem(BuildContext context) {
+  void _addItem() {
     final bloc = Modular.get<ItemsBloc>();
     bloc.add(AddItemEvent());
     Modular.to.pop();
@@ -167,16 +168,17 @@ class _BuildScreen extends StatelessWidget {
 Future<void> _openBottomSheet({
   required BuildContext context,
   required void Function() onSubmit,
-  String title = 'Add new item',
+  String title = 'Add new list',
 }) async {
   await showModalBottomSheet(
     context: _scaffoldKey.currentContext!,
     isScrollControlled: true,
     shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(25.0))),
-    builder: ((dialogContext) => BottomSheetItemForm(
+    builder: ((dialogContext) => BottomSheetForm(
           onSubmit: onSubmit,
           title: title,
+          child: ItemForm(onSubmit: onSubmit),
         )),
   );
 }

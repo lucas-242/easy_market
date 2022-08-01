@@ -4,6 +4,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_market/app/modules/shopping_list/infra/models/item_model.dart';
 import 'package:easy_market/app/modules/shopping_list/infra/models/shopping_list_model.dart';
 
+import '../../../../domain/entities/item.dart';
+
 class FirebaseShoppingListModel extends ShoppingListModel {
   FirebaseShoppingListModel({
     required super.name,
@@ -78,7 +80,7 @@ class FirebaseShoppingListModel extends ShoppingListModel {
   FirebaseShoppingListModel copyWith(
       {String? id,
       String? name,
-      List<ItemModel>? items,
+      List<Item>? items,
       DateTime? createdAt,
       DateTime? updatedAt,
       String? owner,

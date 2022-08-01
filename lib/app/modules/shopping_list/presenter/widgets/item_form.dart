@@ -38,11 +38,7 @@ class _ItemFormState extends State<ItemForm> {
           const SizedBox(height: 20),
           _PriceField(fieldKey: _priceKey),
           const SizedBox(height: 30),
-          CustomElevatedButton(
-            onTap: widget.onSubmit,
-            size: Size(context.width * 0.7, context.height * 0.067),
-            text: 'Add',
-          ),
+          _Button(onSubmit: widget.onSubmit),
         ],
       ),
     );
@@ -153,6 +149,23 @@ class _PriceField extends StatelessWidget {
         fieldValue: value,
         fieldName: label,
       ),
+    );
+  }
+}
+
+class _Button extends StatelessWidget {
+  final void Function() onSubmit;
+
+  const _Button({Key? key, required this.onSubmit}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final bloc = context.watch<ItemsBloc>();
+
+    return CustomElevatedButton(
+      onTap: onSubmit,
+      size: Size(context.width * 0.7, context.height * 0.067),
+      text: bloc.state.currentItem.id.isEmpty ? 'Add' : 'Update',
     );
   }
 }

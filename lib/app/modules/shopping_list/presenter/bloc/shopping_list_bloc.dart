@@ -1,34 +1,92 @@
+import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:easy_market/app/modules/shopping_list/shopping_list.dart';
 import 'package:easy_market/app/shared/entities/base_bloc_state.dart';
+import 'package:easy_market/app/shared/validators/form_validator.dart';
 // ignore: depend_on_referenced_packages
 import 'package:meta/meta.dart';
 
 part 'shopping_list_event.dart';
 part 'shopping_list_state.dart';
 
-class ShoppingListBloc extends Bloc<ShoppingListEvent, ShoppingListState> {
-  final ListenShoppingLists _listenShoppingListsUsecase;
+class ShoppingListBloc extends Bloc<ShoppingListEvent, ShoppingListState>
+    with FormValidator {
+  final ListenShoppingLists listenShoppingListsUsecase;
+  final CreateShoppingList createShoppingListUsecase;
+  final UpdateShoppingList updateShoppingListUsecase;
+  final DeleteShoppingList deleteShoppingListUsecase;
 
-  ShoppingListBloc(this._listenShoppingListsUsecase)
-      : super(ShoppingListState(status: BaseStateStatus.initial)) {
+  ShoppingListBloc({
+    required this.listenShoppingListsUsecase,
+    required this.createShoppingListUsecase,
+    required this.deleteShoppingListUsecase,
+    required this.updateShoppingListUsecase,
+  }) : super(ShoppingListState(status: BaseStateStatus.initial)) {
     on<ListenShoppingListsEvent>(_onInit);
+    on<CreateShoppingListEvent>(_onCreateShoppingList);
+    on<UpdateShoppingListEvent>(_onUpdateShoppingList);
+    on<DeleteShoppingListEvent>(_onDeleteShoppingList);
+    on<ChangeCurrentShoppingListEvent>(_onChangeCurrentShoppingList);
+    on<ChangeNameEvent>(_onChangeName);
   }
 
-  _onInit(
+  Future<void> _onInit(
       ListenShoppingListsEvent event, Emitter<ShoppingListState> emit) async {
-    emit.call(state.copyWith(status: BaseStateStatus.loading));
-    await _listenShoppingLists(event.userId, emit);
+    emit.call(state.copyWith(
+      status: BaseStateStatus.loading,
+      userId: event.userId,
+      currentShoppingList:
+          state.currentShoppingList.copyWith(owner: event.userId),
+    ));
+    await _listenShoppingLists(emit);
   }
 
-  Future<void> _listenShoppingLists(
-      String userId, Emitter<ShoppingListState> emit) async {
-    var result = _listenShoppingListsUsecase(userId);
+  Future<void> _listenShoppingLists(Emitter<ShoppingListState> emit) async {
+    var result = listenShoppingListsUsecase(state.userId);
     await result.fold(
         (failure) async => emit.call(state.copyWith(
             status: BaseStateStatus.error, callbackMessage: failure.message)),
         (stream) async => await emit.forEach(stream,
             onData: (List<ShoppingList> data) => state.copyWith(
                 status: BaseStateStatus.success, shoppingLists: data)));
+  }
+
+  Future<void> _onCreateShoppingList(
+      CreateShoppingListEvent event, Emitter<ShoppingListState> emit) async {
+    emit.call(state.copyWith(status: BaseStateStatus.loading));
+    await _createShoppingList(emit);
+  }
+
+  Future<void> _createShoppingList(Emitter<ShoppingListState> emit) async {
+    final result = await createShoppingListUsecase(state.currentShoppingList);
+    result.fold(
+      (error) => emit(state.copyWith(
+          status: BaseStateStatus.error, callbackMessage: error.message)),
+      (result) => emit(state.successState()),
+    );
+  }
+
+  Future<void> _onUpdateShoppingList(
+      UpdateShoppingListEvent event, Emitter<ShoppingListState> emit) async {
+    emit.call(state.copyWith(status: BaseStateStatus.loading));
+  }
+
+  Future<void> _onDeleteShoppingList(
+      DeleteShoppingListEvent event, Emitter<ShoppingListState> emit) async {
+    emit.call(state.copyWith(status: BaseStateStatus.loading));
+  }
+
+  void _onChangeCurrentShoppingList(
+      ChangeCurrentShoppingListEvent event, Emitter<ShoppingListState> emit) {
+    ShoppingList shoppingList =
+        event.shoppingList ?? ShoppingList(name: '', owner: '');
+    emit(state.copyWith(currentShoppingList: shoppingList));
+  }
+
+  void _onChangeName(ChangeNameEvent event, Emitter<ShoppingListState> emit) {
+    emit(state.copyWith(
+        currentShoppingList:
+            state.currentShoppingList.copyWith(name: event.name)));
   }
 }
