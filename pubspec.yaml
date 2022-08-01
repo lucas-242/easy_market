@@ -20,6 +20,8 @@ dependencies:
   firebase_dynamic_links: ^4.3.2
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
   flutter_bloc: ^8.0.1
   flutter_modular: ^5.0.3
   flutter_slidable: ^2.0.0
@@ -41,6 +43,7 @@ dev_dependencies:
   modular_codegen: ^3.0.4
 
 flutter:
-  uses-material-design: true
   assets:
     - assets/images/
+  generate: true
+  uses-material-design: true

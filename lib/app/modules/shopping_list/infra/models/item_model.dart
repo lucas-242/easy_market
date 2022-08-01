@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import '../../domain/entities/item.dart';
 import '../../domain/entities/item_type.dart';
+import '../../../../shared/extensions/extensions.dart';
 import '../../../../shared/utils/item_type_util.dart';
 
 class ItemModel extends Item {
@@ -31,7 +32,7 @@ class ItemModel extends Item {
     return {
       'name': name,
       'quantity': quantity,
-      'type': type != null ? ItemTypeUtil.toText(type!) : null,
+      'type': type?.toShortString(),
       'price': price,
       'orderKey': orderKey,
       'shoppingListId': shoppingListId,
@@ -42,7 +43,7 @@ class ItemModel extends Item {
     return {
       'name': name,
       'quantity': quantity,
-      'type': type != null ? ItemTypeUtil.toText(type!) : null,
+      'type': type?.toShortString(),
       'price': price,
       'orderKey': orderKey,
     };
@@ -53,7 +54,7 @@ class ItemModel extends Item {
       'id': id,
       'name': name,
       'quantity': quantity,
-      'type': type != null ? ItemTypeUtil.toText(type!) : null,
+      'type': type?.toShortString(),
       'price': price,
       'shoppingListId': shoppingListId,
     };
@@ -64,7 +65,7 @@ class ItemModel extends Item {
       id: map['id'] ?? '',
       name: map['name'],
       quantity: int.tryParse(map['quantity'].toString()) ?? 0,
-      type: map['type'] != null ? ItemTypeUtil.fromText(map['type']) : null,
+      type: map['type'] != null ? ItemTypeUtil.toItemType(map['type']) : null,
       price: map['price']?.toDouble(),
       orderKey: map['orderKey'],
       shoppingListId: map['shoppingListId'],

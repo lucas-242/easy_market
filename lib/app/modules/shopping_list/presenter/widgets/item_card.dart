@@ -1,9 +1,9 @@
+import 'package:easy_market/app/shared/utils/item_type_util.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../shared/widgets/custom_slidable/custom_slidable.dart';
 import '../../domain/entities/item.dart';
-import '/app/shared/extensions/extensions.dart';
 
 class ItemCard extends StatelessWidget {
   final Item item;
@@ -52,7 +52,8 @@ class _Body extends StatelessWidget {
           ),
         ],
       ),
-      subtitle: Text(item.type.toShortString() ?? ''),
+      subtitle:
+          Text(ItemTypeUtil.stringfy(itemType: item.type, context: context)),
     );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:dropdown_search/dropdown_search.dart';
+import 'package:easy_market/app/shared/utils/item_type_util.dart';
 import '../bloc/items_bloc/items_bloc.dart';
 import '../../shopping_list.dart';
 import '../../../../shared/extensions/extensions.dart';
@@ -77,9 +78,11 @@ class _TypeField extends StatelessWidget {
 
     return DropdownSearch<ItemType>(
       items: ItemType.values,
-      itemAsString: (ItemType? i) => i!.toShortString(),
+      itemAsString: (ItemType? itemType) =>
+          ItemTypeUtil.stringfy(itemType: itemType, context: context),
       selectedItem: bloc.state.currentItem.type,
-      compareFn: (item1, item2) => item1.toString() == item2.toShortString(),
+      compareFn: (item1, item2) =>
+          item1.toShortString() == item2.toShortString(),
       onChanged: (value) => bloc.add(ChangeTypeEvent(value)),
       validator: (value) => bloc.validateItemTypeField(fieldValue: value),
       autoValidateMode: AutovalidateMode.onUserInteraction,
@@ -97,7 +100,9 @@ class _TypeField extends StatelessWidget {
         ),
       ),
       dropdownBuilder: (context, selectedItem) => Text(
-        selectedItem == null ? label : selectedItem.toShortString(),
+        selectedItem == null
+            ? label
+            : ItemTypeUtil.stringfy(itemType: selectedItem, context: context),
         style:
             context.bodyLarge?.copyWith(color: context.colors.onSurfaceVariant),
       ),

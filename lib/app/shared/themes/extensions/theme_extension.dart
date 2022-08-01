@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-extension ThemeUtils on BuildContext {
+extension ThemeExtension on BuildContext {
   MediaQueryData get _mediaQuery => MediaQuery.of(this);
   ThemeData get _theme => Theme.of(this);
   ColorScheme get colors => _theme.colorScheme;
