@@ -70,11 +70,32 @@ class ShoppingListBloc extends Bloc<ShoppingListEvent, ShoppingListState>
   Future<void> _onUpdateShoppingList(
       UpdateShoppingListEvent event, Emitter<ShoppingListState> emit) async {
     emit.call(state.copyWith(status: BaseStateStatus.loading));
+    await _updateShoppingList(emit);
+  }
+
+  Future<void> _updateShoppingList(Emitter<ShoppingListState> emit) async {
+    final result = await updateShoppingListUsecase(state.currentShoppingList);
+    result.fold(
+      (error) => emit(state.copyWith(
+          status: BaseStateStatus.error, callbackMessage: error.message)),
+      (result) => emit(state.successState()),
+    );
   }
 
   Future<void> _onDeleteShoppingList(
       DeleteShoppingListEvent event, Emitter<ShoppingListState> emit) async {
     emit.call(state.copyWith(status: BaseStateStatus.loading));
+    await _deleteShoppingList(event.shoppingList, emit);
+  }
+
+  Future<void> _deleteShoppingList(
+      ShoppingList shoppingList, Emitter<ShoppingListState> emit) async {
+    final result = await deleteShoppingListUsecase(shoppingList);
+    result.fold(
+      (error) => emit(state.copyWith(
+          status: BaseStateStatus.error, callbackMessage: error.message)),
+      (result) => emit(state.successState()),
+    );
   }
 
   void _onChangeCurrentShoppingList(

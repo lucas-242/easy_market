@@ -1,30 +1,54 @@
 import 'package:flutter/material.dart';
+import '../../../../shared/widgets/custom_slidable/custom_slidable.dart';
 import '../../shopping_list.dart';
-import '../../../../shared/themes/themes.dart';
 
 class ShoppingListCard extends StatelessWidget {
   final ShoppingList shoppingList;
   final Function(String) onTap;
-  const ShoppingListCard(
-      {Key? key, required this.shoppingList, required this.onTap})
-      : super(key: key);
+  final void Function(ShoppingList) onTapUpdate;
+  final void Function(ShoppingList) onTapDelete;
+  const ShoppingListCard({
+    Key? key,
+    required this.shoppingList,
+    required this.onTapUpdate,
+    required this.onTapDelete,
+    required this.onTap,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      margin: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
-      child: Material(
-        child: InkWell(
-          onTap: () => onTap(shoppingList.id),
-          child: SizedBox(
-            width: double.infinity,
-            child: Padding(
-              padding: const EdgeInsets.all(14.0),
-              child: Text(
-                shoppingList.name,
-                style: context.bodyLarge,
-              ),
-            ),
+    return CustomSlidable(
+      leftPanel: true,
+      rightPanel: true,
+      onLeftSlide: () => onTapUpdate(shoppingList),
+      onRightSlide: () => onTapDelete(shoppingList),
+      child: _Body(
+        shoppingList: shoppingList,
+        onTap: onTap,
+      ),
+    );
+  }
+}
+
+class _Body extends StatelessWidget {
+  final ShoppingList shoppingList;
+  final Function(String) onTap;
+  const _Body({
+    Key? key,
+    required this.shoppingList,
+    required this.onTap,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      child: InkWell(
+        onTap: () => onTap(shoppingList.id),
+        child: SizedBox(
+          width: double.infinity,
+          child: ListTile(
+            title: Text(shoppingList.name),
+            trailing: const Icon(Icons.chevron_right),
           ),
         ),
       ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import '../../../../shared/widgets/confirmation_dialog/confirmation_dialog.dart';
 import '/app/core/routes/app_routes.dart';
 
 import '/app/core/auth/services/auth_service.dart';
@@ -90,6 +91,41 @@ class _BuildScreen extends StatelessWidget {
   final List<ShoppingList> lists;
   const _BuildScreen({Key? key, required this.lists}) : super(key: key);
 
+  Future<void> _onTapDelete({required ShoppingList shoppingList}) async {
+    await showDialog(
+      context: _scaffoldKey.currentContext!,
+      builder: (context) {
+        return ConfirmationDialog(
+          title: 'Delete item',
+          confirmButton: 'Delete',
+          message: 'Would you like to delete ${shoppingList.name}?',
+          onConfirm: () {
+            Modular.to.pop();
+            Modular.get<ShoppingListBloc>()
+                .add(DeleteShoppingListEvent(shoppingList));
+          },
+          onCancel: () => Modular.to.pop(),
+        );
+      },
+    );
+  }
+
+  Future<void> _onTapUpdate({required ShoppingList shoppingList}) async {
+    final bloc = Modular.get<ShoppingListBloc>();
+    bloc.add(ChangeCurrentShoppingListEvent(shoppingList: shoppingList));
+    await BottomSheetUtil.openBottomSheet(
+      context: _scaffoldKey.currentContext!,
+      title: 'Update ${shoppingList.name}',
+      child: ShoppingListForm(onSubmit: () => _updateItem()),
+    );
+  }
+
+  void _updateItem() {
+    final bloc = Modular.get<ShoppingListBloc>();
+    bloc.add(UpdateShoppingListEvent());
+    Modular.to.pop();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -103,6 +139,10 @@ class _BuildScreen extends StatelessWidget {
               '${AppRoutes.listDetails}$index',
               arguments: {'shoppingList': lists[index]},
             ),
+            onTapUpdate: (shoppingList) =>
+                _onTapUpdate(shoppingList: shoppingList),
+            onTapDelete: (shoppingList) =>
+                _onTapDelete(shoppingList: shoppingList),
           ),
         ),
         const Positioned(

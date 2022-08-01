@@ -98,12 +98,9 @@ class _BuildScreen extends StatelessWidget {
   final List<Item> items;
   const _BuildScreen({Key? key, required this.items}) : super(key: key);
 
-  Future<void> _onTapDelete({
-    required BuildContext context,
-    required Item item,
-  }) async {
+  Future<void> _onTapDelete({required Item item}) async {
     await showDialog(
-      context: context,
+      context: _scaffoldKey.currentContext!,
       builder: (context) {
         return ConfirmationDialog(
           title: 'Delete item',
@@ -119,10 +116,7 @@ class _BuildScreen extends StatelessWidget {
     );
   }
 
-  Future<void> _onTapUpdate({
-    required BuildContext context,
-    required Item item,
-  }) async {
+  Future<void> _onTapUpdate({required Item item}) async {
     final bloc = Modular.get<ItemsBloc>();
     bloc.add(ChangeCurrentItemEvent(item: item));
     await BottomSheetUtil.openBottomSheet(
@@ -156,8 +150,8 @@ class _BuildScreen extends StatelessWidget {
             itemBuilder: (context, index) => ItemCard(
               key: Key(items[index].id),
               item: items[index],
-              onTapUpdate: (item) => _onTapUpdate(context: context, item: item),
-              onTapDelete: (item) => _onTapDelete(context: context, item: item),
+              onTapUpdate: (item) => _onTapUpdate(item: item),
+              onTapDelete: (item) => _onTapDelete(item: item),
             ),
           ),
         ),
