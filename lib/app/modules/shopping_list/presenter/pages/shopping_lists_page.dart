@@ -9,7 +9,7 @@ import '/app/modules/shopping_list/presenter/widgets/shopping_list_form.dart';
 import '/app/modules/shopping_list/shopping_list.dart';
 import '/app/shared/entities/base_bloc_state.dart';
 import '/app/shared/widgets/custom_snack_bar/custom_snack_bar.dart';
-import '/app/modules/shopping_list/presenter/bloc/shopping_list_bloc.dart';
+import '/app/modules/shopping_list/presenter/bloc/shopping_list_bloc/shopping_list_bloc.dart';
 import '/app/modules/shopping_list/presenter/widgets/shopping_list_card.dart';
 import '/app/shared/themes/themes.dart';
 import '../utils/bottom_sheet_util.dart';

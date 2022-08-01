@@ -16,7 +16,7 @@ import 'domain/usecases/update_item_in_list.dart';
 import 'domain/usecases/update_shopping_list.dart';
 import 'external/datasources/firebase/firebase_shopping_list_datasource.dart';
 import 'infra/repositories/shopping_list_repository_impl.dart';
-import 'presenter/bloc/shopping_list_bloc.dart';
+import 'presenter/bloc/shopping_list_bloc/shopping_list_bloc.dart';
 import 'presenter/pages/shopping_list_details_page.dart';
 import 'presenter/pages/shopping_lists_page.dart';
 import 'package:modular_bloc_bind/modular_bloc_bind.dart';

@@ -7,7 +7,7 @@ import 'modules/shopping_list/presenter/bloc/items_bloc/items_bloc.dart';
 import 'modules/corroboration/presenter/bloc/reset_password_bloc/reset_password_bloc.dart';
 import 'modules/corroboration/presenter/bloc/sign_in_bloc/sign_in_bloc.dart';
 import 'modules/corroboration/presenter/bloc/sign_up_bloc/sign_up_bloc.dart';
-import 'modules/shopping_list/presenter/bloc/shopping_list_bloc.dart';
+import 'modules/shopping_list/presenter/bloc/shopping_list_bloc/shopping_list_bloc.dart';
 import 'shared/l10n/generated/app_localizations.dart';
 import 'shared/services/stream_subscriptions_cancel.dart';
 import 'shared/themes/themes.dart';
