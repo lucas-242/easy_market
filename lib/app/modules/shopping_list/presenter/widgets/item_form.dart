@@ -1,10 +1,10 @@
 import 'package:dropdown_search/dropdown_search.dart';
-import 'package:easy_market/app/modules/shopping_list/presenter/bloc/items_bloc/items_bloc.dart';
-import 'package:easy_market/app/modules/shopping_list/shopping_list.dart';
-import 'package:easy_market/app/shared/extensions/extensions.dart';
-import 'package:easy_market/app/shared/themes/themes.dart';
-import 'package:easy_market/app/shared/widgets/custom_elevated_button/custom_elevated_button.dart';
-import 'package:easy_market/app/shared/widgets/custom_text_form_field/custom_text_form_field.dart';
+import '../bloc/items_bloc/items_bloc.dart';
+import '../../shopping_list.dart';
+import '../../../../shared/extensions/extensions.dart';
+import '../../../../shared/themes/themes.dart';
+import '../../../../shared/widgets/custom_elevated_button/custom_elevated_button.dart';
+import '../../../../shared/widgets/custom_text_form_field/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

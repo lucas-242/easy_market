@@ -1,5 +1,5 @@
-import 'package:easy_market/app/modules/corroboration/presenter/bloc/reset_password_bloc/reset_password_bloc.dart';
-import 'package:easy_market/app/shared/entities/base_bloc_state.dart';
+import '../bloc/reset_password_bloc/reset_password_bloc.dart';
+import '../../../../shared/entities/base_bloc_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart'

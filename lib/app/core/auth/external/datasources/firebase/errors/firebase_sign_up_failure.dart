@@ -1,4 +1,4 @@
-import 'package:easy_market/app/core/errors/errors.dart';
+import '../../../../../errors/errors.dart';
 
 /// {@template firebase_sign_up_failure}
 /// Thrown during the sign up process if a failure occurs.

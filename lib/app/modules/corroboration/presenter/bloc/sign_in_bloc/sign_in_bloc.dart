@@ -1,9 +1,9 @@
 import 'package:bloc/bloc.dart';
-import 'package:easy_market/app/core/auth/domain/entities/sign_in_credentials.dart';
-import 'package:easy_market/app/core/auth/domain/usecases/sign_in_with_email.dart';
-import 'package:easy_market/app/core/auth/domain/usecases/sign_in_with_phone.dart';
-import 'package:easy_market/app/shared/entities/base_bloc_state.dart';
-import 'package:easy_market/app/shared/validators/form_validator.dart';
+import '../../../../../core/auth/domain/entities/sign_in_credentials.dart';
+import '../../../../../core/auth/domain/usecases/sign_in_with_email.dart';
+import '../../../../../core/auth/domain/usecases/sign_in_with_phone.dart';
+import '../../../../../shared/entities/base_bloc_state.dart';
+import '../../../../../shared/validators/form_validator.dart';
 
 part 'sign_in_event.dart';
 part 'sign_in_state.dart';

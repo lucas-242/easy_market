@@ -1,4 +1,4 @@
-import 'package:easy_market/app/core/errors/errors.dart';
+import '../../../../core/errors/errors.dart';
 
 class InvalidShoppingList extends Failure {
   @override

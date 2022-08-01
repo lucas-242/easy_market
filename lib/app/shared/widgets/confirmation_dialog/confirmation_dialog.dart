@@ -1,5 +1,5 @@
-import 'package:easy_market/app/shared/themes/themes.dart';
-import 'package:easy_market/app/shared/widgets/custom_elevated_button/custom_elevated_button.dart';
+import '../../themes/themes.dart';
+import '../custom_elevated_button/custom_elevated_button.dart';
 import 'package:flutter/material.dart';
 
 class ConfirmationDialog extends StatelessWidget {

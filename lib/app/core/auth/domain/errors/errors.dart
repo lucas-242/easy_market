@@ -1,4 +1,4 @@
-import 'package:easy_market/app/core/errors/errors.dart';
+import '../../../errors/errors.dart';
 
 class GetCurrentUserFailure extends Failure {
   @override

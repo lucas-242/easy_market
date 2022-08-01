@@ -1,7 +1,7 @@
-import 'package:easy_market/app/modules/shopping_list/presenter/bloc/shopping_list_bloc.dart';
-import 'package:easy_market/app/shared/themes/themes.dart';
-import 'package:easy_market/app/shared/widgets/custom_elevated_button/custom_elevated_button.dart';
-import 'package:easy_market/app/shared/widgets/custom_text_form_field/custom_text_form_field.dart';
+import '../bloc/shopping_list_bloc.dart';
+import '../../../../shared/themes/themes.dart';
+import '../../../../shared/widgets/custom_elevated_button/custom_elevated_button.dart';
+import '../../../../shared/widgets/custom_text_form_field/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

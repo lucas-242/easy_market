@@ -1,17 +1,17 @@
-import 'package:easy_market/app/core/auth/services/auth_service.dart';
-import 'package:easy_market/app/modules/shopping_list/presenter/widgets/shopping_list_form.dart';
-import 'package:easy_market/app/modules/shopping_list/shopping_list.dart';
-import 'package:easy_market/app/shared/entities/base_bloc_state.dart';
-import 'package:easy_market/app/shared/widgets/custom_snack_bar/custom_snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:easy_market/app/core/routes/app_routes.dart';
-import 'package:easy_market/app/modules/shopping_list/presenter/bloc/shopping_list_bloc.dart';
-import 'package:easy_market/app/modules/shopping_list/presenter/widgets/shopping_list_card.dart';
-import 'package:easy_market/app/shared/themes/themes.dart';
+import '/app/core/routes/app_routes.dart';
 
-import '../widgets/bottom_sheet_form.dart';
+import '/app/core/auth/services/auth_service.dart';
+import '/app/modules/shopping_list/presenter/widgets/shopping_list_form.dart';
+import '/app/modules/shopping_list/shopping_list.dart';
+import '/app/shared/entities/base_bloc_state.dart';
+import '/app/shared/widgets/custom_snack_bar/custom_snack_bar.dart';
+import '/app/modules/shopping_list/presenter/bloc/shopping_list_bloc.dart';
+import '/app/modules/shopping_list/presenter/widgets/shopping_list_card.dart';
+import '/app/shared/themes/themes.dart';
+import '../utils/bottom_sheet_util.dart';
 
 final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -127,29 +127,12 @@ class _CreateButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
-      onPressed: () => _openBottomSheet(
-        context: context,
-        onSubmit: () => _createShoppingList(),
+      onPressed: () => BottomSheetUtil.openBottomSheet(
+        context: _scaffoldKey.currentContext!,
+        title: 'Create new list',
+        child: ShoppingListForm(onSubmit: _createShoppingList),
       ),
       child: const Icon(Icons.add),
     );
   }
-}
-
-Future<void> _openBottomSheet({
-  required BuildContext context,
-  required void Function() onSubmit,
-  String title = 'Create new list',
-}) async {
-  await showModalBottomSheet(
-    context: _scaffoldKey.currentContext!,
-    isScrollControlled: true,
-    shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(25.0))),
-    builder: ((dialogContext) => BottomSheetForm(
-          onSubmit: onSubmit,
-          title: title,
-          child: ShoppingListForm(onSubmit: onSubmit),
-        )),
-  );
 }

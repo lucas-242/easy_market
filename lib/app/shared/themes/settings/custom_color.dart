@@ -1,4 +1,4 @@
-import 'package:easy_market/app/shared/themes/settings/theme_provider.dart';
+import 'theme_provider.dart';
 import 'package:flutter/material.dart';
 
 class CustomColor {

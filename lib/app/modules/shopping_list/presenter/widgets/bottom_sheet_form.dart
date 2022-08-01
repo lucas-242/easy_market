@@ -4,11 +4,9 @@ import '/app/shared/themes/themes.dart';
 
 class BottomSheetForm extends StatelessWidget {
   final String title;
-  final void Function() onSubmit;
   final Widget child;
   const BottomSheetForm({
     Key? key,
-    required this.onSubmit,
     required this.title,
     required this.child,
   }) : super(key: key);

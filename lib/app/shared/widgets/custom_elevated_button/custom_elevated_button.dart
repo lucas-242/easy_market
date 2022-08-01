@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:easy_market/app/shared/themes/themes.dart';
+import '../../themes/themes.dart';
 
 class CustomElevatedButton extends StatelessWidget {
   final VoidCallback onTap;

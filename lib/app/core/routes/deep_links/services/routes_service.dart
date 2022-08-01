@@ -1,6 +1,6 @@
-import 'package:easy_market/app/core/routes/deep_links/domain/entities/deep_link_data.dart';
-import 'package:easy_market/app/core/routes/deep_links/domain/usecases/listen_background_links.dart';
-import 'package:easy_market/app/core/routes/deep_links/domain/usecases/listen_initial_link.dart';
+import '../domain/entities/deep_link_data.dart';
+import '../domain/usecases/listen_background_links.dart';
+import '../domain/usecases/listen_initial_link.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 part 'routes_service.g.dart';
 

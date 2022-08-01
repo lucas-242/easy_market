@@ -1,7 +1,7 @@
-import 'package:easy_market/app/core/auth/domain/entities/user_info.dart';
-import 'package:easy_market/app/core/auth/domain/usecases/get_current_user.dart';
-import 'package:easy_market/app/core/auth/domain/usecases/listen_current_user.dart';
-import 'package:easy_market/app/core/auth/domain/usecases/sign_out.dart';
+import '../domain/entities/user_info.dart';
+import '../domain/usecases/get_current_user.dart';
+import '../domain/usecases/listen_current_user.dart';
+import '../domain/usecases/sign_out.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 part 'auth_service.g.dart';
 

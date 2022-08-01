@@ -1,9 +1,9 @@
 import 'package:bloc/bloc.dart';
-import 'package:easy_market/app/core/auth/domain/entities/reset_password_credentials.dart';
-import 'package:easy_market/app/core/auth/domain/usecases/confirm_password_reset.dart';
-import 'package:easy_market/app/core/auth/domain/usecases/send_password_reset_email.dart';
-import 'package:easy_market/app/shared/entities/base_bloc_state.dart';
-import 'package:easy_market/app/shared/validators/form_validator.dart';
+import '../../../../../core/auth/domain/entities/reset_password_credentials.dart';
+import '../../../../../core/auth/domain/usecases/confirm_password_reset.dart';
+import '../../../../../core/auth/domain/usecases/send_password_reset_email.dart';
+import '../../../../../shared/entities/base_bloc_state.dart';
+import '../../../../../shared/validators/form_validator.dart';
 
 part 'reset_password_event.dart';
 part 'reset_password_state.dart';

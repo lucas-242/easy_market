@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:easy_market/app/modules/shopping_list/domain/errors/errors.dart';
-import 'package:easy_market/app/modules/shopping_list/infra/datasources/shopping_list_datasource.dart';
-import 'package:easy_market/app/modules/shopping_list/infra/models/item_model.dart';
-import 'package:easy_market/app/modules/shopping_list/infra/models/shopping_list_model.dart';
+import '../../../domain/errors/errors.dart';
+import '../../../infra/datasources/shopping_list_datasource.dart';
+import '../../../infra/models/item_model.dart';
+import '../../../infra/models/shopping_list_model.dart';
 import 'package:lexicographical_order/lexicographical_order.dart';
 
 import 'models/firebase_shopping_list_model.dart';

@@ -1,9 +1,9 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:easy_market/app/modules/shopping_list/shopping_list.dart';
-import 'package:easy_market/app/shared/entities/base_bloc_state.dart';
-import 'package:easy_market/app/shared/validators/form_validator.dart';
+import '../../shopping_list.dart';
+import '../../../../shared/entities/base_bloc_state.dart';
+import '../../../../shared/validators/form_validator.dart';
 // ignore: depend_on_referenced_packages
 import 'package:meta/meta.dart';
 

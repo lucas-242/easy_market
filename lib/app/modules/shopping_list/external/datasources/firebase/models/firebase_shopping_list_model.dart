@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:easy_market/app/modules/shopping_list/infra/models/item_model.dart';
-import 'package:easy_market/app/modules/shopping_list/infra/models/shopping_list_model.dart';
+import '../../../../infra/models/item_model.dart';
+import '../../../../infra/models/shopping_list_model.dart';
 
 import '../../../../domain/entities/item.dart';
 

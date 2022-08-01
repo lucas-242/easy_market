@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
+import '../utils/bottom_sheet_util.dart';
 import '../widgets/item_form.dart';
 import '/app/modules/shopping_list/presenter/bloc/items_bloc/items_bloc.dart';
 import '/app/modules/shopping_list/presenter/widgets/item_card.dart';
-import '../widgets/bottom_sheet_form.dart';
 import '/app/modules/shopping_list/shopping_list.dart';
 import '/app/shared/entities/base_bloc_state.dart';
 import '/app/shared/themes/themes.dart';
@@ -33,12 +33,13 @@ class _ShoppingListDetailsPageState extends State<ShoppingListDetailsPage> {
     super.initState();
   }
 
-  Future<void> _onTapAdd({required BuildContext context}) async {
+  Future<void> _onTapAdd() async {
     final bloc = Modular.get<ItemsBloc>();
     bloc.add(ChangeCurrentItemEvent());
-    await _openBottomSheet(
-      context: context,
-      onSubmit: () => _addItem(),
+    await BottomSheetUtil.openBottomSheet(
+      context: _scaffoldKey.currentContext!,
+      title: 'Add new Item',
+      child: ItemForm(onSubmit: () => _addItem()),
     );
   }
 
@@ -59,7 +60,7 @@ class _ShoppingListDetailsPageState extends State<ShoppingListDetailsPage> {
         ),
         actions: [
           IconButton(
-            onPressed: () => _onTapAdd(context: context),
+            onPressed: () => _onTapAdd(),
             icon: const Icon(Icons.add),
           ),
           const IconButton(onPressed: null, icon: Icon(Icons.filter_alt)),
@@ -124,20 +125,20 @@ class _BuildScreen extends StatelessWidget {
   }) async {
     final bloc = Modular.get<ItemsBloc>();
     bloc.add(ChangeCurrentItemEvent(item: item));
-    await _openBottomSheet(
-      context: context,
+    await BottomSheetUtil.openBottomSheet(
+      context: _scaffoldKey.currentContext!,
       title: 'Update ${item.name}',
-      onSubmit: () => _updateItem(context),
+      child: ItemForm(onSubmit: () => _updateItem()),
     );
   }
 
-  void _updateItem(BuildContext context) {
+  void _updateItem() {
     final bloc = Modular.get<ItemsBloc>();
     bloc.add(UpdateItemEvent());
     Modular.to.pop();
   }
 
-  void _reorderItems(BuildContext context, int oldIndex, int newIndex) {
+  void _reorderItems(int oldIndex, int newIndex) {
     final bloc = Modular.get<ItemsBloc>();
     bloc.add(ReorderItemsEvent(oldIndex, newIndex));
   }
@@ -151,7 +152,7 @@ class _BuildScreen extends StatelessWidget {
           child: ReorderableListView.builder(
             itemCount: items.length,
             onReorder: (oldIndex, newIndex) =>
-                _reorderItems(context, oldIndex, newIndex),
+                _reorderItems(oldIndex, newIndex),
             itemBuilder: (context, index) => ItemCard(
               key: Key(items[index].id),
               item: items[index],
@@ -163,22 +164,4 @@ class _BuildScreen extends StatelessWidget {
       ],
     );
   }
-}
-
-Future<void> _openBottomSheet({
-  required BuildContext context,
-  required void Function() onSubmit,
-  String title = 'Add new list',
-}) async {
-  await showModalBottomSheet(
-    context: _scaffoldKey.currentContext!,
-    isScrollControlled: true,
-    shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(25.0))),
-    builder: ((dialogContext) => BottomSheetForm(
-          onSubmit: onSubmit,
-          title: title,
-          child: ItemForm(onSubmit: onSubmit),
-        )),
-  );
 }

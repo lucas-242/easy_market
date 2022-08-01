@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-import 'package:easy_market/app/modules/shopping_list/domain/entities/item.dart';
-import 'package:easy_market/app/modules/shopping_list/domain/entities/item_type.dart';
-import 'package:easy_market/app/shared/utils/item_type_util.dart';
+import '../../domain/entities/item.dart';
+import '../../domain/entities/item_type.dart';
+import '../../../../shared/utils/item_type_util.dart';
 
 class ItemModel extends Item {
   ItemModel({
