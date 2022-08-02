@@ -1,3 +1,4 @@
+import 'package:easy_market/app/core/l10n/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -38,7 +39,7 @@ class _ShoppingListDetailsPageState extends State<ShoppingListDetailsPage> {
     bloc.add(ChangeCurrentItemEvent());
     await BottomSheetUtil.openBottomSheet(
       context: _scaffoldKey.currentContext!,
-      title: 'Add new Item',
+      title: AppLocalizations.of(context).addNewItem,
       child: ItemForm(onSubmit: () => _addItem()),
     );
   }
@@ -103,9 +104,10 @@ class _BuildScreen extends StatelessWidget {
       context: _scaffoldKey.currentContext!,
       builder: (context) {
         return ConfirmationDialog(
-          title: 'Delete item',
-          confirmButton: 'Delete',
-          message: 'Would you like to delete ${item.name}?',
+          title: AppLocalizations.of(context).deleteItem,
+          confirmButton: AppLocalizations.of(context).delete,
+          message:
+              '${AppLocalizations.of(context).wouldYouLikeDelete} ${item.name}?',
           onConfirm: () {
             Modular.to.pop();
             Modular.get<ItemsBloc>().add(DeleteItemEvent(item));
@@ -121,7 +123,8 @@ class _BuildScreen extends StatelessWidget {
     bloc.add(ChangeCurrentItemEvent(item: item));
     await BottomSheetUtil.openBottomSheet(
       context: _scaffoldKey.currentContext!,
-      title: 'Update ${item.name}',
+      title:
+          '${AppLocalizations.of(_scaffoldKey.currentContext!).update} ${item.name}',
       child: ItemForm(onSubmit: () => _updateItem()),
     );
   }

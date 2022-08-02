@@ -1,8 +1,5 @@
 import 'dart:async';
 
-import 'package:flutter/cupertino.dart';
-
-import '../l10n/generated/app_localizations.dart';
 import '../services/stream_subscriptions_cancel.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -31,11 +28,5 @@ extension EnumNullableExtension on Enum? {
 extension StreamSubscriptionsCancelExtension on StreamSubscription {
   void cancelOnFinishApp() {
     Modular.get<StreamSubscriptionsCancel>().addSubscription(this);
-  }
-}
-
-extension BuildContextExtension on BuildContext {
-  AppLocalizations get appLocalization {
-    return AppLocalizations.of(this);
   }
 }

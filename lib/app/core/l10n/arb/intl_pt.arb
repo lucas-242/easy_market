@@ -1,15 +1,18 @@
 {
   "all": "Todos",
+  "add": "Adicionar",
   "cancel": "Cancelar",
+  "create": "Criar",
   "date": "Data",
   "darkMode": "Modo escuro",
   "delete": "Deletar",
   "lightMode": "Modo claro",
   "logout": "Sair",
-  "price": "Preço",
-  "register": "registrar",
+  "register": "Registrar",
   "save": "Salvar",
   "search": "Busca",
+  "update": "Atualizar",
+  "wouldYouLikeDelete": "Gostaria de deletar",
   
   
   "breadAndBreadSpreads": "Pães e Patês",
@@ -21,5 +24,16 @@
   "meatAndFish": "Carnes e Peixaria",
   "petShop": "Pet shop",
   "snacks": "Café da manhã",
-  "vegetablesAndFruits": "Frutas e Vegetais"
+  "vegetablesAndFruits": "Frutas e Vegetais",
+
+
+  "addNewItem": "Adicionar novo item",
+  "createList": "Criar nova lista",
+  "deleteItem": "Deletar item",
+
+  "name": "Nome",
+  "email": "Email",
+  "price": "Preço",
+  "type": "Tipo",
+  "quantity": "Quantidade"
 }

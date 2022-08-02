@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import '../../../../core/l10n/generated/l10n.dart';
 import '../../../../shared/widgets/confirmation_dialog/confirmation_dialog.dart';
 import '/app/core/routes/app_routes.dart';
 
@@ -42,7 +43,7 @@ class _ShoppingListsPageState extends State<ShoppingListsPage> {
       key: _scaffoldKey,
       appBar: AppBar(
         title: Text(
-          'Welcome  ${_auth.user!.name}',
+          _auth.user!.name,
           style: context.titleLarge,
           overflow: TextOverflow.visible,
         ),
@@ -96,9 +97,10 @@ class _BuildScreen extends StatelessWidget {
       context: _scaffoldKey.currentContext!,
       builder: (context) {
         return ConfirmationDialog(
-          title: 'Delete item',
-          confirmButton: 'Delete',
-          message: 'Would you like to delete ${shoppingList.name}?',
+          title: '${AppLocalizations.of(context).delete} item',
+          confirmButton: AppLocalizations.of(context).delete,
+          message:
+              '${AppLocalizations.of(context).wouldYouLikeDelete} ${shoppingList.name}?',
           onConfirm: () {
             Modular.to.pop();
             Modular.get<ShoppingListBloc>()
@@ -115,7 +117,8 @@ class _BuildScreen extends StatelessWidget {
     bloc.add(ChangeCurrentShoppingListEvent(shoppingList: shoppingList));
     await BottomSheetUtil.openBottomSheet(
       context: _scaffoldKey.currentContext!,
-      title: 'Update ${shoppingList.name}',
+      title:
+          '${AppLocalizations.of(_scaffoldKey.currentContext!).update} ${shoppingList.name}',
       child: ShoppingListForm(onSubmit: () => _updateItem()),
     );
   }
@@ -169,7 +172,7 @@ class _CreateButton extends StatelessWidget {
     return FloatingActionButton(
       onPressed: () => BottomSheetUtil.openBottomSheet(
         context: _scaffoldKey.currentContext!,
-        title: 'Create new list',
+        title: AppLocalizations.of(context).createList,
         child: ShoppingListForm(onSubmit: _createShoppingList),
       ),
       child: const Icon(Icons.add),

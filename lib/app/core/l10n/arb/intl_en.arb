@@ -1,0 +1,54 @@
+{
+    "all": "All",
+    "add": "Add",
+    "cancel": "Cancel",
+    "create": "Create",
+    "date": "Date",
+    "darkMode": "Dark Mode",
+    "delete": "Delete",
+    "lightMode": "Light Mode",
+    "logout": "Logout",
+    "register": "Register",
+    "save": "Save",
+    "search": "Search",
+    "update": "Update",
+    "wouldYouLikeDelete": "Would you like to delete",
+  
+  
+    "breadAndBreadSpreads": "Bread and Bread Spreads",
+    "careProducts": "Care",
+    "cleaningProducts": "Cleaning",
+    "dairy": "Dairy",
+    "dryGoods": "Dry goods",
+    "frozen": "Frozen",
+    "meatAndFish": "Meat and Fish",
+    "petShop": "Pet shop",
+    "snacks": "Snacks",
+    "vegetablesAndFruits": "Vegetables and Fruits",
+  
+  
+    "addNewItem": "Add new item",
+    "createList": "Create new list",
+    "deleteItem": "Deletar item",
+  
+  
+    "name": "Name",
+    "email": "Email",
+    "type": "Type",
+    "price": "Price",
+    "quantity": "Quantity",
+
+
+    "invalidName": "Name is invalid",
+    "invalidOwner": "Owner is invalid",
+    "oneItemNeedToBeInformed": "At least one previous or next item needs to be informed",
+    "errorToGetLists": "Error to get lists",
+    "errorToCreateList": "Error to create list",
+    "errorToDeleteList": "Error to delete list",
+    "errorToUpdateList": "Error to update list",
+    "errorToGetItems": "Error to get items",
+    "errorToAddItem": "Error to add item",
+    "errorToDeleteItem": "Error to delete item",
+    "errorToUpdateItem": "Error to update item",
+    "errorToReorderItems": "Error to reorder items"
+  }

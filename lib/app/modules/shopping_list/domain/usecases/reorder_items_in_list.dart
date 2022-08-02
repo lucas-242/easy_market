@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import '../../../../core/errors/errors.dart';
+import '../../../../core/l10n/generated/l10n.dart';
 import '../entities/item.dart';
 import '../errors/errors.dart';
 import '../repositories/shopping_list_repository.dart';
@@ -25,8 +26,8 @@ class ReorderItemInListImpl implements ReorderItemInList {
 
   Either<Failure, Unit>? _validate(Item? prev, Item? next) {
     if (prev == null && next == null) {
-      return Left(ReorderItemFailure(
-          ShoppingListErrorMessages.oneItemNeedToBeInformed));
+      return Left(
+          ReorderItemFailure(AppLocalizations.current.oneItemNeedToBeInformed));
     }
     return null;
   }

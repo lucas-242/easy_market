@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:easy_market/app/core/l10n/generated/l10n.dart';
 
 import '../extensions/extensions.dart';
 import '../../modules/shopping_list/shopping_list.dart';
@@ -38,33 +38,30 @@ abstract class ItemTypeUtil {
     return false;
   }
 
-  static String stringfy({
-    required ItemType? itemType,
-    required BuildContext context,
-  }) {
+  static String stringfy(ItemType? itemType) {
     switch (itemType) {
       case null:
         return '';
       case ItemType.breadAndBreadSpreads:
-        return context.appLocalization.breadAndBreadSpreads;
+        return AppLocalizations.current.breadAndBreadSpreads;
       case ItemType.careProducts:
-        return context.appLocalization.careProducts;
+        return AppLocalizations.current.careProducts;
       case ItemType.cleaningProducts:
-        return context.appLocalization.cleaningProducts;
+        return AppLocalizations.current.cleaningProducts;
       case ItemType.dairy:
-        return context.appLocalization.dairy;
+        return AppLocalizations.current.dairy;
       case ItemType.dryGoods:
-        return context.appLocalization.dryGoods;
+        return AppLocalizations.current.dryGoods;
       case ItemType.frozen:
-        return context.appLocalization.frozen;
+        return AppLocalizations.current.frozen;
       case ItemType.meatAndFish:
-        return context.appLocalization.meatAndFish;
+        return AppLocalizations.current.meatAndFish;
       case ItemType.petShop:
-        return context.appLocalization.petShop;
+        return AppLocalizations.current.petShop;
       case ItemType.snacks:
-        return context.appLocalization.snacks;
+        return AppLocalizations.current.snacks;
       case ItemType.vegetablesAndFruits:
-        return context.appLocalization.vegetablesAndFruits;
+        return AppLocalizations.current.vegetablesAndFruits;
       default:
         return '';
     }

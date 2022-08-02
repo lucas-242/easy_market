@@ -52,8 +52,7 @@ class _Body extends StatelessWidget {
           ),
         ],
       ),
-      subtitle:
-          Text(ItemTypeUtil.stringfy(itemType: item.type, context: context)),
+      subtitle: Text(ItemTypeUtil.stringfy(item.type)),
     );
   }
 }

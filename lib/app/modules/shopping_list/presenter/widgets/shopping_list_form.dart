@@ -1,3 +1,5 @@
+import 'package:easy_market/app/core/l10n/generated/l10n.dart';
+
 import '../bloc/shopping_list_bloc/shopping_list_bloc.dart';
 import '../../../../shared/themes/themes.dart';
 import '../../../../shared/widgets/custom_elevated_button/custom_elevated_button.dart';
@@ -40,7 +42,7 @@ class _NameField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bloc = context.watch<ShoppingListBloc>();
-    const label = 'Name';
+    final label = AppLocalizations.of(context).name;
 
     return CustomTextFormField(
       textFormKey: fieldKey,
@@ -67,7 +69,9 @@ class _Button extends StatelessWidget {
     return CustomElevatedButton(
       onTap: onSubmit,
       size: Size(context.width * 0.7, context.height * 0.067),
-      text: bloc.state.currentShoppingList.id.isEmpty ? 'Create' : 'Update',
+      text: bloc.state.currentShoppingList.id.isEmpty
+          ? AppLocalizations.of(context).create
+          : AppLocalizations.of(context).update,
     );
   }
 }

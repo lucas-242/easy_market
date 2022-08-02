@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import '../../../../core/l10n/generated/l10n.dart';
 import '../entities/shopping_list.dart';
 import '../../../../core/errors/errors.dart';
 import '../errors/errors.dart';
@@ -25,12 +26,12 @@ class CreateShoppingListImpl implements CreateShoppingList {
   Either<Failure, ShoppingList>? _validateShoppingList(
       ShoppingList shoppingList) {
     if (shoppingList.owner.isEmpty) {
-      return Left(InvalidShoppingList(
-          message: ShoppingListErrorMessages.ownerIsInvalid));
+      return Left(
+          InvalidShoppingList(message: AppLocalizations.current.invalidOwner));
     }
     if (!shoppingList.isValidName) {
-      return Left(InvalidShoppingList(
-          message: ShoppingListErrorMessages.nameIsInvalid));
+      return Left(
+          InvalidShoppingList(message: AppLocalizations.current.invalidName));
     }
     return null;
   }

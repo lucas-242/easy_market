@@ -1,5 +1,6 @@
 name: easy_market
-description: The project consists in creating, editing, and sharing grocery lists by users in real time.
+description: The project consists in creating, editing, and sharing grocery lists by users
+  in real time.
 
 publish_to: 'none'
 version: 1.0.0+1
@@ -47,3 +48,10 @@ flutter:
     - assets/images/
   generate: true
   uses-material-design: true
+flutter_intl:
+  enabled: true
+  class_name: AppLocalizations
+  main_locale: en
+  arb_dir: lib/app/core/l10n/arb
+  output_dir: lib/app/core/l10n/generated
+  use_deferred_loading: false
