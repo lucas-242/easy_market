@@ -1,11 +1,11 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:easy_market/app/modules/shopping_list/domain/usecases/listen_items_from_list.dart';
-import 'package:easy_market/app/modules/shopping_list/domain/usecases/reorder_items_in_list.dart';
-import 'package:easy_market/app/modules/shopping_list/shopping_list.dart';
-import 'package:easy_market/app/shared/entities/base_bloc_state.dart';
-import 'package:easy_market/app/shared/validators/form_validator.dart';
+import '../../../domain/usecases/listen_items_from_list.dart';
+import '../../../domain/usecases/reorder_items_in_list.dart';
+import '../../../shopping_list.dart';
+import '../../../../../shared/entities/base_bloc_state.dart';
+import '../../../../../shared/validators/form_validator.dart';
 
 part 'items_event.dart';
 part 'items_state.dart';

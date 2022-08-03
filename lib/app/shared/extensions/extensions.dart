@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:easy_market/app/shared/services/stream_subscriptions_cancel.dart';
+import '../services/stream_subscriptions_cancel.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 extension StringExtensions on String {

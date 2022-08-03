@@ -1,8 +1,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:easy_market/app/core/auth/domain/entities/user_info.dart';
-import 'package:easy_market/app/core/auth/domain/repositories/auth_repository.dart';
-import 'package:easy_market/app/core/errors/errors.dart';
+import '../entities/user_info.dart';
+import '../repositories/auth_repository.dart';
+import '../../../errors/errors.dart';
 
 part 'get_current_user.g.dart';
 

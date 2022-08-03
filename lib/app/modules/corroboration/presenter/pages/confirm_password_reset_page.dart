@@ -1,5 +1,5 @@
-import 'package:easy_market/app/modules/corroboration/presenter/bloc/reset_password_bloc/reset_password_bloc.dart';
-import 'package:easy_market/app/modules/corroboration/presenter/widgets/show_password_button.dart';
+import '../bloc/reset_password_bloc/reset_password_bloc.dart';
+import '../widgets/show_password_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart'
     hide ModularWatchExtension;

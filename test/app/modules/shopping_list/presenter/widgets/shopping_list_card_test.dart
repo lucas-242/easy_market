@@ -15,10 +15,12 @@ void main() {
           onTap: (id) {
             result = id;
           },
+          onTapDelete: (shoppingList) {},
+          onTapUpdate: (shoppingList) {},
         ),
       ),
     );
-    await tester.tap(find.byType(InkWell));
+    await tester.tap(find.byType(InkWell).first);
     await tester.pumpAndSettle();
     expect(result, shoppingList.id);
   });

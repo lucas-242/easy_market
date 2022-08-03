@@ -21,7 +21,7 @@ void main() {
   });
 
   test('Should throw InvalidShoppingList when the list is invalid', () async {
-    final shoppingListMock = shoppingList.copyWith(name: '');
+    final shoppingListMock = shoppingList.copyWith(owner: '');
     final result = await usecase(shoppingListMock);
     expect(result.leftMap((l) => l is InvalidShoppingList), const Left(true));
   });

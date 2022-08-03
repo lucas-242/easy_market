@@ -1,9 +1,9 @@
-import 'package:easy_market/app/core/routes/deep_links/domain/entities/deep_link_data.dart';
-import 'package:easy_market/app/core/errors/errors.dart';
+import '../../domain/entities/deep_link_data.dart';
+import '../../../../errors/errors.dart';
 import 'package:dartz/dartz.dart';
-import 'package:easy_market/app/core/routes/deep_links/domain/errors/errors.dart';
-import 'package:easy_market/app/core/routes/deep_links/domain/repositories/deep_links_handle_repository.dart';
-import 'package:easy_market/app/core/routes/deep_links/infra/datasources/deep_links_handle_datasource.dart';
+import '../../domain/errors/errors.dart';
+import '../../domain/repositories/deep_links_handle_repository.dart';
+import '../datasources/deep_links_handle_datasource.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 part 'deep_links_handle_repository_impl.g.dart';

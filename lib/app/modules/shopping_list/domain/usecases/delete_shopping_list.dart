@@ -1,10 +1,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-import 'package:easy_market/app/modules/shopping_list/domain/entities/shopping_list.dart';
-import 'package:easy_market/app/core/errors/errors.dart';
-import 'package:easy_market/app/modules/shopping_list/domain/errors/errors.dart';
-import 'package:easy_market/app/modules/shopping_list/domain/repositories/shopping_list_repository.dart';
+import '../entities/shopping_list.dart';
+import '../../../../core/errors/errors.dart';
+import '../errors/errors.dart';
+import '../repositories/shopping_list_repository.dart';
 part 'delete_shopping_list.g.dart';
 
 abstract class DeleteShoppingList {

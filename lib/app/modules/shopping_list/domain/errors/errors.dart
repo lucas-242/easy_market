@@ -1,4 +1,4 @@
-import 'package:easy_market/app/core/errors/errors.dart';
+import '../../../../core/errors/errors.dart';
 
 class InvalidShoppingList extends Failure {
   @override
@@ -68,9 +68,4 @@ class ReorderItemFailure extends Failure {
   final String message;
 
   ReorderItemFailure(this.message);
-}
-
-abstract class ShoppingListErrorMessages {
-  static String get oneItemNeedToBeInformed =>
-      'At least one previous or next item needs to be informed';
 }

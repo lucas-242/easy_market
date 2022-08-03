@@ -1,4 +1,4 @@
-import 'package:easy_market/app/core/errors/errors.dart';
+import '../../../errors/errors.dart';
 
 class GetCurrentUserFailure extends Failure {
   @override
@@ -43,6 +43,7 @@ class ResetPasswordFailure extends Failure {
 }
 
 abstract class AuthErrorMessages {
+  static String get nameIsInvalid => 'Name is invalid';
   static String get emailIsInvalid => 'Email is invalid';
   static String get passwordIsInvalid => 'Password is invalid';
   static String get phoneIsInvalid => 'Phone is invalid';

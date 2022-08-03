@@ -1,12 +1,12 @@
-import 'package:easy_market/app/core/auth/domain/usecases/confirm_password_reset.dart';
-import 'package:easy_market/app/core/auth/domain/usecases/send_password_reset_email.dart';
-import 'package:easy_market/app/core/auth/domain/usecases/sign_in_with_email.dart';
-import 'package:easy_market/app/core/auth/domain/usecases/sign_in_with_phone.dart';
-import 'package:easy_market/app/core/auth/domain/usecases/sign_up_with_email.dart';
-import 'package:easy_market/app/core/routes/utils/routes_utils.dart';
-import 'package:easy_market/app/modules/corroboration/presenter/pages/feedback_password_reset_email.dart';
+import '../../core/auth/domain/usecases/confirm_password_reset.dart';
+import '../../core/auth/domain/usecases/send_password_reset_email.dart';
+import '../../core/auth/domain/usecases/sign_in_with_email.dart';
+import '../../core/auth/domain/usecases/sign_in_with_phone.dart';
+import '../../core/auth/domain/usecases/sign_up_with_email.dart';
+import '../../core/routes/utils/routes_utils.dart';
+import 'presenter/pages/feedback_password_reset_email.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:easy_market/app/core/routes/app_routes.dart';
+import '../../core/routes/app_routes.dart';
 import 'package:modular_bloc_bind/modular_bloc_bind.dart';
 
 import 'presenter/bloc/sign_in_bloc/sign_in_bloc.dart';

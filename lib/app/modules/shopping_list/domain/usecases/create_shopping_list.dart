@@ -1,9 +1,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:easy_market/app/modules/shopping_list/domain/entities/shopping_list.dart';
-import 'package:easy_market/app/core/errors/errors.dart';
-import 'package:easy_market/app/modules/shopping_list/domain/errors/errors.dart';
-import 'package:easy_market/app/modules/shopping_list/domain/repositories/shopping_list_repository.dart';
+import '../../../../core/l10n/generated/l10n.dart';
+import '../entities/shopping_list.dart';
+import '../../../../core/errors/errors.dart';
+import '../errors/errors.dart';
+import '../repositories/shopping_list_repository.dart';
 part 'create_shopping_list.g.dart';
 
 abstract class CreateShoppingList {
@@ -24,8 +25,13 @@ class CreateShoppingListImpl implements CreateShoppingList {
 
   Either<Failure, ShoppingList>? _validateShoppingList(
       ShoppingList shoppingList) {
+    if (shoppingList.owner.isEmpty) {
+      return Left(
+          InvalidShoppingList(message: AppLocalizations.current.invalidOwner));
+    }
     if (!shoppingList.isValidName) {
-      return Left(InvalidShoppingList());
+      return Left(
+          InvalidShoppingList(message: AppLocalizations.current.invalidName));
     }
     return null;
   }

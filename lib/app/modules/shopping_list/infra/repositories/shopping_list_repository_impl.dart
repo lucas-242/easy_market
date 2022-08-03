@@ -1,13 +1,14 @@
-import 'package:easy_market/app/modules/shopping_list/domain/entities/item.dart';
-import 'package:easy_market/app/modules/shopping_list/infra/models/item_model.dart';
+import '../../../../core/l10n/generated/l10n.dart';
+import '../../domain/entities/item.dart';
+import '../models/item_model.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:easy_market/app/core/errors/errors.dart';
-import 'package:easy_market/app/modules/shopping_list/domain/entities/shopping_list.dart';
+import '../../../../core/errors/errors.dart';
+import '../../domain/entities/shopping_list.dart';
 import 'package:dartz/dartz.dart';
-import 'package:easy_market/app/modules/shopping_list/domain/errors/errors.dart';
-import 'package:easy_market/app/modules/shopping_list/domain/repositories/shopping_list_repository.dart';
-import 'package:easy_market/app/modules/shopping_list/infra/datasources/shopping_list_datasource.dart';
-import 'package:easy_market/app/modules/shopping_list/infra/models/shopping_list_model.dart';
+import '../../domain/errors/errors.dart';
+import '../../domain/repositories/shopping_list_repository.dart';
+import '../datasources/shopping_list_datasource.dart';
+import '../models/shopping_list_model.dart';
 part 'shopping_list_repository_impl.g.dart';
 
 @Injectable(singleton: false)
@@ -25,7 +26,8 @@ class ShoppingListRepositoryImpl implements ShoppingListRepository {
     } on Failure catch (e) {
       return left(GetShoppingListFailure(e.message));
     } catch (e) {
-      return left(GetShoppingListFailure('Error to get shopping lists.'));
+      return left(
+          GetShoppingListFailure(AppLocalizations.current.errorToGetLists));
     }
   }
 
@@ -38,7 +40,8 @@ class ShoppingListRepositoryImpl implements ShoppingListRepository {
     } on Failure catch (e) {
       return left(GetShoppingListFailure(e.message));
     } catch (e) {
-      return left(GetShoppingListFailure('Error to get shopping lists.'));
+      return left(
+          GetShoppingListFailure(AppLocalizations.current.errorToGetLists));
     }
   }
 
@@ -53,7 +56,8 @@ class ShoppingListRepositoryImpl implements ShoppingListRepository {
     } on Failure catch (e) {
       return left(CreateShoppingListFailure(e.message));
     } catch (e) {
-      return left(CreateShoppingListFailure('Error to create shopping list.'));
+      return left(CreateShoppingListFailure(
+          AppLocalizations.current.errorToCreateList));
     }
   }
 
@@ -68,7 +72,8 @@ class ShoppingListRepositoryImpl implements ShoppingListRepository {
     } on Failure catch (e) {
       return left(UpdateShoppingListFailure(e.message));
     } catch (e) {
-      return left(UpdateShoppingListFailure('Error to update shopping list.'));
+      return left(UpdateShoppingListFailure(
+          AppLocalizations.current.errorToUpdateList));
     }
   }
 
@@ -81,7 +86,8 @@ class ShoppingListRepositoryImpl implements ShoppingListRepository {
     } on Failure catch (e) {
       return left(DeleteShoppingListFailure(e.message));
     } catch (e) {
-      return left(DeleteShoppingListFailure('Error to delete shopping list.'));
+      return left(DeleteShoppingListFailure(
+          AppLocalizations.current.errorToDeleteList));
     }
   }
 
@@ -94,7 +100,7 @@ class ShoppingListRepositoryImpl implements ShoppingListRepository {
     } on Failure catch (e) {
       return left(GetItemsFailure(e.message));
     } catch (e) {
-      return left(GetItemsFailure('Error to get items.'));
+      return left(GetItemsFailure(AppLocalizations.current.errorToGetItems));
     }
   }
 
@@ -107,7 +113,7 @@ class ShoppingListRepositoryImpl implements ShoppingListRepository {
     } on Failure catch (e) {
       return left(GetItemsFailure(e.message));
     } catch (e) {
-      return left(GetItemsFailure('Error to get items.'));
+      return left(GetItemsFailure(AppLocalizations.current.errorToGetItems));
     }
   }
 
@@ -120,7 +126,7 @@ class ShoppingListRepositoryImpl implements ShoppingListRepository {
     } on Failure catch (e) {
       return left(AddItemFailure(e.message));
     } catch (e) {
-      return left(AddItemFailure('Error to add item.'));
+      return left(AddItemFailure(AppLocalizations.current.errorToAddItem));
     }
   }
 
@@ -133,7 +139,8 @@ class ShoppingListRepositoryImpl implements ShoppingListRepository {
     } on Failure catch (e) {
       return left(UpdateItemFailure(e.message));
     } catch (e) {
-      return left(UpdateItemFailure('Error to update item.'));
+      return left(
+          UpdateItemFailure(AppLocalizations.current.errorToUpdateItem));
     }
   }
 
@@ -146,7 +153,8 @@ class ShoppingListRepositoryImpl implements ShoppingListRepository {
     } on Failure catch (e) {
       return left(DeleteItemFailure(e.message));
     } catch (e) {
-      return left(DeleteItemFailure('Error to delete item.'));
+      return left(
+          DeleteItemFailure(AppLocalizations.current.errorToDeleteItem));
     }
   }
 
@@ -163,7 +171,8 @@ class ShoppingListRepositoryImpl implements ShoppingListRepository {
     } on Failure catch (e) {
       return left(ReorderItemFailure(e.message));
     } catch (e) {
-      return left(ReorderItemFailure('Error to reorder item.'));
+      return left(
+          ReorderItemFailure(AppLocalizations.current.errorToReorderItems));
     }
   }
 }

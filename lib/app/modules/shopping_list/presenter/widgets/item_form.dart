@@ -1,10 +1,12 @@
 import 'package:dropdown_search/dropdown_search.dart';
-import 'package:easy_market/app/modules/shopping_list/presenter/bloc/items_bloc/items_bloc.dart';
-import 'package:easy_market/app/modules/shopping_list/shopping_list.dart';
-import 'package:easy_market/app/shared/extensions/extensions.dart';
-import 'package:easy_market/app/shared/themes/themes.dart';
-import 'package:easy_market/app/shared/widgets/custom_elevated_button/custom_elevated_button.dart';
-import 'package:easy_market/app/shared/widgets/custom_text_form_field/custom_text_form_field.dart';
+import 'package:easy_market/app/shared/utils/item_type_util.dart';
+import '../../../../core/l10n/generated/l10n.dart';
+import '../bloc/items_bloc/items_bloc.dart';
+import '../../shopping_list.dart';
+import '../../../../shared/extensions/extensions.dart';
+import '../../../../shared/themes/themes.dart';
+import '../../../../shared/widgets/custom_elevated_button/custom_elevated_button.dart';
+import '../../../../shared/widgets/custom_text_form_field/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -38,11 +40,7 @@ class _ItemFormState extends State<ItemForm> {
           const SizedBox(height: 20),
           _PriceField(fieldKey: _priceKey),
           const SizedBox(height: 30),
-          CustomElevatedButton(
-            onTap: widget.onSubmit,
-            size: Size(context.width * 0.7, context.height * 0.067),
-            text: 'Add',
-          ),
+          _Button(onSubmit: widget.onSubmit),
         ],
       ),
     );
@@ -56,7 +54,7 @@ class _NameField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bloc = context.watch<ItemsBloc>();
-    const label = 'Name';
+    final label = AppLocalizations.of(context).name;
 
     return CustomTextFormField(
       textFormKey: fieldKey,
@@ -77,13 +75,14 @@ class _TypeField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bloc = context.watch<ItemsBloc>();
-    const label = 'Type';
+    final label = AppLocalizations.of(context).type;
 
     return DropdownSearch<ItemType>(
       items: ItemType.values,
-      itemAsString: (ItemType? i) => i!.toShortString(),
+      itemAsString: (ItemType? itemType) => ItemTypeUtil.stringfy(itemType),
       selectedItem: bloc.state.currentItem.type,
-      compareFn: (item1, item2) => item1.toString() == item2.toShortString(),
+      compareFn: (item1, item2) =>
+          item1.toShortString() == item2.toShortString(),
       onChanged: (value) => bloc.add(ChangeTypeEvent(value)),
       validator: (value) => bloc.validateItemTypeField(fieldValue: value),
       autoValidateMode: AutovalidateMode.onUserInteraction,
@@ -101,7 +100,7 @@ class _TypeField extends StatelessWidget {
         ),
       ),
       dropdownBuilder: (context, selectedItem) => Text(
-        selectedItem == null ? label : selectedItem.toShortString(),
+        selectedItem == null ? label : ItemTypeUtil.stringfy(selectedItem),
         style:
             context.bodyLarge?.copyWith(color: context.colors.onSurfaceVariant),
       ),
@@ -116,7 +115,7 @@ class _QuantityField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bloc = context.watch<ItemsBloc>();
-    const label = 'Quantity';
+    final label = AppLocalizations.of(context).quantity;
 
     return CustomTextFormField(
       textFormKey: fieldKey,
@@ -141,7 +140,7 @@ class _PriceField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bloc = context.watch<ItemsBloc>();
-    const label = 'Price';
+    final label = AppLocalizations.of(context).price;
 
     return CustomTextFormField(
       textFormKey: fieldKey,
@@ -153,6 +152,25 @@ class _PriceField extends StatelessWidget {
         fieldValue: value,
         fieldName: label,
       ),
+    );
+  }
+}
+
+class _Button extends StatelessWidget {
+  final void Function() onSubmit;
+
+  const _Button({Key? key, required this.onSubmit}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final bloc = context.watch<ItemsBloc>();
+
+    return CustomElevatedButton(
+      onTap: onSubmit,
+      size: Size(context.width * 0.7, context.height * 0.067),
+      text: bloc.state.currentItem.id.isEmpty
+          ? AppLocalizations.of(context).add
+          : AppLocalizations.of(context).update,
     );
   }
 }

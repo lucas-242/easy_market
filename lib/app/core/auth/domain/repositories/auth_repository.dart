@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
-import 'package:easy_market/app/core/auth/domain/entities/user_info.dart';
-import 'package:easy_market/app/core/errors/errors.dart';
+import '../entities/user_info.dart';
+import '../../../errors/errors.dart';
 
 abstract class AuthRepository {
   Future<Either<Failure, UserInfo>> signInByEmail({

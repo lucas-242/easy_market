@@ -1,6 +1,6 @@
-import 'package:easy_market/app/core/auth/domain/utils/credentials_validator_util.dart';
-import 'package:easy_market/app/modules/shopping_list/domain/entities/item_type.dart';
-import 'package:easy_market/app/shared/extensions/extensions.dart';
+import '../../core/auth/domain/utils/credentials_validator_util.dart';
+import '../../modules/shopping_list/domain/entities/item_type.dart';
+import '../extensions/extensions.dart';
 
 mixin FormValidator {
   String? validateTextField({

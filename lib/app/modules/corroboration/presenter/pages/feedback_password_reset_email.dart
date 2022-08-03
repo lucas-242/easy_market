@@ -1,9 +1,9 @@
 import 'dart:io';
 
 import 'package:android_intent_plus/android_intent.dart';
-import 'package:easy_market/app/core/routes/app_routes.dart';
-import 'package:easy_market/app/shared/widgets/custom_elevated_button/custom_elevated_button.dart';
-import 'package:easy_market/app/shared/themes/themes.dart';
+import '../../../../core/routes/app_routes.dart';
+import '../../../../shared/widgets/custom_elevated_button/custom_elevated_button.dart';
+import '../../../../shared/themes/themes.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';

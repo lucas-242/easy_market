@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:easy_market/app/shared/themes/settings/theme_settings.dart';
+import 'theme_settings.dart';
 // ignore: depend_on_referenced_packages
 import 'package:material_color_utilities/material_color_utilities.dart';
 

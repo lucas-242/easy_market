@@ -1,8 +1,9 @@
 import 'package:dartz/dartz.dart';
-import 'package:easy_market/app/core/errors/errors.dart';
-import 'package:easy_market/app/modules/shopping_list/domain/entities/item.dart';
-import 'package:easy_market/app/modules/shopping_list/domain/errors/errors.dart';
-import 'package:easy_market/app/modules/shopping_list/domain/repositories/shopping_list_repository.dart';
+import '../../../../core/errors/errors.dart';
+import '../../../../core/l10n/generated/l10n.dart';
+import '../entities/item.dart';
+import '../errors/errors.dart';
+import '../repositories/shopping_list_repository.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 part 'reorder_items_in_list.g.dart';
 
@@ -25,8 +26,8 @@ class ReorderItemInListImpl implements ReorderItemInList {
 
   Either<Failure, Unit>? _validate(Item? prev, Item? next) {
     if (prev == null && next == null) {
-      return Left(ReorderItemFailure(
-          ShoppingListErrorMessages.oneItemNeedToBeInformed));
+      return Left(
+          ReorderItemFailure(AppLocalizations.current.oneItemNeedToBeInformed));
     }
     return null;
   }

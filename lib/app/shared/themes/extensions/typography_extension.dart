@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-extension TypographyUtils on BuildContext {
+extension TypographyExtension on BuildContext {
   ThemeData get _theme => Theme.of(this);
   TextTheme get _textTheme => GoogleFonts.poppinsTextTheme(_theme.textTheme);
   ColorScheme get _colors => _theme.colorScheme;

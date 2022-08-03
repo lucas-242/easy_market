@@ -1,4 +1,4 @@
-import 'package:easy_market/app/core/auth/domain/utils/credentials_validator_util.dart';
+import '../utils/credentials_validator_util.dart';
 
 class SignInCredentials {
   final String email;

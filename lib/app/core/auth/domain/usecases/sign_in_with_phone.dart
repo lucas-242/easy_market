@@ -1,10 +1,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:easy_market/app/core/auth/domain/entities/sign_in_credentials.dart';
-import 'package:easy_market/app/core/auth/domain/entities/user_info.dart';
-import 'package:easy_market/app/core/auth/domain/errors/errors.dart';
-import 'package:easy_market/app/core/auth/domain/repositories/auth_repository.dart';
-import 'package:easy_market/app/core/errors/errors.dart';
+import '../entities/sign_in_credentials.dart';
+import '../entities/user_info.dart';
+import '../errors/errors.dart';
+import '../repositories/auth_repository.dart';
+import '../../../errors/errors.dart';
 part 'sign_in_with_phone.g.dart';
 
 abstract class SignInWithPhone {

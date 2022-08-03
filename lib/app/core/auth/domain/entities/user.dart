@@ -1,4 +1,4 @@
-import 'package:easy_market/app/core/auth/domain/entities/user_info.dart';
+import 'user_info.dart';
 
 class User implements UserInfo {
   @override

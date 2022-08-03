@@ -4,12 +4,15 @@ import 'package:easy_market/app/modules/shopping_list/domain/errors/errors.dart'
 import 'package:easy_market/app/modules/shopping_list/infra/repositories/shopping_list_repository_impl.dart';
 import 'package:mockito/mockito.dart';
 
+import '../../../../test_helper.dart';
 import '../../mock_shopping_list_test.dart';
 import '../../mock_shopping_list_test.mocks.dart';
 
 void main() {
   final datasource = MockShoppingListDatasource();
   final repository = ShoppingListRepositoryImpl(datasource);
+
+  TestHelper.loadAppLocalizations();
 
   group('Get ShoppingList', () {
     test('Should return list of ShoppingList', () async {

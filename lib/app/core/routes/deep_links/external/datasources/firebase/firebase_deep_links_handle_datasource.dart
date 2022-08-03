@@ -1,6 +1,6 @@
-import 'package:easy_market/app/core/routes/deep_links/domain/entities/deep_link_data.dart';
-import 'package:easy_market/app/core/routes/deep_links/infra/datasources/deep_links_handle_datasource.dart';
-import 'package:easy_market/app/core/routes/utils/routes_utils.dart';
+import '../../../domain/entities/deep_link_data.dart';
+import '../../../infra/datasources/deep_links_handle_datasource.dart';
+import '../../../../utils/routes_utils.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 
 class FirebaseDeepLinksHandleDatasource implements DeepLinksHandleDatasource {

@@ -1,12 +1,12 @@
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:easy_market/app/core/auth/external/datasources/firebase/errors/firebase_reset_password_failure.dart';
-import 'package:easy_market/app/core/routes/deep_links_routes.dart';
+import 'errors/firebase_reset_password_failure.dart';
+import '../../../../routes/deep_links_routes.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:easy_market/app/core/auth/external/datasources/firebase/errors/errors.dart';
-import 'package:easy_market/app/core/auth/infra/datasources/auth_datasource.dart';
-import 'package:easy_market/app/core/auth/infra/models/user_model.dart';
+import 'errors/errors.dart';
+import '../../../infra/datasources/auth_datasource.dart';
+import '../../../infra/models/user_model.dart';
 
 class FirebaseAuthDatasource implements AuthDatasource {
   final FirebaseAuth auth;

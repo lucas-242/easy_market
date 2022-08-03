@@ -1,10 +1,10 @@
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:easy_market/app/core/auth/domain/entities/user_info.dart';
+import '../../domain/entities/user_info.dart';
 import 'package:dartz/dartz.dart';
-import 'package:easy_market/app/core/auth/domain/errors/errors.dart';
-import 'package:easy_market/app/core/auth/domain/repositories/auth_repository.dart';
-import 'package:easy_market/app/core/auth/infra/datasources/auth_datasource.dart';
-import 'package:easy_market/app/core/errors/errors.dart';
+import '../../domain/errors/errors.dart';
+import '../../domain/repositories/auth_repository.dart';
+import '../datasources/auth_datasource.dart';
+import '../../../errors/errors.dart';
 part 'auth_repository_impl.g.dart';
 
 @Injectable(singleton: false)

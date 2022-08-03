@@ -1,8 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:easy_market/app/modules/shopping_list/domain/errors/errors.dart';
-import 'package:easy_market/app/modules/shopping_list/infra/datasources/shopping_list_datasource.dart';
-import 'package:easy_market/app/modules/shopping_list/infra/models/item_model.dart';
-import 'package:easy_market/app/modules/shopping_list/infra/models/shopping_list_model.dart';
+import '../../../../../core/l10n/generated/l10n.dart';
+import '../../../domain/errors/errors.dart';
+import '../../../infra/datasources/shopping_list_datasource.dart';
+import '../../../infra/models/item_model.dart';
+import '../../../infra/models/shopping_list_model.dart';
 import 'package:lexicographical_order/lexicographical_order.dart';
 
 import 'models/firebase_shopping_list_model.dart';
@@ -29,11 +30,12 @@ class FirebaseShoppingListDatasource implements ShoppingListDatasource {
       final snapshot = await _firestore
           .collection(shoppingListsTable)
           .where('users', arrayContains: userId)
+          .orderBy('createdAt')
           .get();
       final result = _snapshotToListOfShoppingListModel(snapshot.docs);
       return result;
     } catch (e) {
-      throw GetShoppingListFailure('Error to get shopping lists.');
+      throw GetShoppingListFailure(AppLocalizations.current.errorToGetLists);
     }
   }
 
@@ -52,11 +54,12 @@ class FirebaseShoppingListDatasource implements ShoppingListDatasource {
       Stream<QuerySnapshot> snapshots = _firestore
           .collection(shoppingListsTable)
           .where('users', arrayContains: userId)
+          .orderBy('createdAt')
           .snapshots();
       final result = _querySnapshotToShoppingListModel(snapshots);
       return result;
     } catch (e) {
-      throw GetShoppingListFailure('Error to get shopping lists.');
+      throw GetShoppingListFailure(AppLocalizations.current.errorToGetLists);
     }
   }
 
@@ -92,7 +95,8 @@ class FirebaseShoppingListDatasource implements ShoppingListDatasource {
           owner: shoppingList.owner,
           users: [shoppingList.owner]);
     } catch (e) {
-      throw CreateShoppingListFailure('Error to create shopping list.');
+      throw CreateShoppingListFailure(
+          AppLocalizations.current.errorToCreateList);
     }
   }
 
@@ -102,7 +106,8 @@ class FirebaseShoppingListDatasource implements ShoppingListDatasource {
       final reference = _firestore.collection(shoppingListsTable).doc(id);
       await reference.delete();
     } catch (e) {
-      throw DeleteShoppingListFailure('Error to delete shopping list.');
+      throw DeleteShoppingListFailure(
+          AppLocalizations.current.errorToDeleteList);
     }
   }
 
@@ -117,7 +122,8 @@ class FirebaseShoppingListDatasource implements ShoppingListDatasource {
           .doc(shoppingList.id)
           .update(toSave);
     } catch (e) {
-      throw UpdateShoppingListFailure('Error to delete shopping list.');
+      throw UpdateShoppingListFailure(
+          AppLocalizations.current.errorToUpdateList);
     }
   }
 
@@ -133,7 +139,7 @@ class FirebaseShoppingListDatasource implements ShoppingListDatasource {
       final result = _snapshotToListOfItemModel(snapshot.docs);
       return result;
     } catch (e) {
-      throw GetItemsFailure('Error to get items.');
+      throw GetItemsFailure(AppLocalizations.current.errorToGetItems);
     }
   }
 
@@ -158,7 +164,7 @@ class FirebaseShoppingListDatasource implements ShoppingListDatasource {
       final result = _querySnapshotToItemModel(snapshots);
       return result;
     } catch (e) {
-      throw GetItemsFailure('Error to get items.');
+      throw GetItemsFailure(AppLocalizations.current.errorToGetItems);
     }
   }
 
@@ -207,7 +213,7 @@ class FirebaseShoppingListDatasource implements ShoppingListDatasource {
     ///   throw FirebaseSignUpFailure.fromCode(error.code);
     /// }
     catch (e) {
-      throw AddItemFailure('Error to add item.');
+      throw AddItemFailure(AppLocalizations.current.errorToAddItem);
     }
   }
 
@@ -230,7 +236,7 @@ class FirebaseShoppingListDatasource implements ShoppingListDatasource {
           .doc(item.id)
           .update(toSave);
     } catch (e) {
-      throw UpdateItemFailure('Error to update item.');
+      throw UpdateItemFailure(AppLocalizations.current.errorToUpdateItem);
     }
   }
 
@@ -244,7 +250,7 @@ class FirebaseShoppingListDatasource implements ShoppingListDatasource {
           .doc(item.id)
           .delete();
     } catch (e) {
-      throw DeleteItemFailure('Error to delete item.');
+      throw DeleteItemFailure(AppLocalizations.current.deleteItem);
     }
   }
 
@@ -261,32 +267,13 @@ class FirebaseShoppingListDatasource implements ShoppingListDatasource {
           .doc(item.id)
           .update(toSave);
     } catch (e) {
-      throw UpdateItemFailure('Error to reorder item.');
+      throw UpdateItemFailure(AppLocalizations.current.errorToReorderItems);
     }
   }
 
-  String _generateOrderKeyToOldItem({ItemModel? prev, ItemModel? next}) {
-    // final itemIndex =
-    //     _cachedItems!.indexWhere((element) => element.id == item.id);
-
-    // if (itemIndex == -1) {
-    //   throw ReorderItemFailure('Unexpected error trying to generete key');
-    // }
-
-    // final lastIndex = _cachedItems!.length - 1;
-    // const firstIndex = 0;
-
-    // return between(
-    //   prev:  itemIndex != firstIndex
-    //       ? _cachedItems![itemIndex - 1].orderKey
-    //       : null,
-    //   next:
-    //       itemIndex != lastIndex ? _cachedItems![itemIndex + 1].orderKey : null,
-    // );
-
-    return between(
-      prev: prev?.orderKey,
-      next: next?.orderKey,
-    );
-  }
+  String _generateOrderKeyToOldItem({ItemModel? prev, ItemModel? next}) =>
+      between(
+        prev: prev?.orderKey,
+        next: next?.orderKey,
+      );
 }

@@ -1,10 +1,10 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:easy_market/app/core/auth/domain/entities/sign_up_credentials.dart';
-import 'package:easy_market/app/core/auth/domain/usecases/sign_up_with_email.dart';
-import 'package:easy_market/app/shared/entities/base_bloc_state.dart';
-import 'package:easy_market/app/shared/validators/form_validator.dart';
+import '../../../../../core/auth/domain/entities/sign_up_credentials.dart';
+import '../../../../../core/auth/domain/usecases/sign_up_with_email.dart';
+import '../../../../../shared/entities/base_bloc_state.dart';
+import '../../../../../shared/validators/form_validator.dart';
 
 part 'sign_up_event.dart';
 part 'sign_up_state.dart';
