@@ -41,15 +41,14 @@ class _Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      child: InkWell(
-        onTap: () => onTap(shoppingList.id),
-        child: SizedBox(
-          width: double.infinity,
-          child: ListTile(
-            title: Text(shoppingList.name),
-            trailing: const Icon(Icons.chevron_right),
-          ),
+    return InkWell(
+      onTap: () => onTap(shoppingList.id),
+      child: SizedBox(
+        width: double.infinity,
+        child: ListTile(
+          contentPadding: const EdgeInsets.symmetric(horizontal: 25),
+          title: Text(shoppingList.name),
+          trailing: const Icon(Icons.chevron_right),
         ),
       ),
     );

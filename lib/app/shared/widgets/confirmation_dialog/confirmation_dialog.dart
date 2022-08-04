@@ -31,14 +31,14 @@ class ConfirmationDialog extends StatelessWidget {
         CustomElevatedButton(
           onTap: onCancel,
           text: cancelButton,
-          size: Size(context.width * 0.3, context.height * 0.067),
+          width: context.width * 0.3,
           backgroundColor: colors.background,
           foregroundColor: colors.onSurface,
         ),
         CustomElevatedButton(
           onTap: onConfirm,
           text: confirmButton,
-          size: Size(context.width * 0.3, context.height * 0.067),
+          width: context.width * 0.3,
           backgroundColor: colors.errorContainer,
           foregroundColor: colors.onSurface,
         ),

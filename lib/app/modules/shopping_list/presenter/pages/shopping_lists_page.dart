@@ -1,3 +1,4 @@
+import 'package:easy_market/app/shared/widgets/custom_elevated_button/custom_elevated_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -42,10 +43,13 @@ class _ShoppingListsPageState extends State<ShoppingListsPage> {
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
-        title: Text(
-          _auth.user!.name,
-          style: context.titleLarge,
-          overflow: TextOverflow.visible,
+        title: Center(
+          child: Text(
+            AppLocalizations.of(context).groceryLists,
+            style: context.titleLarge,
+            overflow: TextOverflow.visible,
+            textAlign: TextAlign.center,
+          ),
         ),
         toolbarHeight: kToolbarHeight * 1.3,
         actions: [
@@ -131,26 +135,27 @@ class _BuildScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
+    return Column(
       children: [
-        const SizedBox(height: 25),
-        ListView.builder(
-          itemCount: lists.length,
-          itemBuilder: (context, index) => ShoppingListCard(
-            shoppingList: lists[index],
-            onTap: (id) => Modular.to.pushNamed(
-              '${AppRoutes.listDetails}$index',
-              arguments: {'shoppingList': lists[index]},
+        const SizedBox(height: 20),
+        Expanded(
+          child: ListView.builder(
+            itemCount: lists.length,
+            itemBuilder: (context, index) => ShoppingListCard(
+              shoppingList: lists[index],
+              onTap: (id) => Modular.to.pushNamed(
+                '${AppRoutes.listDetails}$index',
+                arguments: {'shoppingList': lists[index]},
+              ),
+              onTapUpdate: (shoppingList) =>
+                  _onTapUpdate(shoppingList: shoppingList),
+              onTapDelete: (shoppingList) =>
+                  _onTapDelete(shoppingList: shoppingList),
             ),
-            onTapUpdate: (shoppingList) =>
-                _onTapUpdate(shoppingList: shoppingList),
-            onTapDelete: (shoppingList) =>
-                _onTapDelete(shoppingList: shoppingList),
           ),
         ),
-        const Positioned(
-          bottom: 25,
-          right: 25,
+        const Padding(
+          padding: EdgeInsets.only(left: 25, right: 25, bottom: 25),
           child: _CreateButton(),
         ),
       ],
@@ -169,13 +174,14 @@ class _CreateButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FloatingActionButton(
-      onPressed: () => BottomSheetUtil.openBottomSheet(
+    return CustomElevatedButton(
+      width: context.width * 100,
+      onTap: () => BottomSheetUtil.openBottomSheet(
         context: _scaffoldKey.currentContext!,
         title: AppLocalizations.of(context).createList,
         child: ShoppingListForm(onSubmit: _createShoppingList),
       ),
-      child: const Icon(Icons.add),
+      text: AppLocalizations.of(context).createList,
     );
   }
 }

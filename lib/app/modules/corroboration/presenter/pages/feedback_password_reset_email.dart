@@ -68,6 +68,7 @@ class FeedbackPasswordResetEmail extends StatelessWidget {
                 CustomElevatedButton(
                   onTap: () => _openEmailApp(),
                   text: 'Open email app',
+                  width: context.width * 0.4,
                 ),
                 const SizedBox(height: 30),
                 TextButton(

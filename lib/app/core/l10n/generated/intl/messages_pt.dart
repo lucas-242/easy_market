@@ -41,6 +41,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "dryGoods": MessageLookupByLibrary.simpleMessage("Mercearia"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
         "frozen": MessageLookupByLibrary.simpleMessage("Congelados"),
+        "groceryLists":
+            MessageLookupByLibrary.simpleMessage("Listas de compras"),
         "lightMode": MessageLookupByLibrary.simpleMessage("Modo claro"),
         "logout": MessageLookupByLibrary.simpleMessage("Sair"),
         "meatAndFish":

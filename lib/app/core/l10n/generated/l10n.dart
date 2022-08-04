@@ -320,6 +320,16 @@ class AppLocalizations {
     );
   }
 
+  /// `Grocery Lists`
+  String get groceryLists {
+    return Intl.message(
+      'Grocery Lists',
+      name: 'groceryLists',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Name`
   String get name {
     return Intl.message(

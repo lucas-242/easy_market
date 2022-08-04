@@ -58,6 +58,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "errorToUpdateList":
             MessageLookupByLibrary.simpleMessage("Error to update list"),
         "frozen": MessageLookupByLibrary.simpleMessage("Frozen"),
+        "groceryLists": MessageLookupByLibrary.simpleMessage("Grocery Lists"),
         "invalidName": MessageLookupByLibrary.simpleMessage("Name is invalid"),
         "invalidOwner":
             MessageLookupByLibrary.simpleMessage("Owner is invalid"),

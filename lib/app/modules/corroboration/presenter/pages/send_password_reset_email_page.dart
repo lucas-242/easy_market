@@ -142,7 +142,6 @@ class _Form extends StatelessWidget {
             const SizedBox(height: 15),
             CustomElevatedButton(
               onTap: () => sendResetPasswordEmail(context),
-              size: Size(context.width * 0.7, context.height * 0.067),
               text: 'Send email',
             ),
           ],
