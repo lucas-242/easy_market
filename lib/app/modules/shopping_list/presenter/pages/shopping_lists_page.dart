@@ -38,15 +38,13 @@ class _ShoppingListsPageState extends State<ShoppingListsPage> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
         title: Center(
           child: Text(
             AppLocalizations.of(context).groceryLists,
-            style: context.titleLarge,
+            style: context.headlineSmall,
             overflow: TextOverflow.visible,
             textAlign: TextAlign.center,
           ),
@@ -58,7 +56,7 @@ class _ShoppingListsPageState extends State<ShoppingListsPage> {
             child: Padding(
               padding: const EdgeInsets.only(right: 12.0),
               child: CircleAvatar(
-                backgroundColor: theme.colorScheme.tertiary,
+                backgroundColor: context.colors.tertiary,
                 child: const Icon(Icons.person),
               ),
             ),
@@ -154,10 +152,7 @@ class _BuildScreen extends StatelessWidget {
             ),
           ),
         ),
-        const Padding(
-          padding: EdgeInsets.only(left: 25, right: 25, bottom: 25),
-          child: _CreateButton(),
-        ),
+        const _CreateButton(),
       ],
     );
   }
@@ -174,14 +169,17 @@ class _CreateButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomElevatedButton(
-      width: context.width * 100,
-      onTap: () => BottomSheetUtil.openBottomSheet(
-        context: _scaffoldKey.currentContext!,
-        title: AppLocalizations.of(context).createList,
-        child: ShoppingListForm(onSubmit: _createShoppingList),
+    return Padding(
+      padding: const EdgeInsets.only(left: 25, right: 25, bottom: 25),
+      child: CustomElevatedButton(
+        width: context.width * 100,
+        onTap: () => BottomSheetUtil.openBottomSheet(
+          context: _scaffoldKey.currentContext!,
+          title: AppLocalizations.of(context).createList,
+          child: ShoppingListForm(onSubmit: _createShoppingList),
+        ),
+        text: AppLocalizations.of(context).createList,
       ),
-      text: AppLocalizations.of(context).createList,
     );
   }
 }
