@@ -1,3 +1,4 @@
+import 'package:easy_market/app/core/l10n/generated/l10n.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import '../../domain/entities/user_info.dart';
 import 'package:dartz/dartz.dart';
@@ -21,7 +22,8 @@ class AuthRepositoryImpl implements AuthRepository {
     } on Failure catch (error) {
       return Left(GetCurrentUserFailure(error.message));
     } catch (error) {
-      return Left(GetCurrentUserFailure("Error to get logged user."));
+      return Left(
+          GetCurrentUserFailure(AppLocalizations.current.errorToGetLoggedUser));
     }
   }
 
@@ -35,8 +37,8 @@ class AuthRepositoryImpl implements AuthRepository {
     } on Failure catch (error) {
       return Stream.value(Left(GetCurrentUserFailure(error.message)));
     } catch (error) {
-      return Stream.value(
-          Left(GetCurrentUserFailure("Error to get logged user.")));
+      return Stream.value(Left(GetCurrentUserFailure(
+          AppLocalizations.current.errorToGetLoggedUser)));
     }
   }
 
@@ -50,7 +52,8 @@ class AuthRepositoryImpl implements AuthRepository {
     } on Failure catch (error) {
       return Left(SignInWithEmailFailure(error.message));
     } catch (error) {
-      return Left(SignInWithEmailFailure("Error to login with email."));
+      return Left(
+          SignInWithEmailFailure(AppLocalizations.current.errorToSignIn));
     }
   }
 
@@ -63,7 +66,8 @@ class AuthRepositoryImpl implements AuthRepository {
     } on Failure catch (error) {
       return Left(SignInWithPhoneFailure(error.message));
     } catch (error) {
-      return Left(SignInWithPhoneFailure("Error to login with phone."));
+      return Left(
+          SignInWithPhoneFailure(AppLocalizations.current.errorToSignIn));
     }
   }
 
@@ -77,7 +81,8 @@ class AuthRepositoryImpl implements AuthRepository {
     } on Failure catch (error) {
       return Left(SignInWithPhoneFailure(error.message));
     } catch (error) {
-      return Left(SignInWithPhoneFailure("Error to verify phone code."));
+      return Left(
+          SignInWithPhoneFailure(AppLocalizations.current.errorToSignIn));
     }
   }
 
@@ -89,7 +94,7 @@ class AuthRepositoryImpl implements AuthRepository {
     } on Failure catch (error) {
       return Left(SignOutFailure(error.message));
     } catch (error) {
-      return Left(SignOutFailure("Error to logout."));
+      return Left(SignOutFailure(AppLocalizations.current.errorToLogout));
     }
   }
 
@@ -109,7 +114,7 @@ class AuthRepositoryImpl implements AuthRepository {
     } on Failure catch (error) {
       return Left(SignUpFailure(error.message));
     } catch (error) {
-      return Left(SignUpFailure("Error to sign up."));
+      return Left(SignUpFailure(AppLocalizations.current.errorToSignUp));
     }
   }
 
@@ -123,7 +128,8 @@ class AuthRepositoryImpl implements AuthRepository {
     } on Failure catch (error) {
       return Left(ResetPasswordFailure(error.message));
     } catch (error) {
-      return Left(ResetPasswordFailure("Error to reset password."));
+      return Left(
+          ResetPasswordFailure(AppLocalizations.current.errorToResetPassword));
     }
   }
 
@@ -139,7 +145,8 @@ class AuthRepositoryImpl implements AuthRepository {
     } on Failure catch (error) {
       return Left(ResetPasswordFailure(error.message));
     } catch (error) {
-      return Left(ResetPasswordFailure("Error to reset password."));
+      return Left(
+          ResetPasswordFailure(AppLocalizations.current.errorToResetPassword));
     }
   }
 }

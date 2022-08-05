@@ -71,5 +71,27 @@
   "errorToAddItem": "Error to add item",
   "errorToDeleteItem": "Error to delete item",
   "errorToUpdateItem": "Error to update item",
-  "errorToReorderItems": "Error to reorder items"
+  "errorToReorderItems": "Error to reorder items",
+  "errorToGetLoggedUser": "Error to get logged user",
+  "thereIsNoUser": "There is no logged user",
+  "errorToResetPassword": "Error to reset password",
+  "errorToSignUp": "Error to sign up",
+  "errorToSignIn": "Error to sign in",
+  "errorToLogout": "Error to logout",
+  "codeNotRetrieved": "Code was not retrieved automatically",
+  "errorToSaveUserData": "Error to save user data",
+
+  "unknowError": "An unknown exception occurred",
+  "linkHasExpired": "The link has expired",
+  "linkHasBeenUsed": "The link has already been used",
+  "passwordIsWeak": "Password is too weak. Please, try a different one",
+  "emailIsInvalid": "Email is invalid or badly formatted",
+  "userHasBeenDisabled": "This user has been disabled. Please contact support for help",
+  "emailWasNotFound": "Email was not found, please create an account",
+  "thereIsAnotherAccount": "There is already an account with this credential",
+  "credentialIsInvalid": "The credential is invalid",
+  "verificationCodeIsInvalid": "The verification code entered is invalid",
+  "verificationIdIsInvalid": "The verification ID entered is invalid",
+  "cantCreateAccountWithMethod": "You can not create an account with this method. Please try another account or contact support for help",
+  "incorrectEmailOrPassword": "Incorrect email or password"
 }

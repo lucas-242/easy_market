@@ -207,12 +207,7 @@ class FirebaseShoppingListDatasource implements ShoppingListDatasource {
         orderKey: item.orderKey,
         shoppingListId: item.shoppingListId,
       );
-    }
-    //TODO: Implement errors by code
-    /// } on FirebaseException catch (error) {
-    ///   throw FirebaseSignUpFailure.fromCode(error.code);
-    /// }
-    catch (e) {
+    } catch (e) {
       throw AddItemFailure(AppLocalizations.current.errorToAddItem);
     }
   }

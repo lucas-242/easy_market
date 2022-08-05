@@ -1,9 +1,10 @@
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'errors/firebase_reset_password_failure.dart';
-import '../../../../routes/deep_links_routes.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+
+import '../../../../l10n/generated/l10n.dart';
+import '../../../../routes/deep_links_routes.dart';
 import 'errors/errors.dart';
 import '../../../infra/datasources/auth_datasource.dart';
 import '../../../infra/models/user_model.dart';
@@ -19,7 +20,8 @@ class FirebaseAuthDatasource implements AuthDatasource {
   Future<UserModel> getCurrentUser() async {
     final user = auth.currentUser;
     if (user == null) {
-      throw FirebaseSignInFailure(message: 'There is no logged user');
+      throw FirebaseSignInFailure(
+          message: AppLocalizations.current.thereIsNoUser);
     }
     return _getUserModel(user);
   }
@@ -76,7 +78,7 @@ class FirebaseAuthDatasource implements AuthDatasource {
         completer.completeError(error);
       },
       codeSent: (String verificationId, int? forceResendingToken) {
-        completer.completeError('Code was not retrieved automatically');
+        completer.completeError(AppLocalizations.current.codeNotRetrieved);
       },
       codeAutoRetrievalTimeout: (String verificationId) {},
     );
@@ -132,7 +134,8 @@ class FirebaseAuthDatasource implements AuthDatasource {
       await _saveUserData(credential.user!, name);
     } catch (error) {
       credential.user!.delete();
-      throw FirebaseSignUpFailure(message: 'Error to save user data');
+      throw FirebaseSignUpFailure(
+          message: AppLocalizations.current.errorToSaveUserData);
     }
   }
 

@@ -71,5 +71,27 @@
   "errorToAddItem": "Erro ao adicionar item",
   "errorToDeleteItem": "Erro ao deletar item",
   "errorToUpdateItem": "Erro ao atualizar item",
-  "errorToReorderItems": "Erro ao reordenar itens"
+  "errorToReorderItems": "Erro ao reordenar itens",
+  "errorToGetLoggedUser": "Erro ao buscar usuário logado",
+  "thereIsNoUser": "Não há usuário logado",
+  "errorToResetPassword": "Error ao redefinir senha",
+  "errorToSignUp": "Erro ao cadastrar",
+  "errorToSignIn": "Erro ao entrar",
+  "errorToLogout": "Erro ao sair",
+  "codeNotRetrieved": "O código não foi recuperado automaticamente",
+  "errorToSaveUserData": "Erro ao salvar dados do usuário",
+
+  "unknowError": "Ocorreu um erro desconhecido",
+  "linkHasExpired": "O link expirou",
+  "linkHasBeenUsed": "O link já foi usado",
+  "passwordIsWeak": "A senha é muito fraca, por favor, tente outra senha",
+  "emailIsInvalid": "O email é inválido ou mal formatado",
+  "userHasBeenDisabled": "Este usuário foi desabilitado. Entre em contato com o suporte para obter ajuda",
+  "emailWasNotFound": "O email não foi encontrado, por favor, crie uma conta",
+  "thereIsAnotherAccount": "Já existe uma conta com estas credenciais",
+  "credentialIsInvalid": "A credencial é inválida",
+  "verificationCodeIsinvalid": "O código de verificação inserido é inválido",
+  "verificationIdIsInvalid": "O Id de verificação inserido é inválido",
+  "cantCreateAccountWithMethod": "Você não pode criar uma conta com este método. Tente outra conta ou entre em contato com o suporte para obter ajuda",
+  "incorrectEmailOrPassword": "Senha ou email incorretos"
 }

@@ -689,6 +689,216 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `Error to get logged user`
+  String get errorToGetLoggedUser {
+    return Intl.message(
+      'Error to get logged user',
+      name: 'errorToGetLoggedUser',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `There is no logged user`
+  String get thereIsNoUser {
+    return Intl.message(
+      'There is no logged user',
+      name: 'thereIsNoUser',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error to reset password`
+  String get errorToResetPassword {
+    return Intl.message(
+      'Error to reset password',
+      name: 'errorToResetPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error to sign up`
+  String get errorToSignUp {
+    return Intl.message(
+      'Error to sign up',
+      name: 'errorToSignUp',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error to sign in`
+  String get errorToSignIn {
+    return Intl.message(
+      'Error to sign in',
+      name: 'errorToSignIn',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error to logout`
+  String get errorToLogout {
+    return Intl.message(
+      'Error to logout',
+      name: 'errorToLogout',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Code was not retrieved automatically`
+  String get codeNotRetrieved {
+    return Intl.message(
+      'Code was not retrieved automatically',
+      name: 'codeNotRetrieved',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error to save user data`
+  String get errorToSaveUserData {
+    return Intl.message(
+      'Error to save user data',
+      name: 'errorToSaveUserData',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `An unknown exception occurred`
+  String get unknowError {
+    return Intl.message(
+      'An unknown exception occurred',
+      name: 'unknowError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The link has expired`
+  String get linkHasExpired {
+    return Intl.message(
+      'The link has expired',
+      name: 'linkHasExpired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The link has already been used`
+  String get linkHasBeenUsed {
+    return Intl.message(
+      'The link has already been used',
+      name: 'linkHasBeenUsed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password is too weak. Please, try a different one`
+  String get passwordIsWeak {
+    return Intl.message(
+      'Password is too weak. Please, try a different one',
+      name: 'passwordIsWeak',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Email is invalid or badly formatted`
+  String get emailIsInvalid {
+    return Intl.message(
+      'Email is invalid or badly formatted',
+      name: 'emailIsInvalid',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This user has been disabled. Please contact support for help`
+  String get userHasBeenDisabled {
+    return Intl.message(
+      'This user has been disabled. Please contact support for help',
+      name: 'userHasBeenDisabled',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Email was not found, please create an account`
+  String get emailWasNotFound {
+    return Intl.message(
+      'Email was not found, please create an account',
+      name: 'emailWasNotFound',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `There is already an account with this credential`
+  String get thereIsAnotherAccount {
+    return Intl.message(
+      'There is already an account with this credential',
+      name: 'thereIsAnotherAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The credential is invalid`
+  String get credentialIsInvalid {
+    return Intl.message(
+      'The credential is invalid',
+      name: 'credentialIsInvalid',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The verification code entered is invalid`
+  String get verificationCodeIsInvalid {
+    return Intl.message(
+      'The verification code entered is invalid',
+      name: 'verificationCodeIsInvalid',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The verification ID entered is invalid`
+  String get verificationIdIsInvalid {
+    return Intl.message(
+      'The verification ID entered is invalid',
+      name: 'verificationIdIsInvalid',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You can not create an account with this method. Please try another account or contact support for help`
+  String get cantCreateAccountWithMethod {
+    return Intl.message(
+      'You can not create an account with this method. Please try another account or contact support for help',
+      name: 'cantCreateAccountWithMethod',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Incorrect email or password`
+  String get incorrectEmailOrPassword {
+    return Intl.message(
+      'Incorrect email or password',
+      name: 'incorrectEmailOrPassword',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {

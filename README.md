@@ -9,7 +9,7 @@ This is an app to create and share grocery lists, using Firebase, Modular, Bloc 
 - [x] Create, edit and delete lists
 - [x] Create, edit and delete list items
 - [ ] Share and unshare lists with other users
-- [ ] Internationalization
+- [x] Internationalization
 - [ ] Ads
 - [ ] Configure CI and CD
 
