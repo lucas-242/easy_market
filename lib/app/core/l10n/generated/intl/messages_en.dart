@@ -25,18 +25,32 @@ class MessageLookup extends MessageLookupByLibrary {
         "add": MessageLookupByLibrary.simpleMessage("Add"),
         "addNewItem": MessageLookupByLibrary.simpleMessage("Add new item"),
         "all": MessageLookupByLibrary.simpleMessage("All"),
+        "alreadyHaveAccount":
+            MessageLookupByLibrary.simpleMessage("Already have an account?"),
         "breadAndBreadSpreads":
             MessageLookupByLibrary.simpleMessage("Bread and Bread Spreads"),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "careProducts": MessageLookupByLibrary.simpleMessage("Care"),
+        "checkEmail": MessageLookupByLibrary.simpleMessage("Check your email"),
         "cleaningProducts": MessageLookupByLibrary.simpleMessage("Cleaning"),
+        "confirmLater":
+            MessageLookupByLibrary.simpleMessage("Skip, I\'ll confirm later"),
+        "confirmPassword":
+            MessageLookupByLibrary.simpleMessage("Confirm Password"),
+        "confirmPasswordReset":
+            MessageLookupByLibrary.simpleMessage("Confirm password reset"),
         "create": MessageLookupByLibrary.simpleMessage("Create"),
+        "createAccount": MessageLookupByLibrary.simpleMessage("Create Account"),
         "createList": MessageLookupByLibrary.simpleMessage("Create new list"),
         "dairy": MessageLookupByLibrary.simpleMessage("Dairy"),
         "darkMode": MessageLookupByLibrary.simpleMessage("Dark Mode"),
         "date": MessageLookupByLibrary.simpleMessage("Date"),
         "delete": MessageLookupByLibrary.simpleMessage("Delete"),
         "deleteItem": MessageLookupByLibrary.simpleMessage("Deletar item"),
+        "didNotReceiveEmail": MessageLookupByLibrary.simpleMessage(
+            "Did not receive the email? Check your spam filter, or "),
+        "dontHaveAccount":
+            MessageLookupByLibrary.simpleMessage("Don\'t have an account?"),
         "dryGoods": MessageLookupByLibrary.simpleMessage("Dry goods"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
         "errorToAddItem":
@@ -57,6 +71,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Error to update item"),
         "errorToUpdateList":
             MessageLookupByLibrary.simpleMessage("Error to update list"),
+        "forgetPassword":
+            MessageLookupByLibrary.simpleMessage("Forgot your password?"),
         "frozen": MessageLookupByLibrary.simpleMessage("Frozen"),
         "groceryLists": MessageLookupByLibrary.simpleMessage("Grocery Lists"),
         "invalidName": MessageLookupByLibrary.simpleMessage("Name is invalid"),
@@ -68,14 +84,29 @@ class MessageLookup extends MessageLookupByLibrary {
         "name": MessageLookupByLibrary.simpleMessage("Name"),
         "oneItemNeedToBeInformed": MessageLookupByLibrary.simpleMessage(
             "At least one previous or next item needs to be informed"),
+        "openEmailApp": MessageLookupByLibrary.simpleMessage("Open email app"),
+        "password": MessageLookupByLibrary.simpleMessage("Password"),
         "petShop": MessageLookupByLibrary.simpleMessage("Pet shop"),
         "price": MessageLookupByLibrary.simpleMessage("Price"),
         "quantity": MessageLookupByLibrary.simpleMessage("Quantity"),
-        "register": MessageLookupByLibrary.simpleMessage("Register"),
+        "resetPassword": MessageLookupByLibrary.simpleMessage("Reset Password"),
+        "resetPasswordLinkSent": MessageLookupByLibrary.simpleMessage(
+            "We have sent a link to reset your password"),
         "save": MessageLookupByLibrary.simpleMessage("Save"),
         "search": MessageLookupByLibrary.simpleMessage("Search"),
+        "sendEmail": MessageLookupByLibrary.simpleMessage("Send email"),
+        "sendPasswordInstructions1": MessageLookupByLibrary.simpleMessage(
+            "Enter the email associated with your account and we will send an email with a link that you will use to reset your password."),
+        "sendPasswordInstructions2": MessageLookupByLibrary.simpleMessage(
+            "If you won\'t receive an email in a few minutes, check your spam folder."),
+        "signIn": MessageLookupByLibrary.simpleMessage("Sign In"),
+        "signUp": MessageLookupByLibrary.simpleMessage("Sign Up"),
         "snacks": MessageLookupByLibrary.simpleMessage("Snacks"),
+        "tryAnotherEmail":
+            MessageLookupByLibrary.simpleMessage("try another email address"),
         "type": MessageLookupByLibrary.simpleMessage("Type"),
+        "typeNewPassword":
+            MessageLookupByLibrary.simpleMessage("Type your new password."),
         "update": MessageLookupByLibrary.simpleMessage("Update"),
         "vegetablesAndFruits":
             MessageLookupByLibrary.simpleMessage("Vegetables and Fruits"),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import '../../../../core/l10n/generated/l10n.dart';
 import '../../../../core/routes/app_routes.dart';
 import '../../../../shared/themes/themes.dart';
 import '../../../../shared/widgets/custom_elevated_button/custom_elevated_button.dart';
@@ -43,12 +44,12 @@ class _ActionButtons extends StatelessWidget {
         const SizedBox(height: 60),
         CustomElevatedButton(
           onTap: () => Modular.to.pushNamed(AppRoutes.signIn),
-          text: 'Sign In',
+          text: AppLocalizations.of(context).signIn,
         ),
         const SizedBox(height: 25),
         CustomElevatedButton(
           onTap: () => Modular.to.pushNamed(AppRoutes.signUp),
-          text: 'Create Account',
+          text: AppLocalizations.of(context).createAccount,
         ),
         const SizedBox(height: 25),
       ],

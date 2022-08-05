@@ -1,3 +1,4 @@
+import '../../../../core/l10n/generated/l10n.dart';
 import '../bloc/reset_password_bloc/reset_password_bloc.dart';
 import '../../../../shared/entities/base_bloc_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -85,14 +86,14 @@ class _BuildScreen extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(left: 15, right: 15),
           child: Text(
-            'Enter the email associated with your account and we will send an email with a code that you will use to reset your password.',
+            AppLocalizations.of(context).sendPasswordInstructions1,
             style: context.bodyMedium,
           ),
         ),
         Padding(
           padding: const EdgeInsets.only(left: 15, right: 15, bottom: 25),
           child: Text(
-            'If you won\'t receive an email in a few minutes, check your spam folder.',
+            AppLocalizations.of(context).sendPasswordInstructions2,
             style: context.bodyMedium,
           ),
         ),
@@ -108,7 +109,10 @@ class _BuildScreen extends StatelessWidget {
 class _Header extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Text('Reset Password', style: context.headlineLarge);
+    return Text(
+      AppLocalizations.of(context).resetPassword,
+      style: context.headlineLarge,
+    );
   }
 }
 
@@ -142,7 +146,7 @@ class _Form extends StatelessWidget {
             const SizedBox(height: 15),
             CustomElevatedButton(
               onTap: () => sendResetPasswordEmail(context),
-              text: 'Send email',
+              text: AppLocalizations.of(context).sendEmail,
             ),
           ],
         ),
@@ -158,7 +162,7 @@ class _EmailField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bloc = context.watch<ResetPasswordBloc>();
-    const label = 'Email';
+    final label = AppLocalizations.of(context).email;
 
     return CustomTextFormField(
       textFormKey: fieldKey,

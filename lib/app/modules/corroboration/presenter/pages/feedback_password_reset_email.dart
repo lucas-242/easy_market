@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:android_intent_plus/android_intent.dart';
+import '../../../../core/l10n/generated/l10n.dart';
 import '../../../../core/routes/app_routes.dart';
 import '../../../../shared/widgets/custom_elevated_button/custom_elevated_button.dart';
 import '../../../../shared/themes/themes.dart';
@@ -55,42 +56,43 @@ class FeedbackPasswordResetEmail extends StatelessWidget {
                 ),
                 const SizedBox(height: 30),
                 Text(
-                  'Check your email',
+                  AppLocalizations.of(context).checkEmail,
                   style: context.titleLarge,
                 ),
                 const SizedBox(height: 15),
                 Text(
-                  'We have sent a link to reset your password',
+                  AppLocalizations.of(context).resetPasswordLinkSent,
                   style: context.bodyLarge,
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 30),
                 CustomElevatedButton(
                   onTap: () => _openEmailApp(),
-                  text: 'Open email app',
+                  text: AppLocalizations.of(context).openEmailApp,
                   width: context.width * 0.4,
                 ),
                 const SizedBox(height: 30),
                 TextButton(
                   onPressed: () => Modular.to
                       .pushNamedAndRemoveUntil(AppRoutes.auth, (p0) => false),
-                  child: const Text('Skip, I\'ll confirm later'),
+                  child: Text(AppLocalizations.of(context).confirmLater),
                 ),
               ],
             ),
           ),
           Text.rich(
             TextSpan(
-                text: 'Did not receive the email? Check your spam filter, or ',
-                children: [
-                  TextSpan(
-                    text: 'try another email address',
-                    style: TextStyle(color: context.colors.onPrimary),
-                    recognizer: TapGestureRecognizer()
-                      ..onTap = () => Modular.to.pushReplacementNamed(
-                          AppRoutes.sendPasswordResetEmail),
-                  ),
-                ]),
+              text: AppLocalizations.of(context).didNotReceiveEmail,
+              children: [
+                TextSpan(
+                  text: AppLocalizations.of(context).tryAnotherEmail,
+                  style: TextStyle(color: context.colors.onPrimary),
+                  recognizer: TapGestureRecognizer()
+                    ..onTap = () => Modular.to
+                        .pushReplacementNamed(AppRoutes.sendPasswordResetEmail),
+                ),
+              ],
+            ),
             textAlign: TextAlign.center,
           ),
         ],

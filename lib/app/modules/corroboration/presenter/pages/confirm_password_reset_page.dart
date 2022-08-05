@@ -1,3 +1,5 @@
+import 'package:easy_market/app/core/l10n/generated/l10n.dart';
+
 import '../bloc/reset_password_bloc/reset_password_bloc.dart';
 import '../widgets/show_password_button.dart';
 import 'package:flutter/material.dart';
@@ -98,7 +100,7 @@ class _BuildScreen extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(left: 15, right: 15, bottom: 25),
           child: Text(
-            'Type your new password.',
+            AppLocalizations.of(context).typeNewPassword,
             style: context.bodyMedium,
           ),
         ),
@@ -115,7 +117,8 @@ class _BuildScreen extends StatelessWidget {
 class _Header extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Text('Reset Password', style: context.headlineLarge);
+    return Text(AppLocalizations.of(context).resetPassword,
+        style: context.headlineLarge);
   }
 }
 
@@ -154,7 +157,7 @@ class _Form extends StatelessWidget {
             const SizedBox(height: 15),
             CustomElevatedButton(
               onTap: () => confirmPasswordReset(context),
-              text: 'Confirm password reset',
+              text: AppLocalizations.of(context).confirmPasswordReset,
             ),
           ],
         ),
@@ -170,7 +173,7 @@ class _PasswordField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bloc = context.watch<ResetPasswordBloc>();
-    const label = 'Password';
+    final label = AppLocalizations.of(context).password;
 
     return CustomTextFormField(
       textFormKey: fieldKey,
@@ -196,7 +199,7 @@ class _ConfirmPasswordField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bloc = context.watch<ResetPasswordBloc>();
-    const label = 'Confirm Password';
+    final label = AppLocalizations.of(context).confirmPassword;
 
     return CustomTextFormField(
       textFormKey: fieldKey,

@@ -140,11 +140,21 @@ class AppLocalizations {
     );
   }
 
-  /// `Register`
-  String get register {
+  /// `Sign In`
+  String get signIn {
     return Intl.message(
-      'Register',
-      name: 'register',
+      'Sign In',
+      name: 'signIn',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sign Up`
+  String get signUp {
+    return Intl.message(
+      'Sign Up',
+      name: 'signUp',
       desc: '',
       args: [],
     );
@@ -350,6 +360,26 @@ class AppLocalizations {
     );
   }
 
+  /// `Password`
+  String get password {
+    return Intl.message(
+      'Password',
+      name: 'password',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirm Password`
+  String get confirmPassword {
+    return Intl.message(
+      'Confirm Password',
+      name: 'confirmPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Type`
   String get type {
     return Intl.message(
@@ -375,6 +405,166 @@ class AppLocalizations {
     return Intl.message(
       'Quantity',
       name: 'quantity',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Type your new password.`
+  String get typeNewPassword {
+    return Intl.message(
+      'Type your new password.',
+      name: 'typeNewPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reset Password`
+  String get resetPassword {
+    return Intl.message(
+      'Reset Password',
+      name: 'resetPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Check your email`
+  String get checkEmail {
+    return Intl.message(
+      'Check your email',
+      name: 'checkEmail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirm password reset`
+  String get confirmPasswordReset {
+    return Intl.message(
+      'Confirm password reset',
+      name: 'confirmPasswordReset',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `We have sent a link to reset your password`
+  String get resetPasswordLinkSent {
+    return Intl.message(
+      'We have sent a link to reset your password',
+      name: 'resetPasswordLinkSent',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Open email app`
+  String get openEmailApp {
+    return Intl.message(
+      'Open email app',
+      name: 'openEmailApp',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Did not receive the email? Check your spam filter, or `
+  String get didNotReceiveEmail {
+    return Intl.message(
+      'Did not receive the email? Check your spam filter, or ',
+      name: 'didNotReceiveEmail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `try another email address`
+  String get tryAnotherEmail {
+    return Intl.message(
+      'try another email address',
+      name: 'tryAnotherEmail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Skip, I'll confirm later`
+  String get confirmLater {
+    return Intl.message(
+      'Skip, I\'ll confirm later',
+      name: 'confirmLater',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter the email associated with your account and we will send an email with a link that you will use to reset your password.`
+  String get sendPasswordInstructions1 {
+    return Intl.message(
+      'Enter the email associated with your account and we will send an email with a link that you will use to reset your password.',
+      name: 'sendPasswordInstructions1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `If you won't receive an email in a few minutes, check your spam folder.`
+  String get sendPasswordInstructions2 {
+    return Intl.message(
+      'If you won\'t receive an email in a few minutes, check your spam folder.',
+      name: 'sendPasswordInstructions2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Send email`
+  String get sendEmail {
+    return Intl.message(
+      'Send email',
+      name: 'sendEmail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Don't have an account?`
+  String get dontHaveAccount {
+    return Intl.message(
+      'Don\'t have an account?',
+      name: 'dontHaveAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Forgot your password?`
+  String get forgetPassword {
+    return Intl.message(
+      'Forgot your password?',
+      name: 'forgetPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Already have an account?`
+  String get alreadyHaveAccount {
+    return Intl.message(
+      'Already have an account?',
+      name: 'alreadyHaveAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Create Account`
+  String get createAccount {
+    return Intl.message(
+      'Create Account',
+      name: 'createAccount',
       desc: '',
       args: [],
     );
