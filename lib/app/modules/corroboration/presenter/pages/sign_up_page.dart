@@ -1,3 +1,4 @@
+import '../../../../core/l10n/generated/l10n.dart';
 import '../bloc/sign_up_bloc/sign_up_bloc.dart';
 import '../widgets/show_password_button.dart';
 import '../../../../shared/entities/base_bloc_state.dart';
@@ -160,8 +161,7 @@ class _Form extends StatelessWidget {
             const SizedBox(height: 15),
             CustomElevatedButton(
               onTap: () => signUp(context),
-              size: Size(context.width * 0.7, context.height * 0.067),
-              text: 'Sign Up',
+              text: AppLocalizations.of(context).signUp,
             ),
           ],
         ),
@@ -177,7 +177,7 @@ class _NameField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bloc = context.read<SignUpBloc>();
-    const label = 'Name';
+    final label = AppLocalizations.of(context).name;
 
     return CustomTextFormField(
       textFormKey: fieldKey,
@@ -196,7 +196,7 @@ class _EmailField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bloc = context.watch<SignUpBloc>();
-    const label = 'Email';
+    final label = AppLocalizations.of(context).email;
 
     return CustomTextFormField(
       textFormKey: fieldKey,
@@ -216,7 +216,7 @@ class _PasswordField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bloc = context.watch<SignUpBloc>();
-    const label = 'Password';
+    final label = AppLocalizations.of(context).password;
 
     return CustomTextFormField(
       textFormKey: fieldKey,
@@ -242,7 +242,7 @@ class _ConfirmPasswordField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bloc = context.watch<SignUpBloc>();
-    const label = 'Confirm Password';
+    final label = AppLocalizations.of(context).confirmPassword;
 
     return CustomTextFormField(
       textFormKey: fieldKey,
@@ -270,10 +270,10 @@ class _SignInButton extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const Text('Already have an account?'),
+        Text(AppLocalizations.of(context).alreadyHaveAccount),
         TextButton(
           onPressed: () => Modular.to.pushReplacementNamed(AppRoutes.signIn),
-          child: const Text('Sign In'),
+          child: Text(AppLocalizations.of(context).signIn),
         ),
       ],
     );

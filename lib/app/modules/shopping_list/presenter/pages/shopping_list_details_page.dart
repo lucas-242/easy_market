@@ -1,8 +1,10 @@
 import 'package:easy_market/app/core/l10n/generated/l10n.dart';
+import 'package:easy_market/app/modules/shopping_list/presenter/widgets/users_row.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
+import '../../../../shared/widgets/custom_elevated_button/custom_elevated_button.dart';
 import '../utils/bottom_sheet_util.dart';
 import '../widgets/item_form.dart';
 import '/app/modules/shopping_list/presenter/bloc/items_bloc/items_bloc.dart';
@@ -34,39 +36,12 @@ class _ShoppingListDetailsPageState extends State<ShoppingListDetailsPage> {
     super.initState();
   }
 
-  Future<void> _onTapAdd() async {
-    final bloc = Modular.get<ItemsBloc>();
-    bloc.add(ChangeCurrentItemEvent());
-    await BottomSheetUtil.openBottomSheet(
-      context: _scaffoldKey.currentContext!,
-      title: AppLocalizations.of(context).addNewItem,
-      child: ItemForm(onSubmit: () => _addItem()),
-    );
-  }
-
-  void _addItem() {
-    final bloc = Modular.get<ItemsBloc>();
-    bloc.add(AddItemEvent());
-    Modular.to.pop();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
-        title: Text(
-          widget.shoppingList.name,
-          style: context.titleLarge,
-        ),
-        actions: [
-          IconButton(
-            onPressed: () => _onTapAdd(),
-            icon: const Icon(Icons.add),
-          ),
-          const IconButton(onPressed: null, icon: Icon(Icons.filter_alt)),
-          const IconButton(onPressed: null, icon: Icon(Icons.more_horiz))
-        ],
+        actions: const [UsersRow()],
       ),
       body: SafeArea(
         child: BlocListener<ItemsBloc, ItemsState>(
@@ -83,7 +58,10 @@ class _ShoppingListDetailsPageState extends State<ShoppingListDetailsPage> {
           child: BlocBuilder<ItemsBloc, ItemsState>(
             builder: (bloc, state) {
               return state.when(
-                onState: (_) => _BuildScreen(items: state.items),
+                onState: (_) => _BuildScreen(
+                  shoppingList: widget.shoppingList,
+                  items: state.items,
+                ),
                 onLoading: () =>
                     const Center(child: CircularProgressIndicator()),
               );
@@ -96,8 +74,11 @@ class _ShoppingListDetailsPageState extends State<ShoppingListDetailsPage> {
 }
 
 class _BuildScreen extends StatelessWidget {
+  final ShoppingList shoppingList;
   final List<Item> items;
-  const _BuildScreen({Key? key, required this.items}) : super(key: key);
+  const _BuildScreen(
+      {Key? key, required this.items, required this.shoppingList})
+      : super(key: key);
 
   Future<void> _onTapDelete({required Item item}) async {
     await showDialog(
@@ -140,11 +121,29 @@ class _BuildScreen extends StatelessWidget {
     bloc.add(ReorderItemsEvent(oldIndex, newIndex));
   }
 
+  void _onFilter() {}
+
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const SizedBox(height: 25),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 20),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                shoppingList.name,
+                style: context.headlineSmall,
+              ),
+              GestureDetector(
+                onTap: () => _onFilter,
+                child: const Icon(Icons.filter_alt),
+              ),
+            ],
+          ),
+        ),
         Expanded(
           child: ReorderableListView.builder(
             itemCount: items.length,
@@ -158,7 +157,34 @@ class _BuildScreen extends StatelessWidget {
             ),
           ),
         ),
+        const _CreateButton(),
       ],
+    );
+  }
+}
+
+class _CreateButton extends StatelessWidget {
+  const _CreateButton({Key? key}) : super(key: key);
+
+  void _addItem() {
+    final bloc = Modular.get<ItemsBloc>();
+    bloc.add(AddItemEvent());
+    Modular.to.pop();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 25, right: 25, bottom: 25),
+      child: CustomElevatedButton(
+        width: context.width * 100,
+        onTap: () => BottomSheetUtil.openBottomSheet(
+          context: _scaffoldKey.currentContext!,
+          title: AppLocalizations.of(context).addNewItem,
+          child: ItemForm(onSubmit: _addItem),
+        ),
+        text: AppLocalizations.of(context).addNewItem,
+      ),
     );
   }
 }

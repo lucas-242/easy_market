@@ -1,7 +1,6 @@
 import 'package:easy_market/app/core/l10n/generated/l10n.dart';
 
 import '../bloc/shopping_list_bloc/shopping_list_bloc.dart';
-import '../../../../shared/themes/themes.dart';
 import '../../../../shared/widgets/custom_elevated_button/custom_elevated_button.dart';
 import '../../../../shared/widgets/custom_text_form_field/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
@@ -68,7 +67,6 @@ class _Button extends StatelessWidget {
 
     return CustomElevatedButton(
       onTap: onSubmit,
-      size: Size(context.width * 0.7, context.height * 0.067),
       text: bloc.state.currentShoppingList.id.isEmpty
           ? AppLocalizations.of(context).create
           : AppLocalizations.of(context).update,

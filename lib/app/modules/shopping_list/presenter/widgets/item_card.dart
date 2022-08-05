@@ -35,15 +35,24 @@ class _Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      title: Text(item.name),
+      title: Text(
+        item.name,
+        style: DefaultTextStyle.of(context)
+            .style
+            .copyWith(fontWeight: FontWeight.bold),
+      ),
+      contentPadding: const EdgeInsets.symmetric(horizontal: 25),
       trailing: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           Text(
             item.quantity.toString(),
             textAlign: TextAlign.end,
+            style: DefaultTextStyle.of(context)
+                .style
+                .copyWith(fontWeight: FontWeight.bold),
           ),
-          const SizedBox(height: 5.0),
+          const SizedBox(height: 10.0),
           Text(
             item.price != null
                 ? NumberFormat.simpleCurrency().format(item.price)
@@ -52,7 +61,10 @@ class _Body extends StatelessWidget {
           ),
         ],
       ),
-      subtitle: Text(ItemTypeUtil.stringfy(item.type)),
+      subtitle: Padding(
+        padding: const EdgeInsets.only(top: 5.0),
+        child: Text(ItemTypeUtil.stringfy(item.type)),
+      ),
     );
   }
 }

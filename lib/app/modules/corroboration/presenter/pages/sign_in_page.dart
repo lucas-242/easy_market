@@ -1,3 +1,4 @@
+import '../../../../core/l10n/generated/l10n.dart';
 import '../bloc/sign_in_bloc/sign_in_bloc.dart';
 import '../widgets/show_password_button.dart';
 import '../../../../shared/entities/base_bloc_state.dart';
@@ -100,7 +101,8 @@ class _BuildScreen extends StatelessWidget {
 class _Header extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Text('Sign In', style: context.headlineLarge);
+    return Text(AppLocalizations.of(context).signIn,
+        style: context.headlineLarge);
   }
 }
 
@@ -137,8 +139,7 @@ class _Form extends StatelessWidget {
             const SizedBox(height: 15),
             CustomElevatedButton(
               onTap: () => signIn(context),
-              size: Size(context.width * 0.7, context.height * 0.067),
-              text: 'Sign In',
+              text: AppLocalizations.of(context).signIn,
             ),
           ],
         ),
@@ -154,7 +155,7 @@ class _EmailField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bloc = context.watch<SignInBloc>();
-    const label = 'Email';
+    final label = AppLocalizations.of(context).email;
 
     return CustomTextFormField(
       textFormKey: fieldKey,
@@ -174,7 +175,7 @@ class _PasswordField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bloc = context.watch<SignInBloc>();
-    const label = 'Password';
+    final label = AppLocalizations.of(context).password;
 
     return CustomTextFormField(
       textFormKey: fieldKey,
@@ -199,7 +200,7 @@ class _ForgotPasswordButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton(
       onPressed: () => Modular.to.pushNamed(AppRoutes.sendPasswordResetEmail),
-      child: const Text('Forgot your password?'),
+      child: Text(AppLocalizations.of(context).forgetPassword),
     );
   }
 }
@@ -210,10 +211,10 @@ class _SignUpButton extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const Text('Don\'t have an account?'),
+        Text(AppLocalizations.of(context).dontHaveAccount),
         TextButton(
           onPressed: () => Modular.to.pushReplacementNamed(AppRoutes.signUp),
-          child: const Text('Sign Up'),
+          child: Text(AppLocalizations.of(context).signUp),
         ),
       ],
     );

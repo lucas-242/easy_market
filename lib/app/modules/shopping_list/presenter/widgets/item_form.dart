@@ -167,7 +167,6 @@ class _Button extends StatelessWidget {
 
     return CustomElevatedButton(
       onTap: onSubmit,
-      size: Size(context.width * 0.7, context.height * 0.067),
       text: bloc.state.currentItem.id.isEmpty
           ? AppLocalizations.of(context).add
           : AppLocalizations.of(context).update,

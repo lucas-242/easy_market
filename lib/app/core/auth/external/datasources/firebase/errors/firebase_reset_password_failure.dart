@@ -1,3 +1,5 @@
+import 'package:easy_market/app/core/l10n/generated/l10n.dart';
+
 import '../../../../../errors/errors.dart';
 
 /// {@template firebase_reset_password_failure}
@@ -8,8 +10,8 @@ class FirebaseResetPasswordFailure implements Failure {
   final String message;
 
   /// {@macro firebase_reset_password_failure}
-  FirebaseResetPasswordFailure(
-      {this.message = 'An unknown exception occurred.'});
+  FirebaseResetPasswordFailure({String? message})
+      : message = message ?? AppLocalizations.current.unknowError;
 
   /// Create an authentication message
   /// from a firebase reset password exception code.
@@ -17,28 +19,27 @@ class FirebaseResetPasswordFailure implements Failure {
     switch (code) {
       case 'expired-action-code:':
         return FirebaseResetPasswordFailure(
-          message: 'The link has expired.',
+          message: AppLocalizations.current.linkHasExpired,
         );
       case 'invalid-action-code':
         return FirebaseResetPasswordFailure(
-          message: 'The link has already been used.',
+          message: AppLocalizations.current.linkHasBeenUsed,
         );
       case 'weak-password':
         return FirebaseResetPasswordFailure(
-          message: 'Password is too weak. Please, try a different one.',
+          message: AppLocalizations.current.passwordIsWeak,
         );
       case 'invalid-email':
         return FirebaseResetPasswordFailure(
-          message: 'Email is not valid or badly formatted.',
+          message: AppLocalizations.current.emailIsInvalid,
         );
       case 'user-disabled':
         return FirebaseResetPasswordFailure(
-          message:
-              'This user has been disabled. Please contact support for help.',
+          message: AppLocalizations.current.userHasBeenDisabled,
         );
       case 'user-not-found':
         return FirebaseResetPasswordFailure(
-          message: 'Email was not found, please create an account.',
+          message: AppLocalizations.current.emailWasNotFound,
         );
       default:
         return FirebaseResetPasswordFailure();
