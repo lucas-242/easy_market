@@ -14,4 +14,6 @@ abstract class ShoppingListDatasource {
   Future<void> deleteItemFromList(ItemModel item);
   Future<void> reorderItemInList(ItemModel item,
       {ItemModel? prev, ItemModel? next});
+  Future<void> checkItemInList(
+      String shoppingListId, String itemId, bool isChecked);
 }

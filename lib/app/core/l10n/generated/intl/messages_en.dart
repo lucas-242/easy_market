@@ -20,6 +20,8 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
+  static String m0(property) => "${property} is invalid";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "add": MessageLookupByLibrary.simpleMessage("Add"),
@@ -100,8 +102,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "incorrectEmailOrPassword":
             MessageLookupByLibrary.simpleMessage("Incorrect email or password"),
         "invalidName": MessageLookupByLibrary.simpleMessage("Name is invalid"),
-        "invalidOwner":
-            MessageLookupByLibrary.simpleMessage("Owner is invalid"),
+        "invalidProperty": m0,
+        "invalidShoppingList":
+            MessageLookupByLibrary.simpleMessage("Invalid shopping list"),
         "lightMode": MessageLookupByLibrary.simpleMessage("Light Mode"),
         "linkHasBeenUsed": MessageLookupByLibrary.simpleMessage(
             "The link has already been used"),

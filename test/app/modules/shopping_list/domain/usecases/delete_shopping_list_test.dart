@@ -5,12 +5,14 @@ import 'package:easy_market/app/modules/shopping_list/domain/errors/errors.dart'
 import 'package:easy_market/app/modules/shopping_list/domain/usecases/delete_shopping_list.dart';
 import 'package:mockito/mockito.dart';
 
+import '../../../../test_helper.dart';
 import '../../mock_shopping_list_test.dart';
 import '../../mock_shopping_list_test.mocks.dart';
 
 void main() {
   final itemRepository = MockShoppingListRepository();
   final usecase = DeleteShoppingListImpl(itemRepository);
+  TestHelper.loadAppLocalizations();
 
   final shoppingListMock =
       ShoppingList(id: '123', name: 'name', owner: 'owner');

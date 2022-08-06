@@ -9,6 +9,7 @@ import 'package:easy_market/app/core/auth/infra/models/user_model.dart';
 import 'package:easy_market/app/core/auth/infra/repositories/auth_repository_impl.dart';
 import 'package:mockito/mockito.dart';
 
+import '../../../test_helper.dart';
 import '../auth_mock_test.dart';
 import '../auth_mock_test.mocks.dart';
 
@@ -17,6 +18,7 @@ void main() {
   final repository = AuthRepositoryImpl(datasource);
   final userToLogin = userModel;
   final userStream = MockStream<UserModel?>();
+  TestHelper.loadAppLocalizations();
 
   group('Login by Email', () {
     const passwordToLogin = '123456';

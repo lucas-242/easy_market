@@ -44,7 +44,6 @@ dev_dependencies:
   modular_codegen: ^3.0.4
 
 flutter:
-  generate: true
   uses-material-design: true
 flutter_intl:
   enabled: true

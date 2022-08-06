@@ -7,12 +7,14 @@ class Item {
   final ItemType? type;
   final double? price;
   final String orderKey;
+  final bool isChecked;
   final String shoppingListId;
 
   const Item({
     this.id = '',
     required this.name,
     this.quantity = 0,
+    this.isChecked = false,
     this.type,
     this.price,
     this.orderKey = '',
@@ -26,6 +28,7 @@ class Item {
     String? id,
     String? name,
     int? quantity,
+    bool? isChecked,
     ItemType? type,
     double? price,
     String? orderKey,
@@ -35,6 +38,7 @@ class Item {
       id: id ?? this.id,
       name: name ?? this.name,
       quantity: quantity ?? this.quantity,
+      isChecked: isChecked ?? this.isChecked,
       type: type ?? this.type,
       price: price ?? this.price,
       orderKey: orderKey ?? this.orderKey,

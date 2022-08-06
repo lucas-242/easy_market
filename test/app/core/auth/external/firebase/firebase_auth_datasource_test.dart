@@ -9,6 +9,7 @@ import 'package:easy_market/app/core/auth/infra/models/user_model.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
+import '../../../../test_helper.dart';
 import '../../auth_mock_test.dart';
 import 'firebase_auth_datasource_test.mocks.dart';
 
@@ -78,6 +79,8 @@ void main() {
   late FirebaseAuth auth;
   late FirebaseFirestore database;
   late FirebaseAuthDatasource datasource;
+
+  TestHelper.loadAppLocalizations();
 
   void setDatasource({bool signedIn = false}) {
     auth = MockFirebaseAuth(mockUser: mockUser, signedIn: signedIn);

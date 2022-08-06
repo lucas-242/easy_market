@@ -570,6 +570,16 @@ class AppLocalizations {
     );
   }
 
+  /// `Invalid shopping list`
+  String get invalidShoppingList {
+    return Intl.message(
+      'Invalid shopping list',
+      name: 'invalidShoppingList',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Name is invalid`
   String get invalidName {
     return Intl.message(
@@ -580,13 +590,13 @@ class AppLocalizations {
     );
   }
 
-  /// `Owner is invalid`
-  String get invalidOwner {
+  /// `{property} is invalid`
+  String invalidProperty(String property) {
     return Intl.message(
-      'Owner is invalid',
-      name: 'invalidOwner',
+      '$property is invalid',
+      name: 'invalidProperty',
       desc: '',
-      args: [],
+      args: [property],
     );
   }
 

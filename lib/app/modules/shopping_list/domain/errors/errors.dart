@@ -1,10 +1,13 @@
+import 'package:easy_market/app/core/l10n/generated/l10n.dart';
+
 import '../../../../core/errors/errors.dart';
 
 class InvalidShoppingList extends Failure {
   @override
   final String message;
 
-  InvalidShoppingList({this.message = 'Invalid shopping list'});
+  InvalidShoppingList({String? message})
+      : message = message ?? AppLocalizations.current.invalidShoppingList;
 }
 
 class GetShoppingListFailure extends Failure {
@@ -68,4 +71,11 @@ class ReorderItemFailure extends Failure {
   final String message;
 
   ReorderItemFailure(this.message);
+}
+
+class CheckItemFailure extends Failure {
+  @override
+  final String message;
+
+  CheckItemFailure(this.message);
 }

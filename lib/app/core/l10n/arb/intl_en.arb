@@ -60,8 +60,16 @@
   "createAccount": "Create Account",
 
 
+  "invalidShoppingList": "Invalid shopping list",
   "invalidName": "Name is invalid",
-  "invalidOwner": "Owner is invalid",
+  "invalidProperty": "{property} is invalid",
+  "@invalidProperty": {
+    "placeholders": {
+        "property": {
+          "type": "String"
+        }
+    }
+  },
   "oneItemNeedToBeInformed": "At least one previous or next item needs to be informed",
   "errorToGetLists": "Error to get lists",
   "errorToCreateList": "Error to create list",

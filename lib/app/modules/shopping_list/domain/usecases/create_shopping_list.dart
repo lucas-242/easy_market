@@ -26,8 +26,8 @@ class CreateShoppingListImpl implements CreateShoppingList {
   Either<Failure, ShoppingList>? _validateShoppingList(
       ShoppingList shoppingList) {
     if (shoppingList.owner.isEmpty) {
-      return Left(
-          InvalidShoppingList(message: AppLocalizations.current.invalidOwner));
+      return Left(InvalidShoppingList(
+          message: AppLocalizations.current.invalidProperty('owner')));
     }
     if (!shoppingList.isValidName) {
       return Left(
