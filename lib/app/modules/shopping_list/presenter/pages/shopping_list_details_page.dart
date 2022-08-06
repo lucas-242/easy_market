@@ -121,6 +121,11 @@ class _BuildScreen extends StatelessWidget {
     bloc.add(ReorderItemsEvent(oldIndex, newIndex));
   }
 
+  void _onCheck(Item item) {
+    final bloc = Modular.get<ItemsBloc>();
+    bloc.add(CheckItemEvent(item));
+  }
+
   void _onFilter() {}
 
   @override
@@ -154,6 +159,7 @@ class _BuildScreen extends StatelessWidget {
               item: items[index],
               onTapUpdate: (item) => _onTapUpdate(item: item),
               onTapDelete: (item) => _onTapDelete(item: item),
+              onCheck: (item) => _onCheck(item),
             ),
           ),
         ),

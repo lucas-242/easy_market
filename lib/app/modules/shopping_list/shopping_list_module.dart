@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_market/app/modules/shopping_list/domain/usecases/check_item_in_list.dart';
 import '../../core/routes/utils/routes_utils.dart';
 import 'domain/usecases/reorder_items_in_list.dart';
 import 'presenter/bloc/items_bloc/items_bloc.dart';
@@ -25,6 +26,7 @@ class ShoppingListModule extends Module {
   @override
   final List<Bind> binds = [
     $AddItemToListImpl,
+    $CheckItemInListImpl,
     $CreateShoppingListImpl,
     $DeleteItemFromListImpl,
     $DeleteShoppingListImpl,
@@ -51,6 +53,7 @@ class ShoppingListModule extends Module {
         updateItemInListUsecase: i<UpdateItemInList>(),
         deleteItemFromListUsecase: i<DeleteItemFromList>(),
         reorderItemInListUsecase: i<ReorderItemInList>(),
+        checkItemInListUsecase: i<CheckItemInList>(),
       ),
     ),
     BindInject(

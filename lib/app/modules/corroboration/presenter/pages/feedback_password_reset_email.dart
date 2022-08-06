@@ -45,7 +45,7 @@ class FeedbackPasswordResetEmail extends StatelessWidget {
                   width: context.width * .3,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(25),
-                    color: context.colors.onPrimary,
+                    color: context.colorsScheme.onPrimary,
                   ),
                   child: const Center(
                     child: FaIcon(
@@ -86,7 +86,7 @@ class FeedbackPasswordResetEmail extends StatelessWidget {
               children: [
                 TextSpan(
                   text: AppLocalizations.of(context).tryAnotherEmail,
-                  style: TextStyle(color: context.colors.onPrimary),
+                  style: TextStyle(color: context.colorsScheme.onPrimary),
                   recognizer: TapGestureRecognizer()
                     ..onTap = () => Modular.to
                         .pushReplacementNamed(AppRoutes.sendPasswordResetEmail),

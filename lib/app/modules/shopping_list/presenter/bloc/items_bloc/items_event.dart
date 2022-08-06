@@ -30,6 +30,12 @@ class DeleteItemEvent extends ItemsEvent {
   DeleteItemEvent(this.item);
 }
 
+class CheckItemEvent extends ItemsEvent {
+  final Item item;
+
+  CheckItemEvent(this.item);
+}
+
 class ChangeNameEvent extends ItemsEvent {
   final String name;
 

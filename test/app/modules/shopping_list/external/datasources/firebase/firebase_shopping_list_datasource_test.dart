@@ -26,7 +26,7 @@ void main() {
     test('Should create ShoppingList', () async {
       final result = await _createMockShoppingList();
       expect(result.id, isNotEmpty);
-      expect(result.name, shoppingList.name);
+      expect(result.name, equals(shoppingList.name));
     });
   });
 
@@ -78,7 +78,7 @@ void main() {
       final result = shoppingLists
           .firstWhere((element) => element.id == shoppingListToUpdate.id);
 
-      expect(result.name, shoppingListToUpdate.name);
+      expect(result.name, equals(shoppingListToUpdate.name));
     });
   });
 
@@ -118,7 +118,7 @@ void main() {
       final itemToAdd = mockItem.copyWith(shoppingListId: mockShoppingList.id);
       final result = await datasource.addItemToList(itemToAdd);
       expect(result.id, isNotEmpty);
-      expect(result.shoppingListId, mockShoppingList.id);
+      expect(result.shoppingListId, equals(mockShoppingList.id));
     });
 
     test('Should Get Items', () async {
@@ -144,8 +144,8 @@ void main() {
           await datasource.getItemsFromList(itemToUpdate.shoppingListId);
       final result = itemsFromShoppingList
           .firstWhere((element) => element.id == itemToUpdate.id);
-      expect(result.name, itemToUpdate.name);
-      expect(result.quantity, itemToUpdate.quantity);
+      expect(result.name, equals(itemToUpdate.name));
+      expect(result.quantity, equals(itemToUpdate.quantity));
     });
 
     test('Should delete Item', () async {
@@ -169,7 +169,21 @@ void main() {
       final reorderedItems =
           await datasource.getItemsFromList(itemToAdd.shoppingListId);
       expect(reorderedItems.first.id, itemToAdd.id);
-      expect(reorderedItems[1].id, firstItem.id);
+      expect(reorderedItems[1].id, equals(firstItem.id));
+    });
+
+    test('Should check Item', () async {
+      var itemToAdd = mockItem.copyWith(name: 'new item');
+      itemToAdd = await datasource.addItemToList(itemToAdd);
+
+      await datasource.checkItemInList(
+          itemToAdd.shoppingListId, itemToAdd.id, !itemToAdd.isChecked);
+
+      final allItems =
+          await datasource.getItemsFromList(itemToAdd.shoppingListId);
+      final result = allItems.firstWhere((item) => item.id == itemToAdd.id);
+
+      expect(result.isChecked, equals(!itemToAdd.isChecked));
     });
   });
 }
