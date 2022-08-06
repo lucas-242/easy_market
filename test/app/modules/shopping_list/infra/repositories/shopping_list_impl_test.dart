@@ -208,4 +208,25 @@ void main() {
       expect(result.leftMap((l) => l is ReorderItemFailure), const Left(true));
     });
   });
+
+  group('Check Item', () {
+    test('Should check Item', () async {
+      when(datasource.checkItemInList(any, any, any))
+          .thenAnswer((_) async => unit);
+
+      final result =
+          await repository.checkItemInList('shoppingListId', 'itemId', true);
+      expect(result, const Right(unit));
+    });
+
+    test('Should throw CheckItemFailure when there are any errors to check',
+        () async {
+      when(datasource.checkItemInList(any, any, any))
+          .thenThrow((_) async => Exception());
+
+      final result =
+          await repository.checkItemInList('shoppingListId', 'itemId', true);
+      expect(result.leftMap((l) => l is CheckItemFailure), const Left(true));
+    });
+  });
 }

@@ -28,8 +28,8 @@ class UpdateShoppingListImpl implements UpdateShoppingList {
       return Left(InvalidShoppingList());
     }
     if (shoppingList.owner.isEmpty) {
-      return Left(
-          InvalidShoppingList(message: AppLocalizations.current.invalidOwner));
+      return Left(InvalidShoppingList(
+          message: AppLocalizations.current.invalidProperty('owner')));
     }
     if (!shoppingList.isValidName) {
       return Left(

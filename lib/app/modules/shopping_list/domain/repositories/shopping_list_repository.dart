@@ -19,4 +19,6 @@ abstract class ShoppingListRepository {
   Future<Either<Failure, Unit>> deleteItemFromList(Item item);
   Future<Either<Failure, Unit>> reorderItemInList(Item item,
       {Item? prev, Item? next});
+  Future<Either<Failure, Unit>> checkItemInList(
+      String shoppingListId, String itemId, bool isChecked);
 }

@@ -101,8 +101,8 @@ class _TypeField extends StatelessWidget {
       ),
       dropdownBuilder: (context, selectedItem) => Text(
         selectedItem == null ? label : ItemTypeUtil.stringfy(selectedItem),
-        style:
-            context.bodyLarge?.copyWith(color: context.colors.onSurfaceVariant),
+        style: context.bodyLarge
+            ?.copyWith(color: context.colorsScheme.onSurfaceVariant),
       ),
     );
   }

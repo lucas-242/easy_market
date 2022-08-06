@@ -175,4 +175,17 @@ class ShoppingListRepositoryImpl implements ShoppingListRepository {
           ReorderItemFailure(AppLocalizations.current.errorToReorderItems));
     }
   }
+
+  @override
+  Future<Either<Failure, Unit>> checkItemInList(
+      String shoppingListId, String itemId, bool isChecked) async {
+    try {
+      await datasource.checkItemInList(shoppingListId, itemId, isChecked);
+      return right(unit);
+    } on Failure catch (e) {
+      return left(CheckItemFailure(e.message));
+    } catch (e) {
+      return left(CheckItemFailure(AppLocalizations.current.errorToUpdateItem));
+    }
+  }
 }

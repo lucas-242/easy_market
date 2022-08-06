@@ -29,8 +29,8 @@ class CustomSlidable extends StatelessWidget {
                 SlidableAction(
                   onPressed: (context) =>
                       onLeftSlide != null ? onLeftSlide!() : null,
-                  backgroundColor: context.colors.primaryContainer,
-                  foregroundColor: context.colors.onPrimaryContainer,
+                  backgroundColor: context.colorsScheme.primaryContainer,
+                  foregroundColor: context.colorsScheme.onPrimaryContainer,
                   icon: Icons.edit,
                   label: 'Edit',
                 ),
@@ -44,8 +44,8 @@ class CustomSlidable extends StatelessWidget {
                 SlidableAction(
                   onPressed: (context) =>
                       onRightSlide != null ? onRightSlide!() : null,
-                  backgroundColor: context.colors.primaryContainer,
-                  foregroundColor: context.colors.onPrimaryContainer,
+                  backgroundColor: context.colorsScheme.primaryContainer,
+                  foregroundColor: context.colorsScheme.onPrimaryContainer,
                   icon: Icons.delete,
                   label: 'Delete',
                 ),

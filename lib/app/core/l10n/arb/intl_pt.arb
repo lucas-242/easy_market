@@ -60,8 +60,9 @@
   "createAccount": "Criar uma conta",
 
 
+  "invalidShoppingList": "Lista inválida",
   "invalidName": "Nome inválido",
-  "invalidOwner": "Proprietário inválido",
+  "invalidProperty": "{property} inválido",
   "oneItemNeedToBeInformed": "Pelo menos um item deve ser informado",
   "errorToGetLists": "Erro ao carregar listas",
   "errorToCreateList": "Erro ao criar lista",

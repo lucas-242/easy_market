@@ -267,8 +267,20 @@ class FirebaseShoppingListDatasource implements ShoppingListDatasource {
   }
 
   String _generateOrderKeyToOldItem({ItemModel? prev, ItemModel? next}) =>
-      between(
-        prev: prev?.orderKey,
-        next: next?.orderKey,
-      );
+      between(prev: prev?.orderKey, next: next?.orderKey);
+
+  @override
+  Future<void> checkItemInList(
+      String shoppingListId, String itemId, bool isChecked) async {
+    try {
+      await _firestore
+          .collection(shoppingListsTable)
+          .doc(shoppingListId)
+          .collection(itemsTable)
+          .doc(itemId)
+          .update({"isChecked": isChecked});
+    } catch (e) {
+      throw UpdateItemFailure(AppLocalizations.current.errorToUpdateItem);
+    }
+  }
 }

@@ -137,6 +137,15 @@ class MockShoppingListRepository extends _i1.Mock
               returnValue: Future<_i2.Either<_i7.Failure, _i2.Unit>>.value(
                   _FakeEither_0<_i7.Failure, _i2.Unit>()))
           as _i5.Future<_i2.Either<_i7.Failure, _i2.Unit>>);
+  @override
+  _i5.Future<_i2.Either<_i7.Failure, _i2.Unit>> checkItemInList(
+          String? shoppingListId, String? itemId, bool? isChecked) =>
+      (super.noSuchMethod(
+              Invocation.method(
+                  #checkItemInList, [shoppingListId, itemId, isChecked]),
+              returnValue: Future<_i2.Either<_i7.Failure, _i2.Unit>>.value(
+                  _FakeEither_0<_i7.Failure, _i2.Unit>()))
+          as _i5.Future<_i2.Either<_i7.Failure, _i2.Unit>>);
 }
 
 /// A class which mocks [ShoppingListDatasource].
@@ -211,6 +220,14 @@ class MockShoppingListDatasource extends _i1.Mock
       (super.noSuchMethod(
           Invocation.method(
               #reorderItemInList, [item], {#prev: prev, #next: next}),
+          returnValue: Future<void>.value(),
+          returnValueForMissingStub: Future<void>.value()) as _i5.Future<void>);
+  @override
+  _i5.Future<void> checkItemInList(
+          String? shoppingListId, String? itemId, bool? isChecked) =>
+      (super.noSuchMethod(
+          Invocation.method(
+              #checkItemInList, [shoppingListId, itemId, isChecked]),
           returnValue: Future<void>.value(),
           returnValueForMissingStub: Future<void>.value()) as _i5.Future<void>);
 }

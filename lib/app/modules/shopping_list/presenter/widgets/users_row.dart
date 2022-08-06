@@ -26,7 +26,7 @@ class UsersRow extends StatelessWidget {
             top: 12,
             right: 75,
             child: CircleAvatar(
-              backgroundColor: context.colors.tertiary,
+              backgroundColor: context.colorsScheme.tertiary,
               child: const Icon(Icons.person),
             ),
           )
@@ -42,7 +42,7 @@ class UserCircle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CircleAvatar(
-      backgroundColor: context.colors.tertiaryContainer,
+      backgroundColor: context.colorsScheme.tertiaryContainer,
       child: const Icon(Icons.face),
     );
   }
@@ -54,10 +54,10 @@ class AddCircle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CircleAvatar(
-      backgroundColor: context.colors.secondaryContainer,
+      backgroundColor: context.colorsScheme.secondaryContainer,
       child: Icon(
         Icons.add,
-        color: context.colors.onSecondaryContainer,
+        color: context.colorsScheme.onSecondaryContainer,
       ),
     );
   }

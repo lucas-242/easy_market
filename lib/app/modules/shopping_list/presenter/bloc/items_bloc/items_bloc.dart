@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:easy_market/app/modules/shopping_list/domain/usecases/check_item_in_list.dart';
 import '../../../domain/usecases/listen_items_from_list.dart';
 import '../../../domain/usecases/reorder_items_in_list.dart';
 import '../../../shopping_list.dart';
@@ -16,6 +17,7 @@ class ItemsBloc extends Bloc<ItemsEvent, ItemsState> with FormValidator {
   final UpdateItemInList updateItemInListUsecase;
   final DeleteItemFromList deleteItemFromListUsecase;
   final ReorderItemInList reorderItemInListUsecase;
+  final CheckItemInList checkItemInListUsecase;
 
   ItemsBloc({
     required this.listenItemsFromListUsecase,
@@ -23,9 +25,11 @@ class ItemsBloc extends Bloc<ItemsEvent, ItemsState> with FormValidator {
     required this.updateItemInListUsecase,
     required this.deleteItemFromListUsecase,
     required this.reorderItemInListUsecase,
+    required this.checkItemInListUsecase,
   }) : super(ItemsState(status: BaseStateStatus.initial)) {
     on<ListenShoppingListItemsEvent>(_onInit);
     on<AddItemEvent>(_onAddItem);
+    on<CheckItemEvent>(_onCheckItem);
     on<UpdateItemEvent>(_onUpdateItem);
     on<DeleteItemEvent>(_onDeleteItem);
     on<ReorderItemsEvent>(_onReorderItems);
@@ -147,6 +151,32 @@ class ItemsBloc extends Bloc<ItemsEvent, ItemsState> with FormValidator {
     Item? next,
   }) async {
     final result = await reorderItemInListUsecase(item, prev: prev, next: next);
+    result.fold(
+      (error) async => emit(state.copyWith(
+          status: BaseStateStatus.error, callbackMessage: error.message)),
+      (result) => (result) => emit(state.successState()),
+    );
+  }
+
+  Future<void> _onCheckItem(
+      CheckItemEvent event, Emitter<ItemsState> emit) async {
+    emit.call(state.copyWith(status: BaseStateStatus.loading));
+    await _checkItem(
+      emit: emit,
+      itemId: event.item.id,
+      shoppingListId: event.item.shoppingListId,
+      isChecked: !event.item.isChecked,
+    );
+  }
+
+  Future<void> _checkItem({
+    required String shoppingListId,
+    required String itemId,
+    required bool isChecked,
+    required Emitter<ItemsState> emit,
+  }) async {
+    final result =
+        await checkItemInListUsecase(shoppingListId, itemId, isChecked);
     result.fold(
       (error) async => emit(state.copyWith(
           status: BaseStateStatus.error, callbackMessage: error.message)),

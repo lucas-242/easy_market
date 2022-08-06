@@ -56,7 +56,7 @@ class _ShoppingListsPageState extends State<ShoppingListsPage> {
             child: Padding(
               padding: const EdgeInsets.only(right: 12.0),
               child: CircleAvatar(
-                backgroundColor: context.colors.tertiary,
+                backgroundColor: context.colorsScheme.tertiary,
                 child: const Icon(Icons.person),
               ),
             ),
