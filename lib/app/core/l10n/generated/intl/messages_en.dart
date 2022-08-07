@@ -111,6 +111,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "linkHasExpired":
             MessageLookupByLibrary.simpleMessage("The link has expired"),
         "logout": MessageLookupByLibrary.simpleMessage("Logout"),
+        "logoutConfirmation": MessageLookupByLibrary.simpleMessage(
+            "Do you really want to logout?"),
         "meatAndFish": MessageLookupByLibrary.simpleMessage("Meat and Fish"),
         "name": MessageLookupByLibrary.simpleMessage("Name"),
         "oneItemNeedToBeInformed": MessageLookupByLibrary.simpleMessage(

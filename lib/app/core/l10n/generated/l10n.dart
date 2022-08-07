@@ -140,6 +140,16 @@ class AppLocalizations {
     );
   }
 
+  /// `Do you really want to logout?`
+  String get logoutConfirmation {
+    return Intl.message(
+      'Do you really want to logout?',
+      name: 'logoutConfirmation',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Sign In`
   String get signIn {
     return Intl.message(
