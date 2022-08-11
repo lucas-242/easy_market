@@ -8,6 +8,7 @@
   "delete": "Deletar",
   "lightMode": "Modo claro",
   "logout": "Sair",
+  "logoutConfirmation": "Você realmente gostaria de sair?",
   "signIn": "Entrar",
   "signUp": "Cadastrar",
   "save": "Salvar",

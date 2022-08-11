@@ -143,8 +143,6 @@ class FirebaseAuthDatasource implements AuthDatasource {
     await firestore.collection(usersTable).doc(user.uid).set({
       'name': name,
       'email': user.email,
-      'phone': '',
-      'imageUrl': '',
       'createdAt':
           Timestamp.fromDate(user.metadata.creationTime ?? DateTime.now()),
       'updatedAt':
@@ -154,7 +152,7 @@ class FirebaseAuthDatasource implements AuthDatasource {
 
   UserModel _getUserModel(User user) {
     return UserModel(
-      id: user.uid,
+      id: user.email,
       name: user.displayName ?? '',
       email: user.email,
       phone: user.phoneNumber,

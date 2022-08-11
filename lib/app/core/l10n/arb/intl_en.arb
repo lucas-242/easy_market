@@ -8,6 +8,7 @@
   "delete": "Delete",
   "lightMode": "Light Mode",
   "logout": "Logout",
+  "logoutConfirmation": "Do you really want to logout?",
   "signIn": "Sign In",
   "signUp": "Sign Up",
   "save": "Save",

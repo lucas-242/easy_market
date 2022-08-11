@@ -46,22 +46,11 @@ class _ShoppingListsPageState extends State<ShoppingListsPage> {
             AppLocalizations.of(context).groceryLists,
             style: context.headlineSmall,
             overflow: TextOverflow.visible,
-            textAlign: TextAlign.center,
           ),
         ),
         toolbarHeight: kToolbarHeight * 1.3,
-        actions: [
-          InkWell(
-            onTap: () => Modular.get<AuthService>().signOut(),
-            child: Padding(
-              padding: const EdgeInsets.only(right: 12.0),
-              child: CircleAvatar(
-                backgroundColor: context.colorsScheme.tertiary,
-                child: const Icon(Icons.person),
-              ),
-            ),
-          )
-        ],
+        leading: const UserButton(),
+        actions: const [LogoutButton()],
       ),
       body: SafeArea(
         child: BlocListener<ShoppingListBloc, ShoppingListState>(
@@ -85,6 +74,54 @@ class _ShoppingListsPageState extends State<ShoppingListsPage> {
             },
           ),
         ),
+      ),
+    );
+  }
+}
+
+class UserButton extends StatelessWidget {
+  const UserButton({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 8.0),
+      child: IconButton(
+        onPressed: () => null,
+        icon: const Icon(Icons.person),
+      ),
+    );
+  }
+}
+
+class LogoutButton extends StatelessWidget {
+  const LogoutButton({Key? key}) : super(key: key);
+
+  Future<void> _onTapLogout() async {
+    await showDialog(
+      context: _scaffoldKey.currentContext!,
+      builder: (context) {
+        return ConfirmationDialog(
+          title: AppLocalizations.of(context).logout,
+          confirmButton: AppLocalizations.of(context).logout,
+          message: AppLocalizations.of(context).logoutConfirmation,
+          onConfirm: () {
+            Modular.to.pop();
+            Modular.get<AuthService>().signOut();
+          },
+          onCancel: () => Modular.to.pop(),
+        );
+      },
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(right: 8.0),
+      child: IconButton(
+        onPressed: () => _onTapLogout(),
+        icon: const Icon(Icons.logout),
       ),
     );
   }

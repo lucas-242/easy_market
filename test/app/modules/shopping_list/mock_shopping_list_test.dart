@@ -10,7 +10,7 @@ class StreamShoppingLists extends Mock
 
 class StreamItem extends Mock implements Stream<List<ItemModel>> {}
 
-const userId = 'userId';
+const userEmail = 'user@email.com';
 
 ShoppingListModel get shoppingList => ShoppingListModel(
       id: '123',
@@ -19,8 +19,8 @@ ShoppingListModel get shoppingList => ShoppingListModel(
         Item(name: 'product1', quantity: 5, orderKey: ''),
         Item(name: 'product2', quantity: 3, orderKey: ''),
       ],
-      owner: 'userId',
-      users: ['userId'],
+      owner: 'user@email.com',
+      users: ['user@email.com'],
     );
 
 List<ShoppingListModel> get shoppingLists =>
