@@ -11,7 +11,6 @@ import '../../../mock_shopping_list_test.dart';
 void main() {
   final database = FakeFirebaseFirestore();
   final datasource = FirebaseShoppingListDatasource(database);
-  const userId = 'userId';
 
   Future<ShoppingList> _createMockShoppingList() async {
     final list = shoppingList;
@@ -33,7 +32,7 @@ void main() {
   group('Get ShoppingList', () {
     test('Should get all ShoppingLists', () async {
       await _createMockShoppingList();
-      final result = await datasource.getShoppingLists(userId);
+      final result = await datasource.getShoppingLists(userEmail);
       expect(result, isNotEmpty);
       expect(
           result
@@ -43,7 +42,7 @@ void main() {
 
     test('Should listen all ShoppingLists', () async {
       await _createMockShoppingList();
-      final result = datasource.listenShoppingLists(userId);
+      final result = datasource.listenShoppingLists(userEmail);
       result.listen((data) {
         expect(data, isNotEmpty);
         expect(data.every((element) => element.id.isNotEmpty), true);
@@ -55,7 +54,7 @@ void main() {
     test('Should delete ShoppingList', () async {
       final shoppingListToDelete = await _createMockShoppingList();
       await datasource.deleteShoppingList(shoppingListToDelete.id);
-      final shoppingLists = await datasource.getShoppingLists(userId);
+      final shoppingLists = await datasource.getShoppingLists(userEmail);
       expect(shoppingLists.map((e) => e.id),
           isNot(contains(shoppingListToDelete.id)));
     });
@@ -74,7 +73,7 @@ void main() {
     test('Should update ShoppingList', () async {
       final shoppingListToUpdate = await _setupUpdateTest();
       await datasource.updateShoppingList(shoppingListToUpdate);
-      final shoppingLists = await datasource.getShoppingLists(userId);
+      final shoppingLists = await datasource.getShoppingLists(userEmail);
       final result = shoppingLists
           .firstWhere((element) => element.id == shoppingListToUpdate.id);
 

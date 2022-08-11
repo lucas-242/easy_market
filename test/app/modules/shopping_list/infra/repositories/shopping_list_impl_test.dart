@@ -17,20 +17,21 @@ void main() {
   group('Get ShoppingList', () {
     test('Should return list of ShoppingList', () async {
       final lists = shoppingLists;
-      when(datasource.getShoppingLists(userId)).thenAnswer((_) async => lists);
+      when(datasource.getShoppingLists(userEmail))
+          .thenAnswer((_) async => lists);
 
-      final result = await repository.getShoppingLists(userId);
+      final result = await repository.getShoppingLists(userEmail);
       expect(result, Right(lists));
     });
 
     test('Should listen to the ShoppingList stream', () async {
       final mockStream = MockStreamShoppingLists();
-      when(datasource.listenShoppingLists(userId))
+      when(datasource.listenShoppingLists(userEmail))
           .thenAnswer((_) => mockStream);
       when(mockStream.first).thenAnswer((_) => Future.value(shoppingLists));
 
-      final result =
-          (repository.listenShoppingLists(userId)).fold((l) => null, (r) => r);
+      final result = (repository.listenShoppingLists(userEmail))
+          .fold((l) => null, (r) => r);
       expect(result, isNotNull);
       expect(await result!.first, isNotEmpty);
     });
