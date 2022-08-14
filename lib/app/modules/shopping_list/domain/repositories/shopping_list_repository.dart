@@ -4,6 +4,10 @@ import '../entities/shopping_list.dart';
 import '../../../../core/errors/errors.dart';
 
 abstract class ShoppingListRepository {
+  Future<Either<Failure, Unit>> addCollaboratorToList(
+      String shoppingListId, String email);
+  Future<Either<Failure, Unit>> removeCollaboratorFromList(
+      String shoppingListId, String email);
   Future<Either<Failure, List<ShoppingList>>> getShoppingLists(String userId);
   Either<Failure, Stream<List<ShoppingList>>> listenShoppingLists(
       String userId);

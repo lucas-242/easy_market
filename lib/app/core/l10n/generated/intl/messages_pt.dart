@@ -67,6 +67,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "O email é inválido ou mal formatado"),
         "emailWasNotFound": MessageLookupByLibrary.simpleMessage(
             "O email não foi encontrado, por favor, crie uma conta"),
+        "errorToAddCollaborator": MessageLookupByLibrary.simpleMessage(
+            "Erro ao adicionar colaborador"),
         "errorToAddItem":
             MessageLookupByLibrary.simpleMessage("Erro ao adicionar item"),
         "errorToCreateList":
@@ -82,6 +84,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "errorToGetLoggedUser": MessageLookupByLibrary.simpleMessage(
             "Erro ao buscar usuário logado"),
         "errorToLogout": MessageLookupByLibrary.simpleMessage("Erro ao sair"),
+        "errorToRemoveCollaborator":
+            MessageLookupByLibrary.simpleMessage("Erro ao remover colaborador"),
         "errorToReorderItems":
             MessageLookupByLibrary.simpleMessage("Erro ao reordenar itens"),
         "errorToResetPassword":

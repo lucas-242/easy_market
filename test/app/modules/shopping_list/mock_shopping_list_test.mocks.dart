@@ -52,6 +52,23 @@ class MockShoppingListRepository extends _i1.Mock
   }
 
   @override
+  _i5.Future<_i2.Either<_i7.Failure, _i2.Unit>> addCollaboratorToList(
+          String? shoppingListId, String? email) =>
+      (super.noSuchMethod(
+          Invocation.method(#addCollaboratorToList, [shoppingListId, email]),
+          returnValue: Future<_i2.Either<_i7.Failure, _i2.Unit>>.value(
+              _FakeEither_0<_i7.Failure, _i2.Unit>())) as _i5
+          .Future<_i2.Either<_i7.Failure, _i2.Unit>>);
+  @override
+  _i5.Future<_i2.Either<_i7.Failure, _i2.Unit>> removeCollaboratorFromList(
+          String? shoppingListId, String? email) =>
+      (super.noSuchMethod(
+              Invocation.method(
+                  #removeCollaboratorFromList, [shoppingListId, email]),
+              returnValue: Future<_i2.Either<_i7.Failure, _i2.Unit>>.value(
+                  _FakeEither_0<_i7.Failure, _i2.Unit>()))
+          as _i5.Future<_i2.Either<_i7.Failure, _i2.Unit>>);
+  @override
   _i5.Future<_i2.Either<_i7.Failure, List<_i8.ShoppingList>>> getShoppingLists(
           String? userId) =>
       (super.noSuchMethod(Invocation.method(#getShoppingLists, [userId]),
@@ -157,6 +174,21 @@ class MockShoppingListDatasource extends _i1.Mock
     _i1.throwOnMissingStub(this);
   }
 
+  @override
+  _i5.Future<void> addCollaboratorToList(
+          String? shoppingListId, String? email) =>
+      (super.noSuchMethod(
+          Invocation.method(#addCollaboratorToList, [shoppingListId, email]),
+          returnValue: Future<void>.value(),
+          returnValueForMissingStub: Future<void>.value()) as _i5.Future<void>);
+  @override
+  _i5.Future<void> removeCollaboratorFromList(
+          String? shoppingListId, String? email) =>
+      (super.noSuchMethod(
+          Invocation.method(
+              #removeCollaboratorFromList, [shoppingListId, email]),
+          returnValue: Future<void>.value(),
+          returnValueForMissingStub: Future<void>.value()) as _i5.Future<void>);
   @override
   _i5.Future<List<_i3.ShoppingListModel>> getShoppingLists(String? userId) =>
       (super.noSuchMethod(Invocation.method(#getShoppingLists, [userId]),

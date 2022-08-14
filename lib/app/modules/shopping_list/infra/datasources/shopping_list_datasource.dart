@@ -2,6 +2,8 @@ import '../models/item_model.dart';
 import '../models/shopping_list_model.dart';
 
 abstract class ShoppingListDatasource {
+  Future<void> addCollaboratorToList(String shoppingListId, String email);
+  Future<void> removeCollaboratorFromList(String shoppingListId, String email);
   Future<List<ShoppingListModel>> getShoppingLists(String userId);
   Stream<List<ShoppingListModel>> listenShoppingLists(String userId);
   Future<ShoppingListModel> createShoppingList(ShoppingListModel shoppingList);

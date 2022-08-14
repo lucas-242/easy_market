@@ -620,6 +620,26 @@ class AppLocalizations {
     );
   }
 
+  /// `Error to add collaborator`
+  String get errorToAddCollaborator {
+    return Intl.message(
+      'Error to add collaborator',
+      name: 'errorToAddCollaborator',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error to remove collaborator`
+  String get errorToRemoveCollaborator {
+    return Intl.message(
+      'Error to remove collaborator',
+      name: 'errorToRemoveCollaborator',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Error to get lists`
   String get errorToGetLists {
     return Intl.message(

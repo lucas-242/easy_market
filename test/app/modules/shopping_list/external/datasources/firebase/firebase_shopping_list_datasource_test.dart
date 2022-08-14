@@ -12,8 +12,9 @@ void main() {
   final database = FakeFirebaseFirestore();
   final datasource = FirebaseShoppingListDatasource(database);
 
-  Future<ShoppingList> _createMockShoppingList() async {
-    final list = shoppingList;
+  Future<ShoppingList> _createMockShoppingList(
+      {ShoppingListModel? mock}) async {
+    final list = mock ?? shoppingList;
     final listReference = await database
         .collection(datasource.shoppingListsTable)
         .add(FirebaseShoppingListModel.fromShoppingListModel(list).toCreate());
@@ -78,6 +79,31 @@ void main() {
           .firstWhere((element) => element.id == shoppingListToUpdate.id);
 
       expect(result.name, equals(shoppingListToUpdate.name));
+    });
+  });
+
+  group('Collaborator operations', () {
+    const collaboratorEmail = 'collaborator@email.com';
+
+    Future<ShoppingList> getShoppingList(String id) async {
+      final shoppingLists = await datasource.getShoppingLists(userEmail);
+      return shoppingLists.firstWhere((e) => e.id == id);
+    }
+
+    test('Should add collaborator', () async {
+      final shoppingList = await _createMockShoppingList();
+      await datasource.addCollaboratorToList(
+          shoppingList.id, collaboratorEmail);
+      final result = await getShoppingList(shoppingList.id);
+      expect(result.users, contains(collaboratorEmail));
+    });
+
+    test('Should remove collaborator', () async {
+      final list = await _createMockShoppingList(
+          mock: shoppingList.copyWith(users: [userEmail, collaboratorEmail]));
+      await datasource.removeCollaboratorFromList(list.id, collaboratorEmail);
+      final result = await getShoppingList(list.id);
+      expect(result.users, isNot(contains(collaboratorEmail)));
     });
   });
 

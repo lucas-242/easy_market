@@ -92,6 +92,38 @@ class ShoppingListRepositoryImpl implements ShoppingListRepository {
   }
 
   @override
+  Future<Either<Failure, Unit>> addCollaboratorToList(
+    String shoppingListId,
+    String email,
+  ) async {
+    try {
+      await datasource.addCollaboratorToList(shoppingListId, email);
+      return right(unit);
+    } on Failure catch (e) {
+      return left(AddCollaboratorFailure(e.message));
+    } catch (e) {
+      return left(AddCollaboratorFailure(
+          AppLocalizations.current.errorToAddCollaborator));
+    }
+  }
+
+  @override
+  Future<Either<Failure, Unit>> removeCollaboratorFromList(
+    String shoppingListId,
+    String email,
+  ) async {
+    try {
+      await datasource.removeCollaboratorFromList(shoppingListId, email);
+      return right(unit);
+    } on Failure catch (e) {
+      return left(RemoveCollaboratorFailure(e.message));
+    } catch (e) {
+      return left(RemoveCollaboratorFailure(
+          AppLocalizations.current.errorToRemoveCollaborator));
+    }
+  }
+
+  @override
   Future<Either<Failure, List<Item>>> getItemsFromList(
       String shoppingListId) async {
     try {

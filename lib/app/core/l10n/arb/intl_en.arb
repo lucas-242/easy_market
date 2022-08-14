@@ -72,6 +72,8 @@
     }
   },
   "oneItemNeedToBeInformed": "At least one previous or next item needs to be informed",
+  "errorToAddCollaborator": "Error to add collaborator",
+  "errorToRemoveCollaborator": "Error to remove collaborator",
   "errorToGetLists": "Error to get lists",
   "errorToCreateList": "Error to create list",
   "errorToDeleteList": "Error to delete list",
