@@ -43,6 +43,12 @@
   "type": "Tipo",
   "quantity": "Quantidade",
 
+
+  "collaborators": "Colaboradores",
+  "addCollaborator": "Adicionar colaborador",
+  "collaboratorEmail": "Email do colaborador",
+
+  
   "typeNewPassword": "Insira sua nova senha.",
   "resetPassword": "Redefinir senha",
   "checkEmail": "Cheque seu email",

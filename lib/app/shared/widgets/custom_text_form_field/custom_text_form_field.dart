@@ -6,6 +6,7 @@ class CustomTextFormField extends StatelessWidget {
   final GlobalKey<FormFieldState>? textFormKey;
   final TextInputType keyboardType;
   final TextInputAction textInputAction;
+  final InputBorder? border;
   final String labelText;
   final String hintText;
   final String? initialValue;
@@ -34,6 +35,7 @@ class CustomTextFormField extends StatelessWidget {
     this.readOnly = false,
     this.obscureText = false,
     this.suffix,
+    this.border,
   }) : super(key: key);
 
   @override
@@ -53,6 +55,7 @@ class CustomTextFormField extends StatelessWidget {
       obscureText: obscureText,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       decoration: InputDecoration(
+        border: border,
         labelText: labelText,
         hintText: hintText,
         hintStyle: context.bodyLarge!,

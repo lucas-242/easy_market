@@ -420,6 +420,36 @@ class AppLocalizations {
     );
   }
 
+  /// `Collaborators`
+  String get collaborators {
+    return Intl.message(
+      'Collaborators',
+      name: 'collaborators',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add collaborator`
+  String get addCollaborator {
+    return Intl.message(
+      'Add collaborator',
+      name: 'addCollaborator',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Collaborator email`
+  String get collaboratorEmail {
+    return Intl.message(
+      'Collaborator email',
+      name: 'collaboratorEmail',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Type your new password.`
   String get typeNewPassword {
     return Intl.message(

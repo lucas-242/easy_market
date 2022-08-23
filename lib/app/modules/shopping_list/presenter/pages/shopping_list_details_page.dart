@@ -7,6 +7,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import '../../../../shared/widgets/custom_elevated_button/custom_elevated_button.dart';
 import '../utils/bottom_sheet_util.dart';
 import '../widgets/item_form.dart';
+import '../widgets/shared_users.dart';
 import '/app/modules/shopping_list/presenter/bloc/items_bloc/items_bloc.dart';
 import '/app/modules/shopping_list/presenter/widgets/item_card.dart';
 import '/app/modules/shopping_list/shopping_list.dart';
@@ -36,12 +37,25 @@ class _ShoppingListDetailsPageState extends State<ShoppingListDetailsPage> {
     super.initState();
   }
 
+  Future<void> _openUsersPanel() async {
+    await BottomSheetUtil.openBottomSheet(
+      context: _scaffoldKey.currentContext!,
+      title: AppLocalizations.of(context).collaborators,
+      child: const SharedUsers(),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
-        actions: const [UsersRow()],
+        actions: [
+          UsersRow(
+            users: widget.shoppingList.users.skip(1).toList(),
+            onPressed: () => _openUsersPanel(),
+          )
+        ],
       ),
       body: SafeArea(
         child: BlocListener<ItemsBloc, ItemsState>(

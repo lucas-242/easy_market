@@ -2,7 +2,7 @@
   "all": "All",
   "add": "Add",
   "cancel": "Cancel",
-  "create": "Create",
+  "create": "Create",  
   "date": "Date",
   "darkMode": "Dark Mode",
   "delete": "Delete",
@@ -42,7 +42,11 @@
   "price": "Price",
   "quantity": "Quantity",
 
-  
+  "collaborators": "Collaborators",
+  "addCollaborator": "Add collaborator",
+  "collaboratorEmail": "Collaborator email",
+
+
   "typeNewPassword": "Type your new password.",
   "resetPassword": "Reset Password",
   "checkEmail": "Check your email",

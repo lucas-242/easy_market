@@ -25,6 +25,8 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "add": MessageLookupByLibrary.simpleMessage("Adicionar"),
+        "addCollaborator":
+            MessageLookupByLibrary.simpleMessage("Adicionar colaborador"),
         "addNewItem":
             MessageLookupByLibrary.simpleMessage("Adicionar novo item"),
         "all": MessageLookupByLibrary.simpleMessage("Todos"),
@@ -40,6 +42,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "cleaningProducts": MessageLookupByLibrary.simpleMessage("Limpeza"),
         "codeNotRetrieved": MessageLookupByLibrary.simpleMessage(
             "O código não foi recuperado automaticamente"),
+        "collaboratorEmail":
+            MessageLookupByLibrary.simpleMessage("Email do colaborador"),
+        "collaborators": MessageLookupByLibrary.simpleMessage("Colaboradores"),
         "confirmLater":
             MessageLookupByLibrary.simpleMessage("Confirmarei mais tarde"),
         "confirmPassword":
