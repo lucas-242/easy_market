@@ -10,6 +10,7 @@ import 'package:easy_market/app/core/auth/domain/errors/errors.dart';
 import 'package:easy_market/app/core/auth/domain/usecases/listen_current_user.dart';
 import 'package:mockito/mockito.dart';
 
+import '../../../../global_mock.mocks.dart';
 import '../../auth_mock_test.dart';
 import '../../auth_mock_test.mocks.dart';
 

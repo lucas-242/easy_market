@@ -670,6 +670,16 @@ class AppLocalizations {
     );
   }
 
+  /// `Error to get collaborators`
+  String get errorToGetCollaborators {
+    return Intl.message(
+      'Error to get collaborators',
+      name: 'errorToGetCollaborators',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Error to get lists`
   String get errorToGetLists {
     return Intl.message(

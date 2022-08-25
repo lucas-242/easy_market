@@ -17,7 +17,7 @@ class GetShoppingListsImpl implements GetShoppingLists {
 
   @override
   Future<Either<Failure, List<ShoppingList>>> call(String userId) async {
-    var result = await repository.getShoppingLists(userId);
+    final result = await repository.getShoppingLists(userId);
     return result;
   }
 }

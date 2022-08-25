@@ -9,6 +9,7 @@ import 'package:easy_market/app/core/auth/infra/models/user_model.dart';
 import 'package:easy_market/app/core/auth/infra/repositories/auth_repository_impl.dart';
 import 'package:mockito/mockito.dart';
 
+import '../../../global_mock.mocks.dart';
 import '../../../test_helper.dart';
 import '../auth_mock_test.dart';
 import '../auth_mock_test.mocks.dart';

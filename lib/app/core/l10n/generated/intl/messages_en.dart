@@ -80,6 +80,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Error to delete item"),
         "errorToDeleteList":
             MessageLookupByLibrary.simpleMessage("Error to delete list"),
+        "errorToGetCollaborators":
+            MessageLookupByLibrary.simpleMessage("Error to get collaborators"),
         "errorToGetItems":
             MessageLookupByLibrary.simpleMessage("Error to get items"),
         "errorToGetLists":

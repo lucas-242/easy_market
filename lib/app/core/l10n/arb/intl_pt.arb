@@ -73,6 +73,7 @@
   "oneItemNeedToBeInformed": "Pelo menos um item deve ser informado",
   "errorToAddCollaborator": "Erro ao adicionar colaborador",
   "errorToRemoveCollaborator": "Erro ao remover colaborador",
+  "errorToGetCollaborators": "Erro ao carregar colaboradores",
   "errorToGetLists": "Erro ao carregar listas",
   "errorToCreateList": "Erro ao criar lista",
   "errorToDeleteList": "Erro ao deletar lista",

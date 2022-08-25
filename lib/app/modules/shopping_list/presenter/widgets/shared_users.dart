@@ -20,7 +20,7 @@ class SharedUsers extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(
-          height: 350,
+          height: context.height * 0.3,
           child: ListView.builder(
             itemCount: 3,
             itemBuilder: (context, index) {

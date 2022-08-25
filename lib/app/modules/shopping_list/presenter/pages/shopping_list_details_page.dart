@@ -45,6 +45,10 @@ class _ShoppingListDetailsPageState extends State<ShoppingListDetailsPage> {
     );
   }
 
+  List<String> _getCollaborators() {
+    return widget.shoppingList.users.skip(1).toList();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,7 +56,7 @@ class _ShoppingListDetailsPageState extends State<ShoppingListDetailsPage> {
       appBar: AppBar(
         actions: [
           UsersRow(
-            users: widget.shoppingList.users.skip(1).toList(),
+            users: _getCollaborators(),
             onPressed: () => _openUsersPanel(),
           )
         ],

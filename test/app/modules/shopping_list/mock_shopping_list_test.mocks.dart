@@ -6,12 +6,20 @@ import 'dart:async' as _i5;
 
 import 'package:dartz/dartz.dart' as _i2;
 import 'package:easy_market/app/core/errors/errors.dart' as _i7;
+import 'package:easy_market/app/modules/shopping_list/domain/entities/collaborator.dart'
+    as _i13;
 import 'package:easy_market/app/modules/shopping_list/domain/entities/item.dart'
     as _i9;
 import 'package:easy_market/app/modules/shopping_list/domain/entities/shopping_list.dart'
     as _i8;
+import 'package:easy_market/app/modules/shopping_list/domain/repositories/collaborator_repository.dart'
+    as _i12;
+import 'package:easy_market/app/modules/shopping_list/infra/datasources/collaborator_datasource.dart'
+    as _i14;
 import 'package:easy_market/app/modules/shopping_list/infra/datasources/shopping_list_datasource.dart'
     as _i10;
+import 'package:easy_market/app/modules/shopping_list/infra/models/collaborator_model.dart'
+    as _i15;
 import 'package:easy_market/app/modules/shopping_list/infra/models/item_model.dart'
     as _i4;
 import 'package:easy_market/app/modules/shopping_list/infra/models/shopping_list_model.dart'
@@ -717,4 +725,40 @@ class MockStreamShoppingLists extends _i1.Mock
               Invocation.method(#timeout, [timeLimit], {#onTimeout: onTimeout}),
               returnValue: Stream<List<_i3.ShoppingListModel>>.empty())
           as _i5.Stream<List<_i3.ShoppingListModel>>);
+}
+
+/// A class which mocks [CollaboratorRepository].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockCollaboratorRepository extends _i1.Mock
+    implements _i12.CollaboratorRepository {
+  MockCollaboratorRepository() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i5.Stream<_i2.Either<_i7.Failure, List<_i13.Collaborator>>>
+      listenCollaboratorsByEmails(List<String>? emails) => (super.noSuchMethod(
+              Invocation.method(#listenCollaboratorsByEmails, [emails]),
+              returnValue: Stream<
+                  _i2.Either<_i7.Failure, List<_i13.Collaborator>>>.empty())
+          as _i5.Stream<_i2.Either<_i7.Failure, List<_i13.Collaborator>>>);
+}
+
+/// A class which mocks [CollaboratorDatasource].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockCollaboratorDatasource extends _i1.Mock
+    implements _i14.CollaboratorDatasource {
+  MockCollaboratorDatasource() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i5.Stream<List<_i15.CollaboratorModel>> listenCollaboratorsByEmails(
+          List<String>? emails) =>
+      (super.noSuchMethod(
+              Invocation.method(#listenCollaboratorsByEmails, [emails]),
+              returnValue: Stream<List<_i15.CollaboratorModel>>.empty())
+          as _i5.Stream<List<_i15.CollaboratorModel>>);
 }

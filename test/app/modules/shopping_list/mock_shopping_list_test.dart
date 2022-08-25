@@ -1,4 +1,9 @@
+import 'package:dartz/dartz.dart';
+import 'package:easy_market/app/core/errors/errors.dart';
+import 'package:easy_market/app/modules/shopping_list/domain/repositories/collaborator_repository.dart';
+import 'package:easy_market/app/modules/shopping_list/infra/datasources/collaborator_datasource.dart';
 import 'package:easy_market/app/modules/shopping_list/infra/datasources/shopping_list_datasource.dart';
+import 'package:easy_market/app/modules/shopping_list/infra/models/collaborator_model.dart';
 import 'package:easy_market/app/modules/shopping_list/infra/models/item_model.dart';
 import 'package:easy_market/app/modules/shopping_list/infra/models/shopping_list_model.dart';
 import 'package:easy_market/app/modules/shopping_list/shopping_list.dart';
@@ -36,10 +41,21 @@ ItemModel get item => ItemModel(
 
 List<ItemModel> get items => List.generate(10, (index) => item);
 
+CollaboratorModel get collaborator => CollaboratorModel(
+    'colaborator1', 'Jotaro Kujo 1', 'jotarokujo_oraoraora1@test.com');
+
+List<CollaboratorModel> get collaborators => List.generate(
+      10,
+      (index) => CollaboratorModel('colaborator$index', 'Jotaro Kujo $index',
+          'jotarokujo_oraoraora$index@test.com'),
+    );
+
 @GenerateMocks([
   ShoppingListRepository,
   ShoppingListDatasource,
   StreamItem,
   StreamShoppingLists,
+  CollaboratorRepository,
+  CollaboratorDatasource,
 ])
 void main() {}

@@ -45,6 +45,13 @@ class GetItemsFailure extends Failure {
   GetItemsFailure(this.message);
 }
 
+class GetCollaboratorsFailure extends Failure {
+  @override
+  final String message;
+
+  GetCollaboratorsFailure(this.message);
+}
+
 class AddCollaboratorFailure extends Failure {
   @override
   final String message;

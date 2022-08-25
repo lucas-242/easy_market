@@ -1,5 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_market/app/modules/shopping_list/domain/usecases/add_collaborator_to_list.dart';
 import 'package:easy_market/app/modules/shopping_list/domain/usecases/check_item_in_list.dart';
+import 'package:easy_market/app/modules/shopping_list/domain/usecases/listen_collaborators_by_emails.dart';
+import 'package:easy_market/app/modules/shopping_list/domain/usecases/remove_collaborator_from_list.dart';
+import 'package:easy_market/app/modules/shopping_list/infra/repositories/collaborator_repository_impl.dart';
 import '../../core/routes/utils/routes_utils.dart';
 import 'domain/usecases/reorder_items_in_list.dart';
 import 'presenter/bloc/items_bloc/items_bloc.dart';
@@ -38,6 +42,10 @@ class ShoppingListModule extends Module {
     $UpdateShoppingListImpl,
     $ReorderItemInListImpl,
     $ShoppingListRepositoryImpl,
+    $AddCollaboratorToListImpl,
+    $RemoveCollaboratorFromListImpl,
+    $ListenCollaboratorsByEmailsImpl,
+    $CollaboratorRepositoryImpl,
     BlocBind.singleton(
       (i) => ShoppingListBloc(
         listenShoppingListsUsecase: i<ListenShoppingLists>(),
