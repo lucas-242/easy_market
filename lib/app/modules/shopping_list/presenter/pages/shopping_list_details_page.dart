@@ -40,19 +40,16 @@ class _ShoppingListDetailsPageState extends State<ShoppingListDetailsPage> {
 
   List<Widget> _buildUsersRow() {
     var result = <Widget>[];
-    final users = _getUsers();
+    final collaborators = widget.shoppingList.collaborators;
     const maxUsersToShow = 5;
-    final length =
-        users.length < maxUsersToShow ? users.length : maxUsersToShow;
+    final length = collaborators.length < maxUsersToShow
+        ? collaborators.length
+        : maxUsersToShow;
 
-    result.addAll(_buildUsersCircle(users, length));
-    result.addAll(_buildUsersCircleTrailing(users.isEmpty));
+    result.addAll(_buildUsersCircle(collaborators, length));
+    result.addAll(_buildUsersCircleTrailing(collaborators.isEmpty));
 
     return result;
-  }
-
-  List<String> _getUsers() {
-    return widget.shoppingList.users.skip(1).toList();
   }
 
   List<Widget> _buildUsersCircle(List<String> users, int length) {
