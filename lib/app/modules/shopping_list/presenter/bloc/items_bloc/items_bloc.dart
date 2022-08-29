@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:easy_market/app/modules/shopping_list/domain/usecases/check_item_in_list.dart';
+import '../../../domain/usecases/check_item_in_list.dart';
 import '../../../domain/usecases/listen_items_from_list.dart';
 import '../../../domain/usecases/reorder_items_in_list.dart';
 import '../../../shopping_list.dart';

@@ -1,15 +1,16 @@
 import 'dart:io';
 
 import 'package:android_intent_plus/android_intent.dart';
-import '../../../../core/l10n/generated/l10n.dart';
-import '../../../../core/routes/app_routes.dart';
-import '../../../../shared/widgets/custom_elevated_button/custom_elevated_button.dart';
-import '../../../../shared/themes/themes.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher_string.dart';
+
+import '../../../../core/l10n/generated/l10n.dart';
+import '../../../../core/routes/app_routes.dart';
+import '../../../../shared/themes/themes.dart';
+import '../../../../shared/widgets/custom_elevated_button/custom_elevated_button.dart';
 
 class FeedbackPasswordResetEmail extends StatelessWidget {
   const FeedbackPasswordResetEmail({Key? key}) : super(key: key);

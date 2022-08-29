@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
-import 'package:easy_market/app/modules/shopping_list/domain/entities/collaborator.dart';
-import 'package:easy_market/app/modules/shopping_list/domain/errors/errors.dart';
-import 'package:easy_market/app/modules/shopping_list/domain/repositories/collaborator_repository.dart';
+import '../entities/collaborator.dart';
+import '../errors/errors.dart';
+import '../repositories/collaborator_repository.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../../../core/errors/errors.dart';

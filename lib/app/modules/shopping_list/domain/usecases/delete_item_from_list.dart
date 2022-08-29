@@ -1,9 +1,11 @@
 import 'package:dartz/dartz.dart';
-import '../repositories/shopping_list_repository.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import '../entities/item.dart';
+
 import '../../../../core/errors/errors.dart';
+import '../entities/item.dart';
 import '../errors/errors.dart';
+import '../repositories/shopping_list_repository.dart';
+
 part 'delete_item_from_list.g.dart';
 
 abstract class DeleteItemFromList {

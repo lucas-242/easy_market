@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:easy_market/app/modules/shopping_list/infra/models/collaborator_model.dart';
 
 import '../../../../../core/l10n/generated/l10n.dart';
 import '../../../domain/errors/errors.dart';
 import '../../../infra/datasources/collaborator_datasource.dart';
+import '../../../infra/models/collaborator_model.dart';
 
 class FirebaseCollaboratorDatasource implements CollaboratorDatasource {
   final String usersTable = 'users';

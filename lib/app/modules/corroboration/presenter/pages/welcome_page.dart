@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+
 import '../../../../core/l10n/generated/l10n.dart';
 import '../../../../core/routes/app_routes.dart';
 import '../../../../shared/themes/themes.dart';

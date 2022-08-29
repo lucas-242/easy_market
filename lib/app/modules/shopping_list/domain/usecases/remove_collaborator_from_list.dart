@@ -1,10 +1,12 @@
 import 'package:dartz/dartz.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+
 import '../../../../core/auth/domain/utils/credentials_validator_util.dart';
-import '../../../../core/l10n/generated/l10n.dart';
 import '../../../../core/errors/errors.dart';
+import '../../../../core/l10n/generated/l10n.dart';
 import '../errors/errors.dart';
 import '../repositories/shopping_list_repository.dart';
-import 'package:flutter_modular/flutter_modular.dart';
+
 part 'remove_collaborator_from_list.g.dart';
 
 abstract class RemoveCollaboratorFromList {

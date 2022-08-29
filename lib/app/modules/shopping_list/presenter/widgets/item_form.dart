@@ -1,5 +1,5 @@
 import 'package:dropdown_search/dropdown_search.dart';
-import 'package:easy_market/app/shared/utils/item_type_util.dart';
+import '../../../../shared/utils/item_type_util.dart';
 import '../../../../core/l10n/generated/l10n.dart';
 import '../bloc/items_bloc/items_bloc.dart';
 import '../../shopping_list.dart';

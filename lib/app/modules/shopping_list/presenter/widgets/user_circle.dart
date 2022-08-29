@@ -1,5 +1,5 @@
-import 'package:easy_market/app/shared/extensions/extensions.dart';
-import 'package:easy_market/app/shared/themes/themes.dart';
+import '../../../../shared/extensions/extensions.dart';
+import '../../../../shared/themes/themes.dart';
 import 'package:flutter/material.dart';
 
 class UserCircle extends StatelessWidget {

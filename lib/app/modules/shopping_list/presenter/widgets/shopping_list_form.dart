@@ -1,4 +1,4 @@
-import 'package:easy_market/app/core/l10n/generated/l10n.dart';
+import '../../../../core/l10n/generated/l10n.dart';
 
 import '../bloc/shopping_list_bloc/shopping_list_bloc.dart';
 import '../../../../shared/widgets/custom_elevated_button/custom_elevated_button.dart';

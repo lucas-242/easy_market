@@ -1,14 +1,16 @@
+import 'package:dartz/dartz.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+
+import '../../../../core/errors/errors.dart';
 import '../../../../core/l10n/generated/l10n.dart';
 import '../../domain/entities/item.dart';
-import '../models/item_model.dart';
-import 'package:flutter_modular/flutter_modular.dart';
-import '../../../../core/errors/errors.dart';
 import '../../domain/entities/shopping_list.dart';
-import 'package:dartz/dartz.dart';
 import '../../domain/errors/errors.dart';
 import '../../domain/repositories/shopping_list_repository.dart';
 import '../datasources/shopping_list_datasource.dart';
+import '../models/item_model.dart';
 import '../models/shopping_list_model.dart';
+
 part 'shopping_list_repository_impl.g.dart';
 
 @Injectable(singleton: false)

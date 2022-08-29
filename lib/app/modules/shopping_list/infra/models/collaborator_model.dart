@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:easy_market/app/modules/shopping_list/domain/entities/collaborator.dart';
+import '../../domain/entities/collaborator.dart';
 
 class CollaboratorModel extends Collaborator {
   CollaboratorModel(super.id, super.name, super.email);

@@ -1,4 +1,4 @@
-import 'package:easy_market/app/core/l10n/generated/l10n.dart';
+import '../../core/l10n/generated/l10n.dart';
 
 import '../extensions/extensions.dart';
 import '../../modules/shopping_list/shopping_list.dart';
