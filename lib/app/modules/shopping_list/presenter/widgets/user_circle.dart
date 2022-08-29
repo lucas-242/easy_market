@@ -3,14 +3,22 @@ import 'package:easy_market/app/shared/themes/themes.dart';
 import 'package:flutter/material.dart';
 
 class UserCircle extends StatelessWidget {
+  final VoidCallback? onPressed;
   final String name;
-  const UserCircle({Key? key, required this.name}) : super(key: key);
+  const UserCircle({Key? key, required this.name, this.onPressed})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return CircleAvatar(
-      backgroundColor: context.colorsScheme.tertiaryContainer,
-      child: Text(name.getInitials()),
+    return GestureDetector(
+      onTap: onPressed,
+      child: Padding(
+        padding: const EdgeInsets.only(right: 5.0),
+        child: CircleAvatar(
+          backgroundColor: context.colorsScheme.tertiaryContainer,
+          child: Text(name.getInitials()),
+        ),
+      ),
     );
   }
 }

@@ -1,5 +1,5 @@
 import 'package:easy_market/app/core/l10n/generated/l10n.dart';
-import 'package:easy_market/app/modules/shopping_list/presenter/widgets/users_row.dart';
+import 'package:easy_market/app/modules/shopping_list/presenter/widgets/add_user_circle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -8,6 +8,7 @@ import '../../../../shared/widgets/custom_elevated_button/custom_elevated_button
 import '../utils/bottom_sheet_util.dart';
 import '../widgets/item_form.dart';
 import '../widgets/shared_users.dart';
+import '../widgets/user_circle.dart';
 import '/app/modules/shopping_list/presenter/bloc/items_bloc/items_bloc.dart';
 import '/app/modules/shopping_list/presenter/widgets/item_card.dart';
 import '/app/modules/shopping_list/shopping_list.dart';
@@ -37,6 +38,39 @@ class _ShoppingListDetailsPageState extends State<ShoppingListDetailsPage> {
     super.initState();
   }
 
+  List<Widget> _buildUsersRow() {
+    var result = <Widget>[];
+    final users = _getUsers();
+    const maxUsersToShow = 5;
+    final length =
+        users.length < maxUsersToShow ? users.length : maxUsersToShow;
+
+    result.addAll(_buildUsersCircle(users, length));
+    result.addAll(_buildUsersCircleTrailing(users.isEmpty));
+
+    return result;
+  }
+
+  List<String> _getUsers() {
+    return widget.shoppingList.users.skip(1).toList();
+  }
+
+  List<Widget> _buildUsersCircle(List<String> users, int length) {
+    final result = <Widget>[];
+    for (var index = 0; index < length; index++) {
+      result.add(UserCircle(name: users[index], onPressed: _openUsersPanel));
+    }
+
+    return result;
+  }
+
+  List<Widget> _buildUsersCircleTrailing(bool noUsers) {
+    return [
+      AddUserCircle(noUsers: noUsers, onPressed: _openUsersPanel),
+      const SizedBox(width: 20),
+    ];
+  }
+
   Future<void> _openUsersPanel() async {
     await BottomSheetUtil.openBottomSheet(
       context: _scaffoldKey.currentContext!,
@@ -45,22 +79,11 @@ class _ShoppingListDetailsPageState extends State<ShoppingListDetailsPage> {
     );
   }
 
-  List<String> _getCollaborators() {
-    return widget.shoppingList.users.skip(1).toList();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-      appBar: AppBar(
-        actions: [
-          UsersRow(
-            users: _getCollaborators(),
-            onPressed: () => _openUsersPanel(),
-          )
-        ],
-      ),
+      appBar: AppBar(actions: _buildUsersRow()),
       body: SafeArea(
         child: BlocListener<ItemsBloc, ItemsState>(
           listenWhen: (previous, current) => previous.status != current.status,

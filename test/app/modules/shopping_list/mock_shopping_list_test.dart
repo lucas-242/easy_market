@@ -1,5 +1,3 @@
-import 'package:dartz/dartz.dart';
-import 'package:easy_market/app/core/errors/errors.dart';
 import 'package:easy_market/app/modules/shopping_list/domain/repositories/collaborator_repository.dart';
 import 'package:easy_market/app/modules/shopping_list/infra/datasources/collaborator_datasource.dart';
 import 'package:easy_market/app/modules/shopping_list/infra/datasources/shopping_list_datasource.dart';

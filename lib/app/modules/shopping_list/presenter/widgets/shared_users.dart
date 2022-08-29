@@ -25,7 +25,9 @@ class SharedUsers extends StatelessWidget {
             itemCount: 3,
             itemBuilder: (context, index) {
               return const ListTile(
-                leading: UserCircle(name: 'Lucas Guimarães'),
+                leading: UserCircle(
+                  name: 'Lucas Guimarães',
+                ),
                 title: Text('Lucas Guimarães'),
                 subtitle: Text('test@gmail.com'),
               );

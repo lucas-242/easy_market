@@ -1,5 +1,6 @@
+// ignore_for_file: avoid_print
+
 import 'package:dartz/dartz.dart';
-import 'package:easy_market/app/core/errors/errors.dart';
 import 'package:easy_market/app/modules/shopping_list/domain/errors/errors.dart';
 import 'package:easy_market/app/modules/shopping_list/infra/models/collaborator_model.dart';
 import 'package:easy_market/app/modules/shopping_list/infra/repositories/collaborator_repository_impl.dart';
