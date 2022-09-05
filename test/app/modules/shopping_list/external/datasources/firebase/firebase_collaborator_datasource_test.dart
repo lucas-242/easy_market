@@ -27,11 +27,15 @@ void main() {
     }
   });
 
-  test('Should listen all collaborators', () async {
-    final result = datasource.listenCollaboratorsByEmails([collaborator.email]);
-    result.listen((data) {
-      expect(data, isNotEmpty);
-      expect(data.single, isA<CollaboratorModel>());
+  test('Should listen registered and not registered collaborators', () async {
+    final result = datasource.listenCollaboratorsByEmails(
+        [collaborator.email, 'not_registered@email.com']);
+    result.listen((collaborators) {
+      expect(collaborators, isNotEmpty);
+      expect(collaborators.where((collaborator) => !collaborator.isAlreadyUser),
+          hasLength(1));
+      expect(collaborators.where((collaborator) => collaborator.isAlreadyUser),
+          hasLength(1));
     });
   });
 }

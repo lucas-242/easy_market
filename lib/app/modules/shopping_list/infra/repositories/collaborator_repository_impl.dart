@@ -21,9 +21,9 @@ class CollaboratorRepositoryImpl implements CollaboratorRepository {
   Stream<Either<Failure, List<Collaborator>>> listenCollaboratorsByEmails(
       List<String> emails) {
     try {
-      return datasource.listenCollaboratorsByEmails(emails).map((event) =>
-          right(
-              event.map((e) => Collaborator(e.id, e.name, e.email)).toList()));
+      return datasource
+          .listenCollaboratorsByEmails(emails)
+          .map((event) => right(event));
     } on Failure catch (e) {
       return Stream.value(left(GetCollaboratorsFailure(e.message)));
     } catch (e) {

@@ -3,7 +3,17 @@ import 'dart:convert';
 import '../../domain/entities/collaborator.dart';
 
 class CollaboratorModel extends Collaborator {
-  CollaboratorModel(super.id, super.name, super.email);
+  CollaboratorModel({
+    String id = "",
+    required String name,
+    required String email,
+    bool isAlreadyUser = true,
+  }) : super(
+          id: id,
+          name: name,
+          email: email,
+          isAlreadyUser: isAlreadyUser,
+        );
 
   Map<String, dynamic> toMap() {
     return {
@@ -15,9 +25,9 @@ class CollaboratorModel extends Collaborator {
 
   factory CollaboratorModel.fromMap(Map<String, dynamic> map) {
     return CollaboratorModel(
-      map['id'] ?? '',
-      map['name'] ?? '',
-      map['email'] ?? '',
+      id: map['id'] ?? '',
+      name: map['name'] ?? '',
+      email: map['email'] ?? '',
     );
   }
 
@@ -30,11 +40,13 @@ class CollaboratorModel extends Collaborator {
     String? id,
     String? name,
     String? email,
+    bool? isAlreadyUser,
   }) {
     return CollaboratorModel(
-      id ?? this.id,
-      name ?? this.name,
-      email ?? this.email,
+      id: id ?? this.id,
+      name: name ?? this.name,
+      email: email ?? this.email,
+      isAlreadyUser: isAlreadyUser ?? this.isAlreadyUser,
     );
   }
 }

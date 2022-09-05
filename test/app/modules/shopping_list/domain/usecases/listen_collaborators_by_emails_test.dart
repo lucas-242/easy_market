@@ -2,7 +2,6 @@
 
 import 'package:dartz/dartz.dart';
 import 'package:easy_market/app/core/errors/errors.dart';
-import 'package:easy_market/app/modules/shopping_list/domain/errors/errors.dart';
 import 'package:easy_market/app/modules/shopping_list/domain/usecases/listen_collaborators_by_emails.dart';
 import 'package:easy_market/app/modules/shopping_list/infra/models/collaborator_model.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -35,14 +34,14 @@ void main() {
     result.listen((event) {
       event.fold((l) => print(l), (r) {
         expect(r, isA<List<CollaboratorModel>>());
+        expect(r, isNotEmpty);
       });
     });
   });
 
-  test('Should throw GetCollaboratorsFailure', () {
+  test('Should return empty', () {
     when(mockStream.listen(any)).thenAnswer((invocation) {
-      return Stream.value(Left<Failure, List<CollaboratorModel>>(
-              GetCollaboratorsFailure('test')))
+      return Stream.value(const Right<Failure, List<CollaboratorModel>>([]))
           .listen(invocation.positionalArguments.first);
     });
 
@@ -50,8 +49,10 @@ void main() {
 
     expect(result, isNotNull);
     result.listen((event) {
-      expect(
-          event.leftMap((l) => l is GetCollaboratorsFailure), const Left(true));
+      event.fold((l) => print(l), (r) {
+        expect(r, isA<List<CollaboratorModel>>());
+        expect(r, isEmpty);
+      });
     });
   });
 }

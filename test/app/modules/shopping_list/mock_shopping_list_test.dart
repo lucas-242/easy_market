@@ -40,12 +40,18 @@ ItemModel get item => ItemModel(
 List<ItemModel> get items => List.generate(10, (index) => item);
 
 CollaboratorModel get collaborator => CollaboratorModel(
-    'colaborator1', 'Jotaro Kujo 1', 'jotarokujo_oraoraora1@test.com');
+      id: 'colaborator1',
+      name: 'Jotaro Kujo 1',
+      email: 'jotarokujo_oraoraora1@test.com',
+    );
 
 List<CollaboratorModel> get collaborators => List.generate(
       10,
-      (index) => CollaboratorModel('colaborator$index', 'Jotaro Kujo $index',
-          'jotarokujo_oraoraora$index@test.com'),
+      (index) => CollaboratorModel(
+        id: 'colaborator$index',
+        name: 'Jotaro Kujo $index',
+        email: 'jotarokujo_oraoraora$index@test.com',
+      ),
     );
 
 @GenerateMocks([

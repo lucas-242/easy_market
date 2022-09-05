@@ -27,7 +27,7 @@ class FirebaseCollaboratorDatasource implements CollaboratorDatasource {
           .where('email', whereIn: emails)
           .snapshots();
 
-      final result = _querySnapshotToCollaboratorModel(snapshot);
+      final result = _querySnapshotToCollaboratorModel(snapshot, emails);
       return result;
     } catch (error) {
       throw GetCollaboratorsFailure(
@@ -36,14 +36,25 @@ class FirebaseCollaboratorDatasource implements CollaboratorDatasource {
   }
 
   Stream<List<CollaboratorModel>> _querySnapshotToCollaboratorModel(
-      Stream<QuerySnapshot<Object?>> snapshot) {
+      Stream<QuerySnapshot<Object?>> snapshot, List<String> emails) {
     final result = snapshot
         .handleError((error) => GetCollaboratorsFailure(
             AppLocalizations.current.errorToGetCollaborators))
-        .map((query) => query.docs
-            .map((DocumentSnapshot document) =>
-                _documentSnapshotToCollaboratorModel(document))
-            .toList());
+        .map((query) => _mapToCollaboratorModelList(query, emails));
+    return result;
+  }
+
+  List<CollaboratorModel> _mapToCollaboratorModelList(
+      QuerySnapshot<Object?> querySnapshot, List<String> emails) {
+    final result = querySnapshot.docs
+        .map((DocumentSnapshot document) =>
+            _documentSnapshotToCollaboratorModel(document))
+        .toList();
+
+    final notSavedCollaborators =
+        _generateNotSavedCollaborators(emails, result);
+    result.addAll(notSavedCollaborators);
+
     return result;
   }
 
@@ -52,5 +63,24 @@ class FirebaseCollaboratorDatasource implements CollaboratorDatasource {
     final data = snapshot.data() as Map<String, dynamic>;
     final result = CollaboratorModel.fromMap(data);
     return result.copyWith(id: snapshot.id);
+  }
+
+  ///* Firebase implementation doesn't save collaborators that were invited, only collaborators that registered by themselves
+  List<CollaboratorModel> _generateNotSavedCollaborators(
+      List<String> emails, List<CollaboratorModel> savedCollaborators) {
+    final result = <CollaboratorModel>[];
+    final collaboratorEmails = savedCollaborators.map((e) => e.email);
+    final notSavedEmails =
+        emails.where((email) => !collaboratorEmails.contains(email)).toList();
+
+    for (var email in notSavedEmails) {
+      result.add(CollaboratorModel(
+        name: email.split('@')[0],
+        email: email,
+        isAlreadyUser: false,
+      ));
+    }
+
+    return result;
   }
 }

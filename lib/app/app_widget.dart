@@ -5,6 +5,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import 'core/l10n/generated/l10n.dart';
+import 'modules/shopping_list/presenter/bloc/collaborator_bloc/collaborator_bloc.dart';
 import 'modules/shopping_list/presenter/bloc/items_bloc/items_bloc.dart';
 import 'modules/corroboration/presenter/bloc/reset_password_bloc/reset_password_bloc.dart';
 import 'modules/corroboration/presenter/bloc/sign_in_bloc/sign_in_bloc.dart';
@@ -51,6 +52,9 @@ class _AppWidgetState extends State<AppWidget> {
                   ),
                   BlocProvider<ItemsBloc>(
                     create: (_) => Modular.get<ItemsBloc>(),
+                  ),
+                  BlocProvider<CollaboratorBloc>(
+                    create: (_) => Modular.get<CollaboratorBloc>(),
                   ),
                 ],
                 child: MaterialApp.router(

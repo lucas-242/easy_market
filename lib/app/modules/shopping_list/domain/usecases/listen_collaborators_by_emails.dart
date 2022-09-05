@@ -1,11 +1,9 @@
 import 'package:dartz/dartz.dart';
 import '../entities/collaborator.dart';
-import '../errors/errors.dart';
 import '../repositories/collaborator_repository.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../../../core/errors/errors.dart';
-import '../../../../core/l10n/generated/l10n.dart';
 part 'listen_collaborators_by_emails.g.dart';
 
 abstract class ListenCollaboratorsByEmails {
@@ -27,8 +25,7 @@ class ListenCollaboratorsByEmailsImpl implements ListenCollaboratorsByEmails {
 
   Either<Failure, List<Collaborator>>? _validate(List<String> emails) {
     if (emails.isEmpty) {
-      return Left(GetCollaboratorsFailure(
-          AppLocalizations.current.invalidProperty('emails')));
+      return const Right([]);
     }
 
     return null;

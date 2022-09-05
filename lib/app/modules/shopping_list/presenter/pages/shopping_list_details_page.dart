@@ -1,5 +1,7 @@
 import '../../../../core/l10n/generated/l10n.dart';
-import '../widgets/add_user_circle.dart';
+import '../../domain/entities/collaborator.dart';
+import '../bloc/collaborator_bloc/collaborator_bloc.dart';
+import '../widgets/add_collaborator_circle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -7,8 +9,8 @@ import 'package:flutter_modular/flutter_modular.dart';
 import '../../../../shared/widgets/custom_elevated_button/custom_elevated_button.dart';
 import '../utils/bottom_sheet_util.dart';
 import '../widgets/item_form.dart';
-import '../widgets/shared_users.dart';
-import '../widgets/user_circle.dart';
+import '../widgets/collaborators_panel.dart';
+import '../widgets/collaborator_circle.dart';
 import '/app/modules/shopping_list/presenter/bloc/items_bloc/items_bloc.dart';
 import '/app/modules/shopping_list/presenter/widgets/item_card.dart';
 import '/app/modules/shopping_list/shopping_list.dart';
@@ -33,54 +35,27 @@ class ShoppingListDetailsPage extends StatefulWidget {
 class _ShoppingListDetailsPageState extends State<ShoppingListDetailsPage> {
   @override
   void initState() {
-    final bloc = Modular.get<ItemsBloc>();
-    bloc.add(ListenShoppingListItemsEvent(widget.shoppingList.id));
+    final itemsBloc = Modular.get<ItemsBloc>();
+    itemsBloc.add(ListenShoppingListItemsEvent(widget.shoppingList.id));
+    final collaboratorBloc = Modular.get<CollaboratorBloc>();
+    collaboratorBloc.add(
+        ListenCollaboratorsByEmailsEvent(widget.shoppingList.collaborators));
     super.initState();
   }
 
-  List<Widget> _buildUsersRow() {
-    var result = <Widget>[];
-    final collaborators = widget.shoppingList.collaborators;
-    const maxUsersToShow = 5;
-    final length = collaborators.length < maxUsersToShow
-        ? collaborators.length
-        : maxUsersToShow;
+  //TODO: Close stream when close page
+  //TODO: Create and Call collaborators listen method
 
-    result.addAll(_buildUsersCircle(collaborators, length));
-    result.addAll(_buildUsersCircleTrailing(collaborators.isEmpty));
-
-    return result;
-  }
-
-  List<Widget> _buildUsersCircle(List<String> users, int length) {
-    final result = <Widget>[];
-    for (var index = 0; index < length; index++) {
-      result.add(UserCircle(name: users[index], onPressed: _openUsersPanel));
-    }
-
-    return result;
-  }
-
-  List<Widget> _buildUsersCircleTrailing(bool noUsers) {
-    return [
-      AddUserCircle(noUsers: noUsers, onPressed: _openUsersPanel),
-      const SizedBox(width: 20),
-    ];
-  }
-
-  Future<void> _openUsersPanel() async {
-    await BottomSheetUtil.openBottomSheet(
-      context: _scaffoldKey.currentContext!,
-      title: AppLocalizations.of(context).collaborators,
-      child: const SharedUsers(),
-    );
-  }
+  // @override
+  // void dispose() {
+  //   super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-      appBar: AppBar(actions: _buildUsersRow()),
+      appBar: _AppBar(),
       body: SafeArea(
         child: BlocListener<ItemsBloc, ItemsState>(
           listenWhen: (previous, current) => previous.status != current.status,
@@ -105,6 +80,79 @@ class _ShoppingListDetailsPageState extends State<ShoppingListDetailsPage> {
               );
             },
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class _AppBar extends StatelessWidget with PreferredSizeWidget {
+  @override
+  Size get preferredSize => const Size.fromHeight(56);
+
+  List<Widget> _buildCollaboratorsRow(List<Collaborator> collaborators) {
+    var result = <Widget>[];
+    const maxCollaboratorsToShow = 5;
+    final length = collaborators.length < maxCollaboratorsToShow
+        ? collaborators.length
+        : maxCollaboratorsToShow;
+
+    result.addAll(_buildCollaboratorsCircle(collaborators, length));
+    result.addAll(_buildCollaboratorsCircleTrailing(collaborators.isEmpty));
+
+    return result;
+  }
+
+  List<Widget> _buildCollaboratorsCircle(
+      List<Collaborator> collaborators, int length) {
+    final result = <Widget>[];
+    for (var index = 0; index < length; index++) {
+      result.add(CollaboratorCircle(
+          collaborator: collaborators[index],
+          onPressed: _openCollaboratorsPanel));
+    }
+
+    return result;
+  }
+
+  List<Widget> _buildCollaboratorsCircleTrailing(bool noCollaborators) {
+    return [
+      AddCollaboratorCircle(
+          noCollaborators: noCollaborators, onPressed: _openCollaboratorsPanel),
+      const SizedBox(width: 20),
+    ];
+  }
+
+  Future<void> _openCollaboratorsPanel() async {
+    await BottomSheetUtil.openBottomSheet(
+      context: _scaffoldKey.currentContext!,
+      title: AppLocalizations.of(_scaffoldKey.currentContext!).collaborators,
+      child: const CollaboratorsPanel(),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return PreferredSize(
+      preferredSize: preferredSize,
+      child: BlocListener<CollaboratorBloc, CollaboratorState>(
+        listenWhen: (previous, current) => previous.status != current.status,
+        listener: (context, state) {
+          if (state.status == BaseStateStatus.error) {
+            getCustomSnackBar(
+              context: context,
+              message: state.callbackMessage,
+              type: SnackBarType.error,
+            );
+          }
+        },
+        child: BlocBuilder<CollaboratorBloc, CollaboratorState>(
+          builder: (bloc, state) {
+            return state.when(
+              onState: (_) =>
+                  AppBar(actions: _buildCollaboratorsRow(state.collaborators)),
+            );
+          },
         ),
       ),
     );
