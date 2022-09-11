@@ -38,4 +38,15 @@ void main() {
           hasLength(1));
     });
   });
+
+  test('Should get registered and not registered collaborators', () async {
+    final result = await datasource.getCollaboratorsByEmails(
+        [collaborator.email, 'not_registered@email.com']);
+
+    expect(result, isNotEmpty);
+    expect(result.where((collaborator) => !collaborator.isAlreadyUser),
+        hasLength(1));
+    expect(result.where((collaborator) => collaborator.isAlreadyUser),
+        hasLength(1));
+  });
 }

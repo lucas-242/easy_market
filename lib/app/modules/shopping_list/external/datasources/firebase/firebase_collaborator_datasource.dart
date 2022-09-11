@@ -19,6 +19,23 @@ class FirebaseCollaboratorDatasource implements CollaboratorDatasource {
   }
 
   @override
+  Future<List<CollaboratorModel>> getCollaboratorsByEmails(
+      List<String> emails) async {
+    try {
+      final snapshot = await _firestore
+          .collection(usersTable)
+          .where('email', whereIn: emails)
+          .get();
+
+      final result = _mapToCollaboratorModelList(snapshot, emails);
+      return result;
+    } catch (error) {
+      throw GetCollaboratorsFailure(
+          AppLocalizations.current.errorToGetCollaborators);
+    }
+  }
+
+  @override
   Stream<List<CollaboratorModel>> listenCollaboratorsByEmails(
       List<String> emails) {
     try {
@@ -71,7 +88,7 @@ class FirebaseCollaboratorDatasource implements CollaboratorDatasource {
     final result = <CollaboratorModel>[];
     final collaboratorEmails = savedCollaborators.map((e) => e.email);
     final notSavedEmails =
-        emails.where((email) => !collaboratorEmails.contains(email)).toList();
+        emails.where((email) => !collaboratorEmails.contains(email));
 
     for (var email in notSavedEmails) {
       result.add(CollaboratorModel(

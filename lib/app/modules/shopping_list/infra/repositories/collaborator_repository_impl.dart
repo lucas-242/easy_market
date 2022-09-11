@@ -28,7 +28,21 @@ class CollaboratorRepositoryImpl implements CollaboratorRepository {
       return Stream.value(left(GetCollaboratorsFailure(e.message)));
     } catch (e) {
       return Stream.value(left(GetCollaboratorsFailure(
-          AppLocalizations.current.errorToRemoveCollaborator)));
+          AppLocalizations.current.errorToGetCollaborators)));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<Collaborator>>> getCollaboratorsByEmails(
+      List<String> emails) async {
+    try {
+      final result = await datasource.getCollaboratorsByEmails(emails);
+      return right(result);
+    } on Failure catch (e) {
+      return left(GetCollaboratorsFailure(e.message));
+    } catch (e) {
+      return left(GetCollaboratorsFailure(
+          AppLocalizations.current.errorToGetCollaborators));
     }
   }
 }

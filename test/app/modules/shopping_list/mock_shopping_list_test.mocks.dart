@@ -743,6 +743,14 @@ class MockCollaboratorRepository extends _i1.Mock
               returnValue: Stream<
                   _i2.Either<_i7.Failure, List<_i13.Collaborator>>>.empty())
           as _i5.Stream<_i2.Either<_i7.Failure, List<_i13.Collaborator>>>);
+  @override
+  _i5.Future<_i2.Either<_i7.Failure, List<_i13.Collaborator>>>
+      getCollaboratorsByEmails(List<String>? emails) => (super.noSuchMethod(
+          Invocation.method(#getCollaboratorsByEmails, [emails]),
+          returnValue:
+              Future<_i2.Either<_i7.Failure, List<_i13.Collaborator>>>.value(
+                  _FakeEither_0<_i7.Failure, List<_i13.Collaborator>>())) as _i5
+          .Future<_i2.Either<_i7.Failure, List<_i13.Collaborator>>>);
 }
 
 /// A class which mocks [CollaboratorDatasource].
@@ -761,4 +769,12 @@ class MockCollaboratorDatasource extends _i1.Mock
               Invocation.method(#listenCollaboratorsByEmails, [emails]),
               returnValue: Stream<List<_i15.CollaboratorModel>>.empty())
           as _i5.Stream<List<_i15.CollaboratorModel>>);
+  @override
+  _i5.Future<List<_i15.CollaboratorModel>> getCollaboratorsByEmails(
+          List<String>? emails) =>
+      (super.noSuchMethod(
+              Invocation.method(#getCollaboratorsByEmails, [emails]),
+              returnValue: Future<List<_i15.CollaboratorModel>>.value(
+                  <_i15.CollaboratorModel>[]))
+          as _i5.Future<List<_i15.CollaboratorModel>>);
 }

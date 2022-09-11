@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'domain/usecases/add_collaborator_to_list.dart';
 import 'domain/usecases/check_item_in_list.dart';
+import 'domain/usecases/get_collaborators_by_emails.dart';
 import 'domain/usecases/listen_collaborators_by_emails.dart';
 import 'domain/usecases/remove_collaborator_from_list.dart';
 import 'external/datasources/firebase/firebase_collaborator_datasource.dart';
@@ -47,6 +48,7 @@ class ShoppingListModule extends Module {
     $AddCollaboratorToListImpl,
     $RemoveCollaboratorFromListImpl,
     $ListenCollaboratorsByEmailsImpl,
+    $GetCollaboratorsByEmailsImpl,
     $CollaboratorRepositoryImpl,
     BlocBind.singleton(
       (i) => ShoppingListBloc(
@@ -68,7 +70,8 @@ class ShoppingListModule extends Module {
     ),
     BlocBind.singleton(
       (i) => CollaboratorBloc(
-        listenCollaboratorsByEmailsUsecase: i<ListenCollaboratorsByEmails>(),
+        getCollaboratorsByEmailsUsecase: i<GetCollaboratorsByEmails>(),
+        addCollaboratorUsecase: i<AddCollaboratorToList>(),
       ),
     ),
     BindInject(

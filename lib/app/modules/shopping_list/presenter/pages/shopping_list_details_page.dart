@@ -38,14 +38,12 @@ class _ShoppingListDetailsPageState extends State<ShoppingListDetailsPage> {
     final itemsBloc = Modular.get<ItemsBloc>();
     itemsBloc.add(ListenShoppingListItemsEvent(widget.shoppingList.id));
     final collaboratorBloc = Modular.get<CollaboratorBloc>();
-    collaboratorBloc.add(
-        ListenCollaboratorsByEmailsEvent(widget.shoppingList.collaborators));
+    collaboratorBloc
+        .add(GetCollaboratorsByEmailsEvent(widget.shoppingList.collaborators));
     super.initState();
   }
 
   //TODO: Close stream when close page
-  //TODO: Create and Call collaborators listen method
-
   // @override
   // void dispose() {
   //   super.dispose();
@@ -55,7 +53,7 @@ class _ShoppingListDetailsPageState extends State<ShoppingListDetailsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-      appBar: _AppBar(),
+      appBar: _AppBar(shoppingListId: widget.shoppingList.id),
       body: SafeArea(
         child: BlocListener<ItemsBloc, ItemsState>(
           listenWhen: (previous, current) => previous.status != current.status,
@@ -87,6 +85,10 @@ class _ShoppingListDetailsPageState extends State<ShoppingListDetailsPage> {
 }
 
 class _AppBar extends StatelessWidget with PreferredSizeWidget {
+  final String shoppingListId;
+
+  _AppBar({required this.shoppingListId});
+
   @override
   Size get preferredSize => const Size.fromHeight(56);
 
@@ -127,7 +129,7 @@ class _AppBar extends StatelessWidget with PreferredSizeWidget {
     await BottomSheetUtil.openBottomSheet(
       context: _scaffoldKey.currentContext!,
       title: AppLocalizations.of(_scaffoldKey.currentContext!).collaborators,
-      child: const CollaboratorsPanel(),
+      child: CollaboratorsPanel(shoppingListId: shoppingListId),
     );
   }
 

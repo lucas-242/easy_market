@@ -23,36 +23,61 @@ void main() {
   when(datasource.listenCollaboratorsByEmails(any))
       .thenAnswer((_) => mockStream);
 
-  test('Should listen collaborators by email', () {
-    when(datasource.listenCollaboratorsByEmails(any))
-        .thenAnswer((_) => mockStream);
-    when(mockStream.listen(any)).thenAnswer((invocation) {
-      return Stream.value([collaborator])
-          .listen(invocation.positionalArguments.first);
-    });
-    final result = repository.listenCollaboratorsByEmails(emails);
+  group('Listen', () {
+    test('Should listen collaborators by email', () {
+      when(datasource.listenCollaboratorsByEmails(any))
+          .thenAnswer((_) => mockStream);
+      when(mockStream.listen(any)).thenAnswer((invocation) {
+        return Stream.value([collaborator])
+            .listen(invocation.positionalArguments.first);
+      });
+      final result = repository.listenCollaboratorsByEmails(emails);
 
-    result.listen((event) {
-      event.fold((l) => print(l), (r) {
-        expect(r, isNotEmpty);
-        expect(r, emails);
+      result.listen((event) {
+        event.fold((l) => print(l), (r) {
+          expectLater(r, isNotEmpty);
+          expect(r.every((e) => emails.contains(e.email)), true);
+        });
+      });
+    });
+
+    test('Should throw GetCollaboratorsFailure', () {
+      when(mockStream.listen(any)).thenAnswer((invocation) {
+        return Stream<List<CollaboratorModel>>.error(
+                GetCollaboratorsFailure('test'))
+            .listen(invocation.positionalArguments.first);
+      });
+
+      final result = repository.listenCollaboratorsByEmails(emails);
+
+      expect(result, isNotNull);
+      result.listen((event) {
+        expect(event.leftMap((l) => l is GetCollaboratorsFailure),
+            const Left(true));
       });
     });
   });
 
-  test('Should throw GetCollaboratorsFailure', () {
-    when(mockStream.listen(any)).thenAnswer((invocation) {
-      return Stream<List<CollaboratorModel>>.error(
-              GetCollaboratorsFailure('test'))
-          .listen(invocation.positionalArguments.first);
+  group('Get', () {
+    test('Should get collaborators by email', () async {
+      when(datasource.getCollaboratorsByEmails(any))
+          .thenAnswer((_) async => [collaborator]);
+      final result = await repository.getCollaboratorsByEmails(emails);
+      result.fold((l) => print(l), (r) {
+        expect(r, isNotEmpty);
+        expect(r.every((e) => emails.contains(e.email)), true);
+      });
     });
 
-    final result = repository.listenCollaboratorsByEmails(emails);
+    test('Should throw GetCollaboratorsFailure', () async {
+      when(datasource.getCollaboratorsByEmails(any))
+          .thenThrow((_) async => Exception());
 
-    expect(result, isNotNull);
-    result.listen((event) {
-      expect(
-          event.leftMap((l) => l is GetCollaboratorsFailure), const Left(true));
+      final result = await repository.getCollaboratorsByEmails(emails);
+
+      expect(result, isNotNull);
+      expect(result.leftMap((l) => l is GetCollaboratorsFailure),
+          const Left(true));
     });
   });
 }
