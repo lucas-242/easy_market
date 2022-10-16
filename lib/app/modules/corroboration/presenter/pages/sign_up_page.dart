@@ -41,7 +41,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   if (state.status == BaseStateStatus.success) {
                     getCustomSnackBar(
                       context: context,
-                      message: 'Account created successfully',
+                      message: AppLocalizations.current.signUpSuccess,
                       type: SnackBarType.success,
                     );
                     Modular.to.pushReplacementNamed(AppRoutes.lists);

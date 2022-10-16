@@ -150,6 +150,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Se você não receber um email em alguns instantes, verifique sua pasta de spam."),
         "signIn": MessageLookupByLibrary.simpleMessage("Entrar"),
         "signUp": MessageLookupByLibrary.simpleMessage("Cadastrar"),
+        "signUpSuccess": MessageLookupByLibrary.simpleMessage(
+            "Cadastro efetuado com sucesso"),
         "snacks": MessageLookupByLibrary.simpleMessage("Café da manhã"),
         "thereIsAnotherAccount": MessageLookupByLibrary.simpleMessage(
             "Já existe uma conta com estas credenciais"),

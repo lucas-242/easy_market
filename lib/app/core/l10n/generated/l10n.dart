@@ -190,6 +190,16 @@ class AppLocalizations {
     );
   }
 
+  /// `Account created successfully`
+  String get signUpSuccess {
+    return Intl.message(
+      'Account created successfully',
+      name: 'signUpSuccess',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Action done successfully`
   String get success {
     return Intl.message(

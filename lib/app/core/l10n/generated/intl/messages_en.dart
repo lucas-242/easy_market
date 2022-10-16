@@ -147,6 +147,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "If you won\'t receive an email in a few minutes, check your spam folder."),
         "signIn": MessageLookupByLibrary.simpleMessage("Sign In"),
         "signUp": MessageLookupByLibrary.simpleMessage("Sign Up"),
+        "signUpSuccess": MessageLookupByLibrary.simpleMessage(
+            "Account created successfully"),
         "snacks": MessageLookupByLibrary.simpleMessage("Snacks"),
         "success":
             MessageLookupByLibrary.simpleMessage("Action done successfully"),

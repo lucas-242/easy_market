@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_modular/flutter_modular.dart'
-    hide ModularWatchExtension;
 
 import '../../../../core/l10n/generated/l10n.dart';
 import '../../../../shared/entities/base_bloc_state.dart';
@@ -27,15 +25,12 @@ class CollaboratorsPanel extends StatelessWidget {
       listenWhen: (previous, current) => previous.status != current.status,
       listener: (context, state) {
         if (state.status == BaseStateStatus.error) {
-          //TODO: add snackbbar above bottomSheet
-          Modular.to.pop();
           getCustomSnackBar(
             context: context,
             message: state.callbackMessage,
             type: SnackBarType.error,
           );
         } else if (state.status == BaseStateStatus.success) {
-          Modular.to.pop();
           getCustomSnackBar(
             context: context,
             message: AppLocalizations.of(context).success,
