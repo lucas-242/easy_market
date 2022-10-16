@@ -72,6 +72,7 @@ class ShoppingListModule extends Module {
       (i) => CollaboratorBloc(
         getCollaboratorsByEmailsUsecase: i<GetCollaboratorsByEmails>(),
         addCollaboratorUsecase: i<AddCollaboratorToList>(),
+        removeCollaboratorUsecase: i<RemoveCollaboratorFromList>(),
       ),
     ),
     BindInject(

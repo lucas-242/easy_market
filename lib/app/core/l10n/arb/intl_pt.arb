@@ -9,10 +9,11 @@
   "lightMode": "Modo claro",
   "logout": "Sair",
   "logoutConfirmation": "Você realmente gostaria de sair?",
-  "signIn": "Entrar",
-  "signUp": "Cadastrar",
   "save": "Salvar",
   "search": "Busca",
+  "signIn": "Entrar",
+  "signUp": "Cadastrar",
+  "sucess": "Ação efetuada com sucesso",
   "update": "Atualizar",
   "wouldYouLikeDelete": "Gostaria de deletar",
   

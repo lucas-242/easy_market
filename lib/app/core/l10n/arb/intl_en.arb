@@ -9,10 +9,11 @@
   "lightMode": "Light Mode",
   "logout": "Logout",
   "logoutConfirmation": "Do you really want to logout?",
-  "signIn": "Sign In",
-  "signUp": "Sign Up",
   "save": "Save",
   "search": "Search",
+  "signIn": "Sign In",
+  "signUp": "Sign Up",
+  "success": "Action done successfully",
   "update": "Update",
   "wouldYouLikeDelete": "Would you like to delete",
 

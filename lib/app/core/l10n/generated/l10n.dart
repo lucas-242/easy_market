@@ -150,6 +150,26 @@ class AppLocalizations {
     );
   }
 
+  /// `Save`
+  String get save {
+    return Intl.message(
+      'Save',
+      name: 'save',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Search`
+  String get search {
+    return Intl.message(
+      'Search',
+      name: 'search',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Sign In`
   String get signIn {
     return Intl.message(
@@ -170,21 +190,11 @@ class AppLocalizations {
     );
   }
 
-  /// `Save`
-  String get save {
+  /// `Action done successfully`
+  String get success {
     return Intl.message(
-      'Save',
-      name: 'save',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Search`
-  String get search {
-    return Intl.message(
-      'Search',
-      name: 'search',
+      'Action done successfully',
+      name: 'success',
       desc: '',
       args: [],
     );

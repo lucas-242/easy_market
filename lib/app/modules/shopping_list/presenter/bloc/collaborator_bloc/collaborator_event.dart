@@ -14,6 +14,12 @@ class AddCollaboratorEvent extends CollaboratorEvent {
   AddCollaboratorEvent(this.shoppingListId, this.email);
 }
 
+class RemoveCollaboratorEvent extends CollaboratorEvent {
+  final String shoppingListId;
+  final String email;
+  RemoveCollaboratorEvent(this.shoppingListId, this.email);
+}
+
 class ChangeEmailEvent extends CollaboratorEvent {
   final String? email;
 

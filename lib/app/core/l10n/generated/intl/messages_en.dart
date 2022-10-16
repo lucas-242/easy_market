@@ -148,6 +148,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "signIn": MessageLookupByLibrary.simpleMessage("Sign In"),
         "signUp": MessageLookupByLibrary.simpleMessage("Sign Up"),
         "snacks": MessageLookupByLibrary.simpleMessage("Snacks"),
+        "success":
+            MessageLookupByLibrary.simpleMessage("Action done successfully"),
         "thereIsAnotherAccount": MessageLookupByLibrary.simpleMessage(
             "There is already an account with this credential"),
         "thereIsNoUser":
