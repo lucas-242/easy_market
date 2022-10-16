@@ -99,6 +99,26 @@ void main() {
     });
   });
 
+  group('Collaborator operations', () {
+    test('Should add collaborator', () async {
+      when(datasource.addCollaboratorToList(any, any))
+          .thenAnswer((_) async => unit);
+
+      final result = await repository.addCollaboratorToList(
+          shoppingList.id, 'test@email.com');
+      expect(result, const Right(unit));
+    });
+
+    test('Should remove collaborator', () async {
+      when(datasource.removeCollaboratorFromList(any, any))
+          .thenAnswer((_) async => unit);
+
+      final result = await repository.removeCollaboratorFromList(
+          shoppingList.id, 'test@email.com');
+      expect(result, const Right(unit));
+    });
+  });
+
   group('Add Item', () {
     test('Should add and return Item', () async {
       final mockItem = item;

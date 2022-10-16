@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+
 import '../../../../errors/errors.dart';
 import '../entities/deep_link_data.dart';
 

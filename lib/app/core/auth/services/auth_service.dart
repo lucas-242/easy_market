@@ -1,8 +1,10 @@
+import 'package:flutter_modular/flutter_modular.dart';
+
 import '../domain/entities/user_info.dart';
 import '../domain/usecases/get_current_user.dart';
 import '../domain/usecases/listen_current_user.dart';
 import '../domain/usecases/sign_out.dart';
-import 'package:flutter_modular/flutter_modular.dart';
+
 part 'auth_service.g.dart';
 
 @Injectable(lazy: false)

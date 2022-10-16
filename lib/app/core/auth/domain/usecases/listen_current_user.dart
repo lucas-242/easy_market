@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+
 import '../../../errors/errors.dart';
 import '../entities/user_info.dart';
 import '../repositories/auth_repository.dart';

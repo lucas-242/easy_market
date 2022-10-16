@@ -1,4 +1,4 @@
-import 'package:easy_market/app/core/l10n/generated/l10n.dart';
+import '../../../l10n/generated/l10n.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import '../../domain/entities/user_info.dart';
 import 'package:dartz/dartz.dart';

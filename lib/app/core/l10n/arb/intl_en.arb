@@ -2,17 +2,19 @@
   "all": "All",
   "add": "Add",
   "cancel": "Cancel",
-  "create": "Create",
+  "create": "Create",  
   "date": "Date",
   "darkMode": "Dark Mode",
   "delete": "Delete",
   "lightMode": "Light Mode",
   "logout": "Logout",
   "logoutConfirmation": "Do you really want to logout?",
-  "signIn": "Sign In",
-  "signUp": "Sign Up",
   "save": "Save",
   "search": "Search",
+  "signIn": "Sign In",
+  "signUp": "Sign Up",
+  "signUpSuccess": "Account created successfully",
+  "success": "Action done successfully",
   "update": "Update",
   "wouldYouLikeDelete": "Would you like to delete",
 
@@ -42,7 +44,11 @@
   "price": "Price",
   "quantity": "Quantity",
 
-  
+  "collaborators": "Collaborators",
+  "addCollaborator": "Add collaborator",
+  "collaboratorEmail": "Collaborator email",
+
+
   "typeNewPassword": "Type your new password.",
   "resetPassword": "Reset Password",
   "checkEmail": "Check your email",
@@ -72,6 +78,9 @@
     }
   },
   "oneItemNeedToBeInformed": "At least one previous or next item needs to be informed",
+  "errorToAddCollaborator": "Error to add collaborator",
+  "errorToRemoveCollaborator": "Error to remove collaborator",
+  "errorToGetCollaborators": "Error to get collaborators",
   "errorToGetLists": "Error to get lists",
   "errorToCreateList": "Error to create list",
   "errorToDeleteList": "Error to delete list",

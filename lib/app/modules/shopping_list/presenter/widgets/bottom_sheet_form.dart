@@ -14,7 +14,7 @@ class BottomSheetForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: Container(
+      child: Padding(
         padding:
             EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
         child: Padding(
@@ -23,7 +23,7 @@ class BottomSheetForm extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(title, style: context.titleLarge),
-              const SizedBox(height: 25),
+              const SizedBox(height: 15),
               child,
             ],
           ),

@@ -25,6 +25,8 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "add": MessageLookupByLibrary.simpleMessage("Add"),
+        "addCollaborator":
+            MessageLookupByLibrary.simpleMessage("Add collaborator"),
         "addNewItem": MessageLookupByLibrary.simpleMessage("Add new item"),
         "all": MessageLookupByLibrary.simpleMessage("All"),
         "alreadyHaveAccount":
@@ -39,6 +41,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "cleaningProducts": MessageLookupByLibrary.simpleMessage("Cleaning"),
         "codeNotRetrieved": MessageLookupByLibrary.simpleMessage(
             "Code was not retrieved automatically"),
+        "collaboratorEmail":
+            MessageLookupByLibrary.simpleMessage("Collaborator email"),
+        "collaborators": MessageLookupByLibrary.simpleMessage("Collaborators"),
         "confirmLater":
             MessageLookupByLibrary.simpleMessage("Skip, I\'ll confirm later"),
         "confirmPassword":
@@ -65,6 +70,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Email is invalid or badly formatted"),
         "emailWasNotFound": MessageLookupByLibrary.simpleMessage(
             "Email was not found, please create an account"),
+        "errorToAddCollaborator":
+            MessageLookupByLibrary.simpleMessage("Error to add collaborator"),
         "errorToAddItem":
             MessageLookupByLibrary.simpleMessage("Error to add item"),
         "errorToCreateList":
@@ -73,6 +80,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Error to delete item"),
         "errorToDeleteList":
             MessageLookupByLibrary.simpleMessage("Error to delete list"),
+        "errorToGetCollaborators":
+            MessageLookupByLibrary.simpleMessage("Error to get collaborators"),
         "errorToGetItems":
             MessageLookupByLibrary.simpleMessage("Error to get items"),
         "errorToGetLists":
@@ -81,6 +90,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Error to get logged user"),
         "errorToLogout":
             MessageLookupByLibrary.simpleMessage("Error to logout"),
+        "errorToRemoveCollaborator": MessageLookupByLibrary.simpleMessage(
+            "Error to remove collaborator"),
         "errorToReorderItems":
             MessageLookupByLibrary.simpleMessage("Error to reorder items"),
         "errorToResetPassword":
@@ -136,7 +147,11 @@ class MessageLookup extends MessageLookupByLibrary {
             "If you won\'t receive an email in a few minutes, check your spam folder."),
         "signIn": MessageLookupByLibrary.simpleMessage("Sign In"),
         "signUp": MessageLookupByLibrary.simpleMessage("Sign Up"),
+        "signUpSuccess": MessageLookupByLibrary.simpleMessage(
+            "Account created successfully"),
         "snacks": MessageLookupByLibrary.simpleMessage("Snacks"),
+        "success":
+            MessageLookupByLibrary.simpleMessage("Action done successfully"),
         "thereIsAnotherAccount": MessageLookupByLibrary.simpleMessage(
             "There is already an account with this credential"),
         "thereIsNoUser":

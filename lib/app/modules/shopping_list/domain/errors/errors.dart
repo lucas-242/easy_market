@@ -1,4 +1,4 @@
-import 'package:easy_market/app/core/l10n/generated/l10n.dart';
+import '../../../../core/l10n/generated/l10n.dart';
 
 import '../../../../core/errors/errors.dart';
 
@@ -43,6 +43,27 @@ class GetItemsFailure extends Failure {
   final String message;
 
   GetItemsFailure(this.message);
+}
+
+class GetCollaboratorsFailure extends Failure {
+  @override
+  final String message;
+
+  GetCollaboratorsFailure(this.message);
+}
+
+class AddCollaboratorFailure extends Failure {
+  @override
+  final String message;
+
+  AddCollaboratorFailure(this.message);
+}
+
+class RemoveCollaboratorFailure extends Failure {
+  @override
+  final String message;
+
+  RemoveCollaboratorFailure(this.message);
 }
 
 class AddItemFailure extends Failure {

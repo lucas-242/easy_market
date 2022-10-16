@@ -6,12 +6,20 @@ import 'dart:async' as _i5;
 
 import 'package:dartz/dartz.dart' as _i2;
 import 'package:easy_market/app/core/errors/errors.dart' as _i7;
+import 'package:easy_market/app/modules/shopping_list/domain/entities/collaborator.dart'
+    as _i13;
 import 'package:easy_market/app/modules/shopping_list/domain/entities/item.dart'
     as _i9;
 import 'package:easy_market/app/modules/shopping_list/domain/entities/shopping_list.dart'
     as _i8;
+import 'package:easy_market/app/modules/shopping_list/domain/repositories/collaborator_repository.dart'
+    as _i12;
+import 'package:easy_market/app/modules/shopping_list/infra/datasources/collaborator_datasource.dart'
+    as _i14;
 import 'package:easy_market/app/modules/shopping_list/infra/datasources/shopping_list_datasource.dart'
     as _i10;
+import 'package:easy_market/app/modules/shopping_list/infra/models/collaborator_model.dart'
+    as _i15;
 import 'package:easy_market/app/modules/shopping_list/infra/models/item_model.dart'
     as _i4;
 import 'package:easy_market/app/modules/shopping_list/infra/models/shopping_list_model.dart'
@@ -51,6 +59,23 @@ class MockShoppingListRepository extends _i1.Mock
     _i1.throwOnMissingStub(this);
   }
 
+  @override
+  _i5.Future<_i2.Either<_i7.Failure, _i2.Unit>> addCollaboratorToList(
+          String? shoppingListId, String? email) =>
+      (super.noSuchMethod(
+          Invocation.method(#addCollaboratorToList, [shoppingListId, email]),
+          returnValue: Future<_i2.Either<_i7.Failure, _i2.Unit>>.value(
+              _FakeEither_0<_i7.Failure, _i2.Unit>())) as _i5
+          .Future<_i2.Either<_i7.Failure, _i2.Unit>>);
+  @override
+  _i5.Future<_i2.Either<_i7.Failure, _i2.Unit>> removeCollaboratorFromList(
+          String? shoppingListId, String? email) =>
+      (super.noSuchMethod(
+              Invocation.method(
+                  #removeCollaboratorFromList, [shoppingListId, email]),
+              returnValue: Future<_i2.Either<_i7.Failure, _i2.Unit>>.value(
+                  _FakeEither_0<_i7.Failure, _i2.Unit>()))
+          as _i5.Future<_i2.Either<_i7.Failure, _i2.Unit>>);
   @override
   _i5.Future<_i2.Either<_i7.Failure, List<_i8.ShoppingList>>> getShoppingLists(
           String? userId) =>
@@ -157,6 +182,21 @@ class MockShoppingListDatasource extends _i1.Mock
     _i1.throwOnMissingStub(this);
   }
 
+  @override
+  _i5.Future<void> addCollaboratorToList(
+          String? shoppingListId, String? email) =>
+      (super.noSuchMethod(
+          Invocation.method(#addCollaboratorToList, [shoppingListId, email]),
+          returnValue: Future<void>.value(),
+          returnValueForMissingStub: Future<void>.value()) as _i5.Future<void>);
+  @override
+  _i5.Future<void> removeCollaboratorFromList(
+          String? shoppingListId, String? email) =>
+      (super.noSuchMethod(
+          Invocation.method(
+              #removeCollaboratorFromList, [shoppingListId, email]),
+          returnValue: Future<void>.value(),
+          returnValueForMissingStub: Future<void>.value()) as _i5.Future<void>);
   @override
   _i5.Future<List<_i3.ShoppingListModel>> getShoppingLists(String? userId) =>
       (super.noSuchMethod(Invocation.method(#getShoppingLists, [userId]),
@@ -685,4 +725,56 @@ class MockStreamShoppingLists extends _i1.Mock
               Invocation.method(#timeout, [timeLimit], {#onTimeout: onTimeout}),
               returnValue: Stream<List<_i3.ShoppingListModel>>.empty())
           as _i5.Stream<List<_i3.ShoppingListModel>>);
+}
+
+/// A class which mocks [CollaboratorRepository].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockCollaboratorRepository extends _i1.Mock
+    implements _i12.CollaboratorRepository {
+  MockCollaboratorRepository() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i5.Stream<_i2.Either<_i7.Failure, List<_i13.Collaborator>>>
+      listenCollaboratorsByEmails(List<String>? emails) => (super.noSuchMethod(
+              Invocation.method(#listenCollaboratorsByEmails, [emails]),
+              returnValue: Stream<
+                  _i2.Either<_i7.Failure, List<_i13.Collaborator>>>.empty())
+          as _i5.Stream<_i2.Either<_i7.Failure, List<_i13.Collaborator>>>);
+  @override
+  _i5.Future<_i2.Either<_i7.Failure, List<_i13.Collaborator>>>
+      getCollaboratorsByEmails(List<String>? emails) => (super.noSuchMethod(
+          Invocation.method(#getCollaboratorsByEmails, [emails]),
+          returnValue:
+              Future<_i2.Either<_i7.Failure, List<_i13.Collaborator>>>.value(
+                  _FakeEither_0<_i7.Failure, List<_i13.Collaborator>>())) as _i5
+          .Future<_i2.Either<_i7.Failure, List<_i13.Collaborator>>>);
+}
+
+/// A class which mocks [CollaboratorDatasource].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockCollaboratorDatasource extends _i1.Mock
+    implements _i14.CollaboratorDatasource {
+  MockCollaboratorDatasource() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i5.Stream<List<_i15.CollaboratorModel>> listenCollaboratorsByEmails(
+          List<String>? emails) =>
+      (super.noSuchMethod(
+              Invocation.method(#listenCollaboratorsByEmails, [emails]),
+              returnValue: Stream<List<_i15.CollaboratorModel>>.empty())
+          as _i5.Stream<List<_i15.CollaboratorModel>>);
+  @override
+  _i5.Future<List<_i15.CollaboratorModel>> getCollaboratorsByEmails(
+          List<String>? emails) =>
+      (super.noSuchMethod(
+              Invocation.method(#getCollaboratorsByEmails, [emails]),
+              returnValue: Future<List<_i15.CollaboratorModel>>.value(
+                  <_i15.CollaboratorModel>[]))
+          as _i5.Future<List<_i15.CollaboratorModel>>);
 }

@@ -1,5 +1,7 @@
-import 'package:easy_market/app/core/l10n/generated/l10n.dart';
-import 'package:easy_market/app/modules/shopping_list/presenter/widgets/users_row.dart';
+import '../../../../core/l10n/generated/l10n.dart';
+import '../../domain/entities/collaborator.dart';
+import '../bloc/collaborator_bloc/collaborator_bloc.dart';
+import '../widgets/add_collaborator_circle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -7,6 +9,8 @@ import 'package:flutter_modular/flutter_modular.dart';
 import '../../../../shared/widgets/custom_elevated_button/custom_elevated_button.dart';
 import '../utils/bottom_sheet_util.dart';
 import '../widgets/item_form.dart';
+import '../widgets/collaborators_panel.dart';
+import '../widgets/collaborator_circle.dart';
 import '/app/modules/shopping_list/presenter/bloc/items_bloc/items_bloc.dart';
 import '/app/modules/shopping_list/presenter/widgets/item_card.dart';
 import '/app/modules/shopping_list/shopping_list.dart';
@@ -31,18 +35,25 @@ class ShoppingListDetailsPage extends StatefulWidget {
 class _ShoppingListDetailsPageState extends State<ShoppingListDetailsPage> {
   @override
   void initState() {
-    final bloc = Modular.get<ItemsBloc>();
-    bloc.add(ListenShoppingListItemsEvent(widget.shoppingList.id));
+    final itemsBloc = Modular.get<ItemsBloc>();
+    itemsBloc.add(ListenShoppingListItemsEvent(widget.shoppingList.id));
+    final collaboratorBloc = Modular.get<CollaboratorBloc>();
+    collaboratorBloc
+        .add(GetCollaboratorsByEmailsEvent(widget.shoppingList.collaborators));
     super.initState();
   }
+
+  //TODO: Close stream when close page
+  // @override
+  // void dispose() {
+  //   super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-      appBar: AppBar(
-        actions: const [UsersRow()],
-      ),
+      appBar: _AppBar(shoppingListId: widget.shoppingList.id),
       body: SafeArea(
         child: BlocListener<ItemsBloc, ItemsState>(
           listenWhen: (previous, current) => previous.status != current.status,
@@ -67,6 +78,83 @@ class _ShoppingListDetailsPageState extends State<ShoppingListDetailsPage> {
               );
             },
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class _AppBar extends StatelessWidget with PreferredSizeWidget {
+  final String shoppingListId;
+
+  _AppBar({required this.shoppingListId});
+
+  @override
+  Size get preferredSize => const Size.fromHeight(56);
+
+  List<Widget> _buildCollaboratorsRow(List<Collaborator> collaborators) {
+    var result = <Widget>[];
+    const maxCollaboratorsToShow = 5;
+    final length = collaborators.length < maxCollaboratorsToShow
+        ? collaborators.length
+        : maxCollaboratorsToShow;
+
+    result.addAll(_buildCollaboratorsCircle(collaborators, length));
+    result.addAll(_buildCollaboratorsCircleTrailing(collaborators.isEmpty));
+
+    return result;
+  }
+
+  List<Widget> _buildCollaboratorsCircle(
+      List<Collaborator> collaborators, int length) {
+    final result = <Widget>[];
+    for (var index = 0; index < length; index++) {
+      result.add(CollaboratorCircle(
+          collaborator: collaborators[index],
+          onPressed: _openCollaboratorsPanel));
+    }
+
+    return result;
+  }
+
+  List<Widget> _buildCollaboratorsCircleTrailing(bool noCollaborators) {
+    return [
+      AddCollaboratorCircle(
+          noCollaborators: noCollaborators, onPressed: _openCollaboratorsPanel),
+      const SizedBox(width: 20),
+    ];
+  }
+
+  Future<void> _openCollaboratorsPanel() async {
+    await BottomSheetUtil.openBottomSheet(
+      context: _scaffoldKey.currentContext!,
+      title: AppLocalizations.of(_scaffoldKey.currentContext!).collaborators,
+      child: CollaboratorsPanel(shoppingListId: shoppingListId),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return PreferredSize(
+      preferredSize: preferredSize,
+      child: BlocListener<CollaboratorBloc, CollaboratorState>(
+        listenWhen: (previous, current) => previous.status != current.status,
+        listener: (context, state) {
+          if (state.status == BaseStateStatus.error) {
+            getCustomSnackBar(
+              context: context,
+              message: state.callbackMessage,
+              type: SnackBarType.error,
+            );
+          }
+        },
+        child: BlocBuilder<CollaboratorBloc, CollaboratorState>(
+          builder: (bloc, state) {
+            return state.when(
+              onState: (_) =>
+                  AppBar(actions: _buildCollaboratorsRow(state.collaborators)),
+            );
+          },
         ),
       ),
     );

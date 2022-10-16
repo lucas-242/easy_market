@@ -139,6 +139,8 @@ class FirebaseAuthDatasource implements AuthDatasource {
     }
   }
 
+  //* In this datasource implementation, the user identifier is the email.
+  //* User uid provided by firebase is used only to name documents to facilitate the rules handle.
   Future<void> _saveUserData(User user, String name) async {
     await firestore.collection(usersTable).doc(user.uid).set({
       'name': name,

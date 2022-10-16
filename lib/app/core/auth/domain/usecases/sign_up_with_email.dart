@@ -1,9 +1,11 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+
 import '../../../errors/errors.dart';
 import '../entities/sign_up_credentials.dart';
 import '../errors/errors.dart';
 import '../repositories/auth_repository.dart';
+
 part 'sign_up_with_email.g.dart';
 
 abstract class SignUpWithEmail {

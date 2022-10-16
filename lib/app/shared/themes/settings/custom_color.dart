@@ -1,5 +1,6 @@
-import 'theme_provider.dart';
 import 'package:flutter/material.dart';
+
+import 'theme_provider.dart';
 
 class CustomColor {
   const CustomColor({

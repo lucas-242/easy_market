@@ -1,8 +1,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import '../entities/shopping_list.dart';
+
 import '../../../../core/errors/errors.dart';
+import '../entities/shopping_list.dart';
 import '../repositories/shopping_list_repository.dart';
+
 part 'get_shopping_lists.g.dart';
 
 abstract class GetShoppingLists {
@@ -17,7 +19,7 @@ class GetShoppingListsImpl implements GetShoppingLists {
 
   @override
   Future<Either<Failure, List<ShoppingList>>> call(String userId) async {
-    var result = await repository.getShoppingLists(userId);
+    final result = await repository.getShoppingLists(userId);
     return result;
   }
 }

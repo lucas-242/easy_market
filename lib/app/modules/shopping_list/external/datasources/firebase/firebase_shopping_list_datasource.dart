@@ -128,6 +128,42 @@ class FirebaseShoppingListDatasource implements ShoppingListDatasource {
   }
 
   @override
+  Future<void> addCollaboratorToList(
+    String shoppingListId,
+    String email,
+  ) async {
+    try {
+      await _firestore
+          .collection(shoppingListsTable)
+          .doc(shoppingListId)
+          .update({
+        "users": FieldValue.arrayUnion([email])
+      });
+    } catch (e) {
+      throw AddCollaboratorFailure(
+          AppLocalizations.current.errorToAddCollaborator);
+    }
+  }
+
+  @override
+  Future<void> removeCollaboratorFromList(
+    String shoppingListId,
+    String email,
+  ) async {
+    try {
+      await _firestore
+          .collection(shoppingListsTable)
+          .doc(shoppingListId)
+          .update({
+        "users": FieldValue.arrayRemove([email])
+      });
+    } catch (e) {
+      throw RemoveCollaboratorFailure(
+          AppLocalizations.current.errorToRemoveCollaborator);
+    }
+  }
+
+  @override
   Future<List<ItemModel>> getItemsFromList(String shoppingListId) async {
     try {
       final snapshot = await _firestore

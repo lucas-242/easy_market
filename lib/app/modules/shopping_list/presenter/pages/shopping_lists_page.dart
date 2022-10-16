@@ -1,4 +1,4 @@
-import 'package:easy_market/app/shared/widgets/custom_elevated_button/custom_elevated_button.dart';
+import '../../../../shared/widgets/custom_elevated_button/custom_elevated_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';

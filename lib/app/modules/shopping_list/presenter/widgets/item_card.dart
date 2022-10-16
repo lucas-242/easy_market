@@ -1,5 +1,5 @@
-import 'package:easy_market/app/shared/themes/themes.dart';
-import 'package:easy_market/app/shared/utils/item_type_util.dart';
+import '../../../../shared/themes/themes.dart';
+import '../../../../shared/utils/item_type_util.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 

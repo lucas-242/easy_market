@@ -22,6 +22,7 @@ class ShoppingList {
         createdAt = createdAt ?? DateTime.now(),
         updatedAt = updatedAt ?? DateTime.now();
 
+  List<String> get collaborators => users.skip(1).toList();
   bool get isValidName => name.isNotEmpty;
 
   ShoppingList copyWith({

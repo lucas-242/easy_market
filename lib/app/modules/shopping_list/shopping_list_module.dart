@@ -1,7 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:easy_market/app/modules/shopping_list/domain/usecases/check_item_in_list.dart';
+import 'domain/usecases/add_collaborator_to_list.dart';
+import 'domain/usecases/check_item_in_list.dart';
+import 'domain/usecases/get_collaborators_by_emails.dart';
+import 'domain/usecases/listen_collaborators_by_emails.dart';
+import 'domain/usecases/remove_collaborator_from_list.dart';
+import 'external/datasources/firebase/firebase_collaborator_datasource.dart';
+import 'infra/repositories/collaborator_repository_impl.dart';
 import '../../core/routes/utils/routes_utils.dart';
 import 'domain/usecases/reorder_items_in_list.dart';
+import 'presenter/bloc/collaborator_bloc/collaborator_bloc.dart';
 import 'presenter/bloc/items_bloc/items_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import '../../core/routes/app_routes.dart';
@@ -38,6 +45,11 @@ class ShoppingListModule extends Module {
     $UpdateShoppingListImpl,
     $ReorderItemInListImpl,
     $ShoppingListRepositoryImpl,
+    $AddCollaboratorToListImpl,
+    $RemoveCollaboratorFromListImpl,
+    $ListenCollaboratorsByEmailsImpl,
+    $GetCollaboratorsByEmailsImpl,
+    $CollaboratorRepositoryImpl,
     BlocBind.singleton(
       (i) => ShoppingListBloc(
         listenShoppingListsUsecase: i<ListenShoppingLists>(),
@@ -56,8 +68,20 @@ class ShoppingListModule extends Module {
         checkItemInListUsecase: i<CheckItemInList>(),
       ),
     ),
+    BlocBind.singleton(
+      (i) => CollaboratorBloc(
+        getCollaboratorsByEmailsUsecase: i<GetCollaboratorsByEmails>(),
+        addCollaboratorUsecase: i<AddCollaboratorToList>(),
+        removeCollaboratorUsecase: i<RemoveCollaboratorFromList>(),
+      ),
+    ),
     BindInject(
       (i) => FirebaseShoppingListDatasource(i<FirebaseFirestore>()),
+      isSingleton: true,
+      isLazy: true,
+    ),
+    BindInject(
+      (i) => FirebaseCollaboratorDatasource(i<FirebaseFirestore>()),
       isSingleton: true,
       isLazy: true,
     ),

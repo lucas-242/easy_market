@@ -13,7 +13,7 @@ class BaseBlocState {
   }) {
     switch (status) {
       case BaseStateStatus.loading:
-        return onLoading!();
+        return onLoading != null ? onLoading() : onState(this);
       case BaseStateStatus.error:
         return onError != null ? onError(this) : onState(this);
       default:

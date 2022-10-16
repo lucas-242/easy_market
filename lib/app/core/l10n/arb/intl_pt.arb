@@ -9,10 +9,12 @@
   "lightMode": "Modo claro",
   "logout": "Sair",
   "logoutConfirmation": "Você realmente gostaria de sair?",
-  "signIn": "Entrar",
-  "signUp": "Cadastrar",
   "save": "Salvar",
   "search": "Busca",
+  "signIn": "Entrar",
+  "signUp": "Cadastrar",
+  "signUpSuccess": "Cadastro efetuado com sucesso",
+  "sucess": "Ação efetuada com sucesso",
   "update": "Atualizar",
   "wouldYouLikeDelete": "Gostaria de deletar",
   
@@ -43,6 +45,12 @@
   "type": "Tipo",
   "quantity": "Quantidade",
 
+
+  "collaborators": "Colaboradores",
+  "addCollaborator": "Adicionar colaborador",
+  "collaboratorEmail": "Email do colaborador",
+
+  
   "typeNewPassword": "Insira sua nova senha.",
   "resetPassword": "Redefinir senha",
   "checkEmail": "Cheque seu email",
@@ -65,6 +73,9 @@
   "invalidName": "Nome inválido",
   "invalidProperty": "{property} inválido",
   "oneItemNeedToBeInformed": "Pelo menos um item deve ser informado",
+  "errorToAddCollaborator": "Erro ao adicionar colaborador",
+  "errorToRemoveCollaborator": "Erro ao remover colaborador",
+  "errorToGetCollaborators": "Erro ao carregar colaboradores",
   "errorToGetLists": "Erro ao carregar listas",
   "errorToCreateList": "Erro ao criar lista",
   "errorToDeleteList": "Erro ao deletar lista",

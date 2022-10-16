@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+
 import '../../../../../core/auth/domain/entities/sign_up_credentials.dart';
 import '../../../../../core/auth/domain/usecases/sign_up_with_email.dart';
 import '../../../../../shared/entities/base_bloc_state.dart';

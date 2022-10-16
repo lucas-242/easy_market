@@ -150,6 +150,26 @@ class AppLocalizations {
     );
   }
 
+  /// `Save`
+  String get save {
+    return Intl.message(
+      'Save',
+      name: 'save',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Search`
+  String get search {
+    return Intl.message(
+      'Search',
+      name: 'search',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Sign In`
   String get signIn {
     return Intl.message(
@@ -170,21 +190,21 @@ class AppLocalizations {
     );
   }
 
-  /// `Save`
-  String get save {
+  /// `Account created successfully`
+  String get signUpSuccess {
     return Intl.message(
-      'Save',
-      name: 'save',
+      'Account created successfully',
+      name: 'signUpSuccess',
       desc: '',
       args: [],
     );
   }
 
-  /// `Search`
-  String get search {
+  /// `Action done successfully`
+  String get success {
     return Intl.message(
-      'Search',
-      name: 'search',
+      'Action done successfully',
+      name: 'success',
       desc: '',
       args: [],
     );
@@ -420,6 +440,36 @@ class AppLocalizations {
     );
   }
 
+  /// `Collaborators`
+  String get collaborators {
+    return Intl.message(
+      'Collaborators',
+      name: 'collaborators',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add collaborator`
+  String get addCollaborator {
+    return Intl.message(
+      'Add collaborator',
+      name: 'addCollaborator',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Collaborator email`
+  String get collaboratorEmail {
+    return Intl.message(
+      'Collaborator email',
+      name: 'collaboratorEmail',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Type your new password.`
   String get typeNewPassword {
     return Intl.message(
@@ -615,6 +665,36 @@ class AppLocalizations {
     return Intl.message(
       'At least one previous or next item needs to be informed',
       name: 'oneItemNeedToBeInformed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error to add collaborator`
+  String get errorToAddCollaborator {
+    return Intl.message(
+      'Error to add collaborator',
+      name: 'errorToAddCollaborator',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error to remove collaborator`
+  String get errorToRemoveCollaborator {
+    return Intl.message(
+      'Error to remove collaborator',
+      name: 'errorToRemoveCollaborator',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error to get collaborators`
+  String get errorToGetCollaborators {
+    return Intl.message(
+      'Error to get collaborators',
+      name: 'errorToGetCollaborators',
       desc: '',
       args: [],
     );
